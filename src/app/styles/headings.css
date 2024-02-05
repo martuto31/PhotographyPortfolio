@@ -1,0 +1,25 @@
+h1,
+h2,
+h3 {
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 64px;
+}
+
+h2 {
+    font-size: 48px;
+}
+
+h3 {
+    font-size: 36px;
+}
+
+.text-medium {
+    font-size: 24px;
+}
+
+.text-small {
+    font-size: 18px;
+}
