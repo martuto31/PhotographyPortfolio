@@ -18,6 +18,7 @@ export class DimensionService {
     this.screenType = this.getScreenType();
     this.isMobile = this.screenType === ScreenType.Mobile;
     this.isTablet = this.screenType === ScreenType.Tablet;
+    this.isDesktop = this.screenType === ScreenType.Desktop;
 
     this.subscribeToWindowResize();
   }
@@ -27,6 +28,7 @@ export class DimensionService {
   public screenType: ScreenType;
   public isMobile: boolean;
   public isTablet: boolean;
+  public isDesktop: boolean
 
   private tabletBreakpoint = 960;
   private mobileBreakpoint = 480;
@@ -38,6 +40,7 @@ export class DimensionService {
       
       this.isMobile = this.screenType === ScreenType.Mobile;
       this.isTablet = this.screenType === ScreenType.Tablet;
+      this.isDesktop = this.screenType === ScreenType.Desktop;
     };
   }
 

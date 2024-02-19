@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 import { NavigationComponent } from './navigation/navigation.component';
 
@@ -6,13 +7,15 @@ import { DimensionService } from './../../services/dimension.service';
 
 @Component({
   selector: 'app-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.css'],
   standalone: true,
-  templateUrl: './app-layout.component.html',
-  styleUrls: ['./app-layout.component.css'],
   imports: [
+    RouterOutlet,
     NavigationComponent,
   ],
 })
+
 export class LayoutComponent {
 
     constructor(
