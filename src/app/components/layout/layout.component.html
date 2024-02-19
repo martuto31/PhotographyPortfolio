@@ -1,0 +1,11 @@
+<div [class]="[ 'app-container', dimensionService.screenType ]">
+    <div class="wrapper">
+        <app-navigation></app-navigation>
+
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+        <!-- TODO: Add footer -->
+    </div>
+</div>
