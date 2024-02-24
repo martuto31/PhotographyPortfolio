@@ -10,6 +10,11 @@ html, body {
     padding: 0;
 }
 
+mark {
+    color: var(--primary-brand);
+    background: none;
+}
+
 a {
     text-decoration: none;
 }

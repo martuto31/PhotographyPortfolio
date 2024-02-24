@@ -5,19 +5,21 @@ h3 {
 }
 
 h1 {
-    font-size: 64px;
+    font-size: 48px;
+    color: var(--font-high-emphasis);
 }
 
 h2 {
-    font-size: 48px;
+    font-size: 38px;
 }
 
 h3 {
-    font-size: 36px;
+    font-size: 26px;
 }
 
 .text-medium {
-    font-size: 24px;
+    font-size: 20px;
+    color: var(--font-medium-emphasis);
 }
 
 .text-small {

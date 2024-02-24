@@ -21,6 +21,10 @@
     margin: 0 auto;
 }
 
+app-navigation {
+    z-index: 1;
+}
+
 .tablet .wrapper {
     max-width: 760px;
 }
@@ -33,5 +37,5 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
 }
