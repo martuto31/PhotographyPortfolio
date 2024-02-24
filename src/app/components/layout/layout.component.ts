@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { DimensionService } from './../../services/dimension.service';
+import { LandingComponent } from '../landing/landing.component';
 
 @Component({
   selector: 'app-layout',
@@ -13,6 +14,7 @@ import { DimensionService } from './../../services/dimension.service';
   imports: [
     RouterOutlet,
     NavigationComponent,
+    LandingComponent,
   ],
 })
 
