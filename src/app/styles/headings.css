@@ -2,19 +2,51 @@ h1,
 h2,
 h3 {
     font-weight: 600;
+    line-height: initial;
+    margin: 0;
 }
 
 h1 {
     font-size: 48px;
     color: var(--font-high-emphasis);
+    margin-bottom: 32px;
+}
+
+.tablet h1 {
+    font-size: 42px;
+    margin-bottom: 24px;
+}
+
+.mobile h1 {
+    font-size: 38px;
+    margin-bottom: 24px;
 }
 
 h2 {
     font-size: 38px;
+    color: var(--font-high-emphasis);
+    margin-bottom: 24px;
+}
+
+.tablet h2 {
+    font-size: 32px;
+}
+
+.mobile h2 {
+    font-size: 28px;
 }
 
 h3 {
     font-size: 26px;
+    color: var(--font-high-emphasis);
+}
+
+.tablet h3 {
+    font-size: 22px;
+}
+
+.mobile h3 {
+    font-size: 22px;
 }
 
 .text-medium {
@@ -22,6 +54,17 @@ h3 {
     color: var(--font-medium-emphasis);
 }
 
+.tablet .text-medium,
+.mobile .text-medium {
+    font-size: 18px;
+}
+
 .text-small {
     font-size: 18px;
+    color: var(--font-low-emphasis);
+}
+
+.tablet .text-small,
+.mobile .text-small {
+    font-size: 16px;
 }

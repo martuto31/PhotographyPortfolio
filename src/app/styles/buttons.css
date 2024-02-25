@@ -5,6 +5,12 @@
     padding: 8px 24px;
 }
 
+.tablet .btn,
+.mobile .btn {
+    font-size: 16px;
+    padding: 6px 18px;
+}
+
 .btn:hover {
     opacity: 0.8;
 }

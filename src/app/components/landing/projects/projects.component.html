@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="heading">
+        <h1>Галерии</h1>
+
+        <div class="line"></div>
+    </div>
+
+    @for (project of projects; track $index) {
+        <div class="project">
+            @if ($index % 2 !== 0 || dimensionService.isMobile) {
+                <img [src]="project.imageSrc">
+            }
+
+            <div class="summary">
+                <h2>{{ project.name }}</h2>
+
+                <span>{{ project.summary }}</span>
+
+                <a class="btn btn-secondary">Към Галерия</a>
+            </div>
+
+            @if ($index % 2 === 0 && !dimensionService.isMobile) {
+                <img [src]="project.imageSrc">
+            }
+        </div>
+    }
+</div>
