@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ProjectsComponent } from './projects/projects.component';
 import { IntroSectionComponent } from './intro-section/intro-section.component';
 
 @Component({
@@ -8,6 +9,7 @@ import { IntroSectionComponent } from './intro-section/intro-section.component';
   styleUrls: ['./landing.component.css'],
   standalone: true,
   imports: [
+    ProjectsComponent,
     IntroSectionComponent,
   ],
 })
