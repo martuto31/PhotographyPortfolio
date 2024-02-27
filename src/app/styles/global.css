@@ -18,3 +18,12 @@ mark {
 a {
     text-decoration: none;
 }
+
+.section-space {
+    height: 100px;
+}
+
+.tablet .section-space,
+.mobile .section-space {
+    height: 60px;
+}
