@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="heading">
+        <h2>Свържете се с мен</h2>
+
+        <div class="line"></div>
+    </div>
+
+    <div class="form" [formGroup]="formGroup">
+        <div class="input-container">
+            <span>Име</span>
+            <div class="input-field">
+                <input formControlName="name">
+            </div>
+        </div>
+
+        <div class="input-container">
+            <span>Имейл</span>
+            <div class="input-field">
+                <input formControlName="email">
+            </div>
+        </div>
+
+        <div class="text-area-container">
+            <span>Съобщение</span>
+            <div class="text-area">
+                <textarea formControlName="message"></textarea>
+            </div>
+        </div>
+
+        <a class="btn btn-primary">Изпрати</a>
+    </div>
+</div>
