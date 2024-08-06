@@ -23,22 +23,22 @@ export class ProjectsComponent {
 
   public projects: Project[] = [
     {
-      name: 'Сватби',
+      name: 'Сватбени фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       btnLink: '',
-      imageSrc: 'assets/img/Project.png',
+      imageSrc: 'assets/img/card-covers/weddings.webp',
     },
     {
-      name: 'Кръщенета',
+      name: 'Абитуриентски фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       btnLink: '',
-      imageSrc: 'assets/img/Project.png',
+      imageSrc: 'assets/img/card-covers/graduates.webp',
     },
     {
-      name: 'Детски партита',
+      name: 'Персонални фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       btnLink: '',
-      imageSrc: 'assets/img/Project.png',
+      imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];
 
