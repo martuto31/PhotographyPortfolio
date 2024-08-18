@@ -26,7 +26,7 @@ export class ProjectsComponent {
       name: 'Сватбени фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       btnLink: '',
-      imageSrc: 'assets/img/card-covers/weddings.webp',
+      imageSrc: 'assets/img/card-covers/weddings.png',
     },
     {
       name: 'Абитуриентски фотосесии',
