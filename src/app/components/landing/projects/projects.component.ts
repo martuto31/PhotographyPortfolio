@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { DimensionService } from './../../../services/dimension.service';
 
@@ -14,6 +15,9 @@ interface Project {
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
   standalone: true,
+  imports: [
+    RouterLink,
+  ],
 })
 
 export class ProjectsComponent {
@@ -25,7 +29,7 @@ export class ProjectsComponent {
     {
       name: 'Сватбени фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      btnLink: '',
+      btnLink: 'gallery/wedding',
       imageSrc: 'assets/img/card-covers/weddings.png',
     },
     {

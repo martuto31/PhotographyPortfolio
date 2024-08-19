@@ -1,7 +1,6 @@
 .container {
     display: flex;
     justify-content: space-between;
-    color: var(--font-high-emphasis);
     font-size: 18px;
     margin-bottom: 54px;
 }
@@ -13,4 +12,5 @@
 
 a {
     cursor: pointer;
+    color: var(--font-high-emphasis);
 }

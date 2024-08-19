@@ -1,11 +1,11 @@
 <div class="container">
     <div>
-        <a>Виктория Борисова</a>
+        <a routerLink="">Виктория Борисова</a>
     </div>
 
     <div class="actions">
         <a>За Мен</a>
-        <a>Галерия</a>
-        <a>Контакти</a>
+        <a routerLink="" [state]="{ scrollTo: 'projects', }">Галерия</a>
+        <a routerLink="" [state]="{ scrollTo: 'contact-me', }">Контакти</a>
     </div>
 </div>

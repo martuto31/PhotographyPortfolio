@@ -1,6 +1,6 @@
-<div class="container">
+<div id="projects" class="container">
     <div class="heading">
-        <h1>Галерии</h1>
+        <h1>Галерия</h1>
 
         <div class="line"></div>
     </div>
@@ -16,7 +16,7 @@
 
                 <span>{{ project.summary }}</span>
 
-                <a class="btn btn-secondary">Към Галерия</a>
+                <a [routerLink]="project.btnLink" class="btn btn-secondary">Към Галерия</a>
             </div>
 
             @if ($index % 2 === 0 && !dimensionService.isMobile) {
