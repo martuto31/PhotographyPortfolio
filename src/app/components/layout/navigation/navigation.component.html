@@ -1,4 +1,4 @@
-@if (dimensionsService.isDesktop) {
+@if (dimensionsService.isDesktop || dimensionsService.isTablet) {
     <app-navigation-desktop></app-navigation-desktop>
 } @else {
     <app-navigation-mobile></app-navigation-mobile>

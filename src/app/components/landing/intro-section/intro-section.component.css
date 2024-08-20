@@ -3,6 +3,11 @@
     column-gap: 120px;
 }
 
+/* :host-context(.tablet) .container,
+:host-context(.mobile) .container {
+    flex-direction: column-reverse;
+} */
+
 .left {
     flex: 1;
     display: flex;
@@ -18,6 +23,11 @@
 .right {
     width: 720px;
     height: 628px;
+}
+
+:host-context(.tablet) .right,
+:host-context(.mobile) .right {
+    display: none;
 }
 
 .right svg {
