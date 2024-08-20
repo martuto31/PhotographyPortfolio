@@ -1,8 +1,8 @@
  :root {
     /* Background */
     --bg-white: #FFFFFF;
-    /* --bg-gray: #F9FAFF; */
-    --bg-gray: rgb(255, 247, 236);
+    --bg-gray: #F9FAFF;
+    /* --bg-gray: rgb(255, 247, 236); */
     --bg-line: #25282B;
 
     /* Brand */
