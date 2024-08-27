@@ -1,0 +1,67 @@
+a {
+    cursor: pointer;
+    color: var(--font-high-emphasis);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+
+.container a,
+.heading a {
+    font-size: 22px;
+}
+
+.expander-container {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: var(--bg-gray);
+    z-index: 99;
+    overflow-y: auto;
+}
+
+.expander {
+    width: 100%;
+    height: calc(100% - 84px); /* TODO: Fix that - 84 px is the padding */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 36px;
+    padding-bottom: 48px;
+}
+
+.expander .heading {
+    width: 76%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.expander .actions {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.expander .actions a {
+    font-size: 26px;
+}
+
+.expander .actions a.highlight {
+    color: var(--primary-brand);
+    font-weight: 600;
+}
+
+.expander .links {
+    display: flex;
+    gap: 32px;
+}
+
+.expander .links a {
+    color: var(--bg-line);
+}

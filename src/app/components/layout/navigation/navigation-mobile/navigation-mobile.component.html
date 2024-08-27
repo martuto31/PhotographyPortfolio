@@ -1,5 +1,28 @@
 <div class="container">
-    <div></div>
+    <a routerLink="">Виктория Борисова</a>
 
-    <!-- TODO: Add expander img -->
+    <img src="assets/img/hamburger.svg" (click)="triggerAnimation()">
 </div>
+
+@if (isExpanderOpen) {
+    <div class="expander-container" [@slideInOut]>
+        <div class="expander">
+            <div class="heading">
+                <a routerLink="" (click)="triggerAnimation()">Виктория Борисова</a>
+    
+                <img src="assets/img/hamburger.svg" (click)="triggerAnimation()">
+            </div>
+        
+            <div class="actions">
+                <a (click)="triggerAnimation()">За Мен</a>
+                <a class="highlight" routerLink="" [state]="{ scrollTo: 'projects', }" (click)="triggerAnimation()">Галерия</a>
+                <a routerLink="" [state]="{ scrollTo: 'contact-me', }" (click)="triggerAnimation()">Контакти</a>
+            </div>
+    
+            <div class="links">
+                <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank"><i class="fa fa-facebook fa-xl"></i></a>
+                <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank"><i class="fa-brands fa-instagram fa-xl"></i></a>
+            </div>
+        </div>
+    </div>
+}
