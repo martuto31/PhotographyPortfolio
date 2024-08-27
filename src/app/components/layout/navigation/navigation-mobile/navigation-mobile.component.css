@@ -9,6 +9,14 @@ a {
     margin-bottom: 36px;
 }
 
+.logo {
+    height: 80px;
+}
+
+.logo img {
+    object-fit: contain;
+}
+
 .container a,
 .heading a {
     font-size: 22px;

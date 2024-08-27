@@ -1,8 +1,14 @@
 .container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 18px;
     margin-bottom: 54px;
+}
+
+.logo {
+    height: 60px;
+    cursor: pointer;
 }
 
 .actions {
