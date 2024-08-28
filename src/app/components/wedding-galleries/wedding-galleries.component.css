@@ -6,8 +6,16 @@
     row-gap: 80px;
 }
 
+:host-context(.mobile) {
+    row-gap: 60px;
+}
+
 .card {
     width: 48%;
+}
+
+:host-context(.mobile) .card {
+    width: 100%;
 }
 
 .card img {
