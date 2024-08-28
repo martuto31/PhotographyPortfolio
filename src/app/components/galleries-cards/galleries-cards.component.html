@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="cards-container">
+        @if (galleryType === 'wedding') {
+            @for (gallery of weddingGalleries; track $index) {
+                <div class="card">
+                    <img [src]="gallery.imageSrc">
+    
+                    <div>
+                        <span>СВАТБИ</span>
+    
+                        <h3>{{gallery.name}}</h3>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

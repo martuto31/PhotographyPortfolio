@@ -29,19 +29,19 @@ export class ProjectsComponent {
     {
       name: 'Сватбени фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      btnLink: 'gallery/wedding',
+      btnLink: 'galleries/wedding',
       imageSrc: 'assets/img/card-covers/weddings.png',
     },
     {
       name: 'Абитуриентски фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      btnLink: '',
+      btnLink: 'galleries/graduates',
       imageSrc: 'assets/img/card-covers/graduates.webp',
     },
     {
       name: 'Персонални фотосесии',
       summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      btnLink: '',
+      btnLink: 'galleries/personal',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];

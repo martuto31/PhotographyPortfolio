@@ -6,7 +6,6 @@ import { LandingComponent } from './../landing/landing.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { DimensionService } from './../../services/dimension.service';
-import { WeddingGalleriesComponent } from '../wedding-galleries/wedding-galleries.component';
 
 @Component({
   selector: 'app-layout',
@@ -18,7 +17,6 @@ import { WeddingGalleriesComponent } from '../wedding-galleries/wedding-gallerie
     FooterComponent,
     LandingComponent,
     NavigationComponent,
-    WeddingGalleriesComponent,
   ],
 })
 

@@ -7,8 +7,21 @@ export const routes: Routes = [
         title: '',
     },
     {
-        path: 'gallery/wedding',
-        loadComponent: () => import('./components/wedding-galleries/wedding-galleries.component').then(c => c.WeddingGalleriesComponent),
+        path: 'galleries/wedding',
+        loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
         title: '',
+        data: { galleryType: 'wedding' },
+    },
+    {
+        path: 'galleries/graduates',
+        loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
+        title: '',
+        data: { galleryType: 'graduates' },
+    },
+    {
+        path: 'galleries/personal',
+        loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
+        title: '',
+        data: { galleryType: 'personal' },
     },
 ];

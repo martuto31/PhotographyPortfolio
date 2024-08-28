@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 interface Gallery {
   name: string;
@@ -7,15 +8,24 @@ interface Gallery {
 }
 
 @Component({
-  selector: 'app-wedding-galleries',
-  templateUrl: './wedding-galleries.component.html',
-  styleUrls: ['./wedding-galleries.component.css'],
+  selector: 'app-galleries-cards',
+  templateUrl: './galleries-cards.component.html',
+  styleUrls: ['./galleries-cards.component.css'],
   standalone: true,
 })
 
-export class WeddingGalleriesComponent {
+export class GalleriesCardsComponent implements OnInit {
 
-  public galleries: Gallery[] = [
+  constructor(
+    private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.galleryType = this.route.snapshot.data['galleryType'];
+  }
+
+  public galleryType = 'wedding';
+
+  public weddingGalleries: Gallery[] = [
     {
       name: 'Krysteena & Martin',
       btnLink: '',
