@@ -1,7 +1,7 @@
 html, body {
     width: 100%;
     min-height: 100vh;
-    /* font */
+    font-family: 'Overpass', sans-serif;
     font-weight: 400;
     font-size: 16px;
     color: var(--font-low-emphasis);

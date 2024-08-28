@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Overpass';
+    src: url('/assets/fonts/Overpass.ttf') format('truetype');
+    font-weight: normal;
+    font-style: 400;
+}
+
+@font-face {
+    font-family: 'Overpass';
+    src: url('/assets/fonts/Overpass.ttf') format('truetype');
+    font-weight: normal;
+    font-style: 500;
+}
+
+@font-face {
+    font-family: 'Overpass';
+    src: url('/assets/fonts/Overpass.ttf') format('truetype');
+    font-weight: normal;
+    font-style: 600;
+}
+
+@font-face {
+    font-family: 'Overpass';
+    src: url('/assets/fonts/Overpass.ttf') format('truetype');
+    font-weight: normal;
+    font-style: 700;
+}
