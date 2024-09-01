@@ -28,19 +28,19 @@ export class ProjectsComponent {
   public projects: Project[] = [
     {
       name: 'Сватбени фотосесии',
-      summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      summary: 'Моята мисия е да уловя красиви и вълшебни моменти на влюбените хора и да допринеса за тяхното незабравимо изживяване.',
       btnLink: 'galleries/wedding',
       imageSrc: 'assets/img/card-covers/weddings.png',
     },
     {
       name: 'Абитуриентски фотосесии',
-      summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      summary: 'Заснемането на изображение и замразяването на момента разкрива колко богата е действителността',
       btnLink: 'galleries/graduates',
       imageSrc: 'assets/img/card-covers/graduates.webp',
     },
     {
       name: 'Персонални фотосесии',
-      summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      summary: 'Фотографията няма правила, тя не е спорт. Важен е резултатът, независимо как е постигнат затова се старая да покрия и надмина вашите очаквания.',
       btnLink: 'galleries/personal',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
