@@ -37,7 +37,7 @@
 :host-context(.tablet) .project {
     max-width: 680px;
     width: unset;
-    height: 300px;
+    height: 380px;
 }
 
 :host-context(.mobile) .project {

@@ -24,4 +24,9 @@ export const routes: Routes = [
         title: '',
         data: { galleryType: 'personal' },
     },
+    {
+        path: 'gallery',
+        loadComponent: () => import('./components/gallery/gallery.component').then(c => c.GalleryComponent),
+        title: '',
+    },
 ];

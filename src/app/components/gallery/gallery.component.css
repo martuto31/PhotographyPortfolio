@@ -1,0 +1,27 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.column {
+    max-width: 24%;
+    flex: 24%;
+    padding: 0 4px;
+}
+
+:host-context(.tablet) .column {
+    max-width: 48%;
+    flex: 48%;
+}
+
+:host-context(.mobile) .column {
+    max-width: 100%;
+    flex: 100%;
+}
+  
+.column img {
+    width: 100%;
+    vertical-align: middle;
+    margin-top: 8px;
+}
