@@ -1,39 +1,39 @@
 <div class="container">
     <div class="row">
-        <div class="column">
-            <img src="assets/img/card-covers/graduates.webp">
-            <img src="assets/img/card-covers/personal.webp">
-            <img src="assets/img/wedding-galleries/krysteena-martin/krysteena-martin-cover.jpg">
-            <img src="assets/img/card-covers/weddings.png">
-            <img src="assets/img/wedding-galleries/aleksandrina-boris/aleksandrina-boris-cover.jpg">
-            <img src="assets/img/wedding-galleries/mari-ogi/mari-ogi-cover.jpg">
-        </div>
+        @for (image of imageUrls.slice(0, 6); track $index) {
+            <div class="column">
+                <img [src]="imageUrls[$index]">
+            </div>
+        }
 
-        <div class="column">
-            <img src="assets/img/wedding-galleries/aleksandrina-boris/aleksandrina-boris-cover.jpg">
-            <img src="assets/img/wedding-galleries/krysteena-martin/krysteena-martin-cover.jpg">
-            <img src="assets/img/card-covers/graduates.webp">
-            <img src="assets/img/wedding-galleries/mari-ogi/mari-ogi-cover.jpg">
-            <img src="assets/img/card-covers/weddings.png">
-            <img src="assets/img/card-covers/personal.webp">
-        </div>
+        @for (image of imageUrls.slice(5, 6); track $index) {
+            <div class="column">
+                <img [src]="imageUrls[$index]">
+            </div>
+        }
 
-        <div class="column">
-            <img src="assets/img/wedding-galleries/aleksandrina-boris/aleksandrina-boris-cover.jpg">
-            <img src="assets/img/wedding-galleries/krysteena-martin/krysteena-martin-cover.jpg">
-            <img src="assets/img/card-covers/graduates.webp">
-            <img src="assets/img/card-covers/personal.webp">
-            <img src="assets/img/wedding-galleries/mari-ogi/mari-ogi-cover.jpg">
-            <img src="assets/img/card-covers/weddings.png">
-        </div>
+        @for (image of imageUrls.slice(11, 6); track $index) {
+            <div class="column">
+                <img [src]="imageUrls[$index]">
+            </div>
+        }
 
-        <div class="column">
-            <img src="assets/img/wedding-galleries/krysteena-martin/krysteena-martin-cover.jpg">
-            <img src="assets/img/card-covers/graduates.webp">
-            <img src="assets/img/card-covers/weddings.png">
-            <img src="assets/img/card-covers/personal.webp">
-            <img src="assets/img/wedding-galleries/aleksandrina-boris/aleksandrina-boris-cover.jpg">
-            <img src="assets/img/wedding-galleries/mari-ogi/mari-ogi-cover.jpg">
-        </div>
+        @for (image of imageUrls.slice(16, 6); track $index) {
+            <div class="column">
+                <img [src]="imageUrls[$index]">
+            </div>
+        }
+
+        @for (image of imageUrls.slice(21, 6); track $index) {
+            <div class="column">
+                <img [src]="imageUrls[$index]">
+            </div>
+        }
+
+        @for (image of imageUrls.slice(26, 6); track $index) {
+            <div class="column">
+                <img [src]="imageUrls[$index]">
+            </div>
+        }
     </div>
 </div>

@@ -6,6 +6,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent),
         title: '',
     },
+    // TODO: Make galleries/:type instead
     {
         path: 'galleries/wedding',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
@@ -25,7 +26,7 @@ export const routes: Routes = [
         data: { galleryType: 'personal' },
     },
     {
-        path: 'gallery',
+        path: 'gallery/:galleryName',
         loadComponent: () => import('./components/gallery/gallery.component').then(c => c.GalleryComponent),
         title: '',
     },
