@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { S3Client, S3ClientConfig, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
@@ -14,10 +14,7 @@ import awsCredentials from './../../../assets/aws-credentials.json';
 
 export class GalleryComponent implements OnInit {
 
-  @Input() galleryName: string = ''; 
-
-  constructor(
-    private cdr: ChangeDetectorRef) {  }
+  @Input() galleryName: string = 'Други';
 
   public imageUrls: string[] = [];
   public imagesLoaded = false;
@@ -30,6 +27,8 @@ export class GalleryComponent implements OnInit {
 
   private async loadImages(): Promise<void> {
     const s3 = this.getS3Client();
+
+    console.log(this.galleryName);
 
     const command = new ListObjectsV2Command({
       Bucket: this.bucketName,
@@ -50,8 +49,6 @@ export class GalleryComponent implements OnInit {
     }
 
     this.imageUrls.shift();
-
-    // this.cdr.detectChanges();
   }
 
   private getS3Client(): S3Client  {

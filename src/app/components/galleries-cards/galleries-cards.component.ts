@@ -24,9 +24,11 @@ export class GalleriesCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.galleryType = this.route.snapshot.data['galleryType'];
+
+    console.log(this.galleryType);
   }
 
-  public galleryType = 'wedding';
+  public galleryType = 'Weddings';
 
   public weddingGalleries: Gallery[] = [
     {
@@ -56,11 +58,37 @@ export class GalleriesCardsComponent implements OnInit {
   ];
 
   public graduatesGalleries: Gallery[] = [
-    
+    {
+      name: 'Вивиан',
+      imageSrc: '',
+    },
+    {
+      name: 'Кати и Калин',
+      imageSrc: '',
+    },
+    {
+      name: 'Ванеса',
+      imageSrc: '',
+    },
+    {
+      name: 'Мерелин',
+      imageSrc: '',
+    },
+    {
+      name: 'Мони',
+      imageSrc: '',
+    },
+    {
+      name: 'Меги и Здравко',
+      imageSrc: '',
+    },
   ];
 
   public personalGalleries: Gallery[] = [
-
+    {
+      name: '',
+      imageSrc: '',
+    },
   ];
 
 }

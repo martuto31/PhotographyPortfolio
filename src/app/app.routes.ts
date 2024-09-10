@@ -11,19 +11,19 @@ export const routes: Routes = [
         path: 'galleries/wedding',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
         title: '',
-        data: { galleryType: 'wedding' },
+        data: { galleryType: 'Weddings' },
     },
     {
         path: 'galleries/graduates',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
         title: '',
-        data: { galleryType: 'graduates' },
+        data: { galleryType: 'Graduates' },
     },
     {
         path: 'galleries/personal',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
         title: '',
-        data: { galleryType: 'personal' },
+        data: { galleryType: 'Personal' },
     },
     {
         path: 'gallery/:galleryName',

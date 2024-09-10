@@ -41,7 +41,8 @@ export class ProjectsComponent {
     {
       name: 'Персонални фотосесии',
       summary: 'Фотографията няма правила, тя не е спорт. Важен е резултатът, независимо как е постигнат затова се старая да покрия и надмина вашите очаквания.',
-      btnLink: 'galleries/personal',
+      // btnLink: 'galleries/personal',
+      btnLink: 'gallery/Personal',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];
