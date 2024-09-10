@@ -33,54 +33,46 @@ export class GalleriesCardsComponent implements OnInit {
   public weddingGalleries: Gallery[] = [
     {
       name: 'Krysteena & Martin',
-      imageSrc: 'assets/img/wedding-galleries/krysteena-martin/krysteena-martin-cover.jpg',
+      imageSrc: 'assets/img/wedding-galleries/krysteena-martin-cover.webp',
     },
     {
       name: 'Александрина и Борис',
-      imageSrc: 'assets/img/wedding-galleries/aleksandrina-boris/aleksandrina-boris-cover.jpg',
+      imageSrc: 'assets/img/wedding-galleries/aleksandrina-boris-cover.webp',
     },
-    // {
-    //   name: 'Мари и Оги',
-    //   imageSrc: 'assets/img/wedding-galleries/mari-ogi/mari-ogi-cover.jpg',
-    // },
+    {
+      name: 'Мари и Оги',
+      imageSrc: 'assets/img/wedding-galleries/mari-ogi-cover.webp',
+    },
     {
       name: 'Вики и Петьо',
-      imageSrc: 'assets/img/wedding-galleries/viki-petio/viki-petio-cover.jpg',
+      imageSrc: 'assets/img/wedding-galleries/viki-petio-cover.webp',
     },
     {
       name: 'Виктория и Мартин',
-      imageSrc: 'assets/img/wedding-galleries/viki-martin/viki-martin-cover.jpg',
+      imageSrc: 'assets/img/wedding-galleries/viki-martin-cover.webp',
     },
     {
-      name: 'Илияна и Деян',
-      imageSrc: 'assets/img/wedding-galleries/iliqna-deqn/iliqna-deqn-cover.jpg',
+      name: 'Надя и Боби',
+      imageSrc: 'assets/img/wedding-galleries/nadia-bobi-cover.webp',
     },
   ];
 
   public graduatesGalleries: Gallery[] = [
     {
       name: 'Вивиан',
-      imageSrc: '',
-    },
-    {
-      name: 'Кати и Калин',
-      imageSrc: '',
+      imageSrc: 'assets/img/graduates-galleries-covers/vivian.webp',
     },
     {
       name: 'Ванеса',
-      imageSrc: '',
-    },
-    {
-      name: 'Мерелин',
-      imageSrc: '',
+      imageSrc: 'assets/img/graduates-galleries-covers/vanesa.webp',
     },
     {
       name: 'Мони',
-      imageSrc: '',
+      imageSrc: 'assets/img/graduates-galleries-covers/moni.webp',
     },
     {
-      name: 'Меги и Здравко',
-      imageSrc: '',
+      name: 'Други',
+      imageSrc: 'assets/img/graduates-galleries-covers/merelin.webp',
     },
   ];
 
