@@ -24,8 +24,6 @@ export class GalleriesCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.galleryType = this.route.snapshot.data['galleryType'];
-
-    console.log(this.galleryType);
   }
 
   public galleryType = 'Weddings';

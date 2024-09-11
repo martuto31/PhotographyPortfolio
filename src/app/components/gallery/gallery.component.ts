@@ -28,8 +28,6 @@ export class GalleryComponent implements OnInit {
   private async loadImages(): Promise<void> {
     const s3 = this.getS3Client();
 
-    console.log(this.galleryName);
-
     const command = new ListObjectsV2Command({
       Bucket: this.bucketName,
       Prefix: this.galleryName,

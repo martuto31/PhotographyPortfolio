@@ -16,7 +16,7 @@
 }
 
 .btn-primary {
-    color: var(--font-high-emphasis);
+    color: var(--font-white);
     background-color: var(--primary-brand);
 }
 

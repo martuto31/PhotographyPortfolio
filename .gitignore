@@ -43,3 +43,9 @@ Thumbs.db
 
 # AWS Secrets
 /src/assets/aws-credentials.json
+
+# Firebase
+.firebase
+.firebaserc
+firebase.json
+remoteconfig.template.json

@@ -30,7 +30,7 @@ export class ProjectsComponent {
       name: 'Сватбени фотосесии',
       summary: 'Моята мисия е да уловя красиви и вълшебни моменти на влюбените хора и да допринеса за тяхното незабравимо изживяване.',
       btnLink: 'galleries/wedding',
-      imageSrc: 'assets/img/card-covers/weddings.png',
+      imageSrc: 'assets/img/card-covers/weddings.webp',
     },
     {
       name: 'Абитуриентски фотосесии',

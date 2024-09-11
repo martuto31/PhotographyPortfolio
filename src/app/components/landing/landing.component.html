@@ -2,8 +2,12 @@
 
 <div class="section-space"></div>
 
-<app-projects></app-projects>
+@defer (on idle) {
+    <app-projects></app-projects>
+}
 
-<div class="section-space"></div>
+<div #projectsSectionSpace class="section-space"></div>
 
-<app-contact-me></app-contact-me>
+@defer (on viewport(projectsSectionSpace)) {
+    <app-contact-me></app-contact-me>
+}

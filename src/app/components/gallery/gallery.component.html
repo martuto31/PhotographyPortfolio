@@ -1,39 +1,39 @@
 <div class="container">
     <div class="row">
-        @for (image of imageUrls.slice(0, 6); track $index) {
-            <div class="column">
-                <img [src]="imageUrls[$index]">
-            </div>
-        }
+        <div class="column">
+            @for (image of imageUrls.slice(0, 5); track $index) {
+                <img [src]="image">
+            }
+        </div>
 
-        @for (image of imageUrls.slice(5, 6); track $index) {
-            <div class="column">
-                <img [src]="imageUrls[$index]">
-            </div>
-        }
+        <div class="column">
+            @for (image of imageUrls.slice(6, 11); track $index) {
+                <img [src]="image">
+            }
+        </div>
 
-        @for (image of imageUrls.slice(11, 6); track $index) {
-            <div class="column">
-                <img [src]="imageUrls[$index]">
-            </div>
-        }
+        <div class="column">
+            @for (image of imageUrls.slice(12, 17); track $index) {
+                <img [src]="image">
+            }
+        </div>
 
-        @for (image of imageUrls.slice(16, 6); track $index) {
-            <div class="column">
-                <img [src]="imageUrls[$index]">
-            </div>
-        }
+        <div class="column">
+            @for (image of imageUrls.slice(13, 18); track $index) {
+                <img [src]="image">
+            }
+        </div>
 
-        @for (image of imageUrls.slice(21, 6); track $index) {
-            <div class="column">
-                <img [src]="imageUrls[$index]">
-            </div>
-        }
+        <!-- <div class="column">
+            @for (image of imageUrls.slice(19, 24); track $index) {
+                <img [src]="image">
+            }
+        </div>
 
-        @for (image of imageUrls.slice(26, 6); track $index) {
-            <div class="column">
-                <img [src]="imageUrls[$index]">
-            </div>
-        }
+        <div class="column">
+            @for (image of imageUrls.slice(25, 30); track $index) {
+                <img [src]="image">
+            }
+        </div> -->
     </div>
 </div>
