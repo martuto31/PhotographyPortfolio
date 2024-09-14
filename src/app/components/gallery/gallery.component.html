@@ -1,39 +1,7 @@
 <div class="container">
-    <div class="row">
+    @for (image of imageUrls; track $index) {
         <div class="column">
-            @for (image of imageUrls.slice(0, 5); track $index) {
-                <img [src]="image">
-            }
+            <img [src]="image" class="image" alt="Gallery Image">
         </div>
-
-        <div class="column">
-            @for (image of imageUrls.slice(6, 11); track $index) {
-                <img [src]="image">
-            }
-        </div>
-
-        <div class="column">
-            @for (image of imageUrls.slice(12, 17); track $index) {
-                <img [src]="image">
-            }
-        </div>
-
-        <div class="column">
-            @for (image of imageUrls.slice(13, 18); track $index) {
-                <img [src]="image">
-            }
-        </div>
-
-        <!-- <div class="column">
-            @for (image of imageUrls.slice(19, 24); track $index) {
-                <img [src]="image">
-            }
-        </div>
-
-        <div class="column">
-            @for (image of imageUrls.slice(25, 30); track $index) {
-                <img [src]="image">
-            }
-        </div> -->
-    </div>
+    }
 </div>
