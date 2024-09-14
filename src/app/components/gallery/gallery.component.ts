@@ -30,6 +30,10 @@ export class GalleryComponent implements OnInit {
   private async loadImages(): Promise<void> {
     const s3 = this.getS3Client();
 
+    if (this.galleryName === 'Personal') {
+      this.galleryName = 'Personal/Други'; // TODO: Remove when more personal galleries are added
+    }
+
     const command = new ListObjectsV2Command({
       Bucket: this.bucketName,
       Prefix: this.galleryName,

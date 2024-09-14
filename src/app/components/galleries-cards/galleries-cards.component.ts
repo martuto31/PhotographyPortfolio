@@ -19,7 +19,7 @@ interface Gallery {
 
 export class GalleriesCardsComponent {
 
-  @Input() galleryType: string = 'weddings'
+  @Input() galleryType: string = 'Weddings'
 
   public weddingGalleries: Gallery[] = [
     {

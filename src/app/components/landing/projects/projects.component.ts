@@ -29,20 +29,20 @@ export class ProjectsComponent {
     {
       name: 'Сватбени фотосесии',
       summary: 'Моята мисия е да уловя красиви и вълшебни моменти на влюбените хора и да допринеса за тяхното незабравимо изживяване.',
-      btnLink: 'galleries/weddings',
+      btnLink: 'galleries/Weddings',
       imageSrc: 'assets/img/card-covers/weddings.webp',
     },
     {
       name: 'Абитуриентски фотосесии',
       summary: 'Заснемането на изображение и замразяването на момента разкрива колко богата е действителността',
-      btnLink: 'galleries/graduates',
+      btnLink: 'galleries/Graduates',
       imageSrc: 'assets/img/card-covers/graduates.webp',
     },
     {
       name: 'Персонални фотосесии',
       summary: 'Фотографията няма правила, тя не е спорт. Важен е резултатът, независимо как е постигнат затова се старая да покрия и надмина вашите очаквания.',
-      // btnLink: 'galleries/personal',
-      btnLink: 'gallery/personal',
+      // btnLink: 'galleries/Personal',
+      btnLink: 'gallery/Personal',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];
