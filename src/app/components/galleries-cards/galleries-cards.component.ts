@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 interface Gallery {
   name: string;
@@ -17,16 +17,9 @@ interface Gallery {
   ],
 })
 
-export class GalleriesCardsComponent implements OnInit {
+export class GalleriesCardsComponent {
 
-  constructor(
-    private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.galleryType = this.route.snapshot.data['galleryType'];
-  }
-
-  public galleryType = 'Weddings';
+  @Input() galleryType: string = 'weddings'
 
   public weddingGalleries: Gallery[] = [
     {

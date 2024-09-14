@@ -6,24 +6,10 @@ export const routes: Routes = [
         loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent),
         title: '',
     },
-    // TODO: Make galleries/:type instead
     {
-        path: 'galleries/wedding',
+        path: 'galleries/:galleryType',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
         title: '',
-        data: { galleryType: 'Weddings' },
-    },
-    {
-        path: 'galleries/graduates',
-        loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
-        title: '',
-        data: { galleryType: 'Graduates' },
-    },
-    {
-        path: 'galleries/personal',
-        loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
-        title: '',
-        data: { galleryType: 'Personal' },
     },
     {
         path: 'gallery/:galleryName',

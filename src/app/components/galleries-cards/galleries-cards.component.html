@@ -1,6 +1,6 @@
 <div class="container">
     <div class="cards-container">
-        @if (galleryType === 'Weddings') {
+        @if (galleryType === 'weddings') {
             @for (gallery of weddingGalleries; track $index) {
                 <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
                     <img [src]="gallery.imageSrc">
@@ -14,7 +14,7 @@
             }
         }
 
-        @if (galleryType === 'Graduates') {
+        @if (galleryType === 'graduates') {
             @for (gallery of graduatesGalleries; track $index) {
                 <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
                     <img [src]="gallery.imageSrc">
@@ -28,7 +28,7 @@
             }
         }
 
-        @if (galleryType === 'Personal') {
+        @if (galleryType === 'personal') {
             @for (gallery of personalGalleries; track $index) {
                 <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
                     <img [src]="gallery.imageSrc">

@@ -29,7 +29,7 @@ export class ProjectsComponent {
     {
       name: 'Сватбени фотосесии',
       summary: 'Моята мисия е да уловя красиви и вълшебни моменти на влюбените хора и да допринеса за тяхното незабравимо изживяване.',
-      btnLink: 'galleries/wedding',
+      btnLink: 'galleries/weddings',
       imageSrc: 'assets/img/card-covers/weddings.webp',
     },
     {
@@ -42,7 +42,7 @@ export class ProjectsComponent {
       name: 'Персонални фотосесии',
       summary: 'Фотографията няма правила, тя не е спорт. Важен е резултатът, независимо как е постигнат затова се старая да покрия и надмина вашите очаквания.',
       // btnLink: 'galleries/personal',
-      btnLink: 'gallery/Personal',
+      btnLink: 'gallery/personal',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];
