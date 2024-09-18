@@ -49,3 +49,6 @@ Thumbs.db
 .firebaserc
 firebase.json
 remoteconfig.template.json
+
+#emailJS
+/src/assets/email-js-credentials.json

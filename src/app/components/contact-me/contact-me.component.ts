@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
+import emailjs from '@emailjs/browser';
+
+import emailJsCredentials from './../../../assets/email-js-credentials.json';
+
 interface FormControls {
   name: [string, ((control: AbstractControl) => ValidationErrors | null)[]],
   email: [string, ((control: AbstractControl) => ValidationErrors | null)[]],
@@ -23,9 +27,31 @@ export class ContactMeComponent {
     private formBuilder: FormBuilder) {
 
     this.createForm();
+    this.emailJsInit();
   }
 
   public formGroup!: FormGroup;
+
+  public sendEmail(): void {
+    if (this.formGroup.invalid) {
+      return;
+    }
+    
+    const templateParams = {
+      from_name: this.formGroup.controls['name'].value,
+      from_email: this.formGroup.controls['email'].value,
+      message: this.formGroup.controls['message'].value,
+    };
+
+    emailjs.send(emailJsCredentials.serviceId, emailJsCredentials.templateId, templateParams).then(
+      (response) => {
+        this.formGroup.reset();
+      },
+      (error) => {
+
+      },
+    );
+  }
 
   private createForm() {
     const formControls: FormControls = {
@@ -35,6 +61,12 @@ export class ContactMeComponent {
     };
 
     this.formGroup = this.formBuilder.group(formControls);
+  }
+
+  private emailJsInit(): void {
+    emailjs.init({
+      publicKey: emailJsCredentials.publicKey,
+    });
   }
 
 }
