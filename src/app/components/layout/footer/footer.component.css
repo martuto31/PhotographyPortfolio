@@ -43,6 +43,8 @@
     left: 0;
     -webkit-transform: translateY(100%);
     transform: translateY(100%); 
+
+    z-index: -1;
 }
 
 .footer-image img {

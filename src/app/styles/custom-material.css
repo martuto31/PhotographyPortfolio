@@ -1,0 +1,8 @@
+.mat-mdc-snack-bar-container {
+    &.snackbar-success,
+    &.snackbar-error {
+        --mdc-snackbar-container-color: var(--primary-brand);
+        --mat-mdc-snack-bar-button-color: #FFFFFF;
+        --mdc-snackbar-supporting-text-color: #FFFFFF;
+    }
+}

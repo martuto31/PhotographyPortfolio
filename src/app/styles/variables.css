@@ -16,4 +16,7 @@
 
     /* Form */
     --border-white: #E8ECF4;
+
+    /* Error */
+    --error-color: #D32F2F; 
  }

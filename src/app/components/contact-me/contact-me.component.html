@@ -8,23 +8,40 @@
     <div class="form" [formGroup]="formGroup">
         <div class="input-container">
             <span>Име</span>
+
             <div class="input-field">
                 <input formControlName="name">
             </div>
+            
+            @if (hasError('name', 'required')) {
+                <div class="error">* Моля попълнете празното поле</div>
+            }
         </div>
 
         <div class="input-container">
             <span>Имейл</span>
+
             <div class="input-field">
                 <input formControlName="email">
             </div>
+
+            @if (hasError('email', 'required')) {
+                <div class="error">* Моля попълнете празното поле</div>
+            } @else if (hasError('email', 'pattern')) {
+                <div class="error">* Моля въведете валиден имейл адрес</div>
+            }
         </div>
 
         <div class="text-area-container">
             <span>Съобщение</span>
+
             <div class="text-area">
                 <textarea formControlName="message"></textarea>
             </div>
+
+            @if (hasError('message', 'required')) {
+                <div class="error">* Моля попълнете празното поле</div>
+            }
         </div>
 
         <a class="btn btn-primary" (click)="sendEmail()">Изпрати</a>
