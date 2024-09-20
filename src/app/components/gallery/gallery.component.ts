@@ -23,8 +23,6 @@ export class GalleryComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadImages();
-
-    this.setImageOrientation();
   }
 
   private async loadImages(): Promise<void> {
@@ -53,20 +51,6 @@ export class GalleryComponent implements OnInit {
     }
 
     this.imageUrls.shift();
-  }
-
-  private setImageOrientation(): void {
-    document.querySelectorAll('.image').forEach((img) => {
-      const imageElement = img as HTMLImageElement;
-      
-      imageElement.onload = () => {
-        if (imageElement.naturalWidth > imageElement.naturalHeight) {
-          imageElement.classList.add('landscape');
-        } else {
-          imageElement.classList.add('portrait');
-        }
-      };
-    });
   }
 
   private getS3Client(): S3Client  {
