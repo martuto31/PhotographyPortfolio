@@ -1,7 +1,17 @@
 <div class="container">
     @for (image of imageUrls; track $index) {
         <div class="column">
-            <img [src]="image" class="image" alt="Gallery Image">
+            <img [src]="image" class="image" (click)="openModal(image)" alt="Gallery Image">
         </div>
     }
 </div>
+
+@if (isModalOpen) {
+    <div class="modal-container">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            
+            <img id="modal" [src]="modalImage" alt="Gallery Image">
+        </div>
+    </div>
+}

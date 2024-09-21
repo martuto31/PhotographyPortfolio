@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { S3Client, S3ClientConfig, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
 
+import { DimensionService } from './../../services/dimension.service';
+
 import awsCredentials from './../../../assets/aws-credentials.json';
 
 @Component({
@@ -14,15 +16,40 @@ import awsCredentials from './../../../assets/aws-credentials.json';
 
 export class GalleryComponent implements OnInit {
 
+  constructor(public dimensionsService: DimensionService) { }
+
   @Input() galleryName: string = 'Други';
 
   public imageUrls: string[] = [];
   public imagesLoaded = false;
 
+  public isModalOpen = false;
+  public modalImage = '';
+
   private bucketName = 'phbyviki';
 
   async ngOnInit(): Promise<void> {
     await this.loadImages();
+  }
+
+  public openModal(imageSrc: string): void {
+    if (this.dimensionsService.isMobile) {
+      return;
+    }
+    
+    this.modalImage = imageSrc;
+
+    this.isModalOpen = true;
+    
+    setTimeout(() => {
+      this.setImageOrientation();
+    });
+  }
+
+  public closeModal(): void {
+    this.modalImage = '';
+
+    this.isModalOpen = false;
   }
 
   private async loadImages(): Promise<void> {
@@ -51,6 +78,20 @@ export class GalleryComponent implements OnInit {
     }
 
     this.imageUrls.shift();
+  }
+
+  private setImageOrientation(): void {
+    const imageElement = document.getElementById('modal') as HTMLImageElement;
+
+    console.log(imageElement);
+
+    imageElement.onload = () => {
+      if (imageElement.naturalWidth > imageElement.naturalHeight) {
+        imageElement.classList.add('landscape');
+      } else {
+        imageElement.classList.add('portrait');
+      }
+    };
   }
 
   private getS3Client(): S3Client  {
