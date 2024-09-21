@@ -35,7 +35,7 @@ a {
 
 .expander {
     width: 100%;
-    height: calc(100% - 84px); /* TODO: Fix that - 84 px is the padding */
+    height: calc(100% - 142px);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
