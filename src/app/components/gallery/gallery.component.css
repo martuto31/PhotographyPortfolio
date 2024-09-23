@@ -59,7 +59,7 @@
 }
 
 .portrait {
-    width: 54%;
+    width: min(55vh, 50%);
     height: 100%;
 }
 
