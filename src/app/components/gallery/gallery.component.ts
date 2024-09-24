@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { S3Client, S3ClientConfig, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, S3ClientConfig, ListObjectsV2Command, GetObjectCommand, ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
 
 import { DimensionService } from './../../services/dimension.service';
 
@@ -20,16 +20,33 @@ export class GalleryComponent implements OnInit {
 
   @Input() galleryName: string = 'Други';
 
+  public initialImageUrls: string[] = [];
   public imageUrls: string[] = [];
-  public imagesLoaded = false;
+
+  public areImagesLoaded = false;
+  public loadedImages: boolean[] = []
 
   public isModalOpen = false;
   public modalImage = '';
 
+  private s3 = this.getS3Client();
   private bucketName = 'phbyviki';
+  private imageList!: ListObjectsV2CommandOutput;
 
   async ngOnInit(): Promise<void> {
-    await this.loadImages();
+    await this.getImageList();
+
+    this.loadedImages = Array(this.imageList.Contents!.length).fill(false);
+    
+    await this.loadImages().then(() => {
+      setTimeout(() => {
+        this.areImagesLoaded = true;
+      }, 100);
+    });
+  }
+
+  public onImageLoad(index: number): void {
+    this.loadedImages[index] = true;
   }
 
   public openModal(imageSrc: string): void {
@@ -52,9 +69,7 @@ export class GalleryComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  private async loadImages(): Promise<void> {
-    const s3 = this.getS3Client();
-
+  private async getImageList(): Promise<void> {
     if (this.galleryName === 'Personal') {
       this.galleryName = 'Personal/Други'; // TODO: Remove when more personal galleries are added
     }
@@ -64,15 +79,23 @@ export class GalleryComponent implements OnInit {
       Prefix: this.galleryName,
     });
 
-    const response = await s3.send(command);
+    const response = await this.s3.send(command);
 
-    for (const image of response.Contents!) {
+    this.imageList = response;
+  }
+
+  private async loadImages(): Promise<void> {
+    if (!this.imageList.Contents) { 
+      return;
+    }
+    
+    for (const image of this.imageList.Contents) {
       const getImageCommand = new GetObjectCommand({
         Bucket: this.bucketName,
         Key: image.Key,
       });
 
-      const url = await getSignedUrl(s3, getImageCommand, { expiresIn: 7200 });
+      const url = await getSignedUrl(this.s3, getImageCommand, { expiresIn: 7200 });
       
       this.imageUrls.push(url);
     }
