@@ -30,6 +30,40 @@
     transform: scale(1.03);
 }
 
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+  
+.lazy-load.loaded {
+    opacity: 1;
+}
+  
+.skeleton {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    animation: pulse 1.5s infinite;
+    margin-bottom: 80px;
+}
+
+:host-context(.mobile) .skeleton {
+    margin-bottom: 60px;
+}
+
+@keyframes pulse {
+    0% {
+      background-color: #e0e0e0;
+    }
+    50% {
+      background-color: #f0f0f0;
+    }
+    100% {
+      background-color: #e0e0e0;
+    }
+}
+
 .card > div {
     display: flex;
     align-items: center;

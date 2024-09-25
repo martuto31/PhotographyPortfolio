@@ -3,8 +3,17 @@
         @if (galleryType === 'Weddings') {
             @for (gallery of weddingGalleries; track $index) {
                 <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
-                    <img [src]="gallery.imageSrc">
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc" 
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                    >
     
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+                    
                     <div>
                         <span>СВАТБИ</span>
     
@@ -17,8 +26,17 @@
         @if (galleryType === 'Graduates') {
             @for (gallery of graduatesGalleries; track $index) {
                 <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
-                    <img [src]="gallery.imageSrc">
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc" 
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                    >
     
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+                    
                     <div>
                         <span>АБИТУРИЕНТИ</span>
     
@@ -31,8 +49,17 @@
         @if (galleryType === 'Personal') {
             @for (gallery of personalGalleries; track $index) {
                 <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
-                    <img [src]="gallery.imageSrc">
-    
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc" 
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                    >
+
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+                    
                     <div>
                         <span>ПЕРСОНАЛНИ</span>
     
