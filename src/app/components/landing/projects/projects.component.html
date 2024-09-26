@@ -8,7 +8,7 @@
     @for (project of projects; track $index) {
         <div class="project">
             @if ($index % 2 !== 0 || dimensionService.isMobile) {
-                <img [src]="project.imageSrc">
+                <img [src]="project.imageSrc" alt="A cover image for the collection">
             }
 
             <div class="summary">
@@ -20,7 +20,7 @@
             </div>
 
             @if ($index % 2 === 0 && !dimensionService.isMobile) {
-                <img [src]="project.imageSrc">
+                <img [src]="project.imageSrc" alt="A cover image for the collection">
             }
         </div>
     }

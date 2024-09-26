@@ -8,6 +8,7 @@
                         [width]="dimensionsService.isDesktop ? '650' : '350'"
                         [height]="dimensionsService.isDesktop ? '450' : '250'"
                         (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        alt="A cover photo from the weddings gallery"
                     >
     
                     @if (!gallery.isImgLoaded) {
@@ -31,6 +32,7 @@
                         [width]="dimensionsService.isDesktop ? '650' : '350'"
                         [height]="dimensionsService.isDesktop ? '450' : '250'"
                         (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        alt="A cover photo from the graduation gallery"
                     >
     
                     @if (!gallery.isImgLoaded) {
@@ -54,6 +56,7 @@
                         [width]="dimensionsService.isDesktop ? '650' : '350'"
                         [height]="dimensionsService.isDesktop ? '450' : '250'"
                         (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        alt="A cover photo from the personal gallery"
                     >
 
                     @if (!gallery.isImgLoaded) {
