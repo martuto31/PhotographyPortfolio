@@ -24,7 +24,6 @@ export class GalleryComponent implements OnInit {
   public imageUrls: string[] = [];
 
   public areImagesLoaded = false;
-  public loadedImages: boolean[] = []
 
   public isModalOpen = false;
   public modalImage = '';
@@ -35,18 +34,16 @@ export class GalleryComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.getImageList();
-
-    this.loadedImages = Array(this.imageList.Contents!.length).fill(false);
     
-    await this.loadImages().then(() => {
-      setTimeout(() => {
-        this.areImagesLoaded = true;
-      }, 100);
-    });
+    await this.loadImages();
   }
 
   public onImageLoad(index: number): void {
-    this.loadedImages[index] = true;
+    if (index === this.imageUrls.length - 1) {
+      setTimeout(() => {
+        this.areImagesLoaded = true;
+      }, 150);
+    }
   }
 
   public openModal(imageSrc: string): void {

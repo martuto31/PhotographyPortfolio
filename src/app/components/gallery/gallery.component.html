@@ -1,15 +1,22 @@
 <div class="container">
-    @defer (when areImagesLoaded) {
-        @for (image of imageUrls; track $index) {
-            <div class="column">
-                <img [src]="image" class="image lazy-load" (click)="openModal(image)" alt="Gallery Image"
-                    (load)="onImageLoad($index)" [class.loaded]="loadedImages[$index]">
-    
-                @if (!loadedImages[$index]) {
+    @for (image of imageUrls; track $index) {
+        <div class="column" [class.loading]="areImagesLoaded">
+            <img class="image"
+                [src]="image"
+                (click)="openModal(image)"
+                (load)="onImageLoad($index)"
+                alt="Gallery Image">
+        </div>
+    }
+
+    @if (!areImagesLoaded) {
+        <div class="loading-mask">
+            @for (image of [].constructor(12); track $index) {
+                <div class="column">
                     <div class="skeleton"></div>
-                }
-            </div>
-        }
+                </div>
+            }
+        </div>
     }
 </div>
 

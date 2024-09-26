@@ -1,5 +1,6 @@
 .container {
     width: 100%; 
+    position: relative;
     column-count: 4;
     gap: 10px;
 }
@@ -15,6 +16,10 @@
 .column {
     break-inside: avoid;
     padding: 8px;
+}
+
+.column.loading {
+    z-index: -100;
 }
 
 .column img {
@@ -74,13 +79,25 @@
     transition: 0.3s;
 }
 
-.lazy-load {
-    opacity: 0;
-    transition: opacity 0.5s ease;
+.loading-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    column-count: 4;
+    gap: 10px;
+    background-color: var(--bg-gray);
+    overflow: hidden;
+    z-index: 100;
 }
-  
-.lazy-load.loaded {
-    opacity: 1;
+
+:host-context(.tablet) .loading-mask {
+    column-count: 2;
+}
+
+:host-context(.mobile) .loading-mask {
+    column-count: 1;
 }
   
 .skeleton {
