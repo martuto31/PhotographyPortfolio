@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://phbyviki.web.app/sitemap.xml
