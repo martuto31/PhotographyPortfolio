@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { S3Client, S3ClientConfig, ListObjectsV2Command, GetObjectCommand, ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
@@ -16,7 +17,9 @@ import awsCredentials from './../../../assets/aws-credentials.json';
 
 export class GalleryComponent implements OnInit {
 
-  constructor(public dimensionsService: DimensionService) { }
+  constructor(
+    public dimensionsService: DimensionService,
+    private title: Title) { }
 
   @Input() galleryName: string = 'Други';
 
@@ -33,6 +36,8 @@ export class GalleryComponent implements OnInit {
   private imageList!: ListObjectsV2CommandOutput;
 
   async ngOnInit(): Promise<void> {
+    this.setTitle();
+
     await this.getImageList();
     
     await this.loadImages();
@@ -103,8 +108,6 @@ export class GalleryComponent implements OnInit {
   private setImageOrientation(): void {
     const imageElement = document.getElementById('modal') as HTMLImageElement;
 
-    console.log(imageElement);
-
     imageElement.onload = () => {
       if (imageElement.naturalWidth > imageElement.naturalHeight) {
         imageElement.classList.add('landscape');
@@ -124,5 +127,28 @@ export class GalleryComponent implements OnInit {
     };
 
     return new S3Client(config);
+  }
+
+  private setTitle(): void {
+    let translatedGalleryName: string = '';
+
+    const galleryType = this.galleryName.split('/')[0];
+
+    switch (galleryType) {
+      case 'Weddings':
+        translatedGalleryName = 'Сватбена';
+
+        break;
+      case 'Graduates':
+        translatedGalleryName = 'Абитуриентска';
+
+        break;
+      case 'Personal':
+        translatedGalleryName = 'Персонална';
+    }
+
+    if (translatedGalleryName) {
+      this.title.setTitle(`${translatedGalleryName} Фотосесия | Галерия | Виктория Борисова`);
+    }
   }
 }

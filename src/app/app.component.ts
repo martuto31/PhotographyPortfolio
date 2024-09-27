@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { LayoutComponent } from './components/layout/layout.component';
 
+import { SEOService } from './services/seo.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,5 +15,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 })
 
 export class AppComponent {
-  title = 'PhotographyPortfolio';
+
+  constructor(private seoService: SEOService) { }
+
 }

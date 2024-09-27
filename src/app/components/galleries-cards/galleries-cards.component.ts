@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { DimensionService } from './../../services/dimension.service';
 
@@ -19,11 +20,17 @@ interface Gallery {
   ],
 })
 
-export class GalleriesCardsComponent {
+export class GalleriesCardsComponent implements OnInit {
 
-  constructor(public dimensionsService: DimensionService) { }
+  constructor(
+    public dimensionsService: DimensionService,
+    private title: Title) { }
   
   @Input() galleryType: string = 'Weddings'
+
+  public ngOnInit(): void {
+    this.setTitle();
+  }
 
   public weddingGalleries: Gallery[] = [
     {
@@ -91,6 +98,27 @@ export class GalleriesCardsComponent {
 
   public onImageLoad(gallery: Gallery): void {
     gallery.isImgLoaded = true;
+  }
+
+  private setTitle(): void {
+    let translatedGalleryType: string = '';
+
+    switch (this.galleryType) {
+      case 'Weddings':
+        translatedGalleryType = 'Сватбени';
+
+        break;
+      case 'Graduates':
+        translatedGalleryType = 'Абитуриентски';
+
+        break;
+      case 'Personal':
+        translatedGalleryType = 'Лични';
+    }
+
+    if (translatedGalleryType) {
+      this.title.setTitle(`${translatedGalleryType} Фотосесии | Галерия от Виктория Борисова`);
+    }
   }
 
 }
