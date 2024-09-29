@@ -16,4 +16,9 @@ export const routes: Routes = [
         loadComponent: () => import('./components/gallery/gallery.component').then(c => c.GalleryComponent),
         title: 'Галерия от Виктория Борисова',
     },
+    {
+        path: 'about-me',
+        loadComponent: () => import('./components/about-me/about-me.component').then(c => c.AboutMeComponent),
+        title: 'За мен | Виктория Борисова | Професионален Събитиен Фотограф',
+    },
 ];
