@@ -25,11 +25,12 @@ export class GalleryComponent implements OnInit {
 
   public initialImageUrls: string[] = [];
   public imageUrls: string[] = [];
-
+  
   public areImagesLoaded = false;
-
+  
   public isModalOpen = false;
   public modalImage = '';
+  public currentModalImageIndex!: number;
 
   private s3 = this.getS3Client();
   private bucketName = 'phbyviki';
@@ -51,7 +52,7 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  public openModal(imageSrc: string): void {
+  public openModal(imageSrc: string, imageIndex: number): void {
     if (this.dimensionsService.isMobile) {
       return;
     }
@@ -59,10 +60,38 @@ export class GalleryComponent implements OnInit {
     this.modalImage = imageSrc;
 
     this.isModalOpen = true;
+
+    this.currentModalImageIndex = imageIndex;
+
+    console.log(this.currentModalImageIndex);
     
     setTimeout(() => {
       this.setImageOrientation();
     });
+  }
+
+  public nextImage(): void {
+    if (this.currentModalImageIndex < this.imageUrls.length - 1) {
+      this.modalImage = this.imageUrls[this.currentModalImageIndex + 1];
+
+      this.currentModalImageIndex = this.currentModalImageIndex + 1;
+    } else {
+      this.modalImage = this.imageUrls[0];
+
+      this.currentModalImageIndex = 0;
+    }
+  }
+
+  public previousImage(): void {
+    if (this.currentModalImageIndex > 0) {
+      this.modalImage = this.imageUrls[this.currentModalImageIndex - 1];
+
+      this.currentModalImageIndex = this.currentModalImageIndex - 1;
+    } else {
+      this.modalImage = this.imageUrls[this.imageUrls.length - 1];
+
+      this.currentModalImageIndex = this.imageUrls.length - 1;
+    }
   }
 
   public closeModal(): void {

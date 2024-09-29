@@ -3,7 +3,7 @@
         <div class="column" [class.loading]="areImagesLoaded">
             <img class="image"
                 [src]="image"
-                (click)="openModal(image)"
+                (click)="openModal(image, $index)"
                 (load)="onImageLoad($index)"
                 alt="An image of the gallery">
         </div>
@@ -26,6 +26,9 @@
             <span class="close" (click)="closeModal()">&times;</span>
             
             <img id="modal" [src]="modalImage" alt="An image from the gallery">
+
+            <div class="slide-btn btn-left" (click)="previousImage()">&#10094;</div>
+            <div class="slide-btn btn-right" (click)="nextImage()">&#10095;</div>
         </div>
     </div>
 }
