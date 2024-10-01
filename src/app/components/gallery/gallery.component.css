@@ -60,6 +60,7 @@
 
 .slide-btn{
     display: inline-block;
+    cursor: pointer;
     text-decoration: none;
     text-align: center;
     font-size: 30px;
@@ -71,13 +72,15 @@
 .btn-left{
     position:absolute;
     top: 45%;
-    left: 3%;
+    left: 2%;
+    padding: 24px;
 }
 
 .btn-right{
     position: absolute;
     top: 45%;
-    right: 3%;
+    right: 2%;
+    padding: 24px;
 }
 
 .close {

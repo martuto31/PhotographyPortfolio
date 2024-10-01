@@ -19,6 +19,6 @@ export const routes: Routes = [
     {
         path: 'about-me',
         loadComponent: () => import('./components/about-me/about-me.component').then(c => c.AboutMeComponent),
-        title: 'За мен | Виктория Борисова | Професионален Събитиен Фотограф',
+        title: 'За мен | Виктория Борисова | Професионален Събитиен Фотограф Във Видин и София',
     },
 ];
