@@ -43,10 +43,11 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.92);
 }
 
 .modal-content {
+    position: relative;
     width: 80%;
     max-width: 900px;
     display: flex;
@@ -56,6 +57,7 @@
 
 .modal-content > img {
     object-fit: cover;
+    border-radius: 12px;
 }
 
 .slide-btn{
@@ -67,29 +69,28 @@
     color: white;
     background-color: transparent;
     border: none;
+    padding: 24px;
 }
 
 .btn-left{
     position:absolute;
     top: 45%;
-    left: 2%;
-    padding: 24px;
+    left: calc((6% + 24px) * -1);
 }
 
 .btn-right{
     position: absolute;
     top: 45%;
-    right: 2%;
-    padding: 24px;
+    right: calc((6% + 24px) * -1);
 }
 
 .close {
     position: absolute;
-    top: 15px;
-    right: 35px;
+    top: 16px;
+    right: 16px;
     color: #f1f1f1;
     cursor: pointer;
-    font-size: 40px;
+    font-size: 32px;
     font-weight: bold;
     transition: 0.3s;
 }
