@@ -1,0 +1,9 @@
+/
+/about-me
+/galerii/svatbi
+/galerii/abiturienti
+/galerii/krushteneta
+/galerii/korporativni
+/galerii/rojdeni-dni
+/galerii/semeyni
+/galeriya/lichni

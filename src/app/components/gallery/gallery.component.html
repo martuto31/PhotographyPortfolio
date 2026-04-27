@@ -5,7 +5,7 @@
                 [src]="image"
                 (click)="openModal(image, $index)"
                 (load)="onImageLoad($index)"
-                alt="An image of the gallery">
+                alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
         </div>
     }
 
@@ -25,7 +25,7 @@
         <div class="modal-content">
             <span class="close" (click)="closeModal()">&times;</span>
 
-            <img id="modal" [src]="modalImage" alt="An image from the gallery">
+            <img id="modal" [src]="modalImage" alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
 
             <div class="slide-btn btn-left" (click)="previousImage()">&#10094;</div>
             <div class="slide-btn btn-right" (click)="nextImage()">&#10095;</div>

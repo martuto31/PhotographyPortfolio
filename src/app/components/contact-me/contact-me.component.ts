@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,10 +28,14 @@ export class ContactMeComponent {
 
   constructor(
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: object) {
 
     this.createForm();
-    this.emailJsInit();
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.emailJsInit();
+    }
   }
 
   public formGroup!: FormGroup<FormControls>;

@@ -1,3 +1,20 @@
+.page-heading {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.page-heading h1 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+}
+
+.page-heading p {
+    margin: 0;
+    opacity: 0.7;
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+}
+
 .cards-container {
     display: flex;
     flex-wrap: wrap;

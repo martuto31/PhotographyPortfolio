@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
@@ -19,7 +20,8 @@ export class GalleryComponent implements OnInit {
 
   constructor(
     public dimensionsService: DimensionService,
-    private title: Title) { }
+    private title: Title,
+    @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryName: string = 'Други';
 
@@ -39,8 +41,14 @@ export class GalleryComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.setTitle();
 
+    // Skip S3 calls during SSR/prerender — signed URLs would expire and we'd
+    // need credentials at build time. Image fetching happens entirely on the client.
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     await this.getImageList();
-    
+
     await this.loadImages();
   }
 
@@ -101,6 +109,10 @@ export class GalleryComponent implements OnInit {
   }
 
   private async getImageList(): Promise<void> {
+    // Map Bulgarian URL slugs (svatbi/abiturienti/lichni/...) back to the
+    // English S3 prefix (Weddings/Graduates/Personal/...) used by the bucket.
+    this.galleryName = this.translateSlugToS3Prefix(this.galleryName);
+
     if (this.galleryName === 'Personal') {
       this.galleryName = 'Personal/Други'; // TODO: Remove when more personal galleries are added
     }
@@ -158,26 +170,54 @@ export class GalleryComponent implements OnInit {
     return new S3Client(config);
   }
 
+  private translateSlugToS3Prefix(galleryName: string): string {
+    const SLUG_TO_PREFIX: Record<string, string> = {
+      'svatbi': 'Weddings',
+      'abiturienti': 'Graduates',
+      'lichni': 'Personal',
+      'krushteneta': 'Baptisms',
+      'korporativni': 'Corporate',
+      'rojdeni-dni': 'Birthdays',
+      'semeyni': 'Family',
+    };
+
+    const [first, ...rest] = galleryName.split('/');
+    const mapped = SLUG_TO_PREFIX[first];
+    if (!mapped) return galleryName;
+    return rest.length ? `${mapped}/${rest.join('/')}` : mapped;
+  }
+
   private setTitle(): void {
     let translatedGalleryName: string = '';
 
-    const galleryType = this.galleryName.split('/')[0];
+    const rawType = this.translateSlugToS3Prefix(this.galleryName).split('/')[0];
 
-    switch (galleryType) {
+    switch (rawType) {
       case 'Weddings':
         translatedGalleryName = 'Сватбена';
-
         break;
       case 'Graduates':
         translatedGalleryName = 'Абитуриентска';
-
         break;
       case 'Personal':
-        translatedGalleryName = 'Персонална';
+        translatedGalleryName = 'Лична';
+        break;
+      case 'Baptisms':
+        translatedGalleryName = 'Кръщене';
+        break;
+      case 'Corporate':
+        translatedGalleryName = 'Корпоративна';
+        break;
+      case 'Birthdays':
+        translatedGalleryName = 'Рожден ден';
+        break;
+      case 'Family':
+        translatedGalleryName = 'Семейна';
+        break;
     }
 
     if (translatedGalleryName) {
-      this.title.setTitle(`${translatedGalleryName} Фотосесия | Галерия | Виктория Борисова`);
+      this.title.setTitle(`${translatedGalleryName} Фотосесия — София и Видин | Виктория Борисова`);
     }
   }
 }

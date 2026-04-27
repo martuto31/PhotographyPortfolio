@@ -20,6 +20,11 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "server": "src/main.server.ts",
+            "prerender": {
+              "discoverRoutes": false,
+              "routesFile": "prerender-routes.txt"
+            },
             "assets": [
               "src/robots.txt",
               "src/sitemap.xml",

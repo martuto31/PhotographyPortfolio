@@ -3,15 +3,21 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 
+import seoDataJson from '../../assets/seo.json';
+
 interface SEODataItem {
-  title: string;
+  title?: string;
   description: string;
   keywords: string;
+  ogImage?: string;
 }
 
 interface SEOData {
   [key: string]: SEODataItem;
 }
+
+const SITE_URL = 'https://phbyviki.com';
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/img/landing.webp`;
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +33,14 @@ export class SEOService {
     this.subscribeToRouteChange();
   }
 
-  private seoData!: SEOData;
-
-  private cannonicalLink!: HTMLLinkElement;
+  private seoData: SEOData = seoDataJson as unknown as SEOData;
 
   private generate(dataItem: SEODataItem): void {
     dataItem.title = this.getTitle();
 
     this.createDescriptionAndKeywords(dataItem);
     this.generateCannonicalLink();
+    this.generateOpenGraphTags(dataItem);
     this.generateRobotsTag(true);
   }
 
@@ -45,7 +50,7 @@ export class SEOService {
     while (route.firstChild) {
       route = route.firstChild;
     }
-  
+
     return route.snapshot.title || '';
   }
 
@@ -54,25 +59,45 @@ export class SEOService {
     this.meta.updateTag({ name: 'keywords', content: dataItem.keywords });
   }
 
-  private generateCannonicalLink(): void {
-    const canonicaUrl = this.dom.URL.split('?')[0];
-
-    if (this.cannonicalLink) {
-      this.dom.head.removeChild(this.cannonicalLink);
-    }
-
-    this.cannonicalLink = this.dom.createElement('link');
-    this.cannonicalLink.setAttribute('rel', 'canonical');
-    this.cannonicalLink.setAttribute('href', canonicaUrl);
-
-    this.dom.head.appendChild(this.cannonicalLink);
+  private getCurrentUrl(): string {
+    const path = this.router.url.split('?')[0];
+    return `${SITE_URL}${path === '/' ? '/' : path}`;
   }
 
-  private removeCannonicalLink(): void {
-    if (this.cannonicalLink) {
-      this.dom.head.removeChild(this.cannonicalLink);
-      this.cannonicalLink = null as any;
+  private generateCannonicalLink(): void {
+    const canonicalUrl = this.getCurrentUrl();
+
+    // Query the head every time so this works on both server and client
+    // without holding a stale element reference across hydration.
+    const existing = this.dom.head.querySelector('link[rel="canonical"]');
+    if (existing) {
+      existing.parentNode?.removeChild(existing);
     }
+
+    const link = this.dom.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', canonicalUrl);
+    this.dom.head.appendChild(link);
+  }
+
+  private generateOpenGraphTags(dataItem: SEODataItem): void {
+    const url = this.getCurrentUrl();
+    const image = dataItem.ogImage || DEFAULT_OG_IMAGE;
+    const title = dataItem.title || '';
+    const description = dataItem.description;
+
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ property: 'og:url', content: url });
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({ property: 'og:locale', content: 'bg_BG' });
+    this.meta.updateTag({ property: 'og:site_name', content: 'phbyviki — Виктория Борисова' });
+
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: title });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
   }
 
   private generateRobotsTag(shouldIndex: boolean): void {
@@ -89,7 +114,7 @@ export class SEOService {
 
   private generatePageNotFoundTag(): void {
     if (!this.meta.getTag('name="prerender-status-code"')) {
-      this.meta.updateTag({ name: 'prerender-status-code', content: '404'});
+      this.meta.updateTag({ name: 'prerender-status-code', content: '404' });
     }
   }
 
@@ -98,15 +123,10 @@ export class SEOService {
     this.meta.removeTag('name="prerender-header"');
   }
 
-  private async subscribeToRouteChange(): Promise<void> {
-    if (!this.seoData) {
-      this.seoData = await this.getSeoData();
-    }
-
-    this.router.events.subscribe(async event => {
+  private subscribeToRouteChange(): void {
+    this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.removePrerenderTags();
-        this.removeCannonicalLink();
       }
 
       if (event instanceof NavigationEnd) {
@@ -114,8 +134,12 @@ export class SEOService {
         const index = routerUrl.includes('/') ? routerUrl.indexOf('/') : routerUrl.length;
         let key = routerUrl.substring(0, index) as keyof SEOData;
 
-        if (key === 'galleries') {
-            key = routerUrl;
+        // Two-segment keys: galleries/X, galerii/X, galeriya/X, gallery/X
+        if (key === 'galleries' || key === 'galerii' || key === 'galeriya' || key === 'gallery') {
+          const twoSegment = routerUrl.split('/').slice(0, 2).join('/');
+          if (this.seoData[twoSegment]) {
+            key = twoSegment;
+          }
         }
 
         if (this.seoData[key]) {
@@ -127,18 +151,6 @@ export class SEOService {
         }
       }
     });
-  }
-
-  private async getSeoData(): Promise<SEOData> {
-    const filePath = './../../assets/seo.json';
-
-    const seoData = await new Promise<SEOData>(resolve => {
-      fetch(filePath)
-        .then(response => response.json())
-        .then(json => resolve(json));
-    });
-
-    return seoData;
   }
 
 }

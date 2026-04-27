@@ -1,71 +1,176 @@
 <div class="container">
+    @if (pageHeading) {
+        <header class="page-heading">
+            <h1>{{ pageHeading }}</h1>
+            @if (pageSubheading) {
+                <p>{{ pageSubheading }}</p>
+            }
+        </header>
+    }
+
     <div class="cards-container">
-        @if (galleryType === 'Weddings') {
+        @if (type === 'Weddings') {
             @for (gallery of weddingGalleries; track $index) {
-                <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
                     <img class="lazy-load"
-                        [src]="gallery.imageSrc" 
+                        [src]="gallery.imageSrc"
                         [width]="dimensionsService.isDesktop ? '650' : '350'"
                         [height]="dimensionsService.isDesktop ? '450' : '250'"
                         (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
-                        alt="A cover photo from the weddings gallery"
+                        [alt]="'Сватбена фотография — ' + gallery.name + ' — фотограф София и Видин'"
                     >
-    
+
                     @if (!gallery.isImgLoaded) {
                         <div class="skeleton"></div>
                     }
-                    
+
                     <div>
-                        <span>СВАТБИ</span>
-    
+                        <span>{{ cardTag }}</span>
+
                         <h3>{{ gallery.name }}</h3>
                     </div>
                 </div>
             }
         }
 
-        @if (galleryType === 'Graduates') {
+        @if (type === 'Graduates') {
             @for (gallery of graduatesGalleries; track $index) {
-                <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
                     <img class="lazy-load"
-                        [src]="gallery.imageSrc" 
+                        [src]="gallery.imageSrc"
                         [width]="dimensionsService.isDesktop ? '650' : '350'"
                         [height]="dimensionsService.isDesktop ? '450' : '250'"
                         (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
-                        alt="A cover photo from the graduation gallery"
+                        [alt]="'Абитуриентска фотосесия — ' + gallery.name + ' — фотограф София и Видин'"
                     >
-    
+
                     @if (!gallery.isImgLoaded) {
                         <div class="skeleton"></div>
                     }
-                    
+
                     <div>
-                        <span>АБИТУРИЕНТИ</span>
-    
+                        <span>{{ cardTag }}</span>
+
                         <h3>{{ gallery.name }}</h3>
                     </div>
                 </div>
             }
         }
 
-        @if (galleryType === 'Personal') {
+        @if (type === 'Personal') {
             @for (gallery of personalGalleries; track $index) {
-                <div class="card" [routerLink]="[ '/gallery', this.galleryType + '/' + gallery.name ]">
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
                     <img class="lazy-load"
-                        [src]="gallery.imageSrc" 
+                        [src]="gallery.imageSrc"
                         [width]="dimensionsService.isDesktop ? '650' : '350'"
                         [height]="dimensionsService.isDesktop ? '450' : '250'"
                         (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
-                        alt="A cover photo from the personal gallery"
+                        [alt]="'Лична фотосесия — ' + gallery.name + ' — фотограф София и Видин'"
                     >
 
                     @if (!gallery.isImgLoaded) {
                         <div class="skeleton"></div>
                     }
-                    
+
                     <div>
-                        <span>ПЕРСОНАЛНИ</span>
-    
+                        <span>{{ cardTag }}</span>
+
+                        <h3>{{ gallery.name }}</h3>
+                    </div>
+                </div>
+            }
+        }
+
+        @if (type === 'Baptisms') {
+            @for (gallery of baptismGalleries; track $index) {
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc"
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        [alt]="'Фотосесия от кръщене — ' + gallery.name + ' — фотограф София и Видин'"
+                    >
+
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+
+                    <div>
+                        <span>{{ cardTag }}</span>
+
+                        <h3>{{ gallery.name }}</h3>
+                    </div>
+                </div>
+            }
+        }
+
+        @if (type === 'Corporate') {
+            @for (gallery of corporateGalleries; track $index) {
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc"
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        [alt]="'Корпоративно събитие — ' + gallery.name + ' — фотограф София и Видин'"
+                    >
+
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+
+                    <div>
+                        <span>{{ cardTag }}</span>
+
+                        <h3>{{ gallery.name }}</h3>
+                    </div>
+                </div>
+            }
+        }
+
+        @if (type === 'Birthdays') {
+            @for (gallery of birthdayGalleries; track $index) {
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc"
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        [alt]="'Рожден ден — ' + gallery.name + ' — фотограф София и Видин'"
+                    >
+
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+
+                    <div>
+                        <span>{{ cardTag }}</span>
+
+                        <h3>{{ gallery.name }}</h3>
+                    </div>
+                </div>
+            }
+        }
+
+        @if (type === 'Family') {
+            @for (gallery of familyGalleries; track $index) {
+                <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
+                    <img class="lazy-load"
+                        [src]="gallery.imageSrc"
+                        [width]="dimensionsService.isDesktop ? '650' : '350'"
+                        [height]="dimensionsService.isDesktop ? '450' : '250'"
+                        (load)="onImageLoad(gallery)" [class.loaded]="gallery.isImgLoaded"
+                        [alt]="'Семейна фотосесия — ' + gallery.name + ' — фотограф София и Видин'"
+                    >
+
+                    @if (!gallery.isImgLoaded) {
+                        <div class="skeleton"></div>
+                    }
+
+                    <div>
+                        <span>{{ cardTag }}</span>
+
                         <h3>{{ gallery.name }}</h3>
                     </div>
                 </div>

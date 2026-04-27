@@ -1,36 +1,57 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-        <loc>https://phbyviki.web.app/</loc>
-        <changefreq>weekly</changefreq>
-    </url>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
+        xmlns:image='http://www.google.com/schemas/sitemap-image/1.1'>
 
     <url>
-        <loc>https://phbyviki.web.app/galleries/Weddings</loc>
+        <loc>https://phbyviki.com/</loc>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://phbyviki.web.app/galleries/Graduates</loc>
+        <loc>https://phbyviki.com/galerii/svatbi</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://phbyviki.com/galerii/abiturienti</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://phbyviki.com/galerii/krushteneta</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://phbyviki.com/galerii/korporativni</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://phbyviki.com/galerii/rojdeni-dni</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://phbyviki.com/galerii/semeyni</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://phbyviki.com/galeriya/lichni</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://phbyviki.web.app/gallery/Personal</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- <url>
-        <loc>https://phbyviki.web.app/gallery</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url> -->
-
-    <url>
-        <loc>https://phbyviki.web.app/about-me</loc>
+        <loc>https://phbyviki.com/about-me</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>

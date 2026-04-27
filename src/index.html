@@ -3,11 +3,124 @@
 <html lang="bg">
     <head>
         <meta charset="utf-8">
-        <title>Сватбен и Събитиен Фотограф Виктория Борисова</title>
+        <title>Сватбен и Събитиен Фотограф София и Видин | Виктория Борисова — phbyviki</title>
         <base href="/">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#1a1a1a">
+        <meta name="author" content="Виктория Борисова">
+        <meta name="geo.region" content="BG">
+        <meta name="geo.placename" content="София, Видин">
         <meta name="google-site-verification" content="kS2pLkLkUl8q2VLPzHI_iM4JOEPNqKZSdxumV1Da5UI" />
+
+        <!-- Default meta (overridden per route by SEOService) -->
+        <meta name="description" content="Сватбен и събитиен фотограф София и Видин — Виктория Борисова (phbyviki). Сватби, абитуриентски балове, кръщенета, рождени дни, корпоративни събития и лични фотосесии.">
+        <meta name="keywords" content="сватбен фотограф София, сватбен фотограф Видин, фотограф София, фотограф Видин, фотограф абитуриентски бал, фотограф за кръщене, корпоративен фотограф, лична фотосесия, Виктория Борисова, phbyviki">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:site_name" content="phbyviki — Виктория Борисова">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="bg_BG">
+        <meta property="og:url" content="https://phbyviki.com/">
+        <meta property="og:title" content="Сватбен и Събитиен Фотограф София и Видин | phbyviki">
+        <meta property="og:description" content="Сватбен и събитиен фотограф София и Видин — Виктория Борисова (phbyviki). Сватби, абитуриенти, кръщенета и лични фотосесии.">
+        <meta property="og:image" content="https://phbyviki.com/assets/img/landing.webp">
+        <meta property="og:image:alt" content="Виктория Борисова — фотограф София и Видин">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Сватбен и Събитиен Фотограф София и Видин | phbyviki">
+        <meta name="twitter:description" content="Сватбен и събитиен фотограф София и Видин — Виктория Борисова (phbyviki).">
+        <meta name="twitter:image" content="https://phbyviki.com/assets/img/landing.webp">
+
+        <link rel="canonical" href="https://phbyviki.com/">
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon.webp">
+        <link rel="preconnect" href="https://phbyviki.s3.amazonaws.com" crossorigin>
+
+        <script>
+            // Permanent redirect from legacy Firebase domain to the canonical one.
+            (function () {
+                var h = location.hostname;
+                if (h === 'phbyviki.web.app' || h === 'phbyviki.firebaseapp.com') {
+                    location.replace('https://phbyviki.com' + location.pathname + location.search + location.hash);
+                }
+            })();
+        </script>
+
+        <!-- LocalBusiness + Person schema for Google local SEO (Sofia + Vidin) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://phbyviki.com/#business",
+          "name": "phbyviki — Виктория Борисова",
+          "alternateName": ["Виктория Борисова Фотография", "Photography by Viki", "ph by viki"],
+          "description": "Професионален сватбен и събитиен фотограф в София и Видин. Сватби, абитуриентски балове, кръщенета, рождени дни, корпоративни събития и лични фотосесии.",
+          "url": "https://phbyviki.com/",
+          "image": "https://phbyviki.com/assets/img/landing.webp",
+          "logo": "https://phbyviki.com/assets/img/logo.webp",
+          "telephone": "+359895318622",
+          "priceRange": "$$",
+          "foundingDate": "2022",
+          "address": [
+            {
+              "@type": "PostalAddress",
+              "addressLocality": "София",
+              "addressRegion": "София-град",
+              "addressCountry": "BG"
+            },
+            {
+              "@type": "PostalAddress",
+              "addressLocality": "Видин",
+              "addressRegion": "Видин",
+              "addressCountry": "BG"
+            }
+          ],
+          "areaServed": [
+            { "@type": "City", "name": "София" },
+            { "@type": "City", "name": "Видин" },
+            { "@type": "Country", "name": "България" }
+          ],
+          "knowsLanguage": ["bg", "en"],
+          "sameAs": [
+            "https://www.instagram.com/_phbyviki",
+            "https://www.facebook.com/people/phbyviki/100076542123196/"
+          ],
+          "founder": {
+            "@type": "Person",
+            "@id": "https://phbyviki.com/#viktoria",
+            "name": "Виктория Борисова",
+            "jobTitle": "Професионален фотограф",
+            "worksFor": { "@id": "https://phbyviki.com/#business" },
+            "image": "https://phbyviki.com/assets/img/landing.webp",
+            "url": "https://phbyviki.com/about-me",
+            "sameAs": [
+              "https://www.instagram.com/_phbyviki",
+              "https://www.facebook.com/people/phbyviki/100076542123196/"
+            ]
+          },
+          "makesOffer": [
+            { "@type": "Offer", "name": "Сватбена фотография", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/svatbi" },
+            { "@type": "Offer", "name": "Абитуриентски фотосесии и бал", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/abiturienti" },
+            { "@type": "Offer", "name": "Фотограф за кръщене", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/krushteneta" },
+            { "@type": "Offer", "name": "Корпоративна фотография", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/korporativni" },
+            { "@type": "Offer", "name": "Фотограф за рожден ден", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/rojdeni-dni" },
+            { "@type": "Offer", "name": "Семейни и детски фотосесии", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/semeyni" },
+            { "@type": "Offer", "name": "Лична / портретна фотосесия", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galeriya/lichni" }
+          ]
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://phbyviki.com/#website",
+          "url": "https://phbyviki.com/",
+          "name": "phbyviki — Виктория Борисова",
+          "inLanguage": "bg-BG",
+          "publisher": { "@id": "https://phbyviki.com/#business" }
+        }
+        </script>
     </head>
 
     <body>

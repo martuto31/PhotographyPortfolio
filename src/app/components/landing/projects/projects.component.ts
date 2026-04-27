@@ -28,21 +28,20 @@ export class ProjectsComponent {
   public projects: Project[] = [
     {
       name: 'Сватбени фотосесии',
-      summary: 'Моята мисия е да уловя красиви и вълшебни моменти на влюбените хора и да допринеса за тяхното незабравимо изживяване.',
-      btnLink: 'galleries/Weddings',
+      summary: 'Заснемане на сватби — церемония, ресторант, първи танц. Естествени кадри и емоционални моменти от вашия специален ден.',
+      btnLink: 'galerii/svatbi',
       imageSrc: 'assets/img/card-covers/weddings.webp',
     },
     {
       name: 'Абитуриентски фотосесии',
-      summary: 'Заснемането на изображение и замразяването на момента разкрива колко богата е действителността',
-      btnLink: 'galleries/Graduates',
+      summary: 'Фотограф за абитуриентски бал. Индивидуални и групови фотосесии, които превръщат завършването във вечен спомен.',
+      btnLink: 'galerii/abiturienti',
       imageSrc: 'assets/img/card-covers/graduates.webp',
     },
     {
-      name: 'Персонални фотосесии',
-      summary: 'Фотографията няма правила, тя не е спорт. Важен е резултатът, независимо как е постигнат затова се старая да покрия и надмина вашите очаквания.',
-      // btnLink: 'galleries/Personal',
-      btnLink: 'gallery/Personal',
+      name: 'Лични и портретни фотосесии',
+      summary: 'Лични фотосесии — на открито или в студио. Стилни кадри за социални мрежи, портфолио или подарък за близък човек.',
+      btnLink: 'galeriya/lichni',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];

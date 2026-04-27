@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { Subject } from 'rxjs';
 
@@ -14,13 +15,15 @@ enum ScreenType {
 
 export class DimensionService {
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.screenType = this.getScreenType();
     this.isMobile = this.screenType === ScreenType.Mobile;
     this.isTablet = this.screenType === ScreenType.Tablet;
     this.isDesktop = this.screenType === ScreenType.Desktop;
 
-    this.subscribeToWindowResize();
+    if (isPlatformBrowser(this.platformId)) {
+      this.subscribeToWindowResize();
+    }
   }
 
   public windowResize = new Subject<void>();
@@ -37,7 +40,7 @@ export class DimensionService {
     window.onresize = () => {
       this.windowResize.next();
       this.screenType = this.getScreenType();
-      
+
       this.isMobile = this.screenType === ScreenType.Mobile;
       this.isTablet = this.screenType === ScreenType.Tablet;
       this.isDesktop = this.screenType === ScreenType.Desktop;
@@ -45,6 +48,11 @@ export class DimensionService {
   }
 
   private getScreenType(): ScreenType {
+    // During SSR / prerender there is no window — default to desktop layout.
+    if (!isPlatformBrowser(this.platformId)) {
+      return ScreenType.Desktop;
+    }
+
     const innerWidth = window.innerWidth;
 
     if (innerWidth <= this.tabletBreakpoint) {
