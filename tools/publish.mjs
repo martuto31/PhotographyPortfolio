@@ -48,6 +48,11 @@ const args = process.argv.slice(2);
 const manifestOnly = args.includes('--manifest-only');
 const dirArg = readFlag(args, '--dir') || join(__dirname, '..', 'to-upload');
 const SOURCE_DIR = resolve(dirArg);
+// How many images to encode+upload at once. Override with --concurrency N or CONCURRENCY env.
+const CONCURRENCY = Math.max(
+  1,
+  Number(readFlag(args, '--concurrency') || process.env.CONCURRENCY || 6)
+);
 
 requireEnv({ R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET });
 if (!R2_ENDPOINT.startsWith('https://')) {
@@ -80,7 +85,8 @@ async function main() {
   console.log('\n✓ Done.');
 }
 
-// Walk <root>/<Type>/<Gallery>/*.img and upload each as webp under "Type/Gallery/<slug>.webp"
+// Walk <root>/<Type>/<Gallery>/*.img and upload each as webp under "Type/Gallery/<slug>.webp".
+// Images are encoded + uploaded CONCURRENCY-at-a-time (see --concurrency / CONCURRENCY env).
 async function uploadFolder(root) {
   const types = await listDirs(root);
   if (types.length === 0) {
@@ -88,7 +94,8 @@ async function uploadFolder(root) {
     return;
   }
 
-  let count = 0;
+  // Collect every {srcPath, key} task first, then run them through a worker pool.
+  const tasks = [];
   for (const type of types) {
     const galleries = await listDirs(join(root, type));
     for (const gallery of galleries) {
@@ -99,33 +106,65 @@ async function uploadFolder(root) {
         .sort(naturalCompare);
 
       for (const file of files) {
-        const srcPath = join(galleryDir, file);
         const outName = `${slugifyFile(basename(file, extname(file)))}.webp`;
         // Keep the human-readable Type/Gallery prefix so existing routes resolve.
-        const key = `${type}/${gallery}/${outName}`;
-
-        const buffer = await sharp(srcPath)
-          .rotate() // honour EXIF orientation
-          .resize(MAX_EDGE, MAX_EDGE, { fit: 'inside', withoutEnlargement: true })
-          .webp({ quality: WEBP_QUALITY })
-          .toBuffer();
-
-        await s3.send(
-          new PutObjectCommand({
-            Bucket: R2_BUCKET,
-            Key: key,
-            Body: buffer,
-            ContentType: 'image/webp',
-            CacheControl: 'public, max-age=31536000, immutable',
-          })
-        );
-
-        count++;
-        console.log(`  ↑ ${key}  (${(buffer.length / 1024).toFixed(0)} KB)`);
+        tasks.push({ srcPath: join(galleryDir, file), key: `${type}/${gallery}/${outName}` });
       }
     }
   }
-  console.log(`• Uploaded ${count} image(s).`);
+
+  if (tasks.length === 0) {
+    console.log(`No images found under ${root} — nothing to upload.`);
+    return;
+  }
+
+  console.log(`• Uploading ${tasks.length} image(s) with concurrency ${CONCURRENCY}…`);
+  let done = 0;
+  let next = 0;
+  const errors = [];
+
+  async function worker() {
+    while (next < tasks.length) {
+      const { srcPath, key } = tasks[next++];
+      try {
+        await uploadImage(srcPath, key);
+        done++;
+      } catch (err) {
+        errors.push({ key, message: err.message || String(err) });
+        console.error(`  ✗ ${key}  — ${err.message || err}`);
+      }
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(CONCURRENCY, tasks.length) }, () => worker())
+  );
+
+  console.log(`• Uploaded ${done}/${tasks.length} image(s).`);
+  if (errors.length) {
+    fail(`${errors.length} image(s) failed to upload; manifest not rebuilt. Fix and re-run.`);
+  }
+}
+
+// Encode one source image to webp and PUT it to R2 under `key`.
+async function uploadImage(srcPath, key) {
+  const buffer = await sharp(srcPath)
+    .rotate() // honour EXIF orientation
+    .resize(MAX_EDGE, MAX_EDGE, { fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: WEBP_QUALITY })
+    .toBuffer();
+
+  await s3.send(
+    new PutObjectCommand({
+      Bucket: R2_BUCKET,
+      Key: key,
+      Body: buffer,
+      ContentType: 'image/webp',
+      CacheControl: 'public, max-age=31536000, immutable',
+    })
+  );
+
+  console.log(`  ↑ ${key}  (${(buffer.length / 1024).toFixed(0)} KB)`);
 }
 
 // List every object in the bucket and group filenames under their gallery prefix.

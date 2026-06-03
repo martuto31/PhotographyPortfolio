@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { DimensionService } from './../../services/dimension.service';
+import { COVER_FILENAME, fetchManifest, imageUrl } from './../../config';
 
 interface Gallery {
   name: string;
@@ -10,7 +12,7 @@ interface Gallery {
   isImgLoaded: boolean;
 }
 
-// Maps BG URL slug -> internal type key + S3 prefix used by the gallery component.
+// Maps BG URL slug -> internal type key + R2 prefix used by the gallery component.
 // Add a new entry here when introducing a new service category and the rest of the
 // SEO config (seo.json, sitemap.xml, JSON-LD offers) will pick it up.
 export const SLUG_TO_TYPE: Record<string, string> = {
@@ -37,6 +39,17 @@ const TYPE_LABEL_BG: Record<string, { heading: string; cardTag: string }> = {
   'Family': { heading: 'Семейни', cardTag: 'СЕМЕЙНИ' },
 };
 
+// Alt-text prefix per type, used for SEO-friendly image alt attributes.
+const TYPE_ALT_PREFIX: Record<string, string> = {
+  'Weddings': 'Сватбена фотография — ',
+  'Graduates': 'Абитуриентска фотосесия — ',
+  'Personal': 'Лична фотосесия — ',
+  'Baptisms': 'Фотосесия от кръщене — ',
+  'Corporate': 'Корпоративно събитие — ',
+  'Birthdays': 'Рожден ден — ',
+  'Family': 'Семейна фотосесия — ',
+};
+
 @Component({
   selector: 'app-galleries-cards',
   templateUrl: './galleries-cards.component.html',
@@ -51,7 +64,8 @@ export class GalleriesCardsComponent implements OnInit {
 
   constructor(
     public dimensionsService: DimensionService,
-    private title: Title) { }
+    private title: Title,
+    @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryType: string = 'svatbi';
 
@@ -63,29 +77,44 @@ export class GalleriesCardsComponent implements OnInit {
   public currentGalleries: Gallery[] = [];
   public altPrefix: string = '';
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     this.type = SLUG_TO_TYPE[this.galleryType] || this.galleryType;
     this.cardTag = TYPE_LABEL_BG[this.type]?.cardTag || '';
+    this.altPrefix = TYPE_ALT_PREFIX[this.type] || '';
     this.setHeadings();
     this.setTitle();
-    this.setCurrentGalleries();
+
+    // Cards are built from the R2 manifest on the client; the page is SPA-rendered.
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    await this.loadGalleries();
   }
 
-  private setCurrentGalleries(): void {
-    const map: Record<string, { galleries: Gallery[]; altPrefix: string }> = {
-      'Weddings':  { galleries: this.weddingGalleries,    altPrefix: 'Сватбена фотография — ' },
-      'Graduates': { galleries: this.graduatesGalleries,  altPrefix: 'Абитуриентска фотосесия — ' },
-      'Personal':  { galleries: this.personalGalleries,   altPrefix: 'Лична фотосесия — ' },
-      'Baptisms':  { galleries: this.baptismGalleries,    altPrefix: 'Фотосесия от кръщене — ' },
-      'Corporate': { galleries: this.corporateGalleries,  altPrefix: 'Корпоративно събитие — ' },
-      'Birthdays': { galleries: this.birthdayGalleries,   altPrefix: 'Рожден ден — ' },
-      'Family':    { galleries: this.familyGalleries,     altPrefix: 'Семейна фотосесия — ' },
-    };
-    const entry = map[this.type];
-    if (entry) {
-      this.currentGalleries = entry.galleries;
-      this.altPrefix = entry.altPrefix;
+  // Build the card list from every manifest prefix under "<type>/".
+  // Card title = the folder name after "<type>/"; cover = cover.webp if present,
+  // otherwise the first image (manifest lists are already naturally sorted).
+  private async loadGalleries(): Promise<void> {
+    const manifest = await fetchManifest();
+    if (!manifest) {
+      return; // CORS/network failure — show no cards rather than crash
     }
+
+    const typePrefix = `${this.type}/`;
+    this.currentGalleries = Object.keys(manifest.galleries)
+      .filter((prefix) => prefix.startsWith(typePrefix))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+      .map((prefix) => {
+        const files = manifest.galleries[prefix];
+        const cover = files.includes(COVER_FILENAME) ? COVER_FILENAME : files[0];
+        return {
+          name: prefix.slice(typePrefix.length),
+          imageSrc: cover ? imageUrl(prefix, cover) : '',
+          isImgLoaded: false,
+        };
+      })
+      .filter((gallery) => gallery.imageSrc); // skip empty galleries (no cover available)
   }
 
   private setHeadings(): void {
@@ -105,76 +134,6 @@ export class GalleriesCardsComponent implements OnInit {
       this.pageSubheading = h.sub;
     }
   }
-
-  public weddingGalleries: Gallery[] = [
-    {
-      name: 'Krysteena & Martin',
-      imageSrc: 'assets/img/wedding-galleries/krysteena-martin-cover.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Александрина и Борис',
-      imageSrc: 'assets/img/wedding-galleries/aleksandrina-boris-cover.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Мари и Оги',
-      imageSrc: 'assets/img/wedding-galleries/mari-ogi-cover.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Вики и Петьо',
-      imageSrc: 'assets/img/wedding-galleries/viki-petio-cover.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Виктория и Мартин',
-      imageSrc: 'assets/img/wedding-galleries/viki-martin-cover.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Надя и Боби',
-      imageSrc: 'assets/img/wedding-galleries/nadia-bobi-cover.webp',
-      isImgLoaded: false,
-    },
-  ];
-
-  public graduatesGalleries: Gallery[] = [
-    {
-      name: 'Вивиан',
-      imageSrc: 'assets/img/graduates-galleries-covers/vivian.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Ванеса',
-      imageSrc: 'assets/img/graduates-galleries-covers/vanesa.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Мони',
-      imageSrc: 'assets/img/graduates-galleries-covers/moni.webp',
-      isImgLoaded: false,
-    },
-    {
-      name: 'Други',
-      imageSrc: 'assets/img/graduates-galleries-covers/merelin.webp',
-      isImgLoaded: false,
-    },
-  ];
-
-  public personalGalleries: Gallery[] = [
-    {
-      name: '',
-      imageSrc: '',
-      isImgLoaded: false,
-    },
-  ];
-
-  // Future service categories — populate when galleries are added
-  public baptismGalleries: Gallery[] = [];
-  public corporateGalleries: Gallery[] = [];
-  public birthdayGalleries: Gallery[] = [];
-  public familyGalleries: Gallery[] = [];
 
   // Slug used when building links to the single-gallery page
   public get gallerySlug(): string {

@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { DimensionService } from './../../services/dimension.service';
 
-import { MANIFEST_URL, imageUrl } from './../../config';
+import { COVER_FILENAME, MANIFEST_URL, imageUrl } from './../../config';
 
 interface GalleryManifest {
   generated: string;
@@ -119,7 +119,8 @@ export class GalleryComponent implements OnInit {
       const response = await fetch(MANIFEST_URL, { cache: 'no-cache' });
       if (response.ok) {
         const manifest: GalleryManifest = await response.json();
-        files = manifest.galleries[prefix] ?? [];
+        // cover.webp is the card thumbnail — keep it out of the photo grid.
+        files = (manifest.galleries[prefix] ?? []).filter((f) => f !== COVER_FILENAME);
       }
     } catch {
       files = [];
