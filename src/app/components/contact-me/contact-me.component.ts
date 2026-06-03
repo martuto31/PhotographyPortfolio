@@ -33,8 +33,9 @@ export class ContactMeComponent {
 
   public formGroup!: FormGroup<FormControls>;
 
-  // Build a prefilled mailto: link from the form and open the visitor's email app.
-  // No backend, no third-party service, no credentials.
+  // Build a prefilled Gmail compose window from the form and open it in a new tab.
+  // Works in any browser without a configured desktop mail app (the common case
+  // on Windows, where mailto: opens nothing useful). No backend, no credentials.
   public sendEmail(): void {
     if (this.formGroup.invalid) {
       this.formGroup.markAllAsTouched();
@@ -50,13 +51,14 @@ export class ContactMeComponent {
       `Имейл: ${email}\n\n` +
       `${message}`;
 
-    const mailto = `mailto:${CONTACT_EMAIL}` +
-      `?subject=${encodeURIComponent(subject)}` +
+    const gmailCompose = 'https://mail.google.com/mail/?view=cm&fs=1' +
+      `&to=${encodeURIComponent(CONTACT_EMAIL)}` +
+      `&su=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`;
 
-    window.location.href = mailto;
+    window.open(gmailCompose, '_blank', 'noopener');
 
-    this.openSnackBar('Отваряме имейл приложението ви…', 'success');
+    this.openSnackBar('Отваряме Gmail…', 'success');
 
     this.formGroup.reset();
   }

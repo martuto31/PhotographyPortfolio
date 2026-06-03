@@ -91,6 +91,20 @@
     min-width: 240px;
 }
 
+.direct-email {
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--font-medium-emphasis);
+    margin: 4px 0 0;
+}
+
+.direct-email a {
+    color: var(--primary-brand);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+}
+
 .error {
     font-family: var(--font-sans);
     font-size: 13px;
