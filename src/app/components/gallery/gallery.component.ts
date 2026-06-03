@@ -106,11 +106,7 @@ export class GalleryComponent implements OnInit {
   private async loadImages(): Promise<void> {
     // Map Bulgarian URL slugs (svatbi/abiturienti/lichni/...) back to the
     // English prefix (Weddings/Graduates/Personal/...) used as the manifest key.
-    let prefix = this.translateSlugToS3Prefix(this.galleryName);
-
-    if (prefix === 'Personal') {
-      prefix = 'Personal/Други'; // TODO: Remove when more personal galleries are added
-    }
+    const prefix = this.translateSlugToS3Prefix(this.galleryName);
 
     let files: string[] = [];
     try {

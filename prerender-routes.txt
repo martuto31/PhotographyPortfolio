@@ -6,4 +6,4 @@
 /galerii/korporativni
 /galerii/rojdeni-dni
 /galerii/semeyni
-/galeriya/lichni
+/galerii/lichni

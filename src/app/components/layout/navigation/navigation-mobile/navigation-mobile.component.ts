@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
+import { ScrollService } from './../../../../services/scroll.service';
+
 @Component({
   selector: 'app-navigation-mobile',
   templateUrl: './navigation-mobile.component.html',
@@ -30,10 +32,19 @@ export class NavigationMobileComponent {
 
   private bodyEl = document.querySelector('body') as HTMLBodyElement;
 
+  constructor(private scroll: ScrollService) { }
+
   public triggerAnimation(): void {
     this.isExpanderOpen = !this.isExpanderOpen;
 
     this.scrollBlock();
+  }
+
+  // Close the menu (restores body scroll) then smooth-scroll to the section.
+  public scrollTo(id: string, event: Event): void {
+    event.preventDefault();
+    this.triggerAnimation();
+    this.scroll.scrollToSection(id);
   }
 
   private scrollBlock(): void {

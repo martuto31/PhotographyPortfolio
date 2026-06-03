@@ -15,8 +15,8 @@
             <span class="footer-heading">Навигация</span>
             <a routerLink="">Начало</a>
             <a routerLink="about-me">За мен</a>
-            <a routerLink="" [state]="{ scrollTo: 'projects', }">Галерия</a>
-            <a routerLink="" [state]="{ scrollTo: 'contact-me', }">Контакти</a>
+            <a href="/" (click)="scrollTo('projects', $event)">Галерия</a>
+            <a href="/" (click)="scrollTo('contact-me', $event)">Контакти</a>
         </nav>
 
         <div class="footer-col footer-contact">

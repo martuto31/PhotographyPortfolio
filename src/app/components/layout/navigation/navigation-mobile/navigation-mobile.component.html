@@ -25,8 +25,8 @@
 
             <div class="actions">
                 <a routerLink="about-me" (click)="triggerAnimation()">За мен</a>
-                <a routerLink="" [state]="{ scrollTo: 'projects', }" (click)="triggerAnimation()">Галерия</a>
-                <a routerLink="" [state]="{ scrollTo: 'contact-me', }" (click)="triggerAnimation()">Контакти</a>
+                <a href="/" (click)="scrollTo('projects', $event)">Галерия</a>
+                <a href="/" (click)="scrollTo('contact-me', $event)">Контакти</a>
             </div>
 
             <div class="links">

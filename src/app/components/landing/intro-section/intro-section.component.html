@@ -9,8 +9,8 @@
         <p class="hero-sub">Заснемам сватби, абитуриентски балове, кръщенета и лични фотосесии в цяла България.</p>
 
         <div class="btn-group">
-            <a routerLink="" [state]="{ scrollTo: 'projects', }" class="btn btn-ghost-light">Галерия</a>
-            <a routerLink="" [state]="{ scrollTo: 'contact-me', }" class="btn btn-primary">Контакти</a>
+            <a href="/" (click)="scrollTo('projects', $event)" class="btn btn-ghost-light">Галерия</a>
+            <a href="/" (click)="scrollTo('contact-me', $event)" class="btn btn-primary">Контакти</a>
         </div>
     </div>
 

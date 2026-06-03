@@ -71,13 +71,19 @@
     object-fit: contain;
 }
 
+/* Modal controls are fixed to the viewport (not the image box) so they stay
+   on-screen and centered at every width, and visible over any photo. */
 .slide-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1010;
     cursor: pointer;
-    text-align: center;
     font-size: 22px;
+    line-height: 1;
     color: var(--font-white);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
     width: 52px;
     height: 52px;
@@ -88,51 +94,44 @@
     user-select: none;
 }
 
+.btn-left  { left: 24px; }
+.btn-right { right: 24px; }
+
 .slide-btn:hover {
-    background: rgba(255, 255, 255, 0.18);
-    transform: scale(1.05);
-}
-
-.btn-left {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -76px;
-}
-
-.btn-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -76px;
-}
-
-.btn-left:hover, .btn-right:hover {
-    transform: translateY(-50%) scale(1.05);
+    background: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%) scale(1.08);
 }
 
 .close {
-    position: absolute;
-    top: 28px;
-    right: 32px;
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 1010;
     color: var(--font-white);
     cursor: pointer;
-    font-size: 28px;
-    font-weight: 300;
+    font-size: 26px;
     line-height: 1;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    transition: background 200ms ease;
+    transition: background 200ms ease, transform 200ms ease;
 }
 
 .close:hover {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.05);
 }
+
+:host-context(.mobile) .btn-left,
+:host-context(.mobile) .btn-right { width: 44px; height: 44px; }
+
+:host-context(.mobile) .btn-left  { left: 12px; }
+:host-context(.mobile) .btn-right { right: 12px; }
 
 .landscape, .portrait {
     width: auto;
@@ -178,9 +177,4 @@
 @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
-}
-
-@media (max-width: 1100px) {
-    .btn-left  { left: 8px;  background: rgba(0,0,0,0.4); }
-    .btn-right { right: 8px; background: rgba(0,0,0,0.4); }
 }

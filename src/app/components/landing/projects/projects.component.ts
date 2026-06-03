@@ -45,7 +45,7 @@ export class ProjectsComponent {
       name: 'Лични и портретни фотосесии',
       tag: 'Лични',
       summary: 'Лични фотосесии — на открито или в студио. Стилни кадри за социални мрежи, портфолио или подарък за близък човек.',
-      btnLink: 'galeriya/lichni',
+      btnLink: 'galerii/lichni',
       imageSrc: 'assets/img/card-covers/personal.webp',
     },
   ];

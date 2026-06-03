@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { ScrollService } from './../../../../services/scroll.service';
+
 @Component({
   selector: 'app-navigation-desktop',
   templateUrl: './navigation-desktop.component.html',
@@ -11,4 +13,13 @@ import { RouterLink } from '@angular/router';
   ],
 })
 
-export class NavigationDesktopComponent { }
+export class NavigationDesktopComponent {
+
+  constructor(private scroll: ScrollService) { }
+
+  public scrollTo(id: string, event: Event): void {
+    event.preventDefault();
+    this.scroll.scrollToSection(id);
+  }
+
+}

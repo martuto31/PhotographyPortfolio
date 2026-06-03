@@ -22,8 +22,8 @@ export const routes: Routes = [
     // Legacy English routes — kept and redirected for backwards compatibility / SEO continuity
     { path: 'galleries/Weddings', redirectTo: 'galerii/svatbi', pathMatch: 'full' },
     { path: 'galleries/Graduates', redirectTo: 'galerii/abiturienti', pathMatch: 'full' },
-    { path: 'galleries/Personal', redirectTo: 'galeriya/lichni', pathMatch: 'full' },
-    { path: 'gallery/Personal', redirectTo: 'galeriya/lichni', pathMatch: 'full' },
+    { path: 'galleries/Personal', redirectTo: 'galerii/lichni', pathMatch: 'full' },
+    { path: 'gallery/Personal', redirectTo: 'galerii/lichni', pathMatch: 'full' },
     {
         path: 'galleries/:galleryType',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
