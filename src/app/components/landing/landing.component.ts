@@ -25,13 +25,22 @@ export class LandingComponent {
   public ngAfterViewInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && history.state.scrollTo) {
-        setTimeout(() => {
-          const element = document.querySelector('#' + history.state.scrollTo) as HTMLElement;
-
-          window.scrollTo({ top: element.getBoundingClientRect().top - 90, behavior: 'smooth' });
-        }, 50);
+        this.scrollToSection(history.state.scrollTo);
       }
     });
+  }
+
+  // Target sections (projects, contact-me) are lazily rendered via @defer, so
+  // they may not exist the instant navigation completes. Retry briefly until the
+  // element is in the DOM, then smooth-scroll (accounting for the fixed header).
+  private scrollToSection(id: string, attempts = 0): void {
+    const element = document.getElementById(id);
+
+    if (element) {
+      window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+    } else if (attempts < 20) {
+      setTimeout(() => this.scrollToSection(id, attempts + 1), 50);
+    }
   }
 
 }

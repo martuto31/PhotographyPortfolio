@@ -1,74 +1,108 @@
-a {
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Matches the wrapper's padding-top so the nav sits in a symmetrical band. */
+    margin-bottom: var(--nav-band, 24px);
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
     cursor: pointer;
     color: var(--font-high-emphasis);
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 36px;
+.brand-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 20px;
 }
 
-.logo {
-    height: 70px;
+.brand-tag {
+    font-family: var(--font-sans);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--font-medium-emphasis);
+    margin-top: 4px;
 }
 
-.logo img {
-    object-fit: contain;
+.hamburger-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
 }
 
-.container a,
-.heading a {
-    font-size: 22px;
+.hamburger-btn img {
+    width: 26px;
+    height: 26px;
 }
 
 .expander-container {
     width: 100%;
     height: 100vh;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: var(--bg-gray);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--bg-white);
     z-index: 99;
     overflow-y: auto;
 }
 
 .expander {
-    width: 100%;
-    height: calc(100% - 142px);
+    height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    padding-top: 36px;
+    padding: 20px 18px 60px;
+    box-sizing: border-box;
 }
 
 .expander .heading {
-    width: 76%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .expander .actions {
+    flex: 1;
     display: flex;
-    gap: 30px;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
 }
 
 .expander .actions a {
-    font-size: 26px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 32px;
+    color: var(--font-high-emphasis);
+    cursor: pointer;
+    transition: color 200ms ease;
 }
 
-.expander .actions a.highlight {
+.expander .actions a:hover {
     color: var(--primary-brand);
-    font-weight: 600;
 }
 
 .expander .links {
     display: flex;
-    gap: 32px;
+    gap: 28px;
 }
 
 .expander .links a {
-    color: var(--bg-line);
+    color: var(--font-high-emphasis);
+}
+
+.expander .links img {
+    width: 24px;
+    height: 24px;
 }

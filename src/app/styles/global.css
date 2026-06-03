@@ -1,29 +1,61 @@
 html, body {
     width: 100%;
     min-height: 100vh;
-    font-family: 'Overpass', sans-serif;
+    font-family: var(--font-sans);
     font-weight: 400;
     font-size: 16px;
-    color: var(--font-low-emphasis);
-    background-color: var(--bg-gray);
+    line-height: 1.6;
+    color: var(--font-medium-emphasis);
+    background-color: var(--bg-white);
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 mark {
     color: var(--primary-brand);
     background: none;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
 }
 
 a {
     text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
 }
 
 .section-space {
+    height: 140px;
+}
+
+.tablet .section-space {
     height: 100px;
 }
 
-.tablet .section-space,
 .mobile .section-space {
-    height: 60px;
+    height: 70px;
+}
+
+.container-narrow {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.tablet .container-narrow,
+.mobile .container-narrow {
+    padding: 0 20px;
+}
+
+::selection {
+    background: var(--primary-brand);
+    color: var(--font-white);
 }

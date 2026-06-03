@@ -60,12 +60,32 @@ export class GalleriesCardsComponent implements OnInit {
   public cardTag: string = 'СВАТБИ';
   public pageHeading: string = '';
   public pageSubheading: string = '';
+  public currentGalleries: Gallery[] = [];
+  public altPrefix: string = '';
 
   public ngOnInit(): void {
     this.type = SLUG_TO_TYPE[this.galleryType] || this.galleryType;
     this.cardTag = TYPE_LABEL_BG[this.type]?.cardTag || '';
     this.setHeadings();
     this.setTitle();
+    this.setCurrentGalleries();
+  }
+
+  private setCurrentGalleries(): void {
+    const map: Record<string, { galleries: Gallery[]; altPrefix: string }> = {
+      'Weddings':  { galleries: this.weddingGalleries,    altPrefix: 'Сватбена фотография — ' },
+      'Graduates': { galleries: this.graduatesGalleries,  altPrefix: 'Абитуриентска фотосесия — ' },
+      'Personal':  { galleries: this.personalGalleries,   altPrefix: 'Лична фотосесия — ' },
+      'Baptisms':  { galleries: this.baptismGalleries,    altPrefix: 'Фотосесия от кръщене — ' },
+      'Corporate': { galleries: this.corporateGalleries,  altPrefix: 'Корпоративно събитие — ' },
+      'Birthdays': { galleries: this.birthdayGalleries,   altPrefix: 'Рожден ден — ' },
+      'Family':    { galleries: this.familyGalleries,     altPrefix: 'Семейна фотосесия — ' },
+    };
+    const entry = map[this.type];
+    if (entry) {
+      this.currentGalleries = entry.galleries;
+      this.altPrefix = entry.altPrefix;
+    }
   }
 
   private setHeadings(): void {

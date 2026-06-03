@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "ng build && firebase deploy --only hosting",
-    "preview": "npx http-server dist/photography-portfolio/browser -p 4200 -c-1"
+    "preview": "npx http-server dist/photography-portfolio/browser -p 4200 -c-1",
+    "publish": "node tools/publish.mjs"
   },
   "private": true,
   "dependencies": {
@@ -24,9 +25,6 @@
     "@angular/platform-server": "^17.1.1",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.1.1",
-    "@aws-sdk/client-s3": "3.637.0",
-    "@aws-sdk/s3-request-presigner": "^3.645.0",
-    "@emailjs/browser": "^4.4.1",
     "firebase-tools": "^13.16.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -36,6 +34,7 @@
     "@angular-devkit/build-angular": "^17.0.0",
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
+    "@aws-sdk/client-s3": "3.637.0",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^22.5.2",
     "jasmine-core": "~5.1.0",
@@ -44,6 +43,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "sharp": "^0.33.5",
     "typescript": "~5.2.2"
   }
 }

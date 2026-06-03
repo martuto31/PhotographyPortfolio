@@ -1,49 +1,39 @@
-<div id="contact-me" class="container">
-    <div class="heading">
-        <h2>Свържете се с мен</h2>
+<section id="contact-me" class="container">
+    <header class="heading">
+        <span class="eyebrow">Контакти</span>
 
-        <div class="line"></div>
-    </div>
+        <h2>Нека създадем <em>нещо красиво</em>.</h2>
 
-    <div class="form" [formGroup]="formGroup">
-        <div class="input-container">
-            <span>Име</span>
+        <p class="sub">Пишете ми за дата, идея или въпрос — отговарям до 24 часа.</p>
+    </header>
 
-            <div class="input-field">
-                <input formControlName="name">
-            </div>
-            
+    <form class="form" [formGroup]="formGroup" (ngSubmit)="sendEmail()" novalidate>
+        <div class="input-row">
+            <label for="contact-name">Име</label>
+            <input id="contact-name" type="text" formControlName="name" autocomplete="name">
             @if (hasError('name', 'required')) {
-                <div class="error">* Моля попълнете празното поле</div>
+                <div class="error">Моля попълнете това поле.</div>
             }
         </div>
 
-        <div class="input-container">
-            <span>Имейл</span>
-
-            <div class="input-field">
-                <input formControlName="email">
-            </div>
-
+        <div class="input-row">
+            <label for="contact-email">Имейл</label>
+            <input id="contact-email" type="email" formControlName="email" autocomplete="email">
             @if (hasError('email', 'required')) {
-                <div class="error">* Моля попълнете празното поле</div>
+                <div class="error">Моля попълнете това поле.</div>
             } @else if (hasError('email', 'pattern')) {
-                <div class="error">* Моля въведете валиден имейл адрес</div>
+                <div class="error">Моля въведете валиден имейл адрес.</div>
             }
         </div>
 
-        <div class="text-area-container">
-            <span>Съобщение</span>
-
-            <div class="text-area">
-                <textarea formControlName="message"></textarea>
-            </div>
-
+        <div class="input-row">
+            <label for="contact-message">Съобщение</label>
+            <textarea id="contact-message" formControlName="message" rows="5"></textarea>
             @if (hasError('message', 'required')) {
-                <div class="error">* Моля попълнете празното поле</div>
+                <div class="error">Моля попълнете това поле.</div>
             }
         </div>
 
-        <a class="btn btn-primary" (click)="sendEmail()" href="#" role="button" aria-label="Send email request">Изпрати</a>
-    </div>
-</div>
+        <button type="submit" class="btn btn-primary" aria-label="Send email request">Изпрати съобщение</button>
+    </form>
+</section>

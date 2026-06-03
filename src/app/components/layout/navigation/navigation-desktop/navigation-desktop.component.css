@@ -2,22 +2,71 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 18px;
-    margin-bottom: 54px;
+    /* Matches the wrapper's padding-top so the nav sits in a symmetrical band. */
+    margin-bottom: var(--nav-band, 40px);
 }
 
-.logo {
-    height: 80px;
+.brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
     cursor: pointer;
+    color: var(--font-high-emphasis);
+}
+
+.brand-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: -0.005em;
+}
+
+.brand-tag {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--font-medium-emphasis);
+    margin-top: 6px;
+    padding-left: 2px;
 }
 
 .actions {
     display: flex;
-    gap: 48px;
-    padding-bottom: 20px;
+    gap: 44px;
+    align-items: center;
 }
 
-a {
-    cursor: pointer;
+.actions a {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
     color: var(--font-high-emphasis);
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 200ms ease;
+}
+
+.actions a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--primary-brand);
+    transition: width 250ms ease;
+}
+
+.actions a:hover {
+    color: var(--primary-brand);
+}
+
+.actions a:hover::after {
+    width: 100%;
 }

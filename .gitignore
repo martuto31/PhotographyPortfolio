@@ -37,6 +37,10 @@ yarn-error.log
 testem.log
 /typings
 
+# Secrets & local working folders
+tools/.env
+/to-upload
+
 # System files
 .DS_Store
 Thumbs.db
@@ -52,3 +56,6 @@ remoteconfig.template.json
 
 #emailJS
 /src/assets/email-js-credentials.json
+
+# Local image compression comparison samples (not for repo)
+compression-sample/

@@ -1,18 +1,16 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import emailjs from '@emailjs/browser';
-
-import emailJsCredentials from './../../../assets/email-js-credentials.json';
 
 interface FormControls {
   name: FormControl<string | null>;
   email: FormControl<string | null>;
   message: FormControl<string | null>;
 }
+
+// Inbox that inquiries are addressed to.
+const CONTACT_EMAIL = 'phbyviki@gmail.com';
 
 @Component({
   selector: 'app-contact-me',
@@ -28,41 +26,39 @@ export class ContactMeComponent {
 
   constructor(
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder,
-    @Inject(PLATFORM_ID) private platformId: object) {
+    private formBuilder: FormBuilder) {
 
     this.createForm();
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.emailJsInit();
-    }
   }
 
   public formGroup!: FormGroup<FormControls>;
 
+  // Build a prefilled mailto: link from the form and open the visitor's email app.
+  // No backend, no third-party service, no credentials.
   public sendEmail(): void {
     if (this.formGroup.invalid) {
       this.formGroup.markAllAsTouched();
-      
+
       return;
     }
-    
-    const templateParams = {
-      from_name: this.formGroup.controls.name.value,
-      from_email: this.formGroup.controls.email.value,
-      message: this.formGroup.controls.message.value,
-    };
 
-    emailjs.send(emailJsCredentials.serviceId, emailJsCredentials.templateId, templateParams).then(
-      (response) => {
-        this.formGroup.reset();
+    const { name, email, message } = this.formGroup.getRawValue();
 
-        this.openSnackBar('Съобщението е изпратено успешно!', 'success');
-      },
-      (error) => {
-        this.snackBar.open('Възникна грешка!', 'error');
-      },
-    );
+    const subject = `Запитване от ${name}`;
+    const body =
+      `Име: ${name}\n` +
+      `Имейл: ${email}\n\n` +
+      `${message}`;
+
+    const mailto = `mailto:${CONTACT_EMAIL}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+
+    this.openSnackBar('Отваряме имейл приложението ви…', 'success');
+
+    this.formGroup.reset();
   }
 
   public hasError(controlName: string, errorName: string) {
@@ -86,12 +82,6 @@ export class ContactMeComponent {
     };
 
     this.formGroup = this.formBuilder.group(formControls);
-  }
-
-  private emailJsInit(): void {
-    emailjs.init({
-      publicKey: emailJsCredentials.publicKey,
-    });
   }
 
 }

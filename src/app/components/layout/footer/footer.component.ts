@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { DimensionService } from './../../../services/dimension.service';
 
@@ -7,6 +8,9 @@ import { DimensionService } from './../../../services/dimension.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
   standalone: true,
+  imports: [
+    RouterLink,
+  ],
 })
 
 export class FooterComponent {

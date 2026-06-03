@@ -1,16 +1,37 @@
-<div class="container">
-    <div class="content">
-        <div class="icons">
-            <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank" rel="noopener" aria-label="phbyviki във Facebook"><img src="assets/img/facebook.svg" alt="Facebook"></a>
-            <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank" rel="noopener" aria-label="phbyviki в Instagram"><img src="assets/img/instagram.svg" alt="Instagram"></a>
+<footer class="container">
+    <div class="footer-grid">
+        <div class="footer-col footer-about">
+            <a routerLink="" class="footer-brand" aria-label="Начало — Виктория Борисова">
+                <span class="brand-name">Victoria Borisova</span>
+                <span class="brand-tag">Photography</span>
+            </a>
+
+            <p class="footer-tagline">Сватбен и събитиен фотограф — естествени кадри и емоционални моменти, които остават.</p>
+
+            <p class="footer-area">София · Видин · цяла България</p>
         </div>
 
-        <div class="watermark text-small">
-            &#169; Виктория Борисова 2026
+        <nav class="footer-col footer-nav" aria-label="Навигация във футъра">
+            <span class="footer-heading">Навигация</span>
+            <a routerLink="">Начало</a>
+            <a routerLink="about-me">За мен</a>
+            <a routerLink="" [state]="{ scrollTo: 'projects', }">Галерия</a>
+            <a routerLink="" [state]="{ scrollTo: 'contact-me', }">Контакти</a>
+        </nav>
+
+        <div class="footer-col footer-contact">
+            <span class="footer-heading">Свържете се</span>
+            <a class="footer-email" href="mailto:phbyviki@gmail.com">phbyviki&#64;gmail.com</a>
+
+            <div class="footer-social">
+                <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank" rel="noopener" aria-label="phbyviki във Facebook"><img src="assets/img/facebook.svg" alt="Facebook"></a>
+                <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank" rel="noopener" aria-label="phbyviki в Instagram"><img src="assets/img/instagram.svg" alt="Instagram"></a>
+            </div>
         </div>
     </div>
 
-    <div class="footer-image">
-        <img src="assets/img/footer.webp" alt="Сватбена и събитийна фотография — Виктория Борисова">
+    <div class="footer-bottom">
+        <span>&#169; 2026 Виктория Борисова</span>
+        <span class="footer-credit">Всички права запазени</span>
     </div>
-</div>
+</footer>

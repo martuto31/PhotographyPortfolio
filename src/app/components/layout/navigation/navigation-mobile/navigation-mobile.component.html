@@ -1,27 +1,37 @@
 <div class="container">
-    <img src="assets/img/logo.webp" class="logo" routerLink="" alt="An image of the logo">
+    <a routerLink="" class="brand" aria-label="Начало — Виктория Борисова">
+        <span class="brand-name">Victoria Borisova</span>
+        <span class="brand-tag">Photography</span>
+    </a>
 
-    <img src="assets/img/hamburger.svg" (click)="triggerAnimation()" alt="A hamburger image for dropdown menu">
+    <button class="hamburger-btn" (click)="triggerAnimation()" aria-label="Меню">
+        <img src="assets/img/hamburger.svg" alt="">
+    </button>
 </div>
 
 @if (isExpanderOpen) {
     <div class="expander-container" [@slideInOut]>
         <div class="expander">
             <div class="heading">
-                <img src="assets/img/logo.webp" class="logo" routerLink="" (click)="triggerAnimation()" alt="An image of the logo">
-    
-                <img src="assets/img/hamburger.svg" (click)="triggerAnimation()" alt="A hamburger image for dropdown menu">
+                <a routerLink="" class="brand" (click)="triggerAnimation()" aria-label="Начало">
+                    <span class="brand-name">Victoria Borisova</span>
+                    <span class="brand-tag">Photography</span>
+                </a>
+
+                <button class="hamburger-btn" (click)="triggerAnimation()" aria-label="Затвори">
+                    <img src="assets/img/hamburger.svg" alt="">
+                </button>
             </div>
-        
+
             <div class="actions">
-                <a routerLink="about-me" (click)="triggerAnimation()">За Мен</a>
-                <a class="highlight" routerLink="" [state]="{ scrollTo: 'projects', }" (click)="triggerAnimation()">Галерия</a>
+                <a routerLink="about-me" (click)="triggerAnimation()">За мен</a>
+                <a routerLink="" [state]="{ scrollTo: 'projects', }" (click)="triggerAnimation()">Галерия</a>
                 <a routerLink="" [state]="{ scrollTo: 'contact-me', }" (click)="triggerAnimation()">Контакти</a>
             </div>
-    
+
             <div class="links">
-                <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank"><img src="assets/img/facebook.svg" alt="An image of the Facebook logo"></a>
-                <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank"><img src="assets/img/instagram.svg" alt="An image of the Instagram logo"></a>
+                <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank" rel="noopener" aria-label="Facebook"><img src="assets/img/facebook.svg" alt=""></a>
+                <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/instagram.svg" alt=""></a>
             </div>
         </div>
     </div>

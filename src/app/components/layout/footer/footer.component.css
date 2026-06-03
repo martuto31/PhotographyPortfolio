@@ -1,54 +1,172 @@
 .container {
-    margin-top: 80px;
-    /* overflow: hidden; */
+    margin-top: 120px;
+    border-top: 1px solid var(--border-warm);
+    padding: 64px 0 32px;
 }
 
-.content {
+:host-context(.tablet) .container,
+:host-context(.mobile) .container {
+    margin-top: 80px;
+    padding: 44px 0 24px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+}
+
+:host-context(.tablet) .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 32px;
+}
+
+:host-context(.mobile) .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+}
+
+.footer-col {
     display: flex;
     flex-direction: column;
+}
+
+:host-context(.mobile) .footer-col {
     align-items: center;
-    gap: 32px;
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%); 
 }
 
-:host-context(.tablet) .content {
-    -webkit-transform: translateY(65%);
-    transform: translateY(65%); 
-}
-
-:host-context(.mobile) .content {
-    -webkit-transform: translateY(25%);
-    transform: translateY(25%); 
-}
-
-.content .icons {
+/* About / brand column */
+.footer-brand {
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+    line-height: 1;
+    cursor: pointer;
+    width: fit-content;
 }
 
-.content .icons a {
-    color: var(--bg-line);
+.brand-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--font-high-emphasis);
 }
 
-.content .watermark {
+.brand-tag {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
     color: var(--font-medium-emphasis);
+    margin-top: 6px;
 }
 
-.footer-image {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%); 
-
-    z-index: -1;
+.footer-tagline {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--font-medium-emphasis);
+    margin: 22px 0 0;
+    max-width: 38ch;
 }
 
-.footer-image img {
-    width: 100%;
-    height: auto;
-    display: block;
+.footer-area {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--font-low-emphasis);
+    margin: 16px 0 0;
+}
+
+/* Heading shared by nav + contact columns */
+.footer-heading {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--font-high-emphasis);
+    margin-bottom: 18px;
+}
+
+/* Navigation column */
+.footer-nav a {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--font-medium-emphasis);
+    cursor: pointer;
+    width: fit-content;
+    padding: 5px 0;
+    transition: color 200ms ease;
+}
+
+:host-context(.mobile) .footer-nav a {
+    margin: 0 auto;
+}
+
+.footer-nav a:hover {
+    color: var(--primary-brand);
+}
+
+/* Contact column */
+.footer-email {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--font-high-emphasis);
+    width: fit-content;
+    transition: color 200ms ease;
+}
+
+.footer-email:hover {
+    color: var(--primary-brand);
+}
+
+.footer-social {
+    display: flex;
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.footer-social a {
+    color: var(--font-high-emphasis);
+    transition: opacity 200ms ease;
+}
+
+.footer-social a:hover {
+    opacity: 0.55;
+}
+
+.footer-social img {
+    width: 22px;
+    height: 22px;
+}
+
+/* Bottom bar */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-warm);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--font-medium-emphasis);
+    letter-spacing: 0.05em;
+}
+
+:host-context(.mobile) .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.footer-credit {
+    font-style: italic;
+    opacity: 0.7;
 }

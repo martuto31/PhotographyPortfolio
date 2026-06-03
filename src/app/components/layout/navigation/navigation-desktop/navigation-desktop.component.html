@@ -1,11 +1,12 @@
-<div class="container">
-    <div>
-        <img src="assets/img/logo.webp" class="logo" routerLink="" alt="An image of the logo">
-    </div>
+<nav class="container">
+    <a routerLink="" class="brand" aria-label="Начало — Виктория Борисова">
+        <span class="brand-name">Victoria Borisova</span>
+        <span class="brand-tag">Photography</span>
+    </a>
 
     <div class="actions">
-        <a routerLink="about-me">За Мен</a>
+        <a routerLink="about-me">За мен</a>
         <a routerLink="" [state]="{ scrollTo: 'projects', }">Галерия</a>
         <a routerLink="" [state]="{ scrollTo: 'contact-me', }">Контакти</a>
     </div>
-</div>
+</nav>

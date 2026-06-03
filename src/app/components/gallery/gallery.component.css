@@ -1,12 +1,13 @@
 .container {
-    width: 100%; 
+    width: 100%;
     position: relative;
-    column-count: 4;
-    gap: 10px;
+    column-count: 3;
+    column-gap: 16px;
 }
 
 :host-context(.tablet) .container {
     column-count: 2;
+    column-gap: 12px;
 }
 
 :host-context(.mobile) .container {
@@ -15,7 +16,12 @@
 
 .column {
     break-inside: avoid;
-    padding: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+:host-context(.mobile) .column {
+    margin-bottom: 12px;
 }
 
 .column.loading {
@@ -26,12 +32,14 @@
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
+    cursor: pointer;
+    transition: transform 700ms cubic-bezier(0.2, 0.6, 0.2, 1), filter 400ms ease;
+    will-change: transform;
 }
 
 .column img:hover {
-    transform: scale(1.05);
+    transform: scale(1.025);
+    filter: brightness(1.04);
 }
 
 .modal-container {
@@ -43,66 +51,92 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.92);
+    background-color: rgba(10, 10, 10, 0.96);
+    animation: fadeIn 280ms ease;
 }
 
 .modal-content {
     position: relative;
-    width: 80%;
-    max-width: 900px;
+    width: 88%;
+    max-width: 1200px;
+    height: 88vh;
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin: auto;
 }
 
 .modal-content > img {
-    object-fit: cover;
-    border-radius: 12px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
-.slide-btn{
-    display: inline-block;
+.slide-btn {
     cursor: pointer;
-    text-decoration: none;
     text-align: center;
-    font-size: 30px;
-    color: white;
-    background-color: transparent;
-    border: none;
-    padding: 24px;
+    font-size: 22px;
+    color: var(--font-white);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 200ms ease, transform 200ms ease;
+    user-select: none;
 }
 
-.btn-left{
-    position:absolute;
-    top: 45%;
-    left: calc((6% + 24px) * -1);
+.slide-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: scale(1.05);
 }
 
-.btn-right{
+.btn-left {
     position: absolute;
-    top: 45%;
-    right: calc((6% + 24px) * -1);
+    top: 50%;
+    transform: translateY(-50%);
+    left: -76px;
+}
+
+.btn-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -76px;
+}
+
+.btn-left:hover, .btn-right:hover {
+    transform: translateY(-50%) scale(1.05);
 }
 
 .close {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    color: #f1f1f1;
+    top: 28px;
+    right: 32px;
+    color: var(--font-white);
     cursor: pointer;
-    font-size: 32px;
-    font-weight: bold;
-    transition: 0.3s;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    transition: background 200ms ease;
 }
 
-.landscape {
-    width: 100%;
-    height: 100%;
+.close:hover {
+    background: rgba(255, 255, 255, 0.18);
 }
 
-.portrait {
-    width: min(55vh, 50%);
-    height: 100%;
+.landscape, .portrait {
+    width: auto;
+    height: auto;
 }
 
 .loading-mask {
@@ -111,37 +145,42 @@
     position: absolute;
     top: 0;
     left: 0;
-    column-count: 4;
-    gap: 10px;
-    background-color: var(--bg-gray);
+    column-count: 3;
+    column-gap: 16px;
+    background-color: var(--bg-white);
     overflow: hidden;
     z-index: 100;
 }
 
 :host-context(.tablet) .loading-mask {
     column-count: 2;
+    column-gap: 12px;
 }
 
 :host-context(.mobile) .loading-mask {
     column-count: 1;
 }
-  
+
 .skeleton {
-    width: 300px;
-    height: 200px;
-    border-radius: 8px;
-    background-color: #e0e0e0;
+    width: 100%;
+    height: 280px;
+    background-color: var(--bg-cream);
     animation: pulse 1.5s infinite;
+    margin-bottom: 16px;
 }
-  
+
 @keyframes pulse {
-    0% {
-      background-color: #e0e0e0;
-    }
-    50% {
-      background-color: #f0f0f0;
-    }
-    100% {
-      background-color: #e0e0e0;
-    }
+    0%   { background-color: #ECE6DC; }
+    50%  { background-color: #F5F0E8; }
+    100% { background-color: #ECE6DC; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media (max-width: 1100px) {
+    .btn-left  { left: 8px;  background: rgba(0,0,0,0.4); }
+    .btn-right { right: 8px; background: rgba(0,0,0,0.4); }
 }

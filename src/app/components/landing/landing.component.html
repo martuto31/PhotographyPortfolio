@@ -8,6 +8,16 @@
 
 <div #projectsSectionSpace class="section-space"></div>
 
-@defer (on viewport(projectsSectionSpace)) {
+<section class="cinematic-break" aria-hidden="true">
+    <img src="assets/img/hero/feature-love.webp" alt="">
+    <div class="cinematic-quote">
+        <p><em>"Истории, които остават."</em></p>
+        <span>— Виктория Борисова</span>
+    </div>
+</section>
+
+<div class="section-space"></div>
+
+@defer (on idle) {
     <app-contact-me></app-contact-me>
 }

@@ -1,22 +1,32 @@
  :root {
     /* Background */
     --bg-white: #FFFFFF;
-    --bg-gray: #F9FAFF;
-    --bg-line: #25282B;
+    --bg-cream: #F5F0E8;
+    --bg-gray: #FAFAF7;
+    --bg-line: #1A1A1A;
 
     /* Brand */
     --primary-brand: #FD574E;
     --primary-brand-light: #FF7B74;
+    --primary-brand-dark: #D8443C;
 
     /* Text */
     --font-low-emphasis: #9A9FA8;
-    --font-medium-emphasis: #828282;
-    --font-high-emphasis: #25282B;
+    --font-medium-emphasis: #6F6F6F;
+    --font-high-emphasis: #1A1A1A;
     --font-white: #FFFFFF;
 
-    /* Form */
+    /* Form / borders */
     --border-white: #E8ECF4;
+    --border-warm: #E8E2D9;
 
     /* Error */
-    --error-color: #D32F2F; 
+    --error-color: #D32F2F;
+
+    /* Type */
+    --font-serif: 'Cormorant', 'Overpass', Georgia, serif;
+    --font-sans: 'Overpass', system-ui, sans-serif;
+
+    /* Hero image (swap to feature-love.webp for cinematic B&W variant) */
+    --hero-image: url('/assets/img/hero/hero-arch.webp');
  }

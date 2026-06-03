@@ -1,10 +1,15 @@
 .app-container {
+    /* Single source of truth for the nav "band": the gap ABOVE the nav (wrapper
+       padding-top) and BELOW it (nav margin-bottom) both read this, so they stay
+       symmetrical by construction. Overridden per breakpoint below. */
+    --nav-band: 40px;
+
     width: 100%;
     min-height: 100vh;
     display: flex;
     position: relative;
     flex-direction: column;
-    background-color: var(--bg-gray);
+    background-color: var(--bg-white);
 }
 
 .wrapper {
@@ -17,26 +22,34 @@
     flex-direction: column;
 
     box-sizing: border-box;
-    padding: 24px 16px;
-    padding-bottom: 0px;
+    padding: var(--nav-band) 40px 0;
     margin: 0 auto;
 }
 
-app-navigation {
-    z-index: 1;
+.tablet {
+    --nav-band: 32px;
 }
 
 .tablet .wrapper {
-    max-width: 760px;
+    max-width: 100%;
+    padding: var(--nav-band) 24px 0;
+}
+
+.mobile {
+    --nav-band: 24px;
 }
 
 .mobile .wrapper {
-    max-width: 400px;
+    max-width: 100%;
+    padding: var(--nav-band) 18px 0;
+}
+
+app-navigation {
+    z-index: 2;
 }
 
 .content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
 }

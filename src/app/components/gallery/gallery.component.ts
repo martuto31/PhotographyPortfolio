@@ -2,12 +2,14 @@ import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { S3Client, S3ClientConfig, ListObjectsV2Command, GetObjectCommand, ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
-
 import { DimensionService } from './../../services/dimension.service';
 
-import awsCredentials from './../../../assets/aws-credentials.json';
+import { MANIFEST_URL, imageUrl } from './../../config';
+
+interface GalleryManifest {
+  generated: string;
+  galleries: Record<string, string[]>;
+}
 
 @Component({
   selector: 'app-gallery',
@@ -34,20 +36,13 @@ export class GalleryComponent implements OnInit {
   public modalImage = '';
   public currentModalImageIndex!: number;
 
-  private s3 = this.getS3Client();
-  private bucketName = 'phbyviki';
-  private imageList!: ListObjectsV2CommandOutput;
-
   async ngOnInit(): Promise<void> {
     this.setTitle();
 
-    // Skip S3 calls during SSR/prerender — signed URLs would expire and we'd
-    // need credentials at build time. Image fetching happens entirely on the client.
+    // Image fetching happens on the client; gallery routes are SPA-rendered.
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-
-    await this.getImageList();
 
     await this.loadImages();
   }
@@ -108,42 +103,35 @@ export class GalleryComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  private async getImageList(): Promise<void> {
-    // Map Bulgarian URL slugs (svatbi/abiturienti/lichni/...) back to the
-    // English S3 prefix (Weddings/Graduates/Personal/...) used by the bucket.
-    this.galleryName = this.translateSlugToS3Prefix(this.galleryName);
-
-    if (this.galleryName === 'Personal') {
-      this.galleryName = 'Personal/Други'; // TODO: Remove when more personal galleries are added
-    }
-
-    const command = new ListObjectsV2Command({
-      Bucket: this.bucketName,
-      Prefix: this.galleryName,
-    });
-
-    const response = await this.s3.send(command);
-
-    this.imageList = response;
-  }
-
   private async loadImages(): Promise<void> {
-    if (!this.imageList.Contents) { 
-      return;
-    }
-    
-    for (const image of this.imageList.Contents) {
-      const getImageCommand = new GetObjectCommand({
-        Bucket: this.bucketName,
-        Key: image.Key,
-      });
+    // Map Bulgarian URL slugs (svatbi/abiturienti/lichni/...) back to the
+    // English prefix (Weddings/Graduates/Personal/...) used as the manifest key.
+    let prefix = this.translateSlugToS3Prefix(this.galleryName);
 
-      const url = await getSignedUrl(this.s3, getImageCommand, { expiresIn: 7200 });
-      
-      this.imageUrls.push(url);
+    if (prefix === 'Personal') {
+      prefix = 'Personal/Други'; // TODO: Remove when more personal galleries are added
     }
 
-    this.imageUrls.shift();
+    let files: string[] = [];
+    try {
+      // Cross-origin fetch to the R2 domain — a CORS/network failure throws a
+      // TypeError (not a non-ok response), so catch it and fail gracefully.
+      const response = await fetch(MANIFEST_URL, { cache: 'no-cache' });
+      if (response.ok) {
+        const manifest: GalleryManifest = await response.json();
+        files = manifest.galleries[prefix] ?? [];
+      }
+    } catch {
+      files = [];
+    }
+
+    this.imageUrls = files.map((file) => imageUrl(prefix, file));
+
+    // No images (empty gallery or failed manifest): drop the loading mask so we
+    // don't show skeletons forever — onImageLoad would otherwise never fire.
+    if (this.imageUrls.length === 0) {
+      this.areImagesLoaded = true;
+    }
   }
 
   private setImageOrientation(): void {
@@ -156,18 +144,6 @@ export class GalleryComponent implements OnInit {
         imageElement.classList.add('portrait');
       }
     };
-  }
-
-  private getS3Client(): S3Client  {
-    const config: S3ClientConfig = {
-      region: awsCredentials.region,
-      credentials: {
-        accessKeyId: awsCredentials.accessKeyId,
-        secretAccessKey: awsCredentials.secretAccessKey,
-      },
-    };
-
-    return new S3Client(config);
   }
 
   private translateSlugToS3Prefix(galleryName: string): string {

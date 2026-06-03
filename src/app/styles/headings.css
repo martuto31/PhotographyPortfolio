@@ -1,70 +1,93 @@
 h1,
 h2,
 h3 {
-    font-weight: 600;
-    line-height: initial;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--font-high-emphasis);
     margin: 0;
 }
 
 h1 {
-    font-size: 48px;
-    color: var(--font-high-emphasis);
+    font-size: clamp(40px, 6vw, 72px);
     margin-bottom: 32px;
+    line-height: 1.05;
 }
 
 .tablet h1 {
-    font-size: 42px;
+    font-size: 52px;
     margin-bottom: 24px;
 }
 
 .mobile h1 {
-    font-size: 38px;
-    margin-bottom: 24px;
+    font-size: 40px;
+    margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 38px;
-    color: var(--font-high-emphasis);
+    font-size: clamp(32px, 4.5vw, 52px);
     margin-bottom: 24px;
 }
 
 .tablet h2 {
-    font-size: 32px;
+    font-size: 38px;
 }
 
 .mobile h2 {
-    font-size: 28px;
+    font-size: 30px;
 }
 
 h3 {
-    font-size: 26px;
-    color: var(--font-high-emphasis);
+    font-size: 28px;
+    font-weight: 500;
 }
 
-.tablet h3 {
-    font-size: 22px;
-}
-
+.tablet h3,
 .mobile h3 {
     font-size: 22px;
 }
 
+h1 em,
+h2 em,
+h3 em,
+.serif-italic {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--primary-brand);
+}
+
+.eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--font-medium-emphasis);
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
 .text-medium {
-    font-size: 20px;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.7;
     color: var(--font-medium-emphasis);
 }
 
 .tablet .text-medium,
 .mobile .text-medium {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .text-small {
-    font-size: 18px;
-    color: var(--font-low-emphasis);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--font-medium-emphasis);
 }
 
 .tablet .text-small,
 .mobile .text-small {
-    font-size: 16px;
+    font-size: 14px;
 }
