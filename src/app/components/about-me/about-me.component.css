@@ -36,11 +36,10 @@
 .left .lead {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: clamp(20px, 2vw, 26px);
-    line-height: 1.4;
+    font-size: clamp(18px, 1.6vw, 21px);
+    line-height: 1.55;
     color: var(--font-high-emphasis);
     margin: 0 0 12px;
-    max-width: 28ch;
 }
 
 .left .text {

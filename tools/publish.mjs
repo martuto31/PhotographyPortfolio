@@ -154,13 +154,22 @@ async function uploadImage(srcPath, key) {
     .webp({ quality: WEBP_QUALITY })
     .toBuffer();
 
+  // Photos never change once published, so they can be cached forever. Covers
+  // are overwritten in place under the same `cover.webp` key whenever a gallery
+  // gets a new cover, so they must NOT be immutable — give them a short TTL with
+  // revalidation so a re-publish shows up within minutes, no manual cache purge.
+  const isCover = key.endsWith('/cover.webp');
+  const cacheControl = isCover
+    ? 'public, max-age=300, must-revalidate'
+    : 'public, max-age=31536000, immutable';
+
   await s3.send(
     new PutObjectCommand({
       Bucket: R2_BUCKET,
       Key: key,
       Body: buffer,
       ContentType: 'image/webp',
-      CacheControl: 'public, max-age=31536000, immutable',
+      CacheControl: cacheControl,
     })
   );
 
