@@ -1,11 +1,15 @@
 <div class="container">
     @for (image of imageUrls; track $index) {
         <div class="column" [class.loading]="areImagesLoaded">
-            <img class="image"
-                [src]="image"
-                (click)="openModal(image, $index)"
-                (load)="onImageLoad($index)"
-                alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
+            <button type="button" class="image-btn" (click)="openModal(image, $index, $event)" aria-label="Отвори снимка в цял размер">
+                <img class="image"
+                    [src]="image"
+                    (load)="onImageSettled()"
+                    (error)="onImageSettled()"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
+            </button>
         </div>
     }
 
@@ -21,14 +25,36 @@
 </div>
 
 @if (isModalOpen) {
-    <div class="modal-container">
-        <div class="modal-content">
-            <span class="close" (click)="closeModal()">&times;</span>
+    <div class="modal-container"
+         id="modal-dialog"
+         role="dialog"
+         aria-modal="true"
+         aria-label="Преглед на снимка"
+         tabindex="-1"
+         (click)="onBackdropClick($event)">
 
-            <img id="modal" [src]="modalImage" alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
+        <button type="button" class="modal-btn close" (click)="closeModal()" aria-label="Затвори">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M6 6 L18 18 M18 6 L6 18" />
+            </svg>
+        </button>
 
-            <div class="slide-btn btn-left" (click)="previousImage()">&#10094;</div>
-            <div class="slide-btn btn-right" (click)="nextImage()">&#10095;</div>
-        </div>
+        <button type="button" class="modal-btn slide-btn btn-left" (click)="previousImage()" aria-label="Предишна снимка">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M15 5 L8 12 L15 19" />
+            </svg>
+        </button>
+
+        <img id="modal" [src]="modalImage" alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
+
+        <button type="button" class="modal-btn slide-btn btn-right" (click)="nextImage()" aria-label="Следваща снимка">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M9 5 L16 12 L9 19" />
+            </svg>
+        </button>
+
+        @if (imageUrls.length > 1) {
+            <div class="modal-counter" aria-hidden="true">{{ currentModalImageIndex + 1 }} / {{ imageUrls.length }}</div>
+        }
     </div>
 }

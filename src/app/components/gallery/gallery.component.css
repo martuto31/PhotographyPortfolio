@@ -28,16 +28,37 @@
     z-index: -100;
 }
 
+/* The thumbnail is a real <button> for keyboard/screen-reader access; strip the
+   native chrome so it looks identical to the bare image it replaced. */
+.image-btn {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    font: inherit;
+    color: inherit;
+}
+
+.image-btn:focus-visible {
+    outline: 2px solid var(--font-black, #1a1a1a);
+    outline-offset: 3px;
+}
+
 .column img {
     width: 100%;
     height: auto;
+    display: block;
     object-fit: cover;
-    cursor: pointer;
     transition: transform 700ms cubic-bezier(0.2, 0.6, 0.2, 1), filter 400ms ease;
     will-change: transform;
 }
 
-.column img:hover {
+.image-btn:hover img,
+.image-btn:focus-visible img {
     transform: scale(1.025);
     filter: brightness(1.04);
 }
@@ -55,44 +76,63 @@
     animation: fadeIn 280ms ease;
 }
 
-.modal-content {
-    position: relative;
-    width: 88%;
-    max-width: 1200px;
-    height: 88vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* The container takes programmatic focus on open for keyboard users; it isn't
+   an interactive control itself, so don't paint a focus ring on it. */
+.modal-container:focus {
+    outline: none;
 }
 
-.modal-content > img {
-    max-width: 100%;
-    max-height: 100%;
+#modal {
+    max-width: min(88vw, 1200px);
+    max-height: 88vh;
     object-fit: contain;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* Modal controls are fixed to the viewport (not the image box) so they stay
-   on-screen and centered at every width, and visible over any photo. */
-.slide-btn {
+/* Modal controls share one base style. They are fixed to the viewport (not the
+   image box) so they stay on-screen at every width and sit over any photo.
+   Icons are inline SVGs rather than text glyphs: a glyph's ink box is offset
+   from its line box, so flex-centering a "×" or chevron leaves it visibly off
+   -centre. An SVG sized to the button centres exactly. */
+.modal-btn {
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 1010;
+    margin: 0;
+    padding: 0;
     cursor: pointer;
-    font-size: 22px;
-    line-height: 1;
     color: var(--font-white);
     background: rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    width: 52px;
-    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 200ms ease, transform 200ms ease;
-    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
+
+.modal-btn svg {
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.modal-btn:focus-visible {
+    outline: 2px solid var(--font-white);
+    outline-offset: 3px;
+}
+
+.slide-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+}
+
+.slide-btn svg { width: 26px; height: 26px; }
 
 .btn-left  { left: 24px; }
 .btn-right { right: 24px; }
@@ -103,40 +143,40 @@
 }
 
 .close {
-    position: fixed;
     top: 20px;
     right: 24px;
-    z-index: 1010;
-    color: var(--font-white);
-    cursor: pointer;
-    font-size: 26px;
-    line-height: 1;
     width: 48px;
     height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    transition: background 200ms ease, transform 200ms ease;
 }
+
+.close svg { width: 22px; height: 22px; }
 
 .close:hover {
     background: rgba(0, 0, 0, 0.7);
     transform: scale(1.05);
 }
 
-:host-context(.mobile) .btn-left,
-:host-context(.mobile) .btn-right { width: 44px; height: 44px; }
-
-:host-context(.mobile) .btn-left  { left: 12px; }
-:host-context(.mobile) .btn-right { right: 12px; }
-
-.landscape, .portrait {
-    width: auto;
-    height: auto;
+.modal-counter {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1010;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--font-white);
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    user-select: none;
 }
+
+:host-context(.tablet) .btn-left,
+:host-context(.tablet) .btn-right { width: 44px; height: 44px; }
+
+:host-context(.tablet) .btn-left  { left: 12px; }
+:host-context(.tablet) .btn-right { right: 12px; }
 
 .loading-mask {
     width: 100%;
