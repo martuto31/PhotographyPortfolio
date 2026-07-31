@@ -2,9 +2,9 @@
 
 <div class="section-space"></div>
 
-@defer (on idle) {
-    <app-projects></app-projects>
-}
+<!-- Not deferred: this section holds the only internal links to the /galerii/* category
+     pages, and @defer blocks are skipped during prerender (crawlers would see none). -->
+<app-projects></app-projects>
 
 <div #projectsSectionSpace class="section-space"></div>
 

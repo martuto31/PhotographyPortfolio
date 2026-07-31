@@ -83,8 +83,28 @@ photos come up empty** (no error shown to visitors). Set this once in
 ## Gotchas
 
 - **Cards/photos empty after deploy?** 99% of the time it's the CORS policy above.
+  Note the policy shown above is the *intended* one — as of 2026-07-31 the live bucket
+  answers only `https://phbyviki.com`, so photo grids are empty on localhost. Card covers
+  still render locally because they come from the build-time snapshot, not a `fetch`.
 - The manifest is served `no-cache`, so updates show immediately — no cache busting needed.
-- SEO: the page H1, subheading and `<title>` are server-rendered (synchronous), so the
-  keyword content is in the static HTML. The card grid itself is rendered client-side
-  (same as the photo grid always has been). Making the card grid part of the prerendered
-  HTML is a separate future task (SSR of galleries).
+
+## SEO: run `npm run sitemap` after publishing
+
+`npm run publish` puts photos in R2, but two build inputs are derived from the manifest and
+must be regenerated before deploying:
+
+```sh
+npm run sitemap      # rewrites src/sitemap.xml, prerender-routes.txt, src/app/generated/galleries.ts
+```
+
+- **`src/sitemap.xml`** — home, about, every non-empty category, and **one URL per gallery**
+  (with `<image:image>` entries for Google Images). Categories with no photos are left out
+  on purpose: submitting empty pages reads as thin content.
+- **`src/app/generated/galleries.ts`** — a build-time copy of the card lists, so the
+  prerendered `/galerii/*` HTML contains a real `<a href>` per gallery. Without it the grid
+  only exists after JS runs, and the galleries are invisible to most crawlers.
+- **`prerender-routes.txt`** — only the categories that actually have content.
+
+At runtime the live manifest still wins, so a gallery published without re-running this
+appears on the site immediately; it just won't be in the sitemap or the static HTML until
+the next `npm run sitemap && npm run deploy`.

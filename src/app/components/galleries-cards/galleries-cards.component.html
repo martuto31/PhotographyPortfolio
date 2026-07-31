@@ -9,9 +9,16 @@
         </header>
     }
 
+    @if (!currentGalleries.length) {
+        <p class="empty-state">
+            Галерията за тази услуга още се подготвя. Разгледайте
+            <a routerLink="/galerii/svatbi">сватбените фотосесии</a> или ми пишете за вашето събитие.
+        </p>
+    }
+
     <div class="cards-container">
         @for (gallery of currentGalleries; track $index) {
-            <div class="card" [routerLink]="[ '/galeriya', gallerySlug + '/' + gallery.name ]">
+            <a class="card" [routerLink]="[ '/galeriya', gallerySlug, gallery.name ]">
                 <div class="image-wrap">
                     <img class="lazy-load"
                         [src]="gallery.imageSrc"
@@ -32,7 +39,7 @@
 
                     <h3>{{ gallery.name }}</h3>
                 </div>
-            </div>
+            </a>
         }
     </div>
 </div>

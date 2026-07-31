@@ -54,6 +54,9 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    /* Cards are <a> so crawlers see a real href — reset the anchor defaults. */
+    text-decoration: none;
+    color: inherit;
 }
 
 .card .image-wrap {
@@ -126,4 +129,19 @@
 
 .card:hover .card-meta h3 {
     color: var(--primary-brand);
+}
+
+.empty-state {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--font-medium-emphasis);
+    text-align: center;
+    max-width: 52ch;
+    margin: 0 auto;
+}
+
+.empty-state a {
+    color: var(--font-high-emphasis);
+    border-bottom: 1px solid var(--font-high-emphasis);
 }

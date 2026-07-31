@@ -218,3 +218,43 @@
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+.gallery-heading {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+:host-context(.mobile) .gallery-heading {
+    margin-bottom: 36px;
+}
+
+.gallery-heading .breadcrumb {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--font-medium-emphasis);
+    text-decoration: none;
+}
+
+.gallery-heading .breadcrumb:hover {
+    color: var(--primary-brand);
+}
+
+.gallery-heading h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(34px, 4.5vw, 54px);
+    line-height: 1.1;
+    margin: 14px 0 10px;
+    color: var(--font-high-emphasis);
+}
+
+.gallery-heading p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+}

@@ -1,0 +1,41 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 120px 0 160px;
+}
+
+:host-context(.mobile) .not-found {
+    padding: 72px 0 96px;
+}
+
+.not-found h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.1;
+    margin: 16px 0 20px;
+    color: var(--font-high-emphasis);
+}
+
+.not-found p {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+    max-width: 52ch;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 40px;
+}
+
+:host-context(.mobile) .actions {
+    flex-direction: column;
+    gap: 20px;
+}

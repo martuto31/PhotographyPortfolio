@@ -9,7 +9,8 @@
     "test": "ng test",
     "deploy": "ng build && firebase deploy --only hosting",
     "preview": "npx http-server dist/photography-portfolio/browser -p 4200 -c-1",
-    "publish": "node tools/publish.mjs"
+    "publish": "node tools/publish.mjs",
+    "sitemap": "node tools/generate-sitemap.mjs"
   },
   "private": true,
   "dependencies": {

@@ -28,6 +28,7 @@
             "assets": [
               "src/robots.txt",
               "src/sitemap.xml",
+              "src/404.html",
               "src/assets"
             ],
             "styles": [

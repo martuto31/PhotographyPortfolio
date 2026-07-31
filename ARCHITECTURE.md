@@ -77,9 +77,15 @@ Route params bind directly to component `@Input()`s via `withComponentInputBindi
 |---|---|---|
 | `/` | landing | home |
 | `/galerii/:galleryType` | galleries-cards | category page, e.g. `/galerii/svatbi` |
-| `/galeriya/:galleryName` | gallery | a subgallery, e.g. `/galeriya/svatbi/Натали и Валентин` |
+| `/galeriya/:galleryType/:galleryName` | gallery | a subgallery, e.g. `/galeriya/svatbi/Натали и Валентин` |
+| `/galeriya/:galleryName` | gallery | legacy one-segment form (`svatbi%2FНатали и Валентин`) |
 | `/about-me` | about-me | |
 | `/galleries/*`, `/gallery/*` | (redirects) | legacy EN → BG equivalents |
+| `**` | not-found | catch-all; see §5 on 404 handling |
+
+The single-gallery routes deliberately declare **no static `title`** — the title depends on
+the URL, so `SEOService` owns it. Angular's `TitleStrategy` only overrides routes that
+declare one.
 
 **Slug ↔ type mapping** lives in two places that must stay in sync:
 `SLUG_TO_TYPE` in `galleries-cards.component.ts` and `translateSlugToS3Prefix()` in
@@ -125,15 +131,48 @@ pipeline never deletes.
   structured data (LocalBusiness + service Offers pointing at the `/galerii/*` URLs).
 - `services/seo.service.ts` — on each route change, sets `<title>`/`<meta>` from
   `src/assets/seo.json` (keyed by path).
-- `src/assets/sitemap.xml` + `robots.txt` — served as static assets (see Firebase headers).
-- `prerender-routes.txt` — the fixed routes that get **prerendered to static HTML** at
-  build time (home, about, each `/galerii/*` category, `/galeriya/lichni`).
-- Page H1 / subheading / `<title>` are computed **synchronously**, so they appear in the
-  prerendered HTML. The card grid and photo grids render **client-side** (data comes from
-  R2 after load), so they are not in the prerendered HTML — a known future enhancement.
+- `src/sitemap.xml` + `robots.txt` — served as static assets (see Firebase headers).
+- `prerender-routes.txt` — every route prerendered to static HTML at build time.
 
-When adding a new service category, update: `SLUG_TO_TYPE`, `seo.json`, `sitemap.xml`, the
-JSON-LD offers in `index.html`, and `prerender-routes.txt`.
+### Generated from the manifest — run `npm run sitemap`
+
+`tools/generate-sitemap.mjs` reads the live R2 manifest and rewrites three files. **Run it
+after `npm run publish` and before `npm run deploy`:**
+
+| Generated file | Purpose |
+|---|---|
+| `src/sitemap.xml` | home, about, non-empty categories, one URL per gallery + `<image:image>` entries |
+| `prerender-routes.txt` | the same set of routes, so all 31 galleries prerender |
+| `src/app/generated/galleries.ts` | build-time card list, so prerendered category pages contain a real `<a href>` per gallery |
+
+Categories with no photos in the manifest are **excluded on purpose** — an empty category
+prerenders to a heading over blank space and reads as thin content.
+
+Gallery cards render from the snapshot synchronously (server + client), then refresh from the
+live manifest on the client — so newly published galleries appear without a redeploy, while
+crawlers still get real links. `SEOService` derives per-gallery `<title>`/description/canonical
+from the URL.
+
+### 404s
+
+Firebase rewrites are **scoped to known path prefixes** so unknown top-level URLs fall
+through to `src/404.html` with a real HTTP 404 status. A `**` Angular route covers unknown
+paths *inside* a valid prefix (e.g. `/galerii/nesushtestvuvasht`); `SEOService` emits
+`noindex` for those. Before this, `**` → `index.html` returned 200 with an empty body — a
+soft 404 on every bogus URL.
+
+### Careful with these
+
+- **Never `@defer` content carrying internal links or primary copy** — deferred blocks are
+  skipped during prerender, so crawlers see nothing. This previously hid the entire
+  portfolio section (and every link to `/galerii/*`) from the homepage HTML.
+- **Anything clickable that should be crawlable must be `<a routerLink>`** — `routerLink` on
+  a `<div>` renders no `href`, which orphaned all 31 galleries.
+
+When adding a new service category, update: `SLUG_TO_TYPE`, `TYPE_TO_SLUG` in
+`tools/generate-sitemap.mjs`, `seo.json`, the JSON-LD offers in `index.html`, and
+`GALLERY_TYPE_COPY` / `TYPE_HEADING` for gallery-page wording. The sitemap and prerender
+routes then follow automatically once the manifest has content.
 
 ---
 
@@ -169,7 +208,7 @@ GitHub Action — not set up yet.**
 
 | I want to… | Do this |
 |---|---|
-| Add/replace photos in a gallery | `to-upload/<Type>/<Gallery>/`, `npm run publish`, `npm run deploy` |
+| Add/replace photos in a gallery | `to-upload/<Type>/<Gallery>/`, `npm run publish`, `npm run sitemap`, `npm run deploy` |
 | Pick a gallery's card cover | drop a `cover.*` into its folder before publishing |
 | Add a brand-new service category | update `SLUG_TO_TYPE`, `seo.json`, `sitemap.xml`, JSON-LD, `prerender-routes.txt` |
 | Change page meta/title | `src/assets/seo.json` |

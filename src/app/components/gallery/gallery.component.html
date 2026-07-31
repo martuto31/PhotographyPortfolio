@@ -1,3 +1,15 @@
+@if (displayName) {
+    <!-- Outside .container: that element is a CSS multi-column context, so anything inside
+         it flows as a column item. -->
+    <header class="gallery-heading">
+        <a class="breadcrumb" [routerLink]="categoryLink">{{ categoryLabel }}</a>
+
+        <h1>{{ displayName }}</h1>
+
+        <p>{{ pageHeading }} — София и Видин</p>
+    </header>
+}
+
 <div class="container">
     @for (image of imageUrls; track $index) {
         <div class="column" [class.loading]="areImagesLoaded">
@@ -8,7 +20,7 @@
                     (error)="onImageSettled()"
                     loading="lazy"
                     decoding="async"
-                    alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
+                    [alt]="altFor($index)">
             </button>
         </div>
     }

@@ -1,9 +1,36 @@
 /
 /about-me
-/galerii/svatbi
 /galerii/abiturienti
-/galerii/krushteneta
-/galerii/korporativni
-/galerii/rojdeni-dni
-/galerii/semeyni
 /galerii/lichni
+/galerii/svatbi
+/galeriya/abiturienti/Ванеса
+/galeriya/abiturienti/Вивиан
+/galeriya/abiturienti/Ева
+/galeriya/abiturienti/Елинор
+/galeriya/abiturienti/Ирена
+/galeriya/abiturienti/Катрин и Калин
+/galeriya/abiturienti/Мери
+/galeriya/abiturienti/Мони
+/galeriya/abiturienti/Никол
+/galeriya/abiturienti/Никол и Димитър
+/galeriya/abiturienti/Петя
+/galeriya/abiturienti/Семеен бал Ванеса
+/galeriya/abiturienti/Семеен бал Мадлен
+/galeriya/abiturienti/Семеен бал Мони
+/galeriya/lichni/Детски рожден ден Дари
+/galeriya/lichni/Криси
+/galeriya/lichni/Миши
+/galeriya/lichni/Юбилей Сергей
+/galeriya/svatbi/Александрина и Борис
+/galeriya/svatbi/Анжела и Александър
+/galeriya/svatbi/Бети и Светли
+/galeriya/svatbi/Вики и Петьо
+/galeriya/svatbi/Виктория и Мартин
+/galeriya/svatbi/Елина и Денис
+/galeriya/svatbi/Лора и Асен
+/galeriya/svatbi/Лори и Любо
+/galeriya/svatbi/Люба и Калоян
+/galeriya/svatbi/Нанси и Чавдар
+/galeriya/svatbi/Натали и Валентин
+/galeriya/svatbi/Руми и Цецко
+/galeriya/svatbi/Krysteena & Martin

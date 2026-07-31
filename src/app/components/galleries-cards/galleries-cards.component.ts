@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 
 import { DimensionService } from './../../services/dimension.service';
 import { COVER_FILENAME, fetchManifest, imageUrl } from './../../config';
+import { GALLERY_SNAPSHOT } from './../../generated/galleries';
 
 interface Gallery {
   name: string;
@@ -84,11 +85,19 @@ export class GalleriesCardsComponent implements OnInit {
     this.setHeadings();
     this.setTitle();
 
-    // Cards are built from the R2 manifest on the client; the page is SPA-rendered.
+    // Render the build-time snapshot first — synchronously, on server and client alike — so
+    // the prerendered HTML carries a crawlable <a> per gallery instead of an empty grid.
+    this.currentGalleries = (GALLERY_SNAPSHOT[this.type] ?? []).map((gallery) => ({
+      ...gallery,
+      isImgLoaded: false,
+    }));
+
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
+    // Then refresh from the live manifest, so galleries published since the last deploy
+    // still show up without a code change.
     await this.loadGalleries();
   }
 
@@ -98,7 +107,7 @@ export class GalleriesCardsComponent implements OnInit {
   private async loadGalleries(): Promise<void> {
     const manifest = await fetchManifest();
     if (!manifest) {
-      return; // CORS/network failure — show no cards rather than crash
+      return; // CORS/network failure — keep the snapshot on screen rather than crash
     }
 
     const typePrefix = `${this.type}/`;

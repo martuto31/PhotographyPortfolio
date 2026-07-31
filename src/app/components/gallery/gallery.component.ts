@@ -1,6 +1,6 @@
 import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 import { DimensionService } from './../../services/dimension.service';
 
@@ -11,21 +11,43 @@ interface GalleryManifest {
   galleries: Record<string, string[]>;
 }
 
+// Heading wording + the label of the category this gallery belongs to, keyed by URL slug.
+const TYPE_HEADING: Record<string, { noun: string; category: string }> = {
+  'svatbi': { noun: 'Сватбена фотосесия', category: 'Сватбени галерии' },
+  'abiturienti': { noun: 'Абитуриентска фотосесия', category: 'Абитуриентски галерии' },
+  'lichni': { noun: 'Фотосесия', category: 'Други събития' },
+  'krushteneta': { noun: 'Фотосесия от кръщене', category: 'Кръщенета' },
+  'korporativni': { noun: 'Корпоративно събитие', category: 'Корпоративни събития' },
+  'rojdeni-dni': { noun: 'Рожден ден', category: 'Рождени дни' },
+  'semeyni': { noun: 'Семейна фотосесия', category: 'Семейни галерии' },
+};
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css'],
   standalone: true,
+  imports: [
+    RouterLink,
+  ],
 })
 
 export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     public dimensionsService: DimensionService,
-    private title: Title,
     @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryName: string = 'Други';
+
+  // Set only by the canonical two-segment route (/galeriya/:galleryType/:galleryName).
+  // The legacy one-segment route leaves it empty and carries the slug inside galleryName.
+  @Input() galleryType: string = '';
+
+  // The "<slug>/<gallery>" path used to look the gallery up, from either route shape.
+  private get slugPath(): string {
+    return this.galleryType ? `${this.galleryType}/${this.galleryName}` : this.galleryName;
+  }
 
   public imageUrls: string[] = [];
 
@@ -45,8 +67,15 @@ export class GalleryComponent implements OnInit, OnDestroy {
   // The thumbnail that opened the modal, so focus can return to it on close.
   private modalTrigger: HTMLElement | null = null;
 
+  // Visible heading + breadcrumb, resolved synchronously so they don't depend on the
+  // manifest fetch. Title/description are derived from the URL by SEOService on NavigationEnd.
+  public pageHeading = '';
+  public categoryLabel = '';
+  public categoryLink = '';
+  public displayName = '';
+
   async ngOnInit(): Promise<void> {
-    this.setTitle();
+    this.setHeadings();
 
     // Image fetching happens on the client; gallery routes are SPA-rendered.
     if (!isPlatformBrowser(this.platformId)) {
@@ -204,7 +233,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   private async loadImages(): Promise<void> {
     // Map Bulgarian URL slugs (svatbi/abiturienti/lichni/...) back to the
     // English prefix (Weddings/Graduates/Personal/...) used as the manifest key.
-    const prefix = this.translateSlugToS3Prefix(this.galleryName);
+    const prefix = this.translateSlugToS3Prefix(this.slugPath);
 
     let files: string[] = [];
     try {
@@ -237,6 +266,32 @@ export class GalleryComponent implements OnInit, OnDestroy {
     }, GalleryComponent.REVEAL_FALLBACK_MS);
   }
 
+  // Alt text carries the gallery name so each photo is distinguishable to crawlers and
+  // screen readers, instead of 154 identical strings on one page.
+  public altFor(index: number): string {
+    const subject = this.displayName ? `${this.displayName} — ` : '';
+    return `${subject}${this.pageHeading || 'Фотосесия'}, кадър ${index + 1} — Виктория Борисова, фотограф София и Видин`;
+  }
+
+  private setHeadings(): void {
+    const path = this.slugPath;
+    const separator = path.indexOf('/');
+    if (separator === -1) {
+      return;
+    }
+
+    const slug = path.slice(0, separator);
+    const heading = TYPE_HEADING[slug];
+    if (!heading) {
+      return;
+    }
+
+    this.displayName = path.slice(separator + 1);
+    this.pageHeading = heading.noun;
+    this.categoryLabel = heading.category;
+    this.categoryLink = `/galerii/${slug}`;
+  }
+
   private translateSlugToS3Prefix(galleryName: string): string {
     const SLUG_TO_PREFIX: Record<string, string> = {
       'svatbi': 'Weddings',
@@ -254,37 +309,4 @@ export class GalleryComponent implements OnInit, OnDestroy {
     return rest.length ? `${mapped}/${rest.join('/')}` : mapped;
   }
 
-  private setTitle(): void {
-    let translatedGalleryName: string = '';
-
-    const rawType = this.translateSlugToS3Prefix(this.galleryName).split('/')[0];
-
-    switch (rawType) {
-      case 'Weddings':
-        translatedGalleryName = 'Сватбена';
-        break;
-      case 'Graduates':
-        translatedGalleryName = 'Абитуриентска';
-        break;
-      case 'Personal':
-        translatedGalleryName = 'Лична';
-        break;
-      case 'Baptisms':
-        translatedGalleryName = 'Кръщене';
-        break;
-      case 'Corporate':
-        translatedGalleryName = 'Корпоративна';
-        break;
-      case 'Birthdays':
-        translatedGalleryName = 'Рожден ден';
-        break;
-      case 'Family':
-        translatedGalleryName = 'Семейна';
-        break;
-    }
-
-    if (translatedGalleryName) {
-      this.title.setTitle(`${translatedGalleryName} Фотосесия — София и Видин | Виктория Борисова`);
-    }
-  }
 }
