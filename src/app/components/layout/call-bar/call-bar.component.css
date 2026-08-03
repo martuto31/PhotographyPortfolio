@@ -1,0 +1,57 @@
+.call-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Keeps the bar clear of the iOS home indicator. */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    background-color: var(--ink);
+    box-shadow: 0 -8px 28px rgba(25, 24, 23, 0.18);
+}
+
+.call-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    /* 52px tall — comfortably above the 44px minimum tap target. */
+    padding: 16px 12px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--font-white);
+}
+
+.call-action svg {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+    flex: none;
+}
+
+.call-phone {
+    background-color: var(--ink);
+}
+
+.call-phone:active {
+    background-color: #2A2724;
+}
+
+/* Viber purple, used only here. It is the brand of the app rather than of the
+   site, and people scan for the colour rather than reading the label. */
+.call-viber {
+    background-color: #7360F2;
+}
+
+.call-viber:active {
+    background-color: #5F4EDB;
+}
+
+.call-viber svg {
+    fill: currentColor;
+}

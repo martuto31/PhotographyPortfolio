@@ -12,7 +12,7 @@
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr;
+    grid-template-columns: 1.5fr 0.9fr 0.9fr 1.1fr;
     gap: 48px;
     padding-bottom: 48px;
 }
@@ -110,10 +110,30 @@
 }
 
 .footer-nav a:hover {
-    color: var(--primary-brand);
+    color: var(--brass);
 }
 
 /* Contact column */
+.footer-phone {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--font-high-emphasis);
+    width: fit-content;
+    margin-bottom: 12px;
+    transition: color 200ms ease;
+}
+
+:host-context(.mobile) .footer-phone {
+    margin-inline: auto;
+}
+
+.footer-phone:hover {
+    color: var(--brass);
+}
+
 .footer-email {
     font-family: var(--font-serif);
     font-style: italic;
@@ -124,7 +144,26 @@
 }
 
 .footer-email:hover {
-    color: var(--primary-brand);
+    color: var(--brass);
+}
+
+.footer-viber {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--font-medium-emphasis);
+    width: fit-content;
+    margin-top: 14px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--rule-strong);
+    transition: color 200ms ease, border-color 200ms ease;
+}
+
+.footer-viber:hover {
+    color: var(--brass);
+    border-bottom-color: var(--brass);
 }
 
 .footer-social {

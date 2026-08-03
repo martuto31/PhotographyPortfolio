@@ -14,12 +14,14 @@
     <!-- Standalone page: Firebase Hosting serves this with a real HTTP 404 for paths that
          match no rewrite, so it cannot rely on the hashed Angular stylesheet. -->
     <style>
+        /* Mirrors src/app/styles/variables.css. Duplicated because this page
+           cannot load the hashed Angular stylesheet — keep the two in step. */
         :root {
-            --bg-white: #FFFFFF;
-            --primary-brand: #FD574E;
-            --primary-brand-dark: #D8443C;
-            --font-medium-emphasis: #6F6F6F;
-            --font-high-emphasis: #1A1A1A;
+            --paper: #FBFAF7;
+            --brass: #A8721F;
+            --ink: #191817;
+            --font-medium-emphasis: #6B645C;
+            --font-high-emphasis: #191817;
             --font-white: #FFFFFF;
         }
 
@@ -35,7 +37,7 @@
             gap: 20px;
             padding: 40px 24px;
             text-align: center;
-            background-color: var(--bg-white);
+            background-color: var(--paper);
             color: var(--font-high-emphasis);
             font-family: 'Overpass', system-ui, -apple-system, sans-serif;
         }
@@ -75,11 +77,30 @@
             text-transform: uppercase;
             text-decoration: none;
             color: var(--font-white);
-            background-color: var(--primary-brand);
+            background-color: var(--ink);
             transition: background-color 200ms ease;
         }
 
-        a:hover { background-color: var(--primary-brand-dark); }
+        a:hover { background-color: var(--brass); }
+
+        .links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .links .ghost {
+            color: var(--font-high-emphasis);
+            background-color: transparent;
+            border: 1px solid #D3C9B8;
+        }
+
+        .links .ghost:hover {
+            color: var(--font-white);
+            background-color: var(--ink);
+            border-color: var(--ink);
+        }
     </style>
 </head>
 
@@ -90,10 +111,14 @@
 
     <p>
         Изглежда, че страницата, която търсите, е преместена или вече не съществува.
-        Разгледайте галериите или се свържете с мен директно.
+        Разгледайте галериите или се обадете на 0895 318 622.
     </p>
 
-    <a href="/">Към началото</a>
+    <div class="links">
+        <a href="/">Към началото</a>
+        <a class="ghost" href="/galerii">Галерия</a>
+        <a class="ghost" href="tel:+359895318622">0895 318 622</a>
+    </div>
 </body>
 
 </html>

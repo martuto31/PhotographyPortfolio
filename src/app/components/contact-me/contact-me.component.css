@@ -7,8 +7,20 @@
     text-align: center;
 }
 
+/* On /kontakti the form sits in a column beside the contact details, under a
+   heading the page already provides. */
+.container.embedded {
+    max-width: none;
+    align-items: stretch;
+    text-align: left;
+}
+
 .heading {
     margin-bottom: 56px;
+}
+
+.heading-embedded {
+    margin-bottom: 36px;
 }
 
 .heading h2 {
@@ -20,9 +32,19 @@
     color: var(--font-high-emphasis);
 }
 
+.heading-embedded h2 {
+    font-size: clamp(28px, 3vw, 36px);
+}
+
+/* The standalone heading centres its sub-line with auto margins; in the column
+   layout that pushes it off the left edge the h2 is aligned to. */
+.heading-embedded .sub {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .heading h2 em {
     font-style: italic;
-    color: var(--primary-brand);
     font-weight: 400;
 }
 
@@ -82,13 +104,22 @@
 
 .input-row input:focus,
 .input-row textarea:focus {
-    border-bottom-color: var(--primary-brand);
+    border-bottom-color: var(--brass);
+}
+
+.embedded .input-row input,
+.embedded .input-row textarea {
+    border-bottom-color: var(--rule-strong);
 }
 
 .btn-primary {
     align-self: center;
     margin-top: 12px;
     min-width: 240px;
+}
+
+.embedded .btn-primary {
+    align-self: flex-start;
 }
 
 .direct-email {
@@ -99,8 +130,12 @@
     margin: 4px 0 0;
 }
 
+.embedded .direct-email {
+    text-align: left;
+}
+
 .direct-email a {
-    color: var(--primary-brand);
+    color: var(--brass);
     border-bottom: 1px solid currentColor;
     padding-bottom: 1px;
 }

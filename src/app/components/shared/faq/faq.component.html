@@ -1,0 +1,21 @@
+@if (items.length) {
+    <section class="faq">
+        <header class="faq-heading">
+            <span class="eyebrow">{{ eyebrow }}</span>
+            <h2>{{ heading }}</h2>
+        </header>
+
+        <div class="faq-list">
+            @for (item of items; track item.q) {
+                <details class="faq-item" [open]="openFirst && $first">
+                    <summary>
+                        <span class="faq-q">{{ item.q }}</span>
+                        <span class="faq-marker" aria-hidden="true"></span>
+                    </summary>
+
+                    <p class="faq-a">{{ item.a }}</p>
+                </details>
+            }
+        </div>
+    </section>
+}

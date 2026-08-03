@@ -2,7 +2,11 @@
     <!-- Outside .container: that element is a CSS multi-column context, so anything inside
          it flows as a column item. -->
     <header class="gallery-heading">
-        <a class="breadcrumb" [routerLink]="categoryLink">{{ categoryLabel }}</a>
+        <nav class="breadcrumb" aria-label="Навигационна пътека">
+            <a routerLink="/galerii">Галерия</a>
+            <span aria-hidden="true">/</span>
+            <a [routerLink]="categoryLink">{{ categoryLabel }}</a>
+        </nav>
 
         <h1>{{ displayName }}</h1>
 
@@ -35,6 +39,34 @@
         </div>
     }
 </div>
+
+<!-- Everything below is outside .container for the same multi-column reason. -->
+@if (siblings.length) {
+    <section class="siblings">
+        <header class="siblings-heading">
+            <h2>Още от {{ categoryLabel.toLowerCase() }}</h2>
+
+            <a class="link-underline siblings-all" [routerLink]="categoryLink">Всички</a>
+        </header>
+
+        <div class="siblings-grid">
+            @for (sibling of siblings; track sibling.name) {
+                <a class="sibling" [routerLink]="[ '/galeriya', categorySlug, sibling.name ]">
+                    <div class="sibling-image">
+                        <img [src]="sibling.imageSrc" [alt]="sibling.name + ' — ' + pageHeading + ', фотограф София и Видин'" loading="lazy" decoding="async">
+                    </div>
+
+                    <h3>{{ sibling.name }}</h3>
+                </a>
+            }
+        </div>
+    </section>
+}
+
+<app-cta-band
+    heading="Харесва ли ви това, което видяхте?"
+    text="Ако планирате подобен ден, пишете ми датата и мястото — отговарям до 24 часа с наличност и цена.">
+</app-cta-band>
 
 @if (isModalOpen) {
     <div class="modal-container"

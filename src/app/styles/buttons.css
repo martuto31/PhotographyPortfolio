@@ -6,60 +6,96 @@
     text-transform: uppercase;
     border-radius: 0;
     cursor: pointer;
-    padding: 12px 26px;
+    padding: 15px 30px;
     border: 1px solid transparent;
-    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
     display: inline-block;
     text-align: center;
+    /* Buttons carry Cyrillic set in Overpass; the extra word-spacing keeps the
+       wide letter-spacing from running words together. */
+    word-spacing: 0.06em;
 }
 
 .tablet .btn,
 .mobile .btn {
     font-size: 11px;
-    padding: 11px 22px;
+    padding: 14px 24px;
 }
 
+/* Solid ink rather than a saturated fill. The photographs are the only place
+   colour belongs on this site; a coloured button competes with them. */
 .btn-primary {
     color: var(--font-white);
-    background-color: var(--primary-brand);
-    border-color: var(--primary-brand);
+    background-color: var(--ink);
+    border-color: var(--ink);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-brand-dark);
-    border-color: var(--primary-brand-dark);
+    background-color: var(--brass);
+    border-color: var(--brass);
 }
 
 .btn-secondary {
     color: var(--font-high-emphasis);
     background-color: transparent;
-    border-color: var(--font-high-emphasis);
+    border-color: var(--rule-strong);
 }
 
 .btn-secondary:hover {
     color: var(--font-white);
-    background-color: var(--font-high-emphasis);
+    background-color: var(--ink);
+    border-color: var(--ink);
 }
 
+/* On photographs and ink sections */
 .btn-ghost-light {
     color: var(--font-white);
     background-color: transparent;
-    border-color: var(--font-white);
+    border-color: rgba(255, 255, 255, 0.7);
 }
 
 .btn-ghost-light:hover {
     background-color: var(--font-white);
     color: var(--font-high-emphasis);
+    border-color: var(--font-white);
 }
 
+.btn-light {
+    color: var(--ink);
+    background-color: var(--paper);
+    border-color: var(--paper);
+}
+
+.btn-light:hover {
+    background-color: var(--brass-bright);
+    border-color: var(--brass-bright);
+}
+
+/* ---- Text links ---------------------------------------------------------
+   The underline grows from the left on hover — the one piece of motion that
+   repeats across the site, so it has to be defined once. */
 .link-underline {
     color: var(--font-high-emphasis);
-    border-bottom: 1px solid var(--font-high-emphasis);
-    padding-bottom: 2px;
-    transition: color 200ms ease, border-color 200ms ease;
+    position: relative;
+    padding-bottom: 3px;
+    background-image: linear-gradient(var(--brass), var(--brass));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    transition: color 200ms ease, background-size 320ms cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 
 .link-underline:hover {
-    color: var(--primary-brand);
-    border-bottom-color: var(--primary-brand);
+    color: var(--brass);
+}
+
+/* ---- Focus --------------------------------------------------------------
+   Every interactive element gets a visible keyboard state. :focus-visible only,
+   so mouse users never see it. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
 }

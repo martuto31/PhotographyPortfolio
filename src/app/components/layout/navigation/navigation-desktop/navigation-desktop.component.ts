@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { ScrollService } from './../../../../services/scroll.service';
+import { CONTACT } from './../../../../content/contact';
 
 @Component({
   selector: 'app-navigation-desktop',
@@ -10,16 +10,12 @@ import { ScrollService } from './../../../../services/scroll.service';
   standalone: true,
   imports: [
     RouterLink,
+    RouterLinkActive,
   ],
 })
 
 export class NavigationDesktopComponent {
 
-  constructor(private scroll: ScrollService) { }
-
-  public scrollTo(id: string, event: Event): void {
-    event.preventDefault();
-    this.scroll.scrollToSection(id);
-  }
+  public readonly contact = CONTACT;
 
 }

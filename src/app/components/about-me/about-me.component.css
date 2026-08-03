@@ -29,7 +29,6 @@
 
 .left h1 em {
     font-style: italic;
-    color: var(--primary-brand);
     font-weight: 400;
 }
 
@@ -46,9 +45,25 @@
     margin: 0;
 }
 
-.left .btn {
+.about-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
     margin-top: 20px;
-    align-self: flex-start;
+}
+
+.about-phone {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 26px;
+    font-variant-numeric: tabular-nums;
+    color: var(--font-high-emphasis);
+    transition: color 200ms ease;
+}
+
+.about-phone:hover {
+    color: var(--brass);
 }
 
 .right {

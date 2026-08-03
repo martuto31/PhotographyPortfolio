@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { CONTACT } from './../../../content/contact';
+import { SERVICES } from './../../../content/services';
 import { DimensionService } from './../../../services/dimension.service';
-import { ScrollService } from './../../../services/scroll.service';
 
 @Component({
   selector: 'app-footer',
@@ -16,13 +17,15 @@ import { ScrollService } from './../../../services/scroll.service';
 
 export class FooterComponent {
 
-  constructor(
-    public dimensionsService: DimensionService,
-    private scroll: ScrollService) { }
+  constructor(public dimensionsService: DimensionService) { }
 
-  public scrollTo(id: string, event: Event): void {
-    event.preventDefault();
-    this.scroll.scrollToSection(id);
-  }
+  public readonly contact = CONTACT;
+
+  // Every category, linked from every page. This is the site's only complete
+  // internal link set — gallery pages used to carry three links and no route to
+  // the categories a visitor had not already seen.
+  public readonly services = SERVICES;
+
+  public readonly year = new Date().getFullYear();
 
 }

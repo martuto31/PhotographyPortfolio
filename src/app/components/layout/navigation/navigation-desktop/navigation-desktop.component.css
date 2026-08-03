@@ -1,9 +1,29 @@
-.container {
+.bar {
+    background-color: rgba(251, 250, 247, 0.92);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 320ms ease, border-color 320ms ease;
+}
+
+.bar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: var(--nav-h, 84px);
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Matches the wrapper's padding-top so the nav sits in a symmetrical band. */
-    margin-bottom: var(--nav-band, 40px);
+}
+
+/* ---- Transparent-over-hero state ----------------------------------------
+   Set by NavigationComponent: home route, page not yet scrolled. */
+:host-context(.transparent) .bar {
+    background-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom-color: transparent;
 }
 
 .brand {
@@ -12,6 +32,7 @@
     line-height: 1;
     cursor: pointer;
     color: var(--font-high-emphasis);
+    transition: color 320ms ease;
 }
 
 .brand-name {
@@ -31,15 +52,26 @@
     color: var(--font-medium-emphasis);
     margin-top: 6px;
     padding-left: 2px;
+    transition: color 320ms ease;
+}
+
+:host-context(.transparent) .brand,
+:host-context(.transparent) .brand-tag {
+    color: var(--font-white);
+}
+
+:host-context(.transparent) .brand-name,
+:host-context(.transparent) .brand-tag {
+    text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
 }
 
 .actions {
     display: flex;
-    gap: 44px;
+    gap: 40px;
     align-items: center;
 }
 
-.actions a {
+.actions > a {
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: 600;
@@ -52,21 +84,92 @@
     transition: color 200ms ease;
 }
 
-.actions a::after {
+.actions > a::after {
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
     width: 0;
     height: 1px;
-    background: var(--primary-brand);
-    transition: width 250ms ease;
+    background: var(--brass);
+    transition: width 260ms cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 
-.actions a:hover {
-    color: var(--primary-brand);
-}
-
-.actions a:hover::after {
+.actions > a:hover::after,
+.actions > a.active::after {
     width: 100%;
+}
+
+.actions > a:hover {
+    color: var(--brass);
+}
+
+:host-context(.transparent) .actions > a {
+    color: var(--font-white);
+    text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
+}
+
+:host-context(.transparent) .actions > a:hover {
+    color: var(--brass-bright);
+}
+
+:host-context(.transparent) .actions > a::after {
+    background: var(--brass-bright);
+}
+
+/* ---- Phone -------------------------------------------------------------- */
+.call {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 18px;
+    border: 1px solid var(--rule-strong);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--font-high-emphasis);
+    /* Digits in a row: keep them from shifting width on hover. */
+    font-variant-numeric: tabular-nums;
+    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+
+.call:hover {
+    background-color: var(--ink);
+    border-color: var(--ink);
+    color: var(--font-white);
+}
+
+.call-icon {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    flex: none;
+}
+
+:host-context(.transparent) .call {
+    color: var(--font-white);
+    border-color: rgba(255, 255, 255, 0.55);
+    text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
+}
+
+:host-context(.transparent) .call:hover {
+    background-color: var(--font-white);
+    border-color: var(--font-white);
+    color: var(--ink);
+    text-shadow: none;
+}
+
+/* Tablet-width desktop nav: drop the letter-spacing and tighten the gaps before
+   the row has a chance to wrap. */
+:host-context(.tablet) .bar-inner {
+    padding: 0 24px;
+}
+
+:host-context(.tablet) .actions {
+    gap: 26px;
+}
+
+:host-context(.tablet) .actions > a {
+    letter-spacing: 0.14em;
 }

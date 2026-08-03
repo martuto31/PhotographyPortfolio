@@ -36,22 +36,37 @@ src/
     app.config.ts         # router + hydration providers (client)
     app.config.server.ts  # SSR providers
     config.ts             # R2 image config: IMAGE_BASE_URL, imageUrl(), fetchManifest(), COVER_FILENAME
+    content/              # ALL page copy — prose lives here, not in templates
+      contact.ts          #   phone / Viber / email / areas + the credentials strip figures
+      services.ts         #   per-category service copy, "what's included", FAQ, <title>s
+      home.ts             #   the four process steps + the homepage FAQ
+      testimonials.ts     #   client quotes — SHIPS EMPTY, see the header comment
     components/
       landing/            # home page
         intro-section/    #   hero
+        credentials/      #   the 4+ / 30+ / 24ч strip under the hero
         projects/         #   featured work strip
-      galleries-cards/    # category page: grid of subgallery CARDS (manifest-driven)
-      gallery/            # single subgallery: the PHOTO grid + lightbox modal (manifest-driven)
+        process/          #   "how it works", four numbered steps
+      galleries-index/    # /galerii — the category index
+      galleries-cards/    # category page: subgallery CARDS + the service copy for that category
+      gallery/            # single subgallery: PHOTO grid, lightbox, sibling strip
+      contact-page/       # /kontakti — contact methods + the form
       about-me/
-      contact-me/
+      contact-me/         # the form itself; [embedded] drops its own heading
+      shared/             # used by more than one page
+        faq/              #   <details> accordion, no JS
+        cta-band/         #   the closing "book a date" band on ink
+        testimonials/     #   renders nothing while the list is empty
       layout/             # shell: header/footer/navigation wrapping routed pages
         footer/
+        call-bar/         #   fixed phone + Viber bar on handhelds
         navigation/
           navigation-desktop/
           navigation-mobile/
     services/
-      dimension.service.ts  # responsive helper (isMobile / isDesktop)
-      seo.service.ts        # sets <title>/<meta> per route from assets/seo.json
+      dimension.service.ts       # responsive helper (isMobile / isDesktop)
+      seo.service.ts             # sets <title>/<meta> per route from assets/seo.json
+      structured-data.service.ts # per-route JSON-LD (breadcrumbs, FAQ, Service, ImageGallery)
     styles/                 # global CSS: variables, fonts, headings, buttons, global
   assets/
     seo.json              # per-route meta (title/description/keywords/ogImage)
@@ -76,16 +91,25 @@ Route params bind directly to component `@Input()`s via `withComponentInputBindi
 | Path | Component | Notes |
 |---|---|---|
 | `/` | landing | home |
+| `/galerii` | galleries-index | the category index |
 | `/galerii/:galleryType` | galleries-cards | category page, e.g. `/galerii/svatbi` |
 | `/galeriya/:galleryType/:galleryName` | gallery | a subgallery, e.g. `/galeriya/svatbi/Натали и Валентин` |
 | `/galeriya/:galleryName` | gallery | legacy one-segment form (`svatbi%2FНатали и Валентин`) |
+| `/kontakti` | contact-page | |
 | `/about-me` | about-me | |
 | `/galleries/*`, `/gallery/*` | (redirects) | legacy EN → BG equivalents |
 | `**` | not-found | catch-all; see §5 on 404 handling |
 
-The single-gallery routes deliberately declare **no static `title`** — the title depends on
-the URL, so `SEOService` owns it. Angular's `TitleStrategy` only overrides routes that
-declare one.
+**`/galerii` must be declared before `/galerii/:galleryType`.** The router takes the first
+match in declaration order, so the parameterised route would otherwise swallow the index.
+
+The single-gallery and category routes deliberately declare **no static `title`** — the
+title depends on the URL, so `SEOService` (galleries) and the component (categories, via
+`SERVICE_TITLES`) own it. Angular's `TitleStrategy` only overrides routes that declare one.
+
+Every route that a visitor can reach also needs a matching **rewrite in `firebase.json`**.
+The rewrites are scoped rather than a catch-all (see §5 on 404s), so a new top-level route
+without one returns a hard 404 in production while working perfectly in `npm start`.
 
 **Slug ↔ type mapping** lives in two places that must stay in sync:
 `SLUG_TO_TYPE` in `galleries-cards.component.ts` and `translateSlugToS3Prefix()` in
@@ -127,12 +151,25 @@ pipeline never deletes.
 
 ## 5. SEO
 
-- `src/index.html` — global `<head>`, Cormorant font preconnect, and **JSON-LD**
-  structured data (LocalBusiness + service Offers pointing at the `/galerii/*` URLs).
+- `src/index.html` — global `<head>`, Cormorant font preconnect, hero preload, and the
+  **site-wide JSON-LD** (LocalBusiness + WebSite). Inherited by every prerendered page.
 - `services/seo.service.ts` — on each route change, sets `<title>`/`<meta>` from
   `src/assets/seo.json` (keyed by path).
+- `services/structured-data.service.ts` — **per-route JSON-LD**: BreadcrumbList, FAQPage,
+  Service, ImageGallery. Scripts it writes carry `data-page-schema` so they can be cleared
+  on navigation without touching the two static graphs. It runs on the server too, so the
+  schema lands in the prerendered HTML.
 - `src/sitemap.xml` + `robots.txt` — served as static assets (see Firebase headers).
 - `prerender-routes.txt` — every route prerendered to static HTML at build time.
+
+Titles are kept **under 60 characters** and descriptions **under ~155**; past that Google
+truncates mid-phrase. Category titles live in `SERVICE_TITLES` (`content/services.ts`),
+separate from the page copy because they never appear on the page.
+
+There is deliberately **no `Review` or `AggregateRating` markup**. Google has not shown
+review rich results for a business's own site since 2019 (self-serving reviews), so it would
+buy nothing while making a fabricated entry a policy problem. Stars come from the Google
+Business Profile. The on-page testimonials block exists to convince humans.
 
 ### Generated from the manifest — run `npm run sitemap`
 
@@ -141,12 +178,17 @@ after `npm run publish` and before `npm run deploy`:**
 
 | Generated file | Purpose |
 |---|---|
-| `src/sitemap.xml` | home, about, non-empty categories, one URL per gallery + `<image:image>` entries |
+| `src/sitemap.xml` | home, `/galerii`, `/kontakti`, `/about-me`, all 7 categories, one URL per gallery + `<image:image>` entries |
 | `prerender-routes.txt` | the same set of routes, so all 31 galleries prerender |
 | `src/app/generated/galleries.ts` | build-time card list, so prerendered category pages contain a real `<a href>` per gallery |
 
-Categories with no photos in the manifest are **excluded on purpose** — an empty category
-prerenders to a heading over blank space and reads as thin content.
+**All seven categories are included, with or without photographs.** They used to be
+excluded when empty — correctly at the time, because they rendered a heading over blank
+space. Each one now carries several hundred words of service copy from `content/services.ts`
+plus a FAQ. Leaving them out had a specific cost: `/galerii/krushteneta` and its three
+siblings fell through to the SPA shell and served the *prerendered home page* — homepage
+`<h1>`, homepage title, canonical pointing at `/` — while the LocalBusiness `makesOffer`
+schema advertised all four as services.
 
 Gallery cards render from the snapshot synchronously (server + client), then refresh from the
 live manifest on the client — so newly published galleries appear without a redeploy, while
@@ -168,11 +210,21 @@ soft 404 on every bogus URL.
   portfolio section (and every link to `/galerii/*`) from the homepage HTML.
 - **Anything clickable that should be crawlable must be `<a routerLink>`** — `routerLink` on
   a `<div>` renders no `href`, which orphaned all 31 galleries.
+- **Never navigate with `href="/"` plus a scroll handler.** The nav, hero and footer all did
+  this for "Галерия" and "Контакти": no crawlable destination, no URL to send anyone, and
+  clicking either from a gallery page threw the visitor back to the home page. Both are real
+  routes now. The one remaining in-page scroll is the hero's scroll cue, which points at a
+  section of the page the visitor is already on.
+- **Breakpoint classes on `.app-container` must be discrete `[class.x]` bindings.** A single
+  `[class]="[...]"` array does not clear what it did not write, and the prerendered HTML
+  always says `desktop` (there is no window to measure on the server). Phones ended up as
+  `app-container desktop home mobile`, so every `:host-context(.desktop)` rule kept applying.
 
 When adding a new service category, update: `SLUG_TO_TYPE`, `TYPE_TO_SLUG` in
-`tools/generate-sitemap.mjs`, `seo.json`, the JSON-LD offers in `index.html`, and
-`GALLERY_TYPE_COPY` / `TYPE_HEADING` for gallery-page wording. The sitemap and prerender
-routes then follow automatically once the manifest has content.
+`tools/generate-sitemap.mjs`, the `SERVICES` entry + `SERVICE_TITLES` in
+`content/services.ts`, `seo.json`, the JSON-LD offers in `index.html`, and
+`GALLERY_TYPE_COPY` / `TYPE_HEADING` for gallery-page wording. The sitemap, prerender routes
+and both nav/footer link lists then follow automatically.
 
 ---
 
@@ -210,8 +262,12 @@ GitHub Action — not set up yet.**
 |---|---|
 | Add/replace photos in a gallery | `to-upload/<Type>/<Gallery>/`, `npm run publish`, `npm run sitemap`, `npm run deploy` |
 | Pick a gallery's card cover | drop a `cover.*` into its folder before publishing |
-| Add a brand-new service category | update `SLUG_TO_TYPE`, `seo.json`, `sitemap.xml`, JSON-LD, `prerender-routes.txt` |
-| Change page meta/title | `src/assets/seo.json` |
+| Add a brand-new service category | see the list at the end of §5 |
+| Change any page copy | `src/app/content/*.ts` — prose does not live in templates |
+| Add a client testimonial | `src/app/content/testimonials.ts` (read its header first) |
+| Change the phone number or email | `src/app/content/contact.ts`, plus the JSON-LD in `index.html` |
+| Change page meta/description | `src/assets/seo.json` |
+| Change a category `<title>` | `SERVICE_TITLES` in `src/app/content/services.ts` |
 | Change the images domain | `IMAGE_BASE_URL` in `src/app/config.ts` (+ `index.html` preconnect) |
 | Galleries show empty in browser | check the R2 **CORS** policy (§4) |
 | Run locally | `npm start` (needs R2 CORS to include `localhost:4200`) |
@@ -226,6 +282,10 @@ GitHub Action — not set up yet.**
   from R2 or the manifest; delete in the R2 dashboard then `--manifest-only`.
 - **Filenames are slugified** on upload (lowercased, ascii). Re-exporting a photo under a
   different name uploads a *new* object next to the old one.
-- **Two slug maps must agree** (`SLUG_TO_TYPE` and `translateSlugToS3Prefix`).
+- **Two slug maps must agree** (`SLUG_TO_TYPE` and `SLUG_TO_PREFIX` in `gallery.component.ts`).
+- **A new top-level route needs a `firebase.json` rewrite** or it 404s in production only.
+- **Chrome cannot open a window narrower than 500 CSS px on macOS**, so `--window-size=390`
+  silently renders at 500 and crops the screenshot. Anything checking the mobile layout has
+  to drive `Emulation.setDeviceMetricsOverride` over the DevTools Protocol instead.
 - **R2 credentials** live only in `tools/.env` (gitignored). They must never appear in the
   app bundle — the public bucket means the site needs no keys at all.

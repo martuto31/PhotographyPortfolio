@@ -1,11 +1,19 @@
-<section id="contact-me" class="container">
-    <header class="heading">
-        <span class="eyebrow">Контакти</span>
+<section id="contact-me" class="container" [class.embedded]="embedded">
+    @if (!embedded) {
+        <header class="heading">
+            <span class="eyebrow eyebrow-center">Контакти</span>
 
-        <h2>Нека създадем <em>нещо красиво</em>.</h2>
+            <h2>Нека създадем <em>нещо красиво</em>.</h2>
 
-        <p class="sub">Пишете ми за дата, идея или въпрос — отговарям до 24 часа.</p>
-    </header>
+            <p class="sub">Пишете ми за дата, идея или въпрос — отговарям до 24 часа.</p>
+        </header>
+    } @else {
+        <header class="heading heading-embedded">
+            <h2>Изпратете запитване</h2>
+
+            <p class="sub">Попълнете полетата и ще се отвори готово съобщение до мен.</p>
+        </header>
+    }
 
     <form class="form" [formGroup]="formGroup" (ngSubmit)="sendEmail()" novalidate>
         <div class="input-row">

@@ -3,7 +3,7 @@
 <html lang="bg">
     <head>
         <meta charset="utf-8">
-        <title>Сватбен и Събитиен Фотограф София и Видин | Виктория Борисова — phbyviki</title>
+        <title>Сватбен фотограф София и Видин | Виктория Борисова</title>
         <base href="/">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#191817">
@@ -13,7 +13,7 @@
         <meta name="google-site-verification" content="kS2pLkLkUl8q2VLPzHI_iM4JOEPNqKZSdxumV1Da5UI" />
 
         <!-- Default meta (overridden per route by SEOService) -->
-        <meta name="description" content="Сватбен и събитиен фотограф София и Видин — Виктория Борисова (phbyviki). Сватби, абитуриентски балове, кръщенета, рождени дни, корпоративни събития и лични фотосесии.">
+        <meta name="description" content="Сватбен и събитиен фотограф в София и Видин. Сватби, абитуриентски балове, кръщенета и лични фотосесии. Обадете се на 0895 318 622.">
         <meta name="keywords" content="сватбен фотограф София, сватбен фотограф Видин, фотограф София, фотограф Видин, фотограф абитуриентски бал, фотограф за кръщене, корпоративен фотограф, лична фотосесия, Виктория Борисова, phbyviki">
 
         <!-- Open Graph / Facebook -->
@@ -21,15 +21,15 @@
         <meta property="og:type" content="website">
         <meta property="og:locale" content="bg_BG">
         <meta property="og:url" content="https://phbyviki.com/">
-        <meta property="og:title" content="Сватбен и Събитиен Фотограф София и Видин | phbyviki">
-        <meta property="og:description" content="Сватбен и събитиен фотограф София и Видин — Виктория Борисова (phbyviki). Сватби, абитуриенти, кръщенета и лични фотосесии.">
+        <meta property="og:title" content="Сватбен фотограф София и Видин | phbyviki">
+        <meta property="og:description" content="Сватбен и събитиен фотограф в София и Видин. Сватби, абитуриенти, кръщенета и лични фотосесии.">
         <meta property="og:image" content="https://phbyviki.com/assets/img/landing.webp">
         <meta property="og:image:alt" content="Виктория Борисова — фотограф София и Видин">
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Сватбен и Събитиен Фотограф София и Видин | phbyviki">
-        <meta name="twitter:description" content="Сватбен и събитиен фотограф София и Видин — Виктория Борисова (phbyviki).">
+        <meta name="twitter:title" content="Сватбен фотограф София и Видин | phbyviki">
+        <meta name="twitter:description" content="Сватбен и събитиен фотограф в София и Видин. Сватби, абитуриенти, кръщенета и лични фотосесии.">
         <meta name="twitter:image" content="https://phbyviki.com/assets/img/landing.webp">
 
         <link rel="canonical" href="https://phbyviki.com/">
@@ -41,6 +41,11 @@
         <link rel="manifest" href="/site.webmanifest">
 
         <link rel="preconnect" href="https://images.phbyviki.com" crossorigin>
+
+        <!-- The hero is the largest contentful paint on the home page and is set as a
+             CSS background, so the browser cannot discover it until the stylesheet has
+             parsed. Preloading it moves the discovery to the first byte of HTML. -->
+        <link rel="preload" as="image" href="/assets/img/hero/hero-arch.webp" fetchpriority="high">
 
         <script>
             // Permanent redirect from legacy Firebase domain to the canonical one.
@@ -65,6 +70,15 @@
           "image": "https://phbyviki.com/assets/img/landing.webp",
           "logo": "https://phbyviki.com/assets/img/logo.webp",
           "telephone": "+359895318622",
+          "email": "phbyviki@gmail.com",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+359895318622",
+            "email": "phbyviki@gmail.com",
+            "contactType": "customer service",
+            "availableLanguage": ["bg", "en"],
+            "url": "https://phbyviki.com/kontakti"
+          },
           "priceRange": "$$",
           "foundingDate": "2022",
           "address": [

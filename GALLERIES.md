@@ -72,12 +72,25 @@ uploading anything, with `npm run publish -- --manifest-only`.
 
 ### Adding a whole new category
 
-The four empty types (`Baptisms, Corporate, Birthdays, Family`) already exist in the code
-and appear automatically once the manifest has photos under their prefix — nothing to
-change. A genuinely *new* type needs its Bulgarian slug added in two places that must stay
-in sync: `SLUG_TO_TYPE` in `galleries-cards.component.ts` and `TYPE_TO_SLUG` in
-`tools/generate-sitemap.mjs`. `generate-sitemap.mjs` warns and skips any manifest prefix it
-doesn't recognise, so a missing entry is loud rather than silent.
+The four photo-less types (`Baptisms, Corporate, Birthdays, Family`) already exist in the
+code, already have a written service page, and are already in the sitemap. Publishing photos
+under their prefix makes the cards appear above that copy — nothing to change.
+
+A genuinely *new* type needs its Bulgarian slug added in four places that must stay in sync:
+
+| File | What to add |
+| --- | --- |
+| `src/app/components/galleries-cards/galleries-cards.component.ts` | `SLUG_TO_TYPE`, `TYPE_LABEL_BG`, `TYPE_ALT_PREFIX`, and the heading in `setHeadings()` |
+| `src/app/components/gallery/gallery.component.ts` | `TYPE_HEADING` and `SLUG_TO_PREFIX` |
+| `src/app/content/services.ts` | a `SERVICES` entry (the page would otherwise be empty) and a `SERVICE_TITLES` entry |
+| `tools/generate-sitemap.mjs` | `TYPE_TO_SLUG` and `CATEGORY_PRIORITY` |
+
+Then add a `seo.json` description and a `makesOffer` entry in `index.html`. The nav, footer,
+`/galerii` index, sitemap and prerender routes all derive from `SERVICES` and `TYPE_TO_SLUG`,
+so they follow on their own.
+
+`generate-sitemap.mjs` warns and skips any manifest prefix it doesn't recognise, so a missing
+entry there is loud rather than silent.
 
 ## Removing / renaming
 

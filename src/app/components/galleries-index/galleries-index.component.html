@@ -1,0 +1,33 @@
+<header class="page-heading">
+    <span class="eyebrow">Портфолио</span>
+
+    <h1>Галерия</h1>
+
+    <p class="measure">Сватби, абитуриентски балове, кръщенета, семейни и корпоративни събития — заснети в София, Видин и цяла България. Изберете категория, за да видите работите и какво включва услугата.</p>
+</header>
+
+<nav class="index" aria-label="Категории">
+    @for (category of categories; track category.slug) {
+        <a class="row" [routerLink]="[ '/galerii', category.slug ]">
+            <span class="row-main">
+                <span class="row-name">{{ category.label }}</span>
+                <span class="row-teaser">{{ category.teaser }}</span>
+            </span>
+
+            <span class="row-meta">
+                <span class="row-count">{{ countLabel(category.count) }}</span>
+
+                <svg class="row-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 12h15M13 6l6 6-6 6"/>
+                </svg>
+            </span>
+        </a>
+    }
+</nav>
+
+<div class="section-space"></div>
+
+<app-cta-band
+    heading="Не намирате вашия повод?"
+    text="Снимала съм годежи, юбилеи, фирмени празненства и доста неща, които не се вписват в нито една категория. Разкажете ми какво празнувате.">
+</app-cta-band>

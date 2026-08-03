@@ -4,14 +4,31 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent),
-        title: 'Сватбен и Събитиен Фотограф София и Видин | Виктория Борисова — phbyviki',
+        // Kept under 60 characters — the previous 72-character title was being
+        // truncated mid-phrase in search results.
+        title: 'Сватбен фотограф София и Видин | Виктория Борисова',
     },
 
-    // Bulgarian (canonical) gallery routes
+    // Bulgarian (canonical) gallery routes.
+    // The bare 'galerii' index must be declared before 'galerii/:galleryType',
+    // otherwise the parameterised route would never see it — the router takes the
+    // first match in declaration order.
+    {
+        path: 'galerii',
+        loadComponent: () => import('./components/galleries-index/galleries-index.component').then(c => c.GalleriesIndexComponent),
+        title: 'Галерия — сватби, абитуриенти, събития | phbyviki',
+    },
     {
         path: 'galerii/:galleryType',
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
-        title: 'Галерия | Сватби, Абитуриенти, Кръщенета | Виктория Борисова',
+        // No static title: GalleriesCardsComponent builds it per category from
+        // SERVICE_TITLES. Angular's TitleStrategy only overrides when a route
+        // declares one, so leaving it off hands ownership to the component.
+    },
+    {
+        path: 'kontakti',
+        loadComponent: () => import('./components/contact-page/contact-page.component').then(c => c.ContactPageComponent),
+        title: 'Контакти — фотограф София и Видин | phbyviki',
     },
     // Canonical gallery URL: /galeriya/<slug>/<gallery name>. Two real segments, so the
     // path contains a proper slash instead of an encoded %2F.

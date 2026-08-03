@@ -8,30 +8,43 @@
 
             <p class="footer-tagline">Сватбен и събитиен фотограф — естествени кадри и емоционални моменти, които остават.</p>
 
-            <p class="footer-area">София · Видин · цяла България</p>
+            <p class="footer-area">{{ contact.areas }}</p>
         </div>
+
+        <nav class="footer-col footer-nav" aria-label="Категории">
+            <span class="footer-heading">Услуги</span>
+
+            @for (service of services; track service.slug) {
+                <a [routerLink]="[ '/galerii', service.slug ]">{{ service.label }}</a>
+            }
+        </nav>
 
         <nav class="footer-col footer-nav" aria-label="Навигация във футъра">
             <span class="footer-heading">Навигация</span>
             <a routerLink="">Начало</a>
-            <a routerLink="about-me">За мен</a>
-            <a href="/" (click)="scrollTo('projects', $event)">Галерия</a>
-            <a href="/" (click)="scrollTo('contact-me', $event)">Контакти</a>
+            <a routerLink="/galerii">Галерия</a>
+            <a routerLink="/about-me">За мен</a>
+            <a routerLink="/kontakti">Контакти</a>
         </nav>
 
         <div class="footer-col footer-contact">
             <span class="footer-heading">Свържете се</span>
-            <a class="footer-email" href="mailto:phbyviki@gmail.com">phbyviki&#64;gmail.com</a>
+
+            <a class="footer-phone" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+
+            <a class="footer-email" [href]="contact.emailHref">{{ contact.email }}</a>
+
+            <a class="footer-viber" [href]="contact.viberHref">Пишете във Viber</a>
 
             <div class="footer-social">
-                <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank" rel="noopener" aria-label="phbyviki във Facebook"><img src="assets/img/facebook.svg" alt="Facebook"></a>
-                <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank" rel="noopener" aria-label="phbyviki в Instagram"><img src="assets/img/instagram.svg" alt="Instagram"></a>
+                <a [href]="contact.facebook" target="_blank" rel="noopener" aria-label="phbyviki във Facebook"><img src="assets/img/facebook.svg" alt="Facebook"></a>
+                <a [href]="contact.instagram" target="_blank" rel="noopener" aria-label="phbyviki в Instagram"><img src="assets/img/instagram.svg" alt="Instagram"></a>
             </div>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <span>&#169; 2026 Виктория Борисова</span>
+        <span>&#169; {{ year }} Виктория Борисова</span>
         <span class="footer-credit">Всички права запазени</span>
     </div>
 </footer>

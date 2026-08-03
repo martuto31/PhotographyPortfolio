@@ -1,0 +1,89 @@
+.reviews-heading {
+    margin-bottom: 64px;
+    max-width: 620px;
+}
+
+:host-context(.mobile) .reviews-heading {
+    margin-bottom: 40px;
+}
+
+.reviews-heading h2 {
+    margin: 0;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 56px 64px;
+}
+
+:host-context(.mobile) .reviews-grid {
+    gap: 44px;
+}
+
+.review {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    position: relative;
+}
+
+/* Amber tick at the head of each quote — the same mark the process steps use, so
+   the two sections read as one system. */
+.review::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 34px;
+    height: 1px;
+    background-color: var(--brass);
+}
+
+.review blockquote {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--font-high-emphasis);
+}
+
+:host-context(.mobile) .review blockquote {
+    font-size: 19px;
+}
+
+.review figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.review-name {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--font-high-emphasis);
+}
+
+.review-context {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--font-low-emphasis);
+}
+
+.review-link {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    align-self: flex-start;
+    margin-top: 8px;
+}

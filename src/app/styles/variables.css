@@ -1,31 +1,65 @@
  :root {
-    /* Background */
-    --bg-white: #FFFFFF;
-    --bg-cream: #F5F0E8;
-    --bg-gray: #FAFAF7;
-    --bg-line: #1A1A1A;
+    /* ---- Ground -------------------------------------------------------------
+       Warm, near-neutral. A photographer's page should be almost colourless so
+       the photographs carry every bit of saturation on screen. */
+    --paper: #FBFAF7;          /* page ground — white with a touch of warmth */
+    --paper-warm: #F2EDE4;     /* cream panel, image placeholders */
+    --ink: #191817;            /* warm near-black — same value as the brand mark */
+    --ink-deep: #121110;       /* full-bleed dark sections */
 
-    /* Brand */
-    --primary-brand: #FD574E;
-    --primary-brand-light: #FF7B74;
-    --primary-brand-dark: #D8443C;
+    /* ---- Accent -------------------------------------------------------------
+       Candlelight amber, sampled from the hero photograph and carried by the
+       lens-iris mark (see BRAND.md). Two values because one hue cannot serve
+       both grounds: the bright one is illegible on paper, the deep one muddy
+       on ink.
 
-    /* Text */
-    --font-low-emphasis: #9A9FA8;
-    --font-medium-emphasis: #6F6F6F;
-    --font-high-emphasis: #1A1A1A;
+       Used ONLY for hairlines, eyebrow labels and hover underlines. It is never
+       a filled button — a saturated block would compete with the photographs,
+       which is exactly what the old coral did. */
+    --brass: #A8721F;          /* on paper — 4.0:1, passes AA for large text */
+    --brass-bright: #D8A64A;   /* on ink */
+
+    /* ---- Text ---------------------------------------------------------------
+       Greys are warm-biased toward the accent rather than pure neutral. */
+    --font-high-emphasis: #191817;
+    --font-medium-emphasis: #6B645C;
+    --font-low-emphasis: #9C948A;
     --font-white: #FFFFFF;
+    --font-on-ink: #EFEAE1;    /* body text on dark sections — not pure white */
+    --font-on-ink-mute: #A69E93;
 
-    /* Form / borders */
-    --border-white: #E8ECF4;
-    --border-warm: #E8E2D9;
+    /* ---- Rules --------------------------------------------------------------
+       Hairlines carry most of the structure on this site, so they get tokens. */
+    --rule: #E5DED2;
+    --rule-strong: #D3C9B8;
+    --rule-on-ink: rgba(216, 166, 74, 0.30);
 
-    /* Error */
-    --error-color: #D32F2F;
+    /* ---- Legacy aliases -----------------------------------------------------
+       The coral brand is retired. These stay so any stylesheet still reaching
+       for the old names lands on the new palette instead of breaking. */
+    --primary-brand: var(--brass);
+    --primary-brand-light: var(--brass-bright);
+    --primary-brand-dark: #8A5D17;
 
-    /* Type */
+    --bg-white: var(--paper);
+    --bg-cream: var(--paper-warm);
+    --bg-gray: #F6F3ED;
+    --bg-line: var(--ink);
+    --border-white: var(--rule);
+    --border-warm: var(--rule);
+
+    /* ---- Error --------------------------------------------------------------- */
+    --error-color: #B3261E;
+
+    /* ---- Type ---------------------------------------------------------------- */
     --font-serif: 'Cormorant', 'Overpass', Georgia, serif;
     --font-sans: 'Overpass', system-ui, sans-serif;
+
+    /* ---- Layout -------------------------------------------------------------
+       The fixed header overlays content, so its height has to be a token: the
+       page padding, the hero's safe area and ScrollService's scroll offset all
+       read it. Overridden per breakpoint in layout.component.css. */
+    --nav-h: 84px;
 
     /* Hero image (swap to feature-love.webp for cinematic B&W variant) */
     --hero-image: url('/assets/img/hero/hero-arch.webp');

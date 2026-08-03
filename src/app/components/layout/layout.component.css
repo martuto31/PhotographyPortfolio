@@ -1,16 +1,18 @@
 .app-container {
-    /* Single source of truth for the nav "band": the gap ABOVE the nav (wrapper
-       padding-top) and BELOW it (nav margin-bottom) both read this, so they stay
-       symmetrical by construction. Overridden per breakpoint below. */
-    --nav-band: 40px;
-
     width: 100%;
     min-height: 100vh;
     display: flex;
     position: relative;
     flex-direction: column;
-    background-color: var(--bg-white);
+    background-color: var(--paper);
 }
+
+/* Header height, per breakpoint. The wrapper's top padding, the hero's safe
+   area and ScrollService's scroll offset all read this token, so the three can
+   never drift apart. */
+.desktop { --nav-h: 84px; }
+.tablet  { --nav-h: 72px; }
+.mobile  { --nav-h: 64px; }
 
 .wrapper {
     flex: 1;
@@ -22,30 +24,46 @@
     flex-direction: column;
 
     box-sizing: border-box;
-    padding: var(--nav-band) 40px 0;
+    padding: var(--nav-h) 40px 0;
     margin: 0 auto;
 }
 
-.tablet {
-    --nav-band: 32px;
+/* On the home page the hero runs under the transparent header, so the wrapper
+   must not reserve space for it. */
+.home .wrapper {
+    padding-top: 0;
+}
+
+/* Inner pages need breathing room between the header and the first heading —
+   the header height alone puts the h1 hard against the bar. */
+.inner .wrapper {
+    padding-top: calc(var(--nav-h) + 64px);
 }
 
 .tablet .wrapper {
     max-width: 100%;
-    padding: var(--nav-band) 24px 0;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
-.mobile {
-    --nav-band: 24px;
+.tablet.inner .wrapper {
+    padding-top: calc(var(--nav-h) + 44px);
 }
 
 .mobile .wrapper {
     max-width: 100%;
-    padding: var(--nav-band) 18px 0;
+    padding-left: 18px;
+    padding-right: 18px;
 }
 
-app-navigation {
-    z-index: 2;
+.mobile.inner .wrapper {
+    padding-top: calc(var(--nav-h) + 32px);
+}
+
+/* Clear the fixed call bar so it never covers the last line of the footer. */
+.tablet .wrapper,
+.mobile .wrapper {
+    padding-bottom: 64px;
 }
 
 .content {

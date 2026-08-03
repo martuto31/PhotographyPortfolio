@@ -1,45 +1,87 @@
 <div class="container">
     @if (pageHeading) {
         <header class="page-heading">
+            <a class="breadcrumb" routerLink="/galerii">Галерия</a>
+
             <h1>{{ pageHeading }}</h1>
 
-            @if (pageSubheading) {
+            @if (service) {
+                <p class="lead">{{ service.lead }}</p>
+            } @else if (pageSubheading) {
                 <p>{{ pageSubheading }}</p>
             }
         </header>
     }
 
-    @if (!currentGalleries.length) {
+    @if (currentGalleries.length) {
+        <div class="cards-container">
+            @for (gallery of currentGalleries; track $index) {
+                <a class="card" [routerLink]="[ '/galeriya', gallerySlug, gallery.name ]">
+                    <div class="image-wrap">
+                        <img class="lazy-load"
+                            [src]="gallery.imageSrc"
+                            [width]="dimensionsService.isDesktop ? '650' : '350'"
+                            [height]="dimensionsService.isDesktop ? '450' : '250'"
+                            (load)="onImageLoad(gallery)"
+                            [class.loaded]="gallery.isImgLoaded"
+                            [alt]="altPrefix + gallery.name + ' — фотограф София и Видин'"
+                        >
+
+                        @if (!gallery.isImgLoaded) {
+                            <div class="skeleton"></div>
+                        }
+                    </div>
+
+                    <div class="card-meta">
+                        <span class="tag">{{ cardTag }}</span>
+
+                        <h3>{{ gallery.name }}</h3>
+                    </div>
+                </a>
+            }
+        </div>
+    } @else {
         <p class="empty-state">
-            Галерията за тази услуга още се подготвя. Разгледайте
-            <a routerLink="/galerii/svatbi">сватбените фотосесии</a> или ми пишете за вашето събитие.
+            Още не съм публикувала галерия в тази категория — част от заснетите събития са в
+            <a class="link-underline" routerLink="/galerii/lichni">други събития</a>, а някои семейства предпочитат снимките им да останат лични.
+            Прочетете какво включва услугата по-долу или ми пишете за вашето събитие.
         </p>
     }
-
-    <div class="cards-container">
-        @for (gallery of currentGalleries; track $index) {
-            <a class="card" [routerLink]="[ '/galeriya', gallerySlug, gallery.name ]">
-                <div class="image-wrap">
-                    <img class="lazy-load"
-                        [src]="gallery.imageSrc"
-                        [width]="dimensionsService.isDesktop ? '650' : '350'"
-                        [height]="dimensionsService.isDesktop ? '450' : '250'"
-                        (load)="onImageLoad(gallery)"
-                        [class.loaded]="gallery.isImgLoaded"
-                        [alt]="altPrefix + gallery.name + ' — фотограф София и Видин'"
-                    >
-
-                    @if (!gallery.isImgLoaded) {
-                        <div class="skeleton"></div>
-                    }
-                </div>
-
-                <div class="card-meta">
-                    <span class="tag">{{ cardTag }}</span>
-
-                    <h3>{{ gallery.name }}</h3>
-                </div>
-            </a>
-        }
-    </div>
 </div>
+
+@if (service) {
+    <div class="section-space"></div>
+
+    <section class="service">
+        <div class="service-intro">
+            <span class="eyebrow">{{ service.eyebrow }}</span>
+
+            <div class="service-text">
+                @for (paragraph of service.paragraphs; track $index) {
+                    <p>{{ paragraph }}</p>
+                }
+            </div>
+        </div>
+
+        <div class="includes">
+            <h2 class="includes-heading">Какво включва</h2>
+
+            <ul class="includes-list">
+                @for (item of service.includes; track item.title) {
+                    <li>
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.text }}</p>
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+
+    <div class="section-space"></div>
+
+    <app-faq [items]="service.faq"></app-faq>
+
+    <div class="section-space"></div>
+
+    <app-cta-band></app-cta-band>
+}

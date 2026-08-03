@@ -1,0 +1,55 @@
+<header class="page-heading">
+    <span class="eyebrow">Контакти</span>
+
+    <h1>Нека се чуем</h1>
+
+    <p class="measure">Кажете ми датата, мястото и какво празнувате. Отговарям <strong>{{ contact.responseTime }}</strong> — с наличност и конкретна цена, без обещания по телефона, които после се променят.</p>
+</header>
+
+<div class="contact-grid">
+    <div class="methods">
+        <a class="method method-primary" [href]="contact.phoneHref">
+            <span class="method-label">Телефон</span>
+            <span class="method-value">{{ contact.phoneDisplay }}</span>
+            <span class="method-note">Най-бързият начин да проверите дали датата е свободна</span>
+        </a>
+
+        <a class="method" [href]="contact.viberHref">
+            <span class="method-label">Viber</span>
+            <span class="method-value method-value-sm">{{ contact.phoneDisplay }}</span>
+            <span class="method-note">Пишете по всяко време — снимките от деня се пращат лесно</span>
+        </a>
+
+        <a class="method" [href]="contact.emailHref">
+            <span class="method-label">Имейл</span>
+            <span class="method-value method-value-sm">{{ contact.email }}</span>
+            <span class="method-note">За по-подробни запитвания и за фирмени клиенти</span>
+        </a>
+
+        <div class="method method-static">
+            <span class="method-label">Къде снимам</span>
+            <span class="method-value method-value-sm">София &amp; Видин</span>
+            <span class="method-note">Пътувам в цяла България — транспортът се уточнява предварително</span>
+        </div>
+
+        <div class="socials">
+            <span class="method-label">Последвайте</span>
+
+            <div class="social-links">
+                <a [href]="contact.instagram" target="_blank" rel="noopener">
+                    <img src="assets/img/instagram.svg" alt="" aria-hidden="true">
+                    <span>Instagram</span>
+                </a>
+
+                <a [href]="contact.facebook" target="_blank" rel="noopener">
+                    <img src="assets/img/facebook.svg" alt="" aria-hidden="true">
+                    <span>Facebook</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-column">
+        <app-contact-me [embedded]="true"></app-contact-me>
+    </div>
+</div>

@@ -23,14 +23,14 @@ const DEFAULT_TITLE = 'Фотосесия | Галерия | Виктория Б
 // Per-category wording for single-gallery pages. Each gallery is its own indexable page,
 // so it gets a title/description built from the couple/person name rather than inheriting
 // the generic site-wide copy. Keyed by the BG URL slug (see SLUG_TO_TYPE).
-const GALLERY_TYPE_COPY: Record<string, { noun: string; adjective: string; keywords: string }> = {
-  'svatbi': { noun: 'Сватбена фотосесия', adjective: 'сватбена', keywords: 'сватбен фотограф София, сватбен фотограф Видин, сватбени снимки' },
-  'abiturienti': { noun: 'Абитуриентска фотосесия', adjective: 'абитуриентска', keywords: 'фотограф абитуриентски бал София, абитуриентска фотосесия, абитуриентски снимки' },
-  'lichni': { noun: 'Лична фотосесия', adjective: 'лична', keywords: 'лична фотосесия София, портретна фотосесия Видин, фотограф за рожден ден' },
-  'krushteneta': { noun: 'Фотосесия от кръщене', adjective: 'от кръщене', keywords: 'фотограф за кръщене София, фотограф за кръщавка, снимки от кръщене' },
-  'korporativni': { noun: 'Корпоративна фотосесия', adjective: 'корпоративна', keywords: 'корпоративен фотограф София, фотограф за събитие, бизнес фотография' },
-  'rojdeni-dni': { noun: 'Фотосесия за рожден ден', adjective: 'за рожден ден', keywords: 'фотограф за рожден ден София, детски рожден ден, фотограф за юбилей' },
-  'semeyni': { noun: 'Семейна фотосесия', adjective: 'семейна', keywords: 'семеен фотограф София, семейна фотосесия, детска фотосесия' },
+const GALLERY_TYPE_COPY: Record<string, { noun: string; keywords: string }> = {
+  'svatbi': { noun: 'Сватбена фотосесия', keywords: 'сватбен фотограф София, сватбен фотограф Видин, сватбени снимки' },
+  'abiturienti': { noun: 'Абитуриентска фотосесия', keywords: 'фотограф абитуриентски бал София, абитуриентска фотосесия, абитуриентски снимки' },
+  'lichni': { noun: 'Лична фотосесия', keywords: 'лична фотосесия София, портретна фотосесия Видин, фотограф за рожден ден' },
+  'krushteneta': { noun: 'Фотосесия от кръщене', keywords: 'фотограф за кръщене София, фотограф за кръщавка, снимки от кръщене' },
+  'korporativni': { noun: 'Корпоративна фотосесия', keywords: 'корпоративен фотограф София, фотограф за събитие, бизнес фотография' },
+  'rojdeni-dni': { noun: 'Фотосесия за рожден ден', keywords: 'фотограф за рожден ден София, детски рожден ден, фотограф за юбилей' },
+  'semeyni': { noun: 'Семейна фотосесия', keywords: 'семеен фотограф София, семейна фотосесия, детска фотосесия' },
 };
 
 @Injectable({
@@ -177,9 +177,14 @@ export class SEOService {
     }
 
     return {
-      title: `${name} — ${copy.noun} | Виктория Борисова`,
+      // "| phbyviki" rather than "| Виктория Борисова": the longer suffix pushed
+      // the double-barrelled names ("Александрина и Борис", "Семеен бал Ванеса")
+      // past 60 characters, and the brand still appears in the description.
+      title: `${name} — ${copy.noun} | phbyviki`,
       item: {
-        description: `${copy.noun} „${name}“ от Виктория Борисова (phbyviki) — фотограф в София и Видин. Разгледайте кадрите от деня и запазете дата за вашата ${copy.adjective} фотосесия.`,
+        // Kept near 150 characters. The previous wording ran past 165 on every
+        // gallery, so Google truncated all ~31 of them mid-sentence.
+        description: `${copy.noun} „${name}“ — Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и запазете вашата дата на 0895 318 622.`,
         keywords: `${name}, ${copy.keywords}, Виктория Борисова, phbyviki`,
       },
     };

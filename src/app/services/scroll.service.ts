@@ -13,7 +13,9 @@ import { Router } from '@angular/router';
 export class ScrollService {
 
   // Offset for the fixed header so the section isn't hidden underneath it.
-  private static readonly HEADER_OFFSET = 90;
+  // Slightly more than the tallest --nav-h (84px) so the heading clears the bar
+  // rather than touching it.
+  private static readonly HEADER_OFFSET = 104;
 
   constructor(
     private router: Router,

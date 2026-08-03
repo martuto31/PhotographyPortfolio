@@ -36,15 +36,18 @@ export class DimensionService {
   private tabletBreakpoint = 960;
   private mobileBreakpoint = 480;
 
+  // addEventListener rather than `window.onresize =`, which is a single slot:
+  // any other code assigning it would silently replace this handler and freeze
+  // the layout at whatever breakpoint it was on.
   private subscribeToWindowResize(): void {
-    window.onresize = () => {
+    window.addEventListener('resize', () => {
       this.windowResize.next();
       this.screenType = this.getScreenType();
 
       this.isMobile = this.screenType === ScreenType.Mobile;
       this.isTablet = this.screenType === ScreenType.Tablet;
       this.isDesktop = this.screenType === ScreenType.Desktop;
-    };
+    });
   }
 
   private getScreenType(): ScreenType {

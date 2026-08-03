@@ -2,16 +2,27 @@
     <div class="hero-image" aria-hidden="true"></div>
 
     <div class="hero-overlay">
-        <div class="hero-name">VICTORIA BORISOVA</div>
+        <div class="hero-inner">
+            <span class="hero-kicker">Виктория Борисова — phbyviki</span>
 
-        <h1>Сватбен и <em>събитиен фотограф</em><br>в София и Видин</h1>
+            <h1>Сватбен и <em>събитиен фотограф</em><br>в София и Видин</h1>
 
-        <p class="hero-sub">Заснемам сватби, абитуриентски балове, кръщенета и лични фотосесии в цяла България.</p>
+            <p class="hero-sub">Документален и спокоен подход — вие преживявате деня си, аз го записвам. Сватби, абитуриентски балове, кръщенета и лични фотосесии в цяла България.</p>
 
-        <div class="btn-group">
-            <a href="/" (click)="scrollTo('projects', $event)" class="btn btn-ghost-light">Галерия</a>
-            <a href="/" (click)="scrollTo('contact-me', $event)" class="btn btn-primary">Контакти</a>
+            <div class="btn-group">
+                <a routerLink="/galerii" class="btn btn-light">Разгледайте галерията</a>
+
+                <a [href]="contact.phoneHref" class="btn btn-ghost-light call-btn">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/>
+                    </svg>
+                    {{ contact.phoneDisplay }}
+                </a>
+            </div>
         </div>
     </div>
 
+    <button type="button" class="scroll-cue" (click)="scrollToWork()" aria-label="Към работите">
+        <span class="scroll-line" aria-hidden="true"></span>
+    </button>
 </section>

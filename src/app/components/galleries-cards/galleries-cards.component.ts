@@ -3,9 +3,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
+import { FaqComponent } from './../shared/faq/faq.component';
+import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
+
 import { DimensionService } from './../../services/dimension.service';
+import { StructuredDataService } from './../../services/structured-data.service';
 import { COVER_FILENAME, fetchManifest, imageUrl } from './../../config';
 import { GALLERY_SNAPSHOT } from './../../generated/galleries';
+import { SERVICE_BY_SLUG, SERVICE_TITLES, ServiceCopy } from './../../content/services';
 
 interface Gallery {
   name: string;
@@ -58,6 +63,8 @@ const TYPE_ALT_PREFIX: Record<string, string> = {
   standalone: true,
   imports: [
     RouterLink,
+    FaqComponent,
+    CtaBandComponent,
   ],
 })
 
@@ -66,6 +73,7 @@ export class GalleriesCardsComponent implements OnInit {
   constructor(
     public dimensionsService: DimensionService,
     private title: Title,
+    private structuredData: StructuredDataService,
     @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryType: string = 'svatbi';
@@ -78,12 +86,19 @@ export class GalleriesCardsComponent implements OnInit {
   public currentGalleries: Gallery[] = [];
   public altPrefix: string = '';
 
+  // Service prose for this category. Four of the seven categories have no
+  // published galleries, and until this existed those URLs rendered a heading over
+  // an empty grid — while the LocalBusiness JSON-LD advertised them as offers.
+  public service?: ServiceCopy;
+
   public async ngOnInit(): Promise<void> {
     this.type = SLUG_TO_TYPE[this.galleryType] || this.galleryType;
     this.cardTag = TYPE_LABEL_BG[this.type]?.cardTag || '';
     this.altPrefix = TYPE_ALT_PREFIX[this.type] || '';
+    this.service = SERVICE_BY_SLUG[this.galleryType];
     this.setHeadings();
     this.setTitle();
+    this.setStructuredData();
 
     // Render the build-time snapshot first — synchronously, on server and client alike — so
     // the prerendered HTML carries a crawlable <a> per gallery instead of an empty grid.
@@ -154,11 +169,39 @@ export class GalleriesCardsComponent implements OnInit {
   }
 
   private setTitle(): void {
-    const labels = TYPE_LABEL_BG[this.type];
-    if (!labels) return;
+    const title = SERVICE_TITLES[this.galleryType];
+    if (title) {
+      this.title.setTitle(title);
+      return;
+    }
 
-    const cityScope = 'София и Видин';
-    this.title.setTitle(`${labels.heading} Фотосесии — ${cityScope} | Виктория Борисова`);
+    // Legacy English slugs (/galleries/Weddings) reach here without a BG slug.
+    const labels = TYPE_LABEL_BG[this.type];
+    if (labels) {
+      this.title.setTitle(`${labels.heading} фотосесии | Виктория Борисова`);
+    }
+  }
+
+  private setStructuredData(): void {
+    if (!this.service) {
+      return;
+    }
+
+    const url = `https://phbyviki.com/galerii/${this.service.slug}`;
+
+    this.structuredData.set([
+      this.structuredData.breadcrumbs([
+        { name: 'Начало', url: 'https://phbyviki.com/' },
+        { name: 'Галерия', url: 'https://phbyviki.com/galerii' },
+        { name: this.service.label, url },
+      ]),
+      this.structuredData.service({
+        name: this.service.eyebrow,
+        description: this.service.lead,
+        url,
+      }),
+      this.structuredData.faq(this.service.faq),
+    ]);
   }
 
 }

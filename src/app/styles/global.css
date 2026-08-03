@@ -6,7 +6,7 @@ html, body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--font-medium-emphasis);
-    background-color: var(--bg-white);
+    background-color: var(--paper);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -15,7 +15,7 @@ html, body {
 }
 
 mark {
-    color: var(--primary-brand);
+    color: var(--brass);
     background: none;
     font-family: var(--font-serif);
     font-style: italic;
@@ -55,7 +55,75 @@ img {
     padding: 0 20px;
 }
 
-::selection {
-    background: var(--primary-brand);
+/* ---- Full-bleed sections -------------------------------------------------
+   The page is laid out inside a 1400px wrapper with side padding. A section
+   that needs edge-to-edge colour or photography escapes it by pulling itself
+   back out to the viewport width. Alternating paper and ink bands is what
+   gives the page its photo-book rhythm. */
+.bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.on-ink {
+    background-color: var(--ink-deep);
+    color: var(--font-on-ink);
+}
+
+.on-ink h1,
+.on-ink h2,
+.on-ink h3 {
     color: var(--font-white);
+}
+
+.on-ink p {
+    color: var(--font-on-ink-mute);
+}
+
+/* Inner rail for full-bleed sections, so their content still lines up with the
+   rest of the page instead of running to the viewport edge. */
+.bleed-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 40px;
+    box-sizing: border-box;
+}
+
+.tablet .bleed-inner {
+    padding: 88px 24px;
+}
+
+.mobile .bleed-inner {
+    padding: 64px 18px;
+}
+
+::selection {
+    background: var(--brass);
+    color: var(--font-white);
+}
+
+/* Visible to screen readers, not on screen. Used for headings that structure
+   the document but would be redundant next to the visible design. */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

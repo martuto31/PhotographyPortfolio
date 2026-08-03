@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ContactMeComponent } from './../contact-me/contact-me.component';
+import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
+
+import { CONTACT } from './../../content/contact';
+import { StructuredDataService } from './../../services/structured-data.service';
 
 @Component({
   selector: 'app-about-me',
@@ -10,10 +13,23 @@ import { ContactMeComponent } from './../contact-me/contact-me.component';
   standalone: true,
   imports: [
     RouterLink,
-    ContactMeComponent,
+    CtaBandComponent,
   ],
 })
 
-export class AboutMeComponent {
+export class AboutMeComponent implements OnInit {
+
+  constructor(private structuredData: StructuredDataService) { }
+
+  public readonly contact = CONTACT;
+
+  public ngOnInit(): void {
+    this.structuredData.set([
+      this.structuredData.breadcrumbs([
+        { name: 'Начало', url: 'https://phbyviki.com/' },
+        { name: 'За мен', url: 'https://phbyviki.com/about-me' },
+      ]),
+    ]);
+  }
 
 }

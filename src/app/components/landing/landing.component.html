@@ -1,14 +1,21 @@
 <app-intro-section></app-intro-section>
 
+<app-credentials></app-credentials>
+
 <div class="section-space"></div>
 
-<!-- Not deferred: this section holds the only internal links to the /galerii/* category
-     pages, and @defer blocks are skipped during prerender (crawlers would see none). -->
+<!-- Not deferred: this section holds the only internal links to the /galerii/*
+     category pages, and @defer blocks are skipped during prerender (crawlers
+     would see none). -->
 <app-projects></app-projects>
 
-<div #projectsSectionSpace class="section-space"></div>
+<div class="section-space"></div>
 
-<section class="cinematic-break" aria-hidden="true">
+<app-process></app-process>
+
+<div class="section-space"></div>
+
+<section class="cinematic-break bleed" aria-hidden="true">
     <img src="assets/img/hero/feature-love.webp" alt="">
     <div class="cinematic-quote">
         <p><em>"Истории, които остават."</em></p>
@@ -16,8 +23,19 @@
     </div>
 </section>
 
+@if (hasTestimonials) {
+    <div class="section-space"></div>
+
+    <app-testimonials></app-testimonials>
+}
+
 <div class="section-space"></div>
 
-@defer (on idle) {
-    <app-contact-me></app-contact-me>
-}
+<app-faq [items]="faq"></app-faq>
+
+<div class="section-space"></div>
+
+<app-cta-band
+    heading="Разкажете ми за вашия ден"
+    text="Пишете ми датата и мястото на събитието — отговарям до 24 часа с наличност и цена. Ако предпочитате да се чуем, обадете се по всяко време.">
+</app-cta-band>

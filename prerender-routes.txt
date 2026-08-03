@@ -1,8 +1,14 @@
 /
+/galerii
+/kontakti
 /about-me
+/galerii/svatbi
 /galerii/abiturienti
 /galerii/lichni
-/galerii/svatbi
+/galerii/krushteneta
+/galerii/korporativni
+/galerii/rojdeni-dni
+/galerii/semeyni
 /galeriya/abiturienti/Ванеса
 /galeriya/abiturienti/Вивиан
 /galeriya/abiturienti/Ева

@@ -48,6 +48,13 @@ const CATEGORY_PRIORITY = {
   'Family': { priority: '0.7', changefreq: 'monthly' },
 };
 
+// Fixed pages that exist regardless of what is in the manifest.
+const STATIC_PAGES = [
+  { path: '/galerii', priority: '0.9', changefreq: 'weekly' },
+  { path: '/kontakti', priority: '0.8', changefreq: 'monthly' },
+  { path: '/about-me', priority: '0.6', changefreq: 'monthly' },
+];
+
 // Each path segment is encoded separately so "/" stays a real separator while spaces,
 // "&" and Cyrillic get percent-encoded. Matches imageUrl() in src/app/config.ts.
 function encodePath(path) {
@@ -110,20 +117,27 @@ async function main() {
   let galleryCount = 0;
 
   for (const type of Object.keys(TYPE_TO_SLUG)) {
-    const galleries = byType.get(type);
-    if (!galleries?.length) {
-      console.log(`  - ${type}: no galleries, left out of the sitemap`);
-      continue;
-    }
-
     const slug = TYPE_TO_SLUG[type];
     const hints = CATEGORY_PRIORITY[type];
+    const galleries = byType.get(type);
 
+    // Every category page is indexable now, with or without galleries. They used
+    // to be excluded when empty — correctly, because they rendered a heading over
+    // blank space — but each one now carries several hundred words of service copy
+    // from src/app/content/services.ts, plus a FAQ. The four that were left out
+    // are exactly the four the LocalBusiness makesOffer schema has always
+    // advertised, so keeping them unindexed made the schema promise pages Google
+    // could not reach.
     entries.push(urlEntry({
       loc: `${SITE_URL}/galerii/${slug}`,
       changefreq: hints.changefreq,
       priority: hints.priority,
     }));
+
+    if (!galleries?.length) {
+      console.log(`  · ${type}: service page only (no galleries yet)`);
+      continue;
+    }
 
     galleries.sort((a, b) => a.name.localeCompare(b.name, 'bg'));
 
@@ -151,7 +165,13 @@ async function main() {
     console.log(`  ✓ ${type}: ${galleries.length} galleries`);
   }
 
-  entries.push(urlEntry({ loc: `${SITE_URL}/about-me`, changefreq: 'monthly', priority: '0.6' }));
+  for (const page of STATIC_PAGES) {
+    entries.push(urlEntry({
+      loc: `${SITE_URL}${page.path}`,
+      changefreq: page.changefreq,
+      priority: page.priority,
+    }));
+  }
 
   const xml = [
     `<?xml version='1.0' encoding='UTF-8'?>`,
@@ -200,17 +220,21 @@ async function main() {
 
   await writeFile(join(REPO_ROOT, 'src', 'app', 'generated', 'galleries.ts'), snapshotFile, 'utf8');
 
-  // Prerender every route that has content: the fixed pages, the non-empty categories, and
-  // one page per gallery so each ships complete static HTML (unique title/description/
-  // canonical/h1) instead of depending on the crawler executing JS. Empty categories are
-  // left out — they would prerender to a heading over blank space.
+  // Prerender every route: the fixed pages, all seven categories, and one page per
+  // gallery so each ships complete static HTML (unique title/description/canonical/
+  // h1/JSON-LD) instead of depending on the crawler executing JS.
+  //
+  // All seven categories are here, not just the ones with photographs. Without it,
+  // /galerii/krushteneta and its three siblings fall through to the SPA shell and
+  // serve the prerendered *home page* — homepage h1, homepage title, canonical
+  // pointing at "/" — which is what they did before this file listed them.
   //
   // Routes are written unencoded; the builder handles spaces and Cyrillic in the path. If a
   // prerendered file is ever missing, the /galeriya/** rewrite still falls back to the SPA.
   const prerenderRoutes = [
     '/',
-    '/about-me',
-    ...[...byType.keys()].map((type) => `/galerii/${TYPE_TO_SLUG[type]}`),
+    ...STATIC_PAGES.map((page) => page.path),
+    ...Object.values(TYPE_TO_SLUG).map((slug) => `/galerii/${slug}`),
     ...[...byType.entries()].flatMap(([type, galleries]) =>
       galleries.map((gallery) => `/galeriya/${TYPE_TO_SLUG[type]}/${gallery.name}`)),
   ];

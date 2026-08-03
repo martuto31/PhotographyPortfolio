@@ -1,9 +1,29 @@
-.container {
+.bar {
+    background-color: rgba(251, 250, 247, 0.94);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 320ms ease, border-color 320ms ease;
+}
+
+.bar-inner {
+    height: var(--nav-h, 64px);
+    padding: 0 18px;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Matches the wrapper's padding-top so the nav sits in a symmetrical band. */
-    margin-bottom: var(--nav-band, 24px);
+}
+
+:host-context(.tablet) .bar-inner {
+    padding: 0 24px;
+}
+
+:host-context(.transparent) .bar {
+    background-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom-color: transparent;
 }
 
 .brand {
@@ -12,13 +32,14 @@
     line-height: 1;
     cursor: pointer;
     color: var(--font-high-emphasis);
+    transition: color 320ms ease;
 }
 
 .brand-name {
     font-family: var(--font-serif);
     font-style: italic;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 21px;
 }
 
 .brand-tag {
@@ -28,81 +49,161 @@
     letter-spacing: 0.36em;
     text-transform: uppercase;
     color: var(--font-medium-emphasis);
-    margin-top: 4px;
+    margin-top: 5px;
+    transition: color 320ms ease;
 }
 
-.hamburger-btn {
+:host-context(.transparent) .bar-inner .brand,
+:host-context(.transparent) .bar-inner .brand-tag {
+    color: var(--font-white);
+    text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Menu button --------------------------------------------------------
+   Drawn in CSS rather than loaded as an <img>, so it can take the colour of the
+   bar it sits in — an SVG file cannot be recoloured over the hero photograph. */
+.menu-btn {
     background: none;
     border: none;
-    padding: 8px;
+    padding: 10px 0 10px 10px;
     cursor: pointer;
+    color: var(--font-high-emphasis);
+    transition: color 320ms ease;
 }
 
-.hamburger-btn img {
+:host-context(.transparent) .bar-inner .menu-btn {
+    color: var(--font-white);
+}
+
+.menu-lines {
+    display: block;
     width: 26px;
-    height: 26px;
+    height: 12px;
+    position: relative;
 }
 
+.menu-lines i {
+    position: absolute;
+    left: 0;
+    height: 1.5px;
+    background-color: currentColor;
+    transition: transform 260ms ease, width 260ms ease, top 260ms ease;
+}
+
+.menu-lines i:first-child {
+    top: 0;
+    width: 26px;
+}
+
+.menu-lines i:last-child {
+    top: 10px;
+    width: 17px;
+}
+
+.menu-lines.is-close i:first-child {
+    top: 5px;
+    transform: rotate(45deg);
+}
+
+.menu-lines.is-close i:last-child {
+    top: 5px;
+    width: 26px;
+    transform: rotate(-45deg);
+}
+
+/* ---- Full-screen panel --------------------------------------------------- */
 .expander-container {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: var(--bg-white);
+    background-color: var(--paper);
     z-index: 99;
     overflow-y: auto;
 }
 
 .expander {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 18px 60px;
+    padding: 0 18px 48px;
     box-sizing: border-box;
 }
 
+:host-context(.tablet) .expander {
+    padding: 0 24px 56px;
+}
+
 .expander .heading {
-    width: 100%;
+    height: var(--nav-h, 64px);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex: none;
 }
 
 .expander .actions {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 4px;
+    padding: 40px 0;
 }
 
 .expander .actions a {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 32px;
+    font-size: 40px;
+    line-height: 1.5;
     color: var(--font-high-emphasis);
     cursor: pointer;
     transition: color 200ms ease;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.expander .actions a:last-child {
+    border-bottom: none;
 }
 
 .expander .actions a:hover {
-    color: var(--primary-brand);
+    color: var(--brass);
 }
 
-.expander .links {
+/* ---- Contact block at the foot of the panel ------------------------------ */
+.menu-contact {
     display: flex;
-    gap: 28px;
+    flex-direction: column;
+    gap: 10px;
+    flex: none;
 }
 
-.expander .links a {
+.menu-phone {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
     color: var(--font-high-emphasis);
 }
 
-.expander .links img {
-    width: 24px;
-    height: 24px;
+.menu-email {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--font-medium-emphasis);
+}
+
+.links {
+    display: flex;
+    gap: 22px;
+    margin-top: 16px;
+}
+
+.links img {
+    width: 22px;
+    height: 22px;
 }

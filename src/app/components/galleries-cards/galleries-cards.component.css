@@ -2,17 +2,43 @@
     width: 100%;
 }
 
+/* ---- Page heading -------------------------------------------------------
+   Left-aligned rather than centred: it now carries a breadcrumb above it and a
+   long lead sentence below, and centred multi-line prose is hard to scan. */
 .page-heading {
-    text-align: center;
-    margin-bottom: 80px;
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 72px;
+    max-width: 780px;
 }
 
 :host-context(.tablet) .page-heading,
 :host-context(.mobile) .page-heading {
-    margin-bottom: 56px;
+    margin-bottom: 48px;
+}
+
+.breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 20px;
+    transition: color 200ms ease;
+}
+
+.breadcrumb::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background-color: var(--brass);
+    flex: none;
+}
+
+.breadcrumb:hover {
+    color: var(--font-high-emphasis);
 }
 
 .page-heading h1 {
@@ -20,19 +46,28 @@
     font-weight: 500;
     font-size: clamp(36px, 5vw, 60px);
     line-height: 1.1;
-    margin: 0 0 16px;
+    margin: 0 0 20px;
     color: var(--font-high-emphasis);
 }
 
 .page-heading p {
     font-family: var(--font-sans);
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--font-medium-emphasis);
     margin: 0;
-    max-width: 56ch;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 60ch;
+}
+
+/* The service lead is the one sentence that has to land, so it is set in the
+   display serif rather than the UI sans. */
+.page-heading .lead {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.45;
+    color: var(--font-high-emphasis);
+    max-width: 42ch;
 }
 
 .cards-container {
@@ -64,7 +99,7 @@
     overflow: hidden;
     aspect-ratio: 4 / 3;
     margin-bottom: 22px;
-    background-color: var(--bg-cream);
+    background-color: var(--paper-warm);
 }
 
 .card img {
@@ -89,7 +124,7 @@
 .skeleton {
     position: absolute;
     inset: 0;
-    background-color: var(--bg-cream);
+    background-color: var(--paper-warm);
     animation: pulse 1.5s infinite;
 }
 
@@ -113,7 +148,7 @@
     font-weight: 600;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--font-medium-emphasis);
+    color: var(--font-low-emphasis);
 }
 
 .card-meta h3 {
@@ -128,20 +163,88 @@
 }
 
 .card:hover .card-meta h3 {
-    color: var(--primary-brand);
+    color: var(--brass);
 }
 
 .empty-state {
     font-family: var(--font-sans);
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.75;
     color: var(--font-medium-emphasis);
-    text-align: center;
-    max-width: 52ch;
-    margin: 0 auto;
+    max-width: 62ch;
+    margin: 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
 }
 
-.empty-state a {
-    color: var(--font-high-emphasis);
-    border-bottom: 1px solid var(--font-high-emphasis);
+:host-context(.mobile) .empty-state {
+    font-size: 15px;
+}
+
+/* ---- Service copy -------------------------------------------------------- */
+.service {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 88px;
+    align-items: start;
+}
+
+:host-context(.tablet) .service,
+:host-context(.mobile) .service {
+    grid-template-columns: 1fr;
+    gap: 52px;
+}
+
+.service-text {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.service-text p {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+    max-width: 62ch;
+}
+
+:host-context(.mobile) .service-text p {
+    font-size: 15px;
+}
+
+.includes-heading {
+    font-size: clamp(26px, 2.8vw, 34px);
+    margin: 0 0 8px;
+}
+
+.includes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.includes-list li {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.includes-list li:first-child {
+    border-top: 1px solid var(--rule);
+}
+
+.includes-list h3 {
+    font-size: 21px;
+    margin: 0 0 8px;
+}
+
+.includes-list p {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+    max-width: 52ch;
 }

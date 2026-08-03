@@ -1,12 +1,23 @@
-<nav class="container">
-    <a routerLink="" class="brand" aria-label="Начало — Виктория Борисова">
-        <span class="brand-name">Victoria Borisova</span>
-        <span class="brand-tag">Photography</span>
-    </a>
+<div class="bar">
+    <nav class="bar-inner" aria-label="Основна навигация">
+        <a routerLink="" class="brand" aria-label="Начало — Виктория Борисова">
+            <span class="brand-name">Victoria Borisova</span>
+            <span class="brand-tag">Photography</span>
+        </a>
 
-    <div class="actions">
-        <a routerLink="about-me">За мен</a>
-        <a href="/" (click)="scrollTo('projects', $event)">Галерия</a>
-        <a href="/" (click)="scrollTo('contact-me', $event)">Контакти</a>
-    </div>
-</nav>
+        <div class="actions">
+            <a routerLink="/galerii" routerLinkActive="active">Галерия</a>
+            <a routerLink="/about-me" routerLinkActive="active">За мен</a>
+            <a routerLink="/kontakti" routerLinkActive="active">Контакти</a>
+
+            <!-- The number was previously only in the LocalBusiness JSON-LD: advertised
+                 to Google, invisible to the person reading the page. -->
+            <a class="call" [href]="contact.phoneHref" [attr.aria-label]="'Обадете се на ' + contact.phoneDisplay">
+                <svg class="call-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/>
+                </svg>
+                <span>{{ contact.phoneDisplay }}</span>
+            </a>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,153 @@
+.page-heading {
+    max-width: 720px;
+    margin-bottom: 72px;
+}
+
+:host-context(.mobile) .page-heading {
+    margin-bottom: 44px;
+}
+
+.page-heading h1 {
+    margin: 0 0 20px;
+}
+
+.page-heading p {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+}
+
+.page-heading strong {
+    color: var(--font-high-emphasis);
+    font-weight: 600;
+}
+
+:host-context(.mobile) .page-heading p {
+    font-size: 15px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 96px;
+    align-items: start;
+    padding-bottom: 40px;
+}
+
+:host-context(.tablet) .contact-grid,
+:host-context(.mobile) .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+}
+
+/* ---- Contact methods ----------------------------------------------------- */
+.methods {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+}
+
+.method {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+}
+
+.method-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--brass);
+}
+
+.method-value {
+    font-family: var(--font-serif);
+    font-size: clamp(34px, 4.2vw, 50px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--font-high-emphasis);
+    font-variant-numeric: tabular-nums;
+    transition: color 220ms ease;
+    /* The email is long and must not push the column wider than its track. */
+    overflow-wrap: anywhere;
+}
+
+/* Everything after the phone number steps down a level, so the page has one
+   obvious primary action rather than four competing ones. */
+.method-value-sm {
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-style: italic;
+    font-weight: 400;
+}
+
+a.method:hover .method-value {
+    color: var(--brass);
+}
+
+.method-note {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--font-medium-emphasis);
+    max-width: 42ch;
+    margin-top: 2px;
+}
+
+.method-static {
+    cursor: default;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 26px 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 28px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--font-high-emphasis);
+    transition: color 200ms ease;
+}
+
+.social-links a:hover {
+    color: var(--brass);
+}
+
+.social-links img {
+    width: 18px;
+    height: 18px;
+}
+
+/* ---- Form ---------------------------------------------------------------
+   The shared form component centres itself for the home page; on this page it
+   sits in a column and should be left-aligned with the heading above it. */
+.form-column {
+    background-color: var(--paper-warm);
+    padding: 56px 48px;
+}
+
+:host-context(.mobile) .form-column {
+    padding: 36px 20px;
+}
+
+:host-context(.tablet) .form-column {
+    padding: 44px 32px;
+}

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { ScrollService } from './../../../../services/scroll.service';
+import { CONTACT } from './../../../../content/contact';
 
 @Component({
   selector: 'app-navigation-mobile',
@@ -26,43 +27,72 @@ import { ScrollService } from './../../../../services/scroll.service';
   ],
 })
 
-export class NavigationMobileComponent {
+export class NavigationMobileComponent implements OnDestroy {
+
+  constructor(
+    @Inject(DOCUMENT) private dom: Document,
+    @Inject(PLATFORM_ID) private platformId: object) { }
+
+  public readonly contact = CONTACT;
 
   public isExpanderOpen = false;
 
-  private bodyEl = document.querySelector('body') as HTMLBodyElement;
+  // Scroll offset captured when the menu opened, restored when it closes.
+  private lockedScrollY = 0;
 
-  constructor(private scroll: ScrollService) { }
+  public ngOnDestroy(): void {
+    // A route change can tear this down mid-open; without this the page would be
+    // left position:fixed and unscrollable.
+    if (this.isExpanderOpen) {
+      this.unlockScroll();
+    }
+  }
 
-  public triggerAnimation(): void {
+  public toggleMenu(): void {
     this.isExpanderOpen = !this.isExpanderOpen;
 
-    this.scrollBlock();
-  }
-
-  // Close the menu (restores body scroll) then smooth-scroll to the section.
-  public scrollTo(id: string, event: Event): void {
-    event.preventDefault();
-    this.triggerAnimation();
-    this.scroll.scrollToSection(id);
-  }
-
-  private scrollBlock(): void {
     if (this.isExpanderOpen) {
-      const yOffset = window.scrollY;
-
-      this.bodyEl.style.position = 'fixed';
-      this.bodyEl.style.top = '-' + yOffset + 'px';
-      this.bodyEl.style.height = 'calc(80% - 84px + ' + yOffset + 'px)';
+      this.lockScroll();
     } else {
-      const top = parseInt(this.bodyEl.style.top) * -1;
-
-      this.bodyEl.style.position = '';
-      this.bodyEl.style.top = '';
-      this.bodyEl.style.height = '100%';
-
-      window.scrollTo(0, top);
+      this.unlockScroll();
     }
+  }
+
+  // Called by every link inside the panel: navigate and close in one tap.
+  public closeMenu(): void {
+    if (this.isExpanderOpen) {
+      this.toggleMenu();
+    }
+  }
+
+  // position:fixed on <body> is the only lock that reliably holds on iOS Safari.
+  // It collapses the page to the top, so the offset is stashed and re-applied.
+  private lockScroll(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    this.lockedScrollY = window.scrollY;
+
+    const body = this.dom.body;
+    body.style.position = 'fixed';
+    body.style.top = `-${this.lockedScrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+  }
+
+  private unlockScroll(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const body = this.dom.body;
+    body.style.position = '';
+    body.style.top = '';
+    body.style.left = '';
+    body.style.right = '';
+
+    window.scrollTo(0, this.lockedScrollY);
   }
 
 }

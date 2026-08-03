@@ -1,0 +1,27 @@
+<section class="bleed on-ink cta">
+    <div class="bleed-inner cta-inner">
+        <div class="cta-text">
+            <span class="eyebrow">Запазване на дата</span>
+
+            <h2>{{ heading }}</h2>
+
+            <p>{{ text }}</p>
+        </div>
+
+        <div class="cta-actions">
+            <a class="cta-phone" [href]="contact.phoneHref">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/>
+                </svg>
+                {{ contact.phoneDisplay }}
+            </a>
+
+            <div class="cta-links">
+                <a class="btn btn-light" routerLink="/kontakti">Изпрати запитване</a>
+                <a class="btn btn-ghost-light" [href]="contact.viberHref">Viber</a>
+            </div>
+
+            <span class="cta-note">{{ contact.areas }}</span>
+        </div>
+    </div>
+</section>

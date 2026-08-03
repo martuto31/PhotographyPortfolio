@@ -1,0 +1,29 @@
+@if (testimonials.length) {
+    <section class="reviews">
+        <header class="reviews-heading">
+            <span class="eyebrow">Отзиви</span>
+
+            <h2>Какво казват хората,<br>които съм снимала</h2>
+        </header>
+
+        <div class="reviews-grid">
+            @for (review of testimonials; track review.quote) {
+                <figure class="review">
+                    <blockquote>{{ review.quote }}</blockquote>
+
+                    <figcaption>
+                        <span class="review-name">{{ review.name }}</span>
+
+                        @if (review.context) {
+                            <span class="review-context">{{ review.context }}</span>
+                        }
+
+                        @if (review.gallery) {
+                            <a class="review-link link-underline" [routerLink]="galleryLink(review.gallery)">Вижте галерията</a>
+                        }
+                    </figcaption>
+                </figure>
+            }
+        </div>
+    </section>
+}

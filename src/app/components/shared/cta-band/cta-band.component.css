@@ -1,0 +1,78 @@
+.cta-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 72px;
+    align-items: center;
+}
+
+:host-context(.tablet) .cta-inner,
+:host-context(.mobile) .cta-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.cta-text h2 {
+    margin: 0 0 18px;
+    font-size: clamp(30px, 3.6vw, 46px);
+}
+
+.cta-text p {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 46ch;
+}
+
+:host-context(.mobile) .cta-text p {
+    font-size: 15px;
+}
+
+.cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+/* The number itself is the headline of this column — set in the display serif at
+   headline scale rather than tucked into a button label. */
+.cta-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-serif);
+    font-size: clamp(34px, 4.4vw, 52px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    color: var(--font-white);
+    transition: color 220ms ease;
+}
+
+.cta-phone:hover {
+    color: var(--brass-bright);
+}
+
+.cta-phone svg {
+    width: 0.6em;
+    height: 0.6em;
+    fill: var(--brass-bright);
+    flex: none;
+}
+
+.cta-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cta-note {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--font-on-ink-mute);
+}

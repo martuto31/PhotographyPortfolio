@@ -1,37 +1,44 @@
-<div class="container">
-    <a routerLink="" class="brand" aria-label="Начало — Виктория Борисова">
-        <span class="brand-name">Victoria Borisova</span>
-        <span class="brand-tag">Photography</span>
-    </a>
+<div class="bar">
+    <div class="bar-inner">
+        <a routerLink="" class="brand" aria-label="Начало — Виктория Борисова">
+            <span class="brand-name">Victoria Borisova</span>
+            <span class="brand-tag">Photography</span>
+        </a>
 
-    <button class="hamburger-btn" (click)="triggerAnimation()" aria-label="Меню">
-        <img src="assets/img/hamburger.svg" alt="">
-    </button>
+        <button class="menu-btn" type="button" (click)="toggleMenu()" aria-label="Меню" [attr.aria-expanded]="isExpanderOpen">
+            <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
+        </button>
+    </div>
 </div>
 
 @if (isExpanderOpen) {
     <div class="expander-container" [@slideInOut]>
         <div class="expander">
             <div class="heading">
-                <a routerLink="" class="brand" (click)="triggerAnimation()" aria-label="Начало">
+                <a routerLink="" class="brand" (click)="closeMenu()" aria-label="Начало">
                     <span class="brand-name">Victoria Borisova</span>
                     <span class="brand-tag">Photography</span>
                 </a>
 
-                <button class="hamburger-btn" (click)="triggerAnimation()" aria-label="Затвори">
-                    <img src="assets/img/hamburger.svg" alt="">
+                <button class="menu-btn" type="button" (click)="toggleMenu()" aria-label="Затвори">
+                    <span class="menu-lines is-close" aria-hidden="true"><i></i><i></i></span>
                 </button>
             </div>
 
-            <div class="actions">
-                <a routerLink="about-me" (click)="triggerAnimation()">За мен</a>
-                <a href="/" (click)="scrollTo('projects', $event)">Галерия</a>
-                <a href="/" (click)="scrollTo('contact-me', $event)">Контакти</a>
-            </div>
+            <nav class="actions" aria-label="Основна навигация">
+                <a routerLink="/galerii" (click)="closeMenu()">Галерия</a>
+                <a routerLink="/about-me" (click)="closeMenu()">За мен</a>
+                <a routerLink="/kontakti" (click)="closeMenu()">Контакти</a>
+            </nav>
 
-            <div class="links">
-                <a href="https://m.facebook.com/people/phbyviki/100076542123196/" target="_blank" rel="noopener" aria-label="Facebook"><img src="assets/img/facebook.svg" alt=""></a>
-                <a href="https://www.instagram.com/_phbyviki?igsh=MXRlN2g3dXd2amM2Nw==" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/instagram.svg" alt=""></a>
+            <div class="menu-contact">
+                <a class="menu-phone" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+                <a class="menu-email" [href]="contact.emailHref">{{ contact.email }}</a>
+
+                <div class="links">
+                    <a [href]="contact.facebook" target="_blank" rel="noopener" aria-label="Facebook"><img src="assets/img/facebook.svg" alt=""></a>
+                    <a [href]="contact.instagram" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/instagram.svg" alt=""></a>
+                </div>
             </div>
         </div>
     </div>

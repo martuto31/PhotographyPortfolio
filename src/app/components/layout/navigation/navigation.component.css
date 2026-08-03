@@ -1,0 +1,11 @@
+/* The header overlays the page rather than sitting above it. Before this, the
+   nav band pushed the 100vh hero down by ~130px, which is what pushed both hero
+   buttons below the fold on a 900px-tall screen. */
+:host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    display: block;
+}

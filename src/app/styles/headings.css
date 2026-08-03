@@ -7,6 +7,7 @@ h3 {
     letter-spacing: -0.01em;
     color: var(--font-high-emphasis);
     margin: 0;
+    text-wrap: balance;
 }
 
 h1 {
@@ -21,7 +22,7 @@ h1 {
 }
 
 .mobile h1 {
-    font-size: 40px;
+    font-size: 38px;
     margin-bottom: 20px;
 }
 
@@ -35,7 +36,7 @@ h2 {
 }
 
 .mobile h2 {
-    font-size: 30px;
+    font-size: 29px;
 }
 
 h3 {
@@ -48,30 +49,68 @@ h3 {
     font-size: 22px;
 }
 
+/* Emphasis inside a heading is carried by the italic alone, not by colour.
+   Cormorant's italic is a genuinely different drawing rather than a slant, so
+   it reads as emphasis on its own — and it leaves the page monochrome, which
+   is what keeps the photographs the only colour on screen. */
 h1 em,
 h2 em,
 h3 em,
 .serif-italic {
     font-style: italic;
     font-weight: 400;
-    color: var(--primary-brand);
+    color: inherit;
 }
 
+/* ---- Section label ------------------------------------------------------
+   Small caps over a short amber rule. This is the site's structural signature:
+   it opens every section, and it is one of only three places the accent colour
+   appears (the others are hover underlines and hairlines). */
 .eyebrow {
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--font-medium-emphasis);
+    color: var(--brass);
     margin-bottom: 20px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background-color: var(--brass);
+    flex: none;
+}
+
+/* Centred headings put the rule on both sides so the label stays symmetrical. */
+.eyebrow-center::after {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background-color: var(--brass);
+    flex: none;
+}
+
+.on-ink .eyebrow,
+.on-ink .eyebrow::before,
+.on-ink .eyebrow::after {
+    color: var(--brass-bright);
+    background-color: var(--brass-bright);
+}
+
+.on-ink .eyebrow {
+    background-color: transparent;
 }
 
 .text-medium {
     font-family: var(--font-sans);
     font-size: 18px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--font-medium-emphasis);
 }
 
@@ -90,4 +129,10 @@ h3 em,
 .tablet .text-small,
 .mobile .text-small {
     font-size: 14px;
+}
+
+/* Running prose caps its own measure — long lines are the fastest way to make
+   a page feel unconsidered. */
+.measure {
+    max-width: 66ch;
 }

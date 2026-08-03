@@ -1,11 +1,25 @@
-<div [class]="[ 'app-container', dimensionService.screenType ]">
-    <div class="wrapper">
-        <app-navigation></app-navigation>
+<!-- Discrete [class.x] bindings rather than one [class]="[...]" array.
+     The array form does not clear what it did not write, and the prerendered HTML
+     always says "desktop" (there is no window to measure on the server). On a real
+     phone the client then ADDED "mobile" and left "desktop" in place, so the
+     container ended up as "app-container desktop home mobile" and every
+     :host-context(.desktop) rule kept applying on handhelds. -->
+<div class="app-container"
+     [class.desktop]="dimensionService.isDesktop"
+     [class.tablet]="dimensionService.isTablet"
+     [class.mobile]="dimensionService.isMobile"
+     [class.home]="isHome"
+     [class.inner]="!isHome">
+    <app-navigation></app-navigation>
 
+    <div class="wrapper">
         <div class="content">
             <router-outlet></router-outlet>
         </div>
 
         <app-footer></app-footer>
     </div>
+
+    <!-- Phone/Viber bar pinned to the bottom of the viewport on handhelds. -->
+    <app-call-bar></app-call-bar>
 </div>

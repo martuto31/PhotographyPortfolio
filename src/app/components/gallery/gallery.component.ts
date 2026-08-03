@@ -2,13 +2,22 @@ import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID 
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
+import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
+
 import { DimensionService } from './../../services/dimension.service';
+import { StructuredDataService } from './../../services/structured-data.service';
 
 import { COVER_FILENAME, MANIFEST_URL, imageUrl } from './../../config';
+import { GALLERY_SNAPSHOT } from './../../generated/galleries';
 
 interface GalleryManifest {
   generated: string;
   galleries: Record<string, string[]>;
+}
+
+interface SiblingGallery {
+  name: string;
+  imageSrc: string;
 }
 
 // Heading wording + the label of the category this gallery belongs to, keyed by URL slug.
@@ -22,6 +31,17 @@ const TYPE_HEADING: Record<string, { noun: string; category: string }> = {
   'semeyni': { noun: 'Семейна фотосесия', category: 'Семейни галерии' },
 };
 
+// BG URL slug -> R2 manifest prefix / GALLERY_SNAPSHOT key.
+const SLUG_TO_PREFIX: Record<string, string> = {
+  'svatbi': 'Weddings',
+  'abiturienti': 'Graduates',
+  'lichni': 'Personal',
+  'krushteneta': 'Baptisms',
+  'korporativni': 'Corporate',
+  'rojdeni-dni': 'Birthdays',
+  'semeyni': 'Family',
+};
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -29,6 +49,7 @@ const TYPE_HEADING: Record<string, { noun: string; category: string }> = {
   standalone: true,
   imports: [
     RouterLink,
+    CtaBandComponent,
   ],
 })
 
@@ -36,6 +57,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     public dimensionsService: DimensionService,
+    private structuredData: StructuredDataService,
     @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryName: string = 'Други';
@@ -72,10 +94,21 @@ export class GalleryComponent implements OnInit, OnDestroy {
   public pageHeading = '';
   public categoryLabel = '';
   public categoryLink = '';
+  public categorySlug = '';
   public displayName = '';
+
+  // Other galleries in the same category. A gallery page used to carry three
+  // internal links and nothing to do at the bottom — a visitor who scrolled 154
+  // photographs arrived at a dead end. Read from the build-time snapshot so the
+  // strip is in the prerendered HTML rather than waiting on the manifest fetch.
+  public siblings: SiblingGallery[] = [];
+
+  private static readonly MAX_SIBLINGS = 3;
 
   async ngOnInit(): Promise<void> {
     this.setHeadings();
+    this.setSiblings();
+    this.setStructuredData();
 
     // Image fetching happens on the client; gallery routes are SPA-rendered.
     if (!isPlatformBrowser(this.platformId)) {
@@ -289,20 +322,48 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.displayName = path.slice(separator + 1);
     this.pageHeading = heading.noun;
     this.categoryLabel = heading.category;
+    this.categorySlug = slug;
     this.categoryLink = `/galerii/${slug}`;
   }
 
-  private translateSlugToS3Prefix(galleryName: string): string {
-    const SLUG_TO_PREFIX: Record<string, string> = {
-      'svatbi': 'Weddings',
-      'abiturienti': 'Graduates',
-      'lichni': 'Personal',
-      'krushteneta': 'Baptisms',
-      'korporativni': 'Corporate',
-      'rojdeni-dni': 'Birthdays',
-      'semeyni': 'Family',
-    };
+  private setSiblings(): void {
+    const type = SLUG_TO_PREFIX[this.categorySlug];
+    if (!type) {
+      return;
+    }
 
+    this.siblings = (GALLERY_SNAPSHOT[type] ?? [])
+      .filter((gallery) => gallery.name !== this.displayName)
+      .slice(0, GalleryComponent.MAX_SIBLINGS);
+  }
+
+  private setStructuredData(): void {
+    if (!this.displayName || !this.categorySlug) {
+      return;
+    }
+
+    const url = `https://phbyviki.com/galeriya/${this.categorySlug}/${encodeURIComponent(this.displayName)}`;
+
+    this.structuredData.set([
+      this.structuredData.breadcrumbs([
+        { name: 'Начало', url: 'https://phbyviki.com/' },
+        { name: 'Галерия', url: 'https://phbyviki.com/galerii' },
+        { name: this.categoryLabel, url: `https://phbyviki.com${this.categoryLink}` },
+        { name: this.displayName, url },
+      ]),
+      this.structuredData.imageGallery({
+        name: `${this.displayName} — ${this.pageHeading}`,
+        description: `${this.pageHeading} „${this.displayName}“ от Виктория Борисова — фотограф в София и Видин.`,
+        url,
+        // Prerender runs before the manifest fetch, so imageUrls is empty on the
+        // server. The sitemap already carries per-gallery <image:image> entries;
+        // this list is a bonus when it happens to be populated.
+        images: this.imageUrls.slice(0, 8),
+      }),
+    ]);
+  }
+
+  private translateSlugToS3Prefix(galleryName: string): string {
     const [first, ...rest] = galleryName.split('/');
     const mapped = SLUG_TO_PREFIX[first];
     if (!mapped) return galleryName;

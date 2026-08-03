@@ -18,7 +18,11 @@
             Ако усещате нещата по същия начин, ще се радвам да се чуем!
         </div>
 
-        <a routerLink="" [state]="{ scrollTo: 'contact-me', }" class="btn btn-primary">Свържете се с мен</a>
+        <div class="about-actions">
+            <a routerLink="/kontakti" class="btn btn-primary">Свържете се с мен</a>
+
+            <a class="about-phone" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+        </div>
     </div>
 
     <div class="right">
@@ -30,4 +34,7 @@
 
 <div class="section-space"></div>
 
-<app-contact-me></app-contact-me>
+<app-cta-band
+    heading="Да поговорим за вашия ден"
+    text="Кажете ми датата и мястото и ще ви отговоря до 24 часа дали съм свободна и колко ще струва.">
+</app-cta-band>

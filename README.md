@@ -47,11 +47,25 @@ Full detail, naming rules, and how to remove or rename a gallery:
 | `npm run logo` | Regenerate the wordmark lockups |
 | `npm run brand` | `icons` + `logo` |
 
+## Editing the words on the site
+
+Page copy does not live in templates. Everything a non-developer is likely to want to change
+is in **`src/app/content/`**:
+
+| File | What is in it |
+| --- | --- |
+| `contact.ts` | Phone, Viber, email, service area, and the `4+ / 30+ / 24ч` figures under the hero |
+| `services.ts` | Per-category copy, "what's included", FAQ, and the `<title>` for each category page |
+| `home.ts` | The four process steps and the homepage FAQ |
+| `testimonials.ts` | Client quotes — **ships empty on purpose**; read the header before adding any |
+
+Meta descriptions are separate, in `src/assets/seo.json`.
+
 ## Docs
 
 | | |
 | --- | --- |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Routes, rendering, SEO service, hosting config, and the traps that make pages uncrawlable |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Routes, rendering, SEO services, hosting config, and the traps that make pages uncrawlable |
 | [GALLERIES.md](GALLERIES.md) | How galleries work, publishing runbook, R2 setup, gotchas |
 | [BRAND.md](BRAND.md) | The mark, generated icon/logo assets, how to change the brand |
 
@@ -61,4 +75,8 @@ Full detail, naming rules, and how to remove or rename a gallery:
   `href`, so the target becomes an orphan page.
 - **Never wrap link-carrying content in `@defer`.** Deferred blocks do not render during
   prerender, so the links are missing from the static HTML.
+- **Never navigate with `href="/"` plus a scroll handler.** No crawlable destination, no URL
+  to share, and it throws the visitor home from any other page.
+- **A new top-level route also needs a rewrite in `firebase.json`.** Without one it works in
+  `npm start` and returns a hard 404 in production.
 - **Re-run `npm run sitemap` after every publish.** See above.

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,6 +30,10 @@ export class ContactMeComponent {
 
     this.createForm();
   }
+
+  // Set on /kontakti, where the page already has its own h1 and eyebrow — the
+  // component's standalone header would repeat both.
+  @Input() embedded = false;
 
   public formGroup!: FormGroup<FormControls>;
 
