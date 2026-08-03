@@ -38,18 +38,46 @@ from the photo grid** inside the gallery (so it isn't shown twice). No code chan
 
 If you don't add a `cover.*`, the first photo (alphabetically/naturally) is used.
 
-## Adding a new gallery (the whole flow)
+## Adding a new gallery — the whole flow
 
-1. Put originals in `to-upload/<Type>/<Gallery Name>/` — `<Type>` must be one of the
-   English keys: `Weddings, Graduates, Personal, Baptisms, Corporate, Birthdays, Family`.
-   Optionally add a `cover.jpg` (or any `cover.*`) to pick the card thumbnail.
-2. `npm run publish` (encodes → uploads to R2 → rebuilds `manifest.json`).
-   - Parallel uploads: `npm run publish -- --concurrency 8` (default 6).
-   - Only stage NEW galleries in `to-upload/`; the manifest is rebuilt from the whole
-     bucket, so existing galleries are preserved without re-uploading them.
-3. Deploy the site: `npm run deploy`.
+**No code edits are needed. But all four steps are required.** Skipping step 3 is the
+easy mistake: the gallery will appear on the site for humans and be invisible to Google.
 
-That's it — no code edits to add galleries.
+```sh
+# 1. stage the originals (see naming rules below)
+#    to-upload/<Type>/<Gallery Name>/*.jpg
+
+npm run publish     # 2. compress → WebP → upload to R2 → rebuild manifest.json
+npm run sitemap     # 3. regenerate sitemap.xml, prerender-routes.txt, generated/galleries.ts
+npm run deploy      # 4. build + push to Firebase Hosting
+```
+
+**Step 1 — staging.** `<Type>` must be one of the English keys:
+`Weddings, Graduates, Personal, Baptisms, Corporate, Birthdays, Family`.
+`<Gallery Name>` is what visitors see and becomes the URL, so write it the way it should
+read: `to-upload/Weddings/Лора и Асен/`. Cyrillic, spaces and `&` are all fine — they get
+percent-encoded per path segment. Optionally drop in a `cover.jpg` (any `cover.*`) to pick
+the card thumbnail; without one the first photo is used.
+
+**Step 2 — publish.** Encodes to WebP (longest edge 2048, quality 82), uploads, then
+rebuilds `manifest.json` from the *whole bucket*. Only stage NEW galleries in
+`to-upload/` — existing ones are preserved without re-uploading. Faster on big sets:
+`npm run publish -- --concurrency 8` (default 6). Rebuild the manifest alone, without
+uploading anything, with `npm run publish -- --manifest-only`.
+
+**Step 3 — sitemap.** Derives three build inputs from the manifest. Details in
+[SEO: why step 3 is not optional](#seo-why-step-3-is-not-optional).
+
+**Step 4 — deploy.** `ng build` + `firebase deploy --only hosting`.
+
+### Adding a whole new category
+
+The four empty types (`Baptisms, Corporate, Birthdays, Family`) already exist in the code
+and appear automatically once the manifest has photos under their prefix — nothing to
+change. A genuinely *new* type needs its Bulgarian slug added in two places that must stay
+in sync: `SLUG_TO_TYPE` in `galleries-cards.component.ts` and `TYPE_TO_SLUG` in
+`tools/generate-sitemap.mjs`. `generate-sitemap.mjs` warns and skips any manifest prefix it
+doesn't recognise, so a missing entry is loud rather than silent.
 
 ## Removing / renaming
 
@@ -88,10 +116,10 @@ photos come up empty** (no error shown to visitors). Set this once in
   still render locally because they come from the build-time snapshot, not a `fetch`.
 - The manifest is served `no-cache`, so updates show immediately — no cache busting needed.
 
-## SEO: run `npm run sitemap` after publishing
+## SEO: why step 3 is not optional
 
-`npm run publish` puts photos in R2, but two build inputs are derived from the manifest and
-must be regenerated before deploying:
+`npm run publish` puts photos in R2, but three build inputs are derived from the manifest
+and must be regenerated before deploying:
 
 ```sh
 npm run sitemap      # rewrites src/sitemap.xml, prerender-routes.txt, src/app/generated/galleries.ts

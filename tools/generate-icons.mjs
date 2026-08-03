@@ -1,13 +1,11 @@
 #!/usr/bin/env node
-// Draws the brand mark once and emits every icon the site needs.
+// Emits every icon the site needs from the shared brand mark in brand-mark.mjs.
 //
 // Usage:
 //   npm run icons
 //
-// The mark is a six-blade lens iris — a disc with a hexagonal opening and six
-// tangential blade separations — in candlelight amber on warm near-black. It is
-// defined here as geometry rather than shipped as a binary so it stays editable:
-// change RADIUS/OPENING/colours below and re-run.
+// The mark is geometry rather than a committed binary so it stays editable —
+// change the constants in brand-mark.mjs and re-run.
 //
 // Why this many files:
 //   favicon.ico          16/32/48 raster, still what desktop browsers reach for first
@@ -24,54 +22,11 @@ import { fileURLToPath } from 'node:url';
 
 import sharp from 'sharp';
 
+import { markSvg } from './brand-mark.mjs';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
 const IMG_DIR = join(REPO_ROOT, 'src', 'assets', 'img');
-
-// ---- brand constants --------------------------------------------------------
-const INK = '#191817';   // warm near-black; also the <meta name="theme-color">
-const AMBER = '#D8A64A'; // candlelight amber, sampled from the hero photograph
-
-const BOX = 512;
-const CORNER = 116;      // ~22.6% — reads as a rounded chip even at 16px
-const RADIUS = 182;      // outer radius of the iris disc
-const OPENING = 80;      // circumradius of the hexagonal opening
-const BLADE_W = 15;      // width of the separations between blades
-
-// ---- geometry ---------------------------------------------------------------
-function polar(radius, degrees, cx = BOX / 2, cy = BOX / 2) {
-  const a = ((degrees - 90) * Math.PI) / 180;
-  return [cx + radius * Math.cos(a), cy + radius * Math.sin(a)];
-}
-
-// scale: shrinks the mark within the same box, for the maskable safe zone
-function iris({ scale = 1, cx = BOX / 2, cy = BOX / 2 } = {}) {
-  const R = RADIUS * scale;
-  const r = OPENING * scale;
-
-  const hex = Array.from({ length: 6 }, (_, i) =>
-    polar(r, i * 60, cx, cy).map((n) => n.toFixed(1)).join(',')
-  ).join(' ');
-
-  // Each separation runs outward from a hexagon vertex at a tangential angle.
-  // Radial lines would read as a star; the 38 degree offset is what makes it a lens.
-  const blades = Array.from({ length: 6 }, (_, i) => {
-    const [hx, hy] = polar(r, i * 60, cx, cy);
-    const [ex, ey] = polar(R + 6 * scale, i * 60 + 38, cx, cy);
-    return `<line x1="${hx.toFixed(1)}" y1="${hy.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}"`
-         + ` stroke="${INK}" stroke-width="${(BLADE_W * scale).toFixed(1)}"/>`;
-  }).join('');
-
-  return `<circle cx="${cx}" cy="${cy}" r="${R.toFixed(1)}" fill="${AMBER}"/>`
-       + `<polygon points="${hex}" fill="${INK}"/>${blades}`;
-}
-
-function markSvg({ corner = CORNER, scale = 1 } = {}) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BOX} ${BOX}" width="${BOX}" height="${BOX}">`
-       + `<rect width="${BOX}" height="${BOX}" rx="${corner}" ry="${corner}" fill="${INK}"/>`
-       + iris({ scale })
-       + `</svg>`;
-}
 
 const png = (svg, size) => sharp(Buffer.from(svg)).resize(size, size).png({ compressionLevel: 9 }).toBuffer();
 

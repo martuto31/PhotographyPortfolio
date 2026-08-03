@@ -11,7 +11,9 @@
     "preview": "npx http-server dist/photography-portfolio/browser -p 4200 -c-1",
     "publish": "node tools/publish.mjs",
     "sitemap": "node tools/generate-sitemap.mjs",
-    "icons": "node tools/generate-icons.mjs"
+    "icons": "node tools/generate-icons.mjs",
+    "logo": "node tools/generate-logo.mjs",
+    "brand": "npm run icons && npm run logo"
   },
   "private": true,
   "dependencies": {
