@@ -46,5 +46,11 @@
     <div class="footer-bottom">
         <span>&#169; {{ year }} Виктория Борисова</span>
         <span class="footer-credit">Всички права запазени</span>
+
+        <nav class="footer-legal" aria-label="Правна информация">
+            @for (link of legalLinks; track link.path) {
+                <a [routerLink]="link.path">{{ link.label }}</a>
+            }
+        </nav>
     </div>
 </footer>

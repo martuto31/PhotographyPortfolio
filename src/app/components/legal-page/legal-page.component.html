@@ -1,0 +1,76 @@
+<header class="page-heading">
+    <span class="eyebrow">{{ doc.eyebrow }}</span>
+
+    <h1>{{ doc.h1 }}</h1>
+
+    <p class="lead">{{ doc.lead }}</p>
+
+    <p class="updated">Последна актуализация: <time [attr.datetime]="doc.updated">{{ doc.updatedLabel }}</time></p>
+</header>
+
+<div class="legal-grid">
+    <!-- A plain anchor list, not routerLink: these are same-page fragments, and
+         routerLink would push a navigation for each one. -->
+    <nav class="toc" aria-label="Съдържание на страницата">
+        <span class="toc-heading">На тази страница</span>
+
+        @for (section of doc.sections; track section.id) {
+            <a [href]="'/' + doc.slug + '#' + section.id">{{ section.heading }}</a>
+        }
+    </nav>
+
+    <div class="legal-body">
+        @for (section of doc.sections; track section.id; let i = $index) {
+            <section [id]="section.id">
+                <h2>
+                    <span class="section-number">{{ i + 1 }}</span>
+                    {{ section.heading }}
+                </h2>
+
+                @for (block of section.blocks; track $index) {
+                    @switch (block.kind) {
+                        @case ('p') {
+                            <p [innerHTML]="block.text"></p>
+                        }
+
+                        @case ('list') {
+                            <ul>
+                                @for (item of block.items; track $index) {
+                                    <li [innerHTML]="item"></li>
+                                }
+                            </ul>
+                        }
+
+                        @case ('defs') {
+                            <dl>
+                                @for (item of block.items; track $index) {
+                                    <div class="def">
+                                        <dt>{{ item.term }}</dt>
+                                        <dd [innerHTML]="item.text"></dd>
+                                    </div>
+                                }
+                            </dl>
+                        }
+                    }
+                }
+            </section>
+        }
+
+        <aside class="legal-footer">
+            <p>Ако нещо тук не ви е ясно, попитайте ме — отговарям {{ contact.responseTime }}.</p>
+
+            <div class="legal-footer-links">
+                <a [href]="contact.emailHref">{{ contact.email }}</a>
+                <a [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+            </div>
+
+            <div class="legal-other">
+                @for (link of otherDocs; track link.path) {
+                    @if (link.path !== '/' + doc.slug) {
+                        <a [routerLink]="link.path">{{ link.label }}</a>
+                    }
+                }
+            </div>
+        </aside>
+    </div>
+</div>

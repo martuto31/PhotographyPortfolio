@@ -53,6 +53,11 @@ const STATIC_PAGES = [
   { path: '/galerii', priority: '0.9', changefreq: 'weekly' },
   { path: '/kontakti', priority: '0.8', changefreq: 'monthly' },
   { path: '/about-me', priority: '0.6', changefreq: 'monthly' },
+  // Legal pages are indexable on purpose — they are a trust signal, and a site
+  // whose privacy policy cannot be found reads as one that does not have one.
+  // Low priority because they should never outrank a gallery.
+  { path: '/poveritelnost', priority: '0.2', changefreq: 'yearly' },
+  { path: '/usloviya', priority: '0.2', changefreq: 'yearly' },
 ];
 
 // Each path segment is encoded separately so "/" stays a real separator while spaces,

@@ -209,3 +209,21 @@
     font-style: italic;
     opacity: 0.7;
 }
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: var(--font-medium-emphasis);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+    color: var(--font-high-emphasis);
+    border-bottom-color: var(--brass);
+}

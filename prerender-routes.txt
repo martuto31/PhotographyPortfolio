@@ -2,6 +2,8 @@
 /galerii
 /kontakti
 /about-me
+/poveritelnost
+/usloviya
 /galerii/svatbi
 /galerii/abiturienti
 /galerii/lichni

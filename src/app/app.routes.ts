@@ -67,6 +67,21 @@ export const routes: Routes = [
         title: 'За мен | Виктория Борисова — Фотограф София и Видин',
     },
 
+    // Legal. Both are the same component; `data.doc` picks the document, so the two
+    // keep clean Bulgarian URLs instead of sharing a /legal/* prefix.
+    {
+        path: 'poveritelnost',
+        loadComponent: () => import('./components/legal-page/legal-page.component').then(c => c.LegalPageComponent),
+        data: { doc: 'poveritelnost' },
+        title: 'Политика за поверителност | phbyviki',
+    },
+    {
+        path: 'usloviya',
+        loadComponent: () => import('./components/legal-page/legal-page.component').then(c => c.LegalPageComponent),
+        data: { doc: 'usloviya' },
+        title: 'Общи условия за ползване | phbyviki',
+    },
+
     // Catch-all. Without it, unmatched URLs rendered an empty body under a 200 — a soft 404.
     // Unknown top-level paths get a real 404 status from Firebase (see the scoped rewrites in
     // firebase.json); this handles the ones that fall inside a valid prefix.

@@ -1,0 +1,285 @@
+/* Legal pages are read, not scanned, so this is the one place on the site that is
+   set as a document: a narrow measure, generous leading, numbered clauses so a
+   section can be referred to by number, and no photography competing for attention. */
+
+.page-heading {
+    max-width: 720px;
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+}
+
+:host-context(.mobile) .page-heading {
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+}
+
+.page-heading h1 {
+    margin: 0 0 20px;
+}
+
+.lead {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+    max-width: 62ch;
+}
+
+:host-context(.mobile) .lead {
+    font-size: 15px;
+}
+
+.updated {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--font-low-emphasis);
+    margin: 24px 0 0;
+}
+
+/* ---- Layout -------------------------------------------------------------- */
+.legal-grid {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 96px;
+    align-items: start;
+    padding-bottom: 40px;
+}
+
+:host-context(.tablet) .legal-grid,
+:host-context(.mobile) .legal-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+}
+
+/* ---- Table of contents ---------------------------------------------------- */
+.toc {
+    position: sticky;
+    top: calc(var(--nav-h, 84px) + 32px);
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+}
+
+:host-context(.tablet) .toc,
+:host-context(.mobile) .toc {
+    position: static;
+}
+
+.toc-heading {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 16px;
+}
+
+.toc a {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--font-medium-emphasis);
+    text-decoration: none;
+    padding: 7px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease;
+}
+
+.toc a:hover,
+.toc a:focus-visible {
+    color: var(--font-high-emphasis);
+}
+
+/* ---- Body ---------------------------------------------------------------- */
+.legal-body {
+    max-width: 68ch;
+}
+
+.legal-body section {
+    padding-bottom: 44px;
+    /* The fixed header would otherwise cover the heading of a #fragment target. */
+    scroll-margin-top: calc(var(--nav-h, 84px) + 24px);
+}
+
+.legal-body h2 {
+    font-size: 27px;
+    line-height: 1.25;
+    margin: 0 0 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+:host-context(.mobile) .legal-body h2 {
+    font-size: 22px;
+    gap: 10px;
+}
+
+/* Clause numbers, so a section can be cited. Tabular so they stay on one axis. */
+.section-number {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--brass);
+    flex: 0 0 auto;
+    padding-top: 2px;
+}
+
+.legal-body p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--font-medium-emphasis);
+    margin: 0 0 16px;
+}
+
+:host-context(.mobile) .legal-body p {
+    font-size: 15px;
+}
+
+.legal-body :is(p, li, dd) strong {
+    color: var(--font-high-emphasis);
+    font-weight: 600;
+}
+
+.legal-body :is(p, li, dd) a {
+    color: var(--font-high-emphasis);
+    text-decoration: none;
+    border-bottom: 1px solid var(--brass);
+    padding-bottom: 1px;
+    transition: background-color 0.2s ease;
+}
+
+.legal-body :is(p, li, dd) a:hover,
+.legal-body :is(p, li, dd) a:focus-visible {
+    background-color: rgba(168, 114, 31, 0.09);
+}
+
+/* ---- Lists ---------------------------------------------------------------- */
+.legal-body ul {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.legal-body li {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--font-medium-emphasis);
+    padding: 0 0 10px 22px;
+    position: relative;
+}
+
+:host-context(.mobile) .legal-body li {
+    font-size: 15px;
+}
+
+.legal-body li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 1px;
+    background: var(--brass);
+}
+
+/* ---- Definition rows ------------------------------------------------------ */
+dl {
+    margin: 0 0 16px;
+    border-top: 1px solid var(--rule);
+}
+
+.def {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+:host-context(.mobile) .def {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    padding: 14px 0;
+}
+
+dt {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-high-emphasis);
+}
+
+dd {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--font-medium-emphasis);
+    margin: 0;
+}
+
+/* ---- Closing block -------------------------------------------------------- */
+.legal-footer {
+    margin-top: 12px;
+    padding: 32px;
+    background: var(--paper-warm);
+}
+
+:host-context(.mobile) .legal-footer {
+    padding: 24px;
+}
+
+.legal-footer p {
+    margin: 0 0 16px;
+    color: var(--font-high-emphasis);
+}
+
+.legal-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    margin-bottom: 24px;
+}
+
+.legal-footer-links a {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--font-high-emphasis);
+    text-decoration: none;
+    border-bottom: 1px solid var(--brass);
+}
+
+:host-context(.mobile) .legal-footer-links a {
+    font-size: 20px;
+}
+
+.legal-other {
+    display: flex;
+    gap: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule-strong);
+}
+
+.legal-other a {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--font-medium-emphasis);
+    text-decoration: none;
+}
+
+.legal-other a:hover,
+.legal-other a:focus-visible {
+    color: var(--brass);
+}
