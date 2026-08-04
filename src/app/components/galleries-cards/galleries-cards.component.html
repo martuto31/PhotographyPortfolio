@@ -18,8 +18,16 @@
             @for (gallery of currentGalleries; track $index) {
                 <a class="card" [routerLink]="[ '/galeriya', gallerySlug, gallery.name ]">
                     <div class="image-wrap">
+                        <!-- The first row is the LCP and stays eager; everything below the
+                             fold waits. Thirteen covers used to be fetched at full size the
+                             moment the page parsed, before the manifest could offer a
+                             smaller one. -->
                         <img class="lazy-load"
                             [src]="gallery.imageSrc"
+                            [attr.srcset]="gallery.imageSrcset || null"
+                            [attr.sizes]="gallery.imageSrcset ? cardSizes : null"
+                            [attr.loading]="$index < 2 ? null : 'lazy'"
+                            decoding="async"
                             [width]="dimensionsService.isDesktop ? '650' : '350'"
                             [height]="dimensionsService.isDesktop ? '450' : '250'"
                             (load)="onImageLoad(gallery)"

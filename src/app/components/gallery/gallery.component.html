@@ -15,11 +15,18 @@
 }
 
 <div class="container">
-    @for (image of imageUrls; track $index) {
+    @for (image of images; track image.src) {
         <div class="column" [class.loading]="areImagesLoaded">
-            <button type="button" class="image-btn" (click)="openModal(image, $index, $event)" aria-label="Отвори снимка в цял размер">
+            <button type="button" class="image-btn" (click)="openModal(image.src, $index, $event)" aria-label="Отвори снимка в цял размер">
+                <!-- width/height are the full-size pixel dimensions. The browser only
+                     needs the ratio: it reserves the right box before the photo
+                     arrives, so a 154-photo column stops reflowing as it loads. -->
                 <img class="image"
-                    [src]="image"
+                    [src]="image.src"
+                    [attr.srcset]="image.srcset || null"
+                    [attr.sizes]="image.srcset ? gridSizes : null"
+                    [attr.width]="image.width || null"
+                    [attr.height]="image.height || null"
                     (load)="onImageSettled()"
                     (error)="onImageSettled()"
                     loading="lazy"
@@ -53,7 +60,12 @@
             @for (sibling of siblings; track sibling.name) {
                 <a class="sibling" [routerLink]="[ '/galeriya', categorySlug, sibling.name ]">
                     <div class="sibling-image">
-                        <img [src]="sibling.imageSrc" [alt]="sibling.name + ' — ' + pageHeading + ', фотограф София и Видин'" loading="lazy" decoding="async">
+                        <img [src]="sibling.imageSrc"
+                             [attr.srcset]="sibling.imageSrcset || null"
+                             [attr.sizes]="sibling.imageSrcset ? siblingSizes : null"
+                             [alt]="sibling.name + ' — ' + pageHeading + ', фотограф София и Видин'"
+                             loading="lazy"
+                             decoding="async">
                     </div>
 
                     <h3>{{ sibling.name }}</h3>
@@ -97,8 +109,8 @@
             </svg>
         </button>
 
-        @if (imageUrls.length > 1) {
-            <div class="modal-counter" aria-hidden="true">{{ currentModalImageIndex + 1 }} / {{ imageUrls.length }}</div>
+        @if (images.length > 1) {
+            <div class="modal-counter" aria-hidden="true">{{ currentModalImageIndex + 1 }} / {{ images.length }}</div>
         }
     </div>
 }

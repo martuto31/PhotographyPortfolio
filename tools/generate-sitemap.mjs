@@ -66,6 +66,27 @@ function encodePath(path) {
   return path.split('/').map(encodeURIComponent).join('/');
 }
 
+// Mirrors galleryImages() in src/app/config.ts: a derivative exists exactly when its
+// width is smaller than the full-size photo's, and the full size closes the list at
+// its own measured width. Returns '' when the manifest has no dimensions for the
+// photo yet, which is the signal for "no srcset attribute at all".
+function buildSrcset(manifest, prefix, file) {
+  const dims = manifest.dims?.[prefix];
+  const index = dims?.files.indexOf(file) ?? -1;
+  const size = index === -1 ? null : dims.sizes[index];
+  if (!size) {
+    return '';
+  }
+
+  const base = `https://images.phbyviki.com/${encodePath(prefix)}`;
+  const full = `${base}/${encodeURIComponent(file)}`;
+  const candidates = (manifest.widths ?? [])
+    .filter((width) => width < size[0])
+    .map((width) => `${base}/w${width}/${encodeURIComponent(file)} ${width}w`);
+
+  return candidates.length ? [...candidates, `${full} ${size[0]}w`].join(', ') : '';
+}
+
 function xmlEscape(value) {
   return value
     .replace(/&/g, '&amp;')
@@ -200,7 +221,8 @@ async function main() {
     const items = galleries.map((gallery) => {
       const cover = gallery.files.includes(COVER_FILENAME) ? COVER_FILENAME : gallery.files[0];
       const coverUrl = `https://images.phbyviki.com/${encodePath(gallery.prefix)}/${encodeURIComponent(cover)}`;
-      return `    { name: ${JSON.stringify(gallery.name)}, imageSrc: ${JSON.stringify(coverUrl)} },`;
+      const srcset = buildSrcset(manifest, gallery.prefix, cover);
+      return `    { name: ${JSON.stringify(gallery.name)}, imageSrc: ${JSON.stringify(coverUrl)}, imageSrcset: ${JSON.stringify(srcset)} },`;
     });
     return `  ${JSON.stringify(type)}: [\n${items.join('\n')}\n  ],`;
   });
@@ -215,6 +237,8 @@ async function main() {
     'export interface GallerySnapshotItem {',
     '  name: string;',
     '  imageSrc: string;',
+    '  // Empty until the cover has responsive derivatives in R2 (npm run publish -- --thumbs).',
+    '  imageSrcset: string;',
     '}',
     '',
     'export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {',

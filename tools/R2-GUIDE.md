@@ -104,14 +104,66 @@ In `tools/publish.mjs` / overridable in `tools/.env`:
 - `MAX_EDGE` (default **2048**) — caps the **longest side**, keeps aspect ratio, never upscales.
   A 4K photo (3840×2160) → 2048×1152. Set `MAX_EDGE=1920` for ~1080p / smaller files.
 - `WEBP_QUALITY` (default **82**) — good balance; a 4–8 MB JPEG → ~200–400 KB webp. Lower = smaller.
+- `THUMB_WIDTHS` (default **512,1024,1600**) — the responsive copies, see below.
+- `THUMB_QUALITY` (default **80**) — quality for those copies.
+
+---
+
+## Responsive sizes (`srcset`)
+
+Alongside each photo the pipeline writes smaller copies into `wNNN/` folders:
+
+```
+Weddings/Лора и Асен/dsc00066.webp          full size
+Weddings/Лора и Асен/w512/dsc00066.webp
+Weddings/Лора и Асен/w1024/dsc00066.webp
+Weddings/Лора и Асен/w1600/dsc00066.webp
+```
+
+The browser picks one per screen. Measured on the 153-photo `Лора и Асен` gallery:
+**33.6 MB → 4.4 MB** on a normal laptop, **11.8 MB** on retina or a modern phone.
+
+A copy is written **only when its width is smaller than the photo's own width**, so a
+file in `w1024/` is always exactly 1024px wide. The site relies on that: it decides
+which URLs exist by applying the same rule to the dimensions in the manifest, which is
+why nothing about the copies themselves has to be recorded anywhere.
+
+`npm run publish` produces them for anything you upload. For photos that predate this,
+run the one-off backfill (safe to repeat — it skips what is already done):
+
+```sh
+npm run publish -- --thumbs
+npm run sitemap        # so the prerendered pages use them too
+```
+
+### What the manifest looks like now
+
+```json
+{
+  "generated": "2026-08-04T…",
+  "widths": [512, 1024, 1600],
+  "galleries": { "Weddings/Лора и Асен": ["dsc00066.webp", …] },
+  "dims":      { "Weddings/Лора и Асен": { "files": ["dsc00066.webp", …],
+                                           "sizes": [[2048, 1365], …] } }
+}
+```
+
+`galleries` is unchanged, so an older build of the site keeps working against it.
+`dims` is the full-size pixel dimensions of each photo; a photo appears there only once
+its copies are really in the bucket, and a photo missing from it simply gets served full
+size. **`wNNN/` folders are deliberately kept out of `galleries`** — the site treats every
+prefix under `Weddings/` as a gallery card, so leaving them in would invent a card called
+`Лора и Асен/w512`.
 
 ---
 
 ## Updating the manifest
 
 - Upload **via the script** → manifest rebuilt automatically every run.
-- Upload **by other means** (dashboard drag-drop, etc.) → run `npm run publish -- --manifest-only` once.
-- To **delete** a photo: remove it in the R2 dashboard, then `npm run publish -- --manifest-only`.
+- Upload **by other means** (dashboard drag-drop, etc.) → `npm run publish -- --thumbs` (which
+  also rebuilds the manifest), or `--manifest-only` if you don't want the responsive copies.
+- To **delete** a photo: remove it in the R2 dashboard — including its `wNNN/` copies — then
+  `npm run publish -- --manifest-only`.
 
 ---
 
@@ -127,6 +179,7 @@ why they read the manifest at runtime.
 
 ## Cost summary
 
-- R2 storage: $0.015/GB/mo, first 10 GB free. Egress: **$0**.
+- R2 storage: $0.015/GB/mo, first 10 GB free. Egress: **$0**. The responsive copies roughly
+  double what is stored (~275 MB → ~550 MB), which is still inside the free tier.
 - No server, no env vars in the app, no credentials in the browser.
 - Realistically **~$0/month** at this scale.

@@ -8,13 +8,11 @@ import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
 
 import { DimensionService } from './../../services/dimension.service';
 import { StructuredDataService } from './../../services/structured-data.service';
-import { COVER_FILENAME, fetchManifest, imageUrl } from './../../config';
-import { GALLERY_SNAPSHOT } from './../../generated/galleries';
+import { COVER_FILENAME, PHONE_SLOT, coverImage, fetchManifest } from './../../config';
+import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
 import { SERVICE_BY_SLUG, SERVICE_TITLES, ServiceCopy } from './../../content/services';
 
-interface Gallery {
-  name: string;
-  imageSrc: string;
+interface Gallery extends GallerySnapshotItem {
   isImgLoaded: boolean;
 }
 
@@ -86,6 +84,9 @@ export class GalleriesCardsComponent implements OnInit {
   public currentGalleries: Gallery[] = [];
   public altPrefix: string = '';
 
+  // Two cards across on desktop and tablet inside a 1400px shell, one on mobile.
+  public readonly cardSizes = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 650px, 47vw`;
+
   // Service prose for this category. Four of the seven categories have no
   // published galleries, and until this existed those URLs rendered a heading over
   // an empty grid — while the LocalBusiness JSON-LD advertised them as offers.
@@ -132,9 +133,11 @@ export class GalleriesCardsComponent implements OnInit {
       .map((prefix) => {
         const files = manifest.galleries[prefix];
         const cover = files.includes(COVER_FILENAME) ? COVER_FILENAME : files[0];
+        const image = cover ? coverImage(manifest, prefix, cover) : null;
         return {
           name: prefix.slice(typePrefix.length),
-          imageSrc: cover ? imageUrl(prefix, cover) : '',
+          imageSrc: image?.src ?? '',
+          imageSrcset: image?.srcset ?? '',
           isImgLoaded: false,
         };
       })

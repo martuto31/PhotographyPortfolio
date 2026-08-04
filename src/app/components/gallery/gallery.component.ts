@@ -7,18 +7,10 @@ import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
 import { DimensionService } from './../../services/dimension.service';
 import { StructuredDataService } from './../../services/structured-data.service';
 
-import { COVER_FILENAME, MANIFEST_URL, imageUrl } from './../../config';
-import { GALLERY_SNAPSHOT } from './../../generated/galleries';
+import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, fetchManifest, galleryImages } from './../../config';
+import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
 
-interface GalleryManifest {
-  generated: string;
-  galleries: Record<string, string[]>;
-}
-
-interface SiblingGallery {
-  name: string;
-  imageSrc: string;
-}
+type SiblingGallery = GallerySnapshotItem;
 
 // Heading wording + the label of the category this gallery belongs to, keyed by URL slug.
 const TYPE_HEADING: Record<string, { noun: string; category: string }> = {
@@ -71,7 +63,14 @@ export class GalleryComponent implements OnInit, OnDestroy {
     return this.galleryType ? `${this.galleryType}/${this.galleryName}` : this.galleryName;
   }
 
-  public imageUrls: string[] = [];
+  public images: ResponsiveImage[] = [];
+
+  // The grid is three columns inside a 1400px shell, two on tablet and one on
+  // mobile — the breakpoints mirror DimensionService, which drives the CSS.
+  public readonly gridSizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 48vw, (min-width: 1440px) 440px, 31vw`;
+
+  // The sibling strip stays three-up from tablet width and goes full-bleed on mobile.
+  public readonly siblingSizes = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 425px, 31vw`;
 
   public areImagesLoaded = false;
   // Counts images that have finished (loaded or errored). The skeleton mask
@@ -161,7 +160,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     this.settledImages += 1;
 
-    const target = Math.min(GalleryComponent.REVEAL_THRESHOLD, this.imageUrls.length);
+    const target = Math.min(GalleryComponent.REVEAL_THRESHOLD, this.images.length);
     if (this.settledImages >= target) {
       setTimeout(() => {
         this.areImagesLoaded = true;
@@ -196,7 +195,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   public nextImage(): void {
-    if (this.currentModalImageIndex < this.imageUrls.length - 1) {
+    if (this.currentModalImageIndex < this.images.length - 1) {
       this.currentModalImageIndex = this.currentModalImageIndex + 1;
     } else {
       this.currentModalImageIndex = 0;
@@ -209,7 +208,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     if (this.currentModalImageIndex > 0) {
       this.currentModalImageIndex = this.currentModalImageIndex - 1;
     } else {
-      this.currentModalImageIndex = this.imageUrls.length - 1;
+      this.currentModalImageIndex = this.images.length - 1;
     }
 
     this.showCurrentImage();
@@ -228,7 +227,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   private showCurrentImage(): void {
-    this.modalImage = this.imageUrls[this.currentModalImageIndex];
+    this.modalImage = this.images[this.currentModalImageIndex].src;
     this.preloadNeighbours();
   }
 
@@ -239,7 +238,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const count = this.imageUrls.length;
+    const count = this.images.length;
     if (count < 2) {
       return;
     }
@@ -247,8 +246,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
     const next = (this.currentModalImageIndex + 1) % count;
     const previous = (this.currentModalImageIndex - 1 + count) % count;
 
-    new Image().src = this.imageUrls[next];
-    new Image().src = this.imageUrls[previous];
+    // Full size, matching what the modal itself shows — preloading a derivative
+    // would warm the wrong cache entry and the swap would still flash.
+    new Image().src = this.images[next].src;
+    new Image().src = this.images[previous].src;
   }
 
   private lockBodyScroll(): void {
@@ -268,25 +269,15 @@ export class GalleryComponent implements OnInit, OnDestroy {
     // English prefix (Weddings/Graduates/Personal/...) used as the manifest key.
     const prefix = this.translateSlugToS3Prefix(this.slugPath);
 
-    let files: string[] = [];
-    try {
-      // Cross-origin fetch to the R2 domain — a CORS/network failure throws a
-      // TypeError (not a non-ok response), so catch it and fail gracefully.
-      const response = await fetch(MANIFEST_URL, { cache: 'no-cache' });
-      if (response.ok) {
-        const manifest: GalleryManifest = await response.json();
-        // cover.webp is the card thumbnail — keep it out of the photo grid.
-        files = (manifest.galleries[prefix] ?? []).filter((f) => f !== COVER_FILENAME);
-      }
-    } catch {
-      files = [];
-    }
+    const manifest = await fetchManifest();
+    // cover.webp is the card thumbnail — keep it out of the photo grid.
+    const files = (manifest?.galleries[prefix] ?? []).filter((f) => f !== COVER_FILENAME);
 
-    this.imageUrls = files.map((file) => imageUrl(prefix, file));
+    this.images = galleryImages(manifest, prefix, files);
 
     // No images (empty gallery or failed manifest): drop the loading mask so we
     // don't show skeletons forever — onImageSettled would otherwise never fire.
-    if (this.imageUrls.length === 0) {
+    if (this.images.length === 0) {
       this.areImagesLoaded = true;
       return;
     }
@@ -355,10 +346,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
         name: `${this.displayName} — ${this.pageHeading}`,
         description: `${this.pageHeading} „${this.displayName}“ от Виктория Борисова — фотограф в София и Видин.`,
         url,
-        // Prerender runs before the manifest fetch, so imageUrls is empty on the
+        // Prerender runs before the manifest fetch, so `images` is empty on the
         // server. The sitemap already carries per-gallery <image:image> entries;
         // this list is a bonus when it happens to be populated.
-        images: this.imageUrls.slice(0, 8),
+        images: this.images.slice(0, 8).map((image) => image.src),
       }),
     ]);
   }
