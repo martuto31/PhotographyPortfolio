@@ -184,7 +184,7 @@ export class SEOService {
       item: {
         // Kept near 150 characters. The previous wording ran past 165 on every
         // gallery, so Google truncated all ~31 of them mid-sentence.
-        description: `${copy.noun} „${name}“ — Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и запазете вашата дата на 0895 318 622.`,
+        description: `${copy.noun} „${name}“ — Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и ми пишете за вашата дата.`,
         keywords: `${name}, ${copy.keywords}, Виктория Борисова, phbyviki`,
       },
     };

@@ -3,20 +3,20 @@
 
     <h1>Нека се чуем</h1>
 
-    <p class="measure">Кажете ми датата, мястото и какво празнувате. Отговарям <strong>{{ contact.responseTime }}</strong> — с наличност и конкретна цена, без обещания по телефона, които после се променят.</p>
+    <p class="measure">Кажете ми датата, мястото и какво празнувате. Отговарям <strong>{{ contact.responseTime }}</strong> — с наличност и конкретна цена, написани черно на бяло, а не обещания, които после се променят.</p>
 </header>
 
 <div class="contact-grid">
     <div class="methods">
-        <a class="method method-primary" [href]="contact.phoneHref">
-            <span class="method-label">Телефон</span>
-            <span class="method-value">{{ contact.phoneDisplay }}</span>
+        <a class="method method-primary" [href]="contact.messengerHref" target="_blank" rel="noopener">
+            <span class="method-label">Messenger</span>
+            <span class="method-value">Пишете ми</span>
             <span class="method-note">Най-бързият начин да проверите дали датата е свободна</span>
         </a>
 
-        <a class="method" [href]="contact.viberHref">
-            <span class="method-label">Viber</span>
-            <span class="method-value method-value-sm">{{ contact.phoneDisplay }}</span>
+        <a class="method" [href]="contact.instagramDmHref" target="_blank" rel="noopener">
+            <span class="method-label">Instagram</span>
+            <span class="method-value method-value-sm">{{ contact.instagramHandle }}</span>
             <span class="method-note">Пишете по всяко време — снимките от деня се пращат лесно</span>
         </a>
 

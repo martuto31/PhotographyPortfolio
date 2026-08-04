@@ -99,7 +99,6 @@ export class StructuredDataService {
       'availableChannel': {
         '@type': 'ServiceChannel',
         'serviceUrl': 'https://phbyviki.com/kontakti',
-        'servicePhone': { '@type': 'ContactPoint', 'telephone': '+359895318622' },
       },
     };
   }

@@ -1,4 +1,4 @@
-.call-bar {
+.contact-bar {
     position: fixed;
     left: 0;
     right: 0;
@@ -12,7 +12,7 @@
     box-shadow: 0 -8px 28px rgba(25, 24, 23, 0.18);
 }
 
-.call-action {
+.bar-action {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,31 +27,28 @@
     color: var(--font-white);
 }
 
-.call-action svg {
+.bar-action svg {
     width: 17px;
     height: 17px;
     fill: currentColor;
     flex: none;
 }
 
-.call-phone {
+/* Messenger blue, used only here. It is the brand of the app rather than of the
+   site, and people scan for the colour rather than reading the label. This is the
+   primary action now that there is no number to tap. */
+.bar-messenger {
+    background-color: #0084FF;
+}
+
+.bar-messenger:active {
+    background-color: #0068CC;
+}
+
+.bar-instagram {
     background-color: var(--ink);
 }
 
-.call-phone:active {
+.bar-instagram:active {
     background-color: #2A2724;
-}
-
-/* Viber purple, used only here. It is the brand of the app rather than of the
-   site, and people scan for the colour rather than reading the label. */
-.call-viber {
-    background-color: #7360F2;
-}
-
-.call-viber:active {
-    background-color: #5F4EDB;
-}
-
-.call-viber svg {
-    fill: currentColor;
 }

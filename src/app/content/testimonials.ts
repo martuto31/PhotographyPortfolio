@@ -14,7 +14,7 @@
 // The test is whether the event happened, not how you know the person.
 //
 // HOW TO ADD ONE
-//   1. Ask the client for permission to publish. Messenger/Viber is enough.
+//   1. Ask the client for permission to publish. A Messenger reply is enough.
 //   2. Paste their words. Light edits for typos are fine; do not rewrite the voice
 //      or the praise.
 //   3. Attribute honestly: real first name, and the event/place if they agree.

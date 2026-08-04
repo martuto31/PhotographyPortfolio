@@ -1,20 +1,28 @@
 // Every way to reach Viktoria, in one place.
 //
-// Before this file the phone number existed only inside the LocalBusiness JSON-LD
-// in index.html — the schema advertised a number no visitor could see or tap. The
-// nav, hero, footer, contact page and mobile call bar all read from here now, so
-// the number can never be right in one place and stale in another.
+// The phone number is deliberately absent. It was removed from the whole site —
+// display text, tel: links, Viber, the LocalBusiness JSON-LD and the meta
+// descriptions — so it should not reappear here. Viber is gone with it: its deep
+// link is built from the number, so keeping Viber would have left the number in
+// the page source and shown it the moment anyone tapped.
+//
+// Messenger and Instagram replace it. Both open a conversation in one tap without
+// exposing a number, and in Bulgaria they are the two channels people actually use
+// after a phone call. Email stays for corporate and more formal enquiries.
+//
+// If the number is ever restored, add it back here first — the nav, hero, footer,
+// contact page, mobile bar, legal pages and JSON-LD all read from this file, so
+// nothing needs to be hunted down twice.
 
 export const CONTACT = {
-  // E.164 for tel:/schema, spaced for display. Bulgarian mobile convention is
-  // 0895 318 622 locally; the leading +359 only belongs in the href.
-  phoneE164: '+359895318622',
-  phoneHref: 'tel:+359895318622',
-  phoneDisplay: '0895 318 622',
+  // m.me is Messenger's canonical short link. The id is the Facebook profile id
+  // that `facebook` below already points at; m.me redirects it to the page inbox.
+  messengerHref: 'https://m.me/100076542123196',
 
-  // Viber is how most Bulgarian clients actually open a conversation. The number
-  // must be percent-encoded — a bare "+" in a query string reads as a space.
-  viberHref: 'viber://chat?number=%2B359895318622',
+  // ig.me/m/<handle> opens a direct message thread. Plain instagram.com/<handle>
+  // only opens the profile, which is a different (and slower) action.
+  instagramDmHref: 'https://ig.me/m/_phbyviki',
+  instagramHandle: '@_phbyviki',
 
   email: 'phbyviki@gmail.com',
   emailHref: 'mailto:phbyviki@gmail.com',

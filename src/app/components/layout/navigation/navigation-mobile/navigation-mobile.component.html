@@ -32,7 +32,8 @@
             </nav>
 
             <div class="menu-contact">
-                <a class="menu-phone" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+                <a class="menu-primary" [href]="contact.messengerHref" target="_blank" rel="noopener">Пишете в Messenger</a>
+                <a class="menu-primary" [href]="contact.instagramDmHref" target="_blank" rel="noopener">Пишете в Instagram</a>
                 <a class="menu-email" [href]="contact.emailHref">{{ contact.email }}</a>
 
                 <div class="links">

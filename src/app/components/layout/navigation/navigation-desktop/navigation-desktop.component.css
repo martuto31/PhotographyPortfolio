@@ -117,8 +117,8 @@
     background: var(--brass-bright);
 }
 
-/* ---- Phone -------------------------------------------------------------- */
-.call {
+/* ---- Write to me -------------------------------------------------------------- */
+.write {
     display: inline-flex;
     align-items: center;
     gap: 9px;
@@ -130,30 +130,29 @@
     letter-spacing: 0.06em;
     color: var(--font-high-emphasis);
     /* Digits in a row: keep them from shifting width on hover. */
-    font-variant-numeric: tabular-nums;
     transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
 }
 
-.call:hover {
+.write:hover {
     background-color: var(--ink);
     border-color: var(--ink);
     color: var(--font-white);
 }
 
-.call-icon {
+.write-icon {
     width: 15px;
     height: 15px;
     fill: currentColor;
     flex: none;
 }
 
-:host-context(.transparent) .call {
+:host-context(.transparent) .write {
     color: var(--font-white);
     border-color: rgba(255, 255, 255, 0.55);
     text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
 }
 
-:host-context(.transparent) .call:hover {
+:host-context(.transparent) .write:hover {
     background-color: var(--font-white);
     border-color: var(--font-white);
     color: var(--ink);

@@ -10,13 +10,14 @@
             <a routerLink="/about-me" routerLinkActive="active">За мен</a>
             <a routerLink="/kontakti" routerLinkActive="active">Контакти</a>
 
-            <!-- The number was previously only in the LocalBusiness JSON-LD: advertised
-                 to Google, invisible to the person reading the page. -->
-            <a class="call" [href]="contact.phoneHref" [attr.aria-label]="'Обадете се на ' + contact.phoneDisplay">
-                <svg class="call-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/>
+            <!-- Routes to /kontakti rather than deep-linking Messenger. On desktop a
+                 m.me link lands on a Facebook login wall as often as an inbox, so the
+                 contact page — which offers all three channels — is the safer target. -->
+            <a class="write" routerLink="/kontakti" aria-label="Пишете ми">
+                <svg class="write-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M12 2C6.3 2 2 6.2 2 11.8c0 3.1 1.4 5.8 3.7 7.6V23l3.4-1.9c.9.25 1.9.4 2.9.4 5.7 0 10-4.2 10-9.7S17.7 2 12 2Zm1 13.1-2.6-2.7-5 2.7L11 9.2l2.6 2.7 4.9-2.7-6.5 6.9Z"/>
                 </svg>
-                <span>{{ contact.phoneDisplay }}</span>
+                <span>Пишете ми</span>
             </a>
         </div>
     </nav>

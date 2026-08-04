@@ -75,7 +75,8 @@ export const PRIVACY: LegalDoc = {
           kind: 'defs',
           items: [
             { term: 'Имейл', text: `<a href="${CONTACT.emailHref}">${CONTACT.email}</a>` },
-            { term: 'Телефон', text: `<a href="${CONTACT.phoneHref}">${CONTACT.phoneDisplay}</a>` },
+            { term: 'Messenger', text: `<a href="${CONTACT.messengerHref}" target="_blank" rel="noopener">m.me/phbyviki</a>` },
+            { term: 'Instagram', text: `<a href="${CONTACT.instagramDmHref}" target="_blank" rel="noopener">${CONTACT.instagramHandle}</a>` },
             { term: 'Сайт', text: 'phbyviki.com' },
           ],
         },
@@ -124,7 +125,7 @@ export const PRIVACY: LegalDoc = {
           items: [
             {
               term: 'При запитване',
-              text: 'Име, телефон и/или имейл и това, което сте написали — дата, място и вид на събитието.',
+              text: 'Име, начин за връзка (имейл или профил в социална мрежа) и това, което сте написали — дата, място и вид на събитието.',
             },
             {
               term: 'При уговорена фотосесия',
@@ -136,7 +137,7 @@ export const PRIVACY: LegalDoc = {
             },
             {
               term: 'Съобщения в социалните мрежи',
-              text: 'Когато ми пишете в Instagram, Facebook или Viber, разговорът остава и при съответната платформа, според нейните собствени правила.',
+              text: 'Когато ми пишете в Messenger или Instagram, разговорът остава и при съответната платформа, според нейните собствени правила.',
             },
           ],
         },
@@ -332,7 +333,8 @@ export const TERMS: LegalDoc = {
           kind: 'defs',
           items: [
             { term: 'Имейл', text: `<a href="${CONTACT.emailHref}">${CONTACT.email}</a>` },
-            { term: 'Телефон', text: `<a href="${CONTACT.phoneHref}">${CONTACT.phoneDisplay}</a>` },
+            { term: 'Messenger', text: `<a href="${CONTACT.messengerHref}" target="_blank" rel="noopener">m.me/phbyviki</a>` },
+            { term: 'Instagram', text: `<a href="${CONTACT.instagramDmHref}" target="_blank" rel="noopener">${CONTACT.instagramHandle}</a>` },
           ],
         },
       ],
@@ -416,7 +418,7 @@ export const TERMS: LegalDoc = {
       blocks: [
         {
           kind: 'p',
-          text: 'Сайтът съдържа връзки към Instagram, Facebook и Viber. Тези платформи имат свои условия и политики за поверителност, за които не отговарям.',
+          text: 'Сайтът съдържа връзки към Messenger и Instagram. Тези платформи имат свои условия и политики за поверителност, за които не отговарям.',
         },
       ],
     },

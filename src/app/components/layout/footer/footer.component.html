@@ -30,11 +30,11 @@
         <div class="footer-col footer-contact">
             <span class="footer-heading">Свържете се</span>
 
-            <a class="footer-phone" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+            <a class="footer-primary" [href]="contact.messengerHref" target="_blank" rel="noopener">Messenger</a>
 
             <a class="footer-email" [href]="contact.emailHref">{{ contact.email }}</a>
 
-            <a class="footer-viber" [href]="contact.viberHref">Пишете във Viber</a>
+            <a class="footer-alt" [href]="contact.instagramDmHref" target="_blank" rel="noopener">Пишете в Instagram</a>
 
             <div class="footer-social">
                 <a [href]="contact.facebook" target="_blank" rel="noopener" aria-label="phbyviki във Facebook"><img src="assets/img/facebook.svg" alt="Facebook"></a>

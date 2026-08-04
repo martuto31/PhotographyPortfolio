@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
 import { LandingComponent } from './../landing/landing.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { CallBarComponent } from './call-bar/call-bar.component';
+import { ContactBarComponent } from './contact-bar/contact-bar.component';
 
 import { DimensionService } from './../../services/dimension.service';
 
@@ -19,7 +19,7 @@ import { DimensionService } from './../../services/dimension.service';
     FooterComponent,
     LandingComponent,
     NavigationComponent,
-    CallBarComponent,
+    ContactBarComponent,
   ],
 })
 

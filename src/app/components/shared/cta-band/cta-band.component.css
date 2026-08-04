@@ -37,7 +37,7 @@
 
 /* The number itself is the headline of this column — set in the display serif at
    headline scale rather than tucked into a button label. */
-.cta-phone {
+.cta-primary {
     display: inline-flex;
     align-items: center;
     gap: 16px;
@@ -46,16 +46,15 @@
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.01em;
-    font-variant-numeric: tabular-nums;
     color: var(--font-white);
     transition: color 220ms ease;
 }
 
-.cta-phone:hover {
+.cta-primary:hover {
     color: var(--brass-bright);
 }
 
-.cta-phone svg {
+.cta-primary svg {
     width: 0.6em;
     height: 0.6em;
     fill: var(--brass-bright);

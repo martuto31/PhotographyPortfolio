@@ -114,23 +114,22 @@
 }
 
 /* Contact column */
-.footer-phone {
+.footer-primary {
     font-family: var(--font-sans);
     font-size: 22px;
     font-weight: 600;
     letter-spacing: 0.02em;
-    font-variant-numeric: tabular-nums;
     color: var(--font-high-emphasis);
     width: fit-content;
     margin-bottom: 12px;
     transition: color 200ms ease;
 }
 
-:host-context(.mobile) .footer-phone {
+:host-context(.mobile) .footer-primary {
     margin-inline: auto;
 }
 
-.footer-phone:hover {
+.footer-primary:hover {
     color: var(--brass);
 }
 
@@ -147,7 +146,7 @@
     color: var(--brass);
 }
 
-.footer-viber {
+.footer-alt {
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 600;
@@ -161,7 +160,7 @@
     transition: color 200ms ease, border-color 200ms ease;
 }
 
-.footer-viber:hover {
+.footer-alt:hover {
     color: var(--brass);
     border-bottom-color: var(--brass);
 }

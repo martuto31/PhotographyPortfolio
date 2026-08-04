@@ -146,7 +146,7 @@
     flex: none;
 }
 
-/* The phone is redundant on handhelds — the fixed call bar is always on screen. */
+/* Redundant on handhelds — the fixed contact bar is always on screen. */
 :host-context(.mobile) .call-btn {
     display: none;
 }
