@@ -325,8 +325,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
   // Alt text carries the gallery name so each photo is distinguishable to crawlers and
   // screen readers, instead of 154 identical strings on one page.
   public altFor(index: number): string {
-    const subject = this.displayName ? `${this.displayName} — ` : '';
-    return `${subject}${this.pageHeading || 'Фотосесия'}, кадър ${index + 1} — Виктория Борисова, фотограф София и Видин`;
+    const subject = this.displayName ? `${this.displayName} - ` : '';
+    return `${subject}${this.pageHeading || 'Фотосесия'}, кадър ${index + 1} - Виктория Борисова, фотограф София и Видин`;
   }
 
   private setHeadings(): void {
@@ -435,8 +435,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
         { name: this.displayName, url },
       ]),
       this.structuredData.imageGallery({
-        name: `${this.displayName} — ${this.pageHeading}`,
-        description: `${this.pageHeading} „${this.displayName}“ от Виктория Борисова — фотограф в София и Видин.`,
+        name: `${this.displayName} - ${this.pageHeading}`,
+        description: `${this.pageHeading} „${this.displayName}“ от Виктория Борисова - фотограф в София и Видин.`,
         url,
         // Prerender runs before the manifest fetch, so `images` is empty on the
         // server. The sitemap already carries per-gallery <image:image> entries;

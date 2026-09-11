@@ -11,10 +11,9 @@
 // and inside .ts files only touches string literals. It prints what it changed and
 // is idempotent — a second run reports 0.
 //
-// `residual` exists because commit-plan.sh holds back five files (the SEO pass)
-// that also carry dashes; sweeping them would fold that work into a copy commit.
-// Every dash `residual` finds must map to one of those files — 0 unattributed —
-// until T-17b sweeps them after commit-plan.sh has run.
+// `residual` lists every "—" left in the prerendered HTML and exits 1 if there is
+// one. While five files were held back by commit-plan.sh it classified the
+// leftovers by source; now that they are swept, anything it finds is a regression.
 
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join, dirname, relative, extname } from 'node:path';
@@ -24,24 +23,13 @@ const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(REPO_ROOT, 'src');
 const DIST = join(REPO_ROOT, 'dist', 'photography-portfolio', 'browser');
 
-// Held back by commit-plan.sh — see the Traps section of WORKER.md.
-const HELD_BACK = new Set([
-  'src/app/components/gallery/gallery.component.ts',
-  'src/app/components/gallery/gallery.component.html',
-  'src/app/components/galleries-cards/galleries-cards.component.ts',
-  'src/index.html',
-  'src/app/generated/galleries.ts',
-]);
+// Files the sweep never touches. The generated snapshot carries gallery names
+// straight from the bucket; a dash in one of those is the folder's real name.
+const SKIP = new Set(['src/app/generated/galleries.ts']);
 
-// Where each dash still in the built HTML comes from. All of these are held back.
-const RESIDUAL_SOURCES = [
-  [/— София и Видин/, 'galleries-cards.component.ts h1 / gallery.component.html sub'],
-  [/phbyviki — Виктория Борисова/, 'src/index.html og:site_name + JSON-LD name'],
-  [/сова — фотограф/, 'src/index.html og:image:alt / gallery.component.ts JSON-LD description'],
-  [/ — Виктория Борисова, фотограф/, 'gallery.component.ts photo alt'],
-  [/датата и мястото — отговарям/, 'gallery.component.html cta'],
-  [/Снимка от фотосесия — /, 'gallery.component.html modal alt'],
-  [/(Сватбена фотография|Абитуриентска фотосесия|Лична фотосесия|Фотосесия от кръщене|Корпоративно събитие|Рожден ден|Семейна фотосесия) — |— (Сватбена фотография|Абитуриентска фотосесия|Лична фотосесия|Фотосесия от кръщене|Корпоративно събитие|Рожден ден|Семейна фотосесия|Сватбена фотосесия|Фотосесия)/, 'galleries-cards.component.ts page headings (titles, card and sibling alt, JSON-LD name)'],
+// Dashes that are allowed to remain: comments in the served HTML, which no visitor
+// or search result ever shows.
+const ALLOWED = [
   [/<!-- Icons — generated/, 'src/index.html HTML comment (not visible)'],
   [/hashed Angular stylesheet — keep/, '404.html CSS comment (not visible)'],
 ];
@@ -99,7 +87,7 @@ function sweep() {
   for (const file of walk(SRC)) {
     const rel = relative(REPO_ROOT, file);
     const kind = extname(file).slice(1);
-    if (!['ts', 'html', 'json'].includes(kind) || HELD_BACK.has(rel)) continue;
+    if (!['ts', 'html', 'json'].includes(kind) || SKIP.has(rel)) continue;
     const text = readFileSync(file, 'utf8');
     if (!text.includes('—')) continue;
     const { out, changed } = sweepText(text, kind, rel);
@@ -125,7 +113,7 @@ function residual() {
     for (let i = text.indexOf('—'); i !== -1; i = text.indexOf('—', i + 1)) {
       total++;
       const ctx = text.slice(Math.max(0, i - 60), i + 61);
-      const src = RESIDUAL_SOURCES.find(([re]) => re.test(ctx))?.[1];
+      const src = ALLOWED.find(([re]) => re.test(ctx))?.[1];
       if (src) counts.set(src, (counts.get(src) ?? 0) + 1);
       else unknown.set(ctx.replace(/\s+/g, ' '), (unknown.get(ctx.replace(/\s+/g, ' ')) ?? 0) + 1);
     }
@@ -133,7 +121,7 @@ function residual() {
   console.log(`${total} em dashes across the prerendered HTML`);
   for (const [src, n] of [...counts].sort((a, b) => b[1] - a[1])) console.log(`${String(n).padStart(5)}  ${src}`);
   const u = [...unknown.values()].reduce((a, b) => a + b, 0);
-  console.log(`${u} unattributed`);
+  console.log(`${u} not allowed`);
   for (const [ctx, n] of [...unknown].sort((a, b) => b[1] - a[1]).slice(0, 20)) console.log(`${String(n).padStart(5)}  …${ctx}…`);
   process.exit(u === 0 ? 0 : 1);
 }

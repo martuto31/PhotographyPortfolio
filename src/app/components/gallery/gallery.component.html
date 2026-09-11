@@ -10,7 +10,7 @@
 
         <h1>{{ displayName }}</h1>
 
-        <p>{{ pageHeading }} — София и Видин</p>
+        <p>{{ pageHeading }} - София и Видин</p>
     </header>
 }
 
@@ -64,7 +64,7 @@
                         <img [src]="sibling.imageSrc"
                              [attr.srcset]="sibling.imageSrcset || null"
                              [attr.sizes]="sibling.imageSrcset ? siblingSizes : null"
-                             [alt]="sibling.name + ' — ' + pageHeading + ', фотограф София и Видин'"
+                             [alt]="sibling.name + ' - ' + pageHeading + ', фотограф София и Видин'"
                              loading="lazy"
                              decoding="async">
                     </div>
@@ -78,7 +78,7 @@
 
 <app-cta-band
     heading="Харесва ли ви това, което видяхте?"
-    text="Ако планирате подобен ден, пишете ми датата и мястото — отговарям до 24 часа с наличност и цена.">
+    text="Ако планирате подобен ден, пишете ми датата и мястото - отговарям до 24 часа с наличност и цена.">
 </app-cta-band>
 
 @if (isModalOpen) {
@@ -102,7 +102,7 @@
             </svg>
         </button>
 
-        <img id="modal" [src]="modalImage" alt="Снимка от фотосесия — Виктория Борисова, фотограф София и Видин">
+        <img id="modal" [src]="modalImage" alt="Снимка от фотосесия - Виктория Борисова, фотограф София и Видин">
 
         <button type="button" class="modal-btn slide-btn btn-right" (click)="nextImage()" aria-label="Следваща снимка">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">

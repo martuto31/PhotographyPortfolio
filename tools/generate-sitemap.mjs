@@ -207,7 +207,7 @@ async function main() {
         .slice(0, 5)
         .map((file) => ({
           loc: `https://images.phbyviki.com/${encodePath(gallery.prefix)}/${encodeURIComponent(file)}`,
-          title: `${gallery.name} — фотограф София и Видин`,
+          title: `${gallery.name} - фотограф София и Видин`,
         }));
 
       entries.push(urlEntry({
