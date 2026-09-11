@@ -32,7 +32,7 @@
                             [height]="dimensionsService.isDesktop ? '450' : '250'"
                             (load)="onImageLoad(gallery)"
                             [class.loaded]="gallery.isImgLoaded"
-                            [alt]="altPrefix + gallery.name + ' — фотограф София и Видин'"
+                            [alt]="altPrefix + gallery.name + ' - фотограф София и Видин'"
                         >
 
                         @if (!gallery.isImgLoaded) {
@@ -50,7 +50,7 @@
         </div>
     } @else {
         <p class="empty-state">
-            Още не съм публикувала галерия в тази категория — част от заснетите събития са в
+            Още не съм публикувала галерия в тази категория - част от заснетите събития са в
             <a class="link-underline" routerLink="/galerii/lichni">други събития</a>, а някои семейства предпочитат снимките им да останат лични.
             Прочетете какво включва услугата по-долу или ми пишете за вашето събитие.
         </p>

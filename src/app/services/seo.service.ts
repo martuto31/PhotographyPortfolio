@@ -116,7 +116,7 @@ export class SEOService {
     this.meta.updateTag({ property: 'og:image', content: image });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:locale', content: 'bg_BG' });
-    this.meta.updateTag({ property: 'og:site_name', content: 'phbyviki — Виктория Борисова' });
+    this.meta.updateTag({ property: 'og:site_name', content: 'phbyviki - Виктория Борисова' });
 
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
@@ -180,11 +180,11 @@ export class SEOService {
       // "| phbyviki" rather than "| Виктория Борисова": the longer suffix pushed
       // the double-barrelled names ("Александрина и Борис", "Семеен бал Ванеса")
       // past 60 characters, and the brand still appears in the description.
-      title: `${name} — ${copy.noun} | phbyviki`,
+      title: `${name} - ${copy.noun} | phbyviki`,
       item: {
         // Kept near 150 characters. The previous wording ran past 165 on every
         // gallery, so Google truncated all ~31 of them mid-sentence.
-        description: `${copy.noun} „${name}“ — Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и ми пишете за вашата дата.`,
+        description: `${copy.noun} „${name}“ - Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и ми пишете за вашата дата.`,
         keywords: `${name}, ${copy.keywords}, Виктория Борисова, phbyviki`,
       },
     };

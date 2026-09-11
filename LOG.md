@@ -32,11 +32,14 @@ page's meta description (`src/assets/seo.json`). Viki only asked about the
 homepage, so I left it. Say if you want it rewritten to match her new wording —
 that would be needs-you copy.
 
-### T-17 · Long dashes (no answer needed unless I guessed wrong)
-I will replace every "—" in visible text with " - ", the way Viki writes it herself,
-and run it **last** so it also sweeps her new family and birthday texts, which
-contain "—". `<title>`s and meta descriptions included. En dashes in ranges
-("май–октомври") stay.
+### T-17b · Long dashes in the held-back SEO files — blocked on you
+Part A is shipped (see below). The rest of the dashes live in the four files
+`commit-plan.sh` is holding: `gallery.component.ts/.html`,
+`galleries-cards.component.ts`, `src/index.html`, plus `generate-sitemap.mjs`.
+**Run `bash commit-plan.sh`** (or tell me to sweep those files anyway) and the
+worker finishes it next tick. Also: the testimonial attribution on the homepage
+now reads "- Виктория Борисова" (was "— Виктория Борисова") — say if you would
+rather it kept a dash of its own.
 
 Still parked from before: **T-04** (delete `prod`), **T-05** (legal name + address —
 needs the address from you), **T-06** (refund clause).
@@ -48,10 +51,12 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-All of Viki's copy that could ship without you is shipped (T-07, T-09, T-10,
-T-12, T-13, T-14, T-15). Next tick: **T-17 · Remove long dashes** across all
-visible text — the last of her batch. Then T-02 (og:image) and T-03 (sitemap
-in publish). T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Viki's whole batch is shipped except what needs you (T-08, T-11, T-16, T-17b).
+Next tick: **T-02 · Per-gallery og:image**, then T-03 (sitemap in publish).
+Note: T-02's scope names `gallery.component.ts` and `generate-sitemap.mjs` —
+both held back by `commit-plan.sh`. If it cannot be done without touching them
+it parks too, and the worker goes idle until you run `commit-plan.sh` or paste
+more work. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -59,7 +64,15 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-15 · Birthdays gallery copy** — commit "Put Viki's birthdays copy on /galerii/rojdeni-dni" —
+- **T-17 · Long dashes, part A** — commit "Replace long dashes with hyphens in the visible text" —
+  97 "—" → "-" across 22 files (content, seo.json, route titles, templates,
+  404 page), nothing else changed; verifier PASS; gate green. **905 dashes
+  remain in the build and every one comes from the five files `commit-plan.sh`
+  holds back** (category H1s "… — София и Видин", gallery titles and alt text,
+  og:site_name, LocalBusiness name). `node tools/dashes.mjs residual` proves it.
+  Run `bash commit-plan.sh` and T-17b is one tick. Side effect until then: card
+  alt text reads "Абитуриентска фотосесия — Ванеса - фотограф…" (one of each).
+- **T-15 · Birthdays gallery copy** — `29fe1bf` —
   description in four paragraphs (her block byte-identical when rejoined, three
   "—" kept for T-17), "заведение" FAQ swapped for "Колко снимки ще получим?" in
   the same slot. 12/12 assertions, verifier PASS, gate green.

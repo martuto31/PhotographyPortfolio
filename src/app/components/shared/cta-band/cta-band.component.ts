@@ -23,7 +23,7 @@ export class CtaBandComponent {
 
   @Input() heading = 'Свободна ли е вашата дата?';
 
-  @Input() text = 'Пишете ми датата и мястото на събитието — отговарям до 24 часа с наличност и цена.';
+  @Input() text = 'Пишете ми датата и мястото на събитието - отговарям до 24 часа с наличност и цена.';
 
   public readonly contact = CONTACT;
 

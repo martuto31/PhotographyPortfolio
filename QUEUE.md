@@ -73,7 +73,7 @@ purpose — see its note.
   > В галерията “рождени дни” в графата “често задавани въпроси” въпросът “може ли да снимате в заведение” да се премахне и да се сложи следния въпрос и отговор: “Колко снимки ще получим? Без ограничение — получавате всеки сполучлив кадър от деня, не предварително зададен брой.”
 - [x] T-16 · Remove the "корпоративни" gallery · needs-you · deletes a live URL — specced below
   > Галерията “корпоративни” да се премахне
-- [ ] T-17 · Remove long dashes from all visible text · auto · runs after T-07…T-15, so it also sweeps the new texts (two of them contain "—")
+- [x] T-17 · Remove long dashes from all visible text · auto · part A shipped 2026-09-11; T-17b (held-back SEO files) under Blocked
   > Махане на дългите тирета
 
 ---
@@ -298,6 +298,7 @@ Not startable. Listed so they are not rediscovered every week.
 | Venue / town / date on gallery cards | gallery spreadsheet | Viki |
 | Gallery page texts, 80–150 words each | gallery spreadsheet | Viki |
 | Responsive `srcset` and real image dimensions | R2 token 403s | Martin |
+| T-17b · long dashes in the held-back SEO files (H1s, gallery titles, alt text, og:site_name, sitemap image titles) | `bash commit-plan.sh` | Martin |
 | Testimonials | real quotes | Viki |
 
 The moment the spreadsheet lands, the two gallery tasks become roughly 60 small

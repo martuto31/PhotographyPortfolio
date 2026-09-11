@@ -40,7 +40,7 @@ export class ContactPageComponent implements OnInit {
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
         'url': 'https://phbyviki.com/kontakti',
-        'name': 'Контакти — Виктория Борисова, фотограф София и Видин',
+        'name': 'Контакти - Виктория Борисова, фотограф София и Видин',
         'mainEntity': { '@id': 'https://phbyviki.com/#business' },
       },
     ]);

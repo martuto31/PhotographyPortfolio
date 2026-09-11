@@ -16,7 +16,7 @@ export const routes: Routes = [
     {
         path: 'galerii',
         loadComponent: () => import('./components/galleries-index/galleries-index.component').then(c => c.GalleriesIndexComponent),
-        title: 'Галерия — сватби, абитуриенти, събития | phbyviki',
+        title: 'Галерия - сватби, абитуриенти, събития | phbyviki',
     },
     {
         path: 'galerii/:galleryType',
@@ -28,7 +28,7 @@ export const routes: Routes = [
     {
         path: 'kontakti',
         loadComponent: () => import('./components/contact-page/contact-page.component').then(c => c.ContactPageComponent),
-        title: 'Контакти — фотограф София и Видин | phbyviki',
+        title: 'Контакти - фотограф София и Видин | phbyviki',
     },
     // Canonical gallery URL: /galeriya/<slug>/<gallery name>. Two real segments, so the
     // path contains a proper slash instead of an encoded %2F.
@@ -64,7 +64,7 @@ export const routes: Routes = [
     {
         path: 'about-me',
         loadComponent: () => import('./components/about-me/about-me.component').then(c => c.AboutMeComponent),
-        title: 'За мен | Виктория Борисова — Фотограф София и Видин',
+        title: 'За мен | Виктория Борисова - Фотограф София и Видин',
     },
 
     // Legal. Both are the same component; `data.doc` picks the document, so the two

@@ -2,13 +2,13 @@
     <header class="section-heading">
         <span class="eyebrow eyebrow-center">Портфолио</span>
 
-        <h2>Галерия — <em>сватби, абитуриенти,<br>други събития</em></h2>
+        <h2>Галерия - <em>сватби, абитуриенти,<br>други събития</em></h2>
     </header>
 
     @for (project of projects; track $index) {
         <article class="project" [class.reverse]="$index % 2 !== 0">
             <a class="project-image-link" [routerLink]="project.btnLink" [attr.aria-label]="project.name">
-                <img [src]="project.imageSrc" [alt]="project.name + ' — фотограф София и Видин'" loading="lazy">
+                <img [src]="project.imageSrc" [alt]="project.name + ' - фотограф София и Видин'" loading="lazy">
             </a>
 
             <div class="project-summary">
