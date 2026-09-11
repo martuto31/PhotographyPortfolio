@@ -47,9 +47,9 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-09 · Wedding gallery copy** — lead, body paragraphs, two
-"какво включва" items, the travel FAQ answer, all from her text. Then T-10 →
-T-12 → T-13 → T-14 → T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-10 · Prom gallery copy** — description and the "какво включва"
+list (replace-all reading, see Needs you). Then T-12 → T-13 → T-14 → T-15 →
+T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -57,7 +57,12 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-07 · Homepage hero subtitle** — commit "Replace the hero subtitle with Viki's text" —
+- **T-09 · Wedding gallery copy** — commit "Put Viki's wedding copy on /galerii/svatbi" —
+  lead, three body paragraphs, two "какво включва" items and the travel FAQ, all
+  byte-identical to her text (her long block split into three `<p>`, words
+  untouched). 16/16 string assertions, old lead gone from the whole dist,
+  verifier PASS, gate green.
+- **T-07 · Homepage hero subtitle** — `86b457d` —
   her text landed byte-identical on `/`; old paragraph gone from the whole dist;
   verifier PASS; gate green.
 - **Copy assertion helper** — `50ecc44` — `node tools/check-text.mjs <route> --has "…" --not "…"`
