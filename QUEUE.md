@@ -30,6 +30,23 @@ tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
 
+Redesign direction is decided and written up in DESIGN-SPEC.md — tokens, glow recipe, type scale, what came from theme 01 vs 02, what was dropped. Read it before touching any visual work.
+Preview artifact, shared with Viki: https://claude.ai/code/artifact/e277ac36-238b-459d-9974-bb89aeb8f9cc
+BLOCKED on Viki: she must name one button colour of four (Костено бяло / Бледо шампанско / Пепелна роза / Само контур). Recommendation is Костено бяло. Nothing visual gets applied until she answers.
+When she answers: apply the direction to every page in one pass — home, galleries index, four service pages, about, contacts. Not page by page.
+Two things must survive that pass, both shipped for indexing: the sibling-gallery strip at the bottom of gallery.component.html, and the real <img> tags seeded from src/app/generated/galleries.ts (first row eager, first photo preloaded).
+
+
+T-06 - Add the sentence yes
+
+T-17b and 16b i dont understand can you run it and verify its good and about the dash you can make the decision
+
+i odnt understand about me meta description - update it if about you was updated?
+
+T-10 change to match the new text yes
+
+For the design there was redesign but unfinished, here is the artifact: design spec md  and also she picked the color and website for reference so i dont have clear instructions about that maybe scope them and decide or give me the decision
+
 
 ---
 
