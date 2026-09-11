@@ -37,22 +37,32 @@ a dash of its own.
 The `/galerii` index teaser still says "Индивидуални и групови фотосесии" for
 abiturienti. Want it changed to match her new text? That is copy, so it waits.
 
+### T-18 / T-19 · Design (no task yet)
+Viki's two lines are stubbed: buttons "костено бяло" from "the artifact", and
+anastasiiakharyna.com as the design she likes. Both are design, so they park.
+To start T-18 I need the artifact (link or the hex value). For T-19: what should
+be taken from that site - and does it replace the merged design that was waiting
+on the button colour?
+
 `WORKER.md` is untracked - commit it yourself or tell me to.
 
 ---
 
 ## Working on
 
-Next tick: **T-05 · legal name and address** in the footer and both legal pages
-("Виктория Борисова, ж.к. Александър Стамболийски 1, Видин"). Then T-08 (150+),
-T-11 (approved FAQ), T-16 (remove корпоративни, 404), one per tick.
+Next tick: **T-08** (30+ → 150+), then T-11 (approved FAQ), then T-16 (remove
+корпоративни, 404), one per tick. Loop is on 10 minutes now.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-06 · Refund clause** — commit "State that a booked date cannot be withdrawn from" —
+- **T-05 · Legal name and address** — commit "Publish her name and contact address" —
+  "Виктория Борисова · ж.к. Александър Стамболийски 1, Видин" in the footer of
+  all 44 pages and as an "Адрес" row on both legal pages; the strings live once,
+  in `contact.ts`. Verifier PASS (44/44), gate green.
+- **T-06 · Refund clause** — `3dcc310` —
   new "Отказ от запазена дата" section on `/usloviya`, citing ЗЗП чл. 57; terms
   page dated 11 септември 2026, privacy page untouched. Verifier PASS, gate green.
 - **T-04 · Delete `prod`** — closed, you keep it.

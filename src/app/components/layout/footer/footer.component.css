@@ -209,6 +209,13 @@
     opacity: 0.7;
 }
 
+/* The legal identity line. Not a postal invitation, so it takes the same quiet
+   weight as the credit rather than the emphasis of a heading. */
+.footer-address {
+    font-style: normal;
+    opacity: 0.7;
+}
+
 .footer-legal {
     display: flex;
     gap: 20px;

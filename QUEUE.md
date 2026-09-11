@@ -30,9 +30,6 @@ tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
 
-Цвят на бутоните костено бяло от артефакта
-
-Вики - Сайта на който ми харесва дизайна https://www.anastasiiakharyna.com/
 
 ---
 
@@ -83,7 +80,7 @@ purpose — see its note.
   > dont delete prod branch ill do myself the work there
 - [x] T-06 · Refund clause for booked dates · auto · shipped 2026-09-11 (wording in LOG for veto)
   > T-06 thats okay do you need green light? if so yes
-- [ ] T-05 · Legal name and contact address in the footer and legal pages · auto (data supplied 2026-09-11)
+- [x] T-05 · Legal name and contact address in the footer and legal pages · auto · shipped 2026-09-11
   > T-05 Виктория Борисова, адрес: ж.к. Александър Стамболийски 1 Видин
 - [ ] T-08 · "30+" → "150+" заснети събития · auto (number supplied)
   > T-08 150+ събития
@@ -91,6 +88,10 @@ purpose — see its note.
   > Т-11 I approve
 - [ ] T-16 · Remove the "корпоративни" category, plain 404 · auto (confirmed 2026-09-11)
   > T-16 Remove it and maybe we dont need 301 as it is not indexed but if its indexed do 301 but no for now 404
+- [ ] T-18 · Button colour: "костено бяло" (bone white) from the design artifact · needs-you · blocked: which artifact / exact value? This is Viki's answer to the "button colour" blocker on "Apply the merged design to every page"
+  > Цвят на бутоните костено бяло от артефакта
+- [ ] T-19 · Design reference: anastasiiakharyna.com - Viki likes this design · needs-you · a reference, not a task yet: what to take from it, and does it change the merged design?
+  > Вики - Сайта на който ми харесва дизайна https://www.anastasiiakharyna.com/
 
 ---
 
@@ -101,28 +102,6 @@ _Nothing startable. Everything left needs Martin or is blocked — see below._
 ---
 
 # Needs Martin
-
-## T-05 · Publish her legal name and contact address
-
-**Why** — ЗЕТ чл. 4 requires it of anyone providing services online in Bulgaria.
-Missing today. Also a trust signal for a stranger deciding whether to hand this
-person their wedding day.
-
-**Scope** — `src/app/content/contact.ts`, footer component, privacy/terms pages
-
-**Done when**
-- THE footer SHALL show her legal name and a contact address on every page
-- THE text SHALL be in Bulgarian and match the voice of the existing site copy
-- THE copy SHALL live in `src/app/content/`, not in a template
-- `npm run verify` stays green
-
-**Evidence** — the drafted Bulgarian text, for approval before anything is applied
-
-**Autonomy** — **needs-you.** Live public copy, legal wording, her real name and
-address. Worker drafts the Bulgarian text and parks it. **Martin supplies the
-address** — do not ask Viki, and do not guess a city from the site copy.
-
----
 
 ## T-08 · Increase the "30+ заснети събития" figure
 

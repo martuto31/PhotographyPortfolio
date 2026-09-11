@@ -69,11 +69,12 @@ export const PRIVACY: LegalDoc = {
       blocks: [
         {
           kind: 'p',
-          text: 'Администратор на личните данни е <strong>Виктория Борисова</strong> - фотограф, работещ в София, Видин и цяла България.',
+          text: `Администратор на личните данни е <strong>${CONTACT.legalName}</strong> - фотограф, работещ в София, Видин и цяла България.`,
         },
         {
           kind: 'defs',
           items: [
+            { term: 'Адрес', text: CONTACT.address },
             { term: 'Имейл', text: `<a href="${CONTACT.emailHref}">${CONTACT.email}</a>` },
             { term: 'Messenger', text: `<a href="${CONTACT.messengerHref}" target="_blank" rel="noopener">m.me/phbyviki</a>` },
             { term: 'Instagram', text: `<a href="${CONTACT.instagramDmHref}" target="_blank" rel="noopener">${CONTACT.instagramHandle}</a>` },
@@ -325,7 +326,7 @@ export const TERMS: LegalDoc = {
       blocks: [
         {
           kind: 'p',
-          text: 'phbyviki.com е портфолио сайт на <strong>Виктория Борисова</strong> - фотограф в София и Видин. Сайтът показва работата ми и дава начин да се свържете с мен.',
+          text: `phbyviki.com е портфолио сайт на <strong>${CONTACT.legalName}</strong> - фотограф в София и Видин. Сайтът показва работата ми и дава начин да се свържете с мен.`,
         },
         {
           kind: 'p',
@@ -334,6 +335,7 @@ export const TERMS: LegalDoc = {
         {
           kind: 'defs',
           items: [
+            { term: 'Адрес', text: CONTACT.address },
             { term: 'Имейл', text: `<a href="${CONTACT.emailHref}">${CONTACT.email}</a>` },
             { term: 'Messenger', text: `<a href="${CONTACT.messengerHref}" target="_blank" rel="noopener">m.me/phbyviki</a>` },
             { term: 'Instagram', text: `<a href="${CONTACT.instagramDmHref}" target="_blank" rel="noopener">${CONTACT.instagramHandle}</a>` },
