@@ -53,8 +53,6 @@ purpose — see its note.
 - [x] T-10 · Prom gallery copy — description and "какво включва" · auto · shipped 2026-09-11
   > В описанието за абитуриентските фотографии да се промени на следния текст: “Завършването е момент, който се случва само веднъж в живота - и заслужава да бъде запечатан завинаги. Правя индивидуална фотосесия на абитуриента в деня на бала, заедно с близките и роднините му, както и с приятелите. Възможно е и заснемане на семейния бал, което започва със същата индивидуална сесия, но включва и снимки с гостите на арката, а при желание и купонът след това.”
   > В албума абитуриентска фотография в частта какво включва да се променят на “Индивидуална фотосесия в деня на бала” и описание към него “Прави се индивидуална фотосесия на абитуриента, последвана от кадри с близките, роднините и приятелите му. Заснема се и пристигането с автомобил при останалите съученици.”, след това се добавя нова графа “Семеен бал” и описанието към нея е следното: “Протича по същия начин като индивидуалната фотосесия в деня на бала, но включва и посрещането на гостите със снимки пред арката, както и купонът след това.” Нека в тази част да се променят често задаваните въпроси на база тази информация която съм написала сега
-- [x] T-11 · Prom FAQ rewrite from the new "какво включва" info · needs-you · copy I would have to write — drafted below
-  > (same source line as T-10, last sentence: "Нека в тази част да се променят често задаваните въпроси на база тази информация която съм написала сега")
 - [x] T-12 · Other events gallery copy — description, drop "Локация и светлина" · auto · shipped 2026-09-11
   > От галерията “други събития” да се премахне “локация и светлина”
   > Текстът с описанието в галерията “други събития” да се промени на “Тук са всички останали галерии със снимки като портретни сесии, рождени дни, годишнини, годежи, изненади и други. Ако имате идея не се колебайте да ми я споделите, за да я осъществим. Портретните сесии обикновено траят около час, а локацията я избирате вие.”
@@ -83,7 +81,7 @@ purpose — see its note.
   > T-05 Виктория Борисова, адрес: ж.к. Александър Стамболийски 1 Видин
 - [x] T-08 · "30+" → "150+" заснети събития · auto · shipped 2026-09-11
   > T-08 150+ събития
-- [ ] T-11 · Prom FAQ — apply the approved draft · auto (approved 2026-09-11)
+- [x] T-11 · Prom FAQ — apply the approved draft · auto · shipped 2026-09-11
   > Т-11 I approve
 - [ ] T-16 · Remove the "корпоративни" category, plain 404 · auto (confirmed 2026-09-11)
   > T-16 Remove it and maybe we dont need 301 as it is not indexed but if its indexed do 301 but no for now 404
@@ -101,43 +99,6 @@ _Nothing startable. Everything left needs Martin or is blocked — see below._
 ---
 
 # Needs Martin
-
-## T-11 · Prom FAQ rewrite from the new "какво включва" info
-
-**Why** — Viki: "Нека в тази част да се променят често задаваните въпроси на база
-тази информация която съм написала сега." That is copy I would be writing, so it
-parks. **Assumption:** the three current FAQs on `/galerii/abiturienti` are replaced
-wholesale, because two of them ("само за мен, без класа", "груповата фотосесия")
-describe a class-group offering her new text no longer mentions.
-
-Draft, for approval or edits — built only from her T-10 text:
-
-1. **Кога се прави индивидуалната фотосесия?**
-   В деня на бала — преди тръгването, заедно с близките, роднините и приятелите.
-   Заснемам и пристигането с автомобил при останалите съученици.
-2. **Какво е семеен бал?**
-   Протича като индивидуалната фотосесия в деня на бала, но включва и посрещането
-   на гостите със снимки пред арката, а при желание — и купонът след това.
-3. **Какво да облечем за фотосесията?**
-   Официалното облекло за бала, ако вече е готово. Ако не е, работим с каквото ви
-   харесва — важното е да се чувствате добре в него.
-   _(kept from the current FAQ — nothing in the new text contradicts it)_
-
-**Scope** — `src/app/content/services.ts` → `abiturienti.faq`
-
-**Done when**
-- WHEN `/galerii/abiturienti` is prerendered, THE page SHALL contain each approved
-  question and answer (fragments to be fixed once the text is approved)
-- THE page SHALL NOT contain "Може ли сесия само за мен, без класа?"
-- THE page SHALL NOT contain "Колко време отнема груповата фотосесия?"
-- `npm run verify` stays green
-
-**Evidence** — string assertions on `/galerii/abiturienti`, gate output
-
-**Autonomy** — **needs-you.** Approve the draft as is, edit it, or send Viki's own
-wording. If T-17 (no long dashes) is confirmed, the "—" in the draft become " - ".
-
----
 
 ## T-16 · Remove the "корпоративни" gallery
 

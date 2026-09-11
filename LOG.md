@@ -50,15 +50,19 @@ on the button colour?
 
 ## Working on
 
-Next tick: **T-11** (approved prom FAQ), then T-16 (remove корпоративни, 404).
-Loop is on 10 minutes now.
+Next tick: **T-16** (remove the корпоративни category, plain 404) - the last
+auto task. After it, idle until T-18/T-19 get answers, `commit-plan.sh` runs, or
+Intake gets more.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-08 · 150+ заснети събития** — commit "Raise the events figure to Viki's count" —
+- **T-11 · Prom FAQ** — commit "Put the approved prom FAQs on /galerii/abiturienti" —
+  the three approved questions, byte-exact, class-group ones gone; the FAQ under
+  her new "какво включва" is consistent again. Verifier PASS, gate green.
+- **T-08 · 150+ заснети събития** — `01b2c18` —
   homepage credibility line; "30+" gone from the whole build. Verifier PASS.
 - **T-05 · Legal name and address** — `34fbaa6` —
   "Виктория Борисова · ж.к. Александър Стамболийски 1, Видин" in the footer of
