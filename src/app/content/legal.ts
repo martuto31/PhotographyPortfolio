@@ -418,8 +418,8 @@ export const TERMS: LegalDoc = {
     },
     {
       // ЗЗП чл. 57 excludes the 14-day withdrawal right for a service with a fixed
-      // date - but only if it is stated. Says nothing about the deposit on purpose:
-      // that is a business decision, not a legal default.
+      // date - but only if it is stated. The deposit sentence is Martin's decision
+      // (2026-09-12), not a legal default.
       id: 'withdrawal',
       heading: 'Отказ от запазена дата',
       blocks: [
@@ -429,7 +429,7 @@ export const TERMS: LegalDoc = {
         },
         {
           kind: 'p',
-          text: 'Ако все пак се наложи да отмените или да преместите датата, пишете ми възможно най-рано - колкото по-рано знам, толкова по-лесно ще се разберем.',
+          text: 'Ако все пак се наложи да отмените или да преместите датата, пишете ми възможно най-рано - колкото по-рано знам, толкова по-лесно ще се разберем. При отказ от ваша страна платеното капаро не се възстановява - датата е била пазена за вас и не е могла да бъде предложена на друг.',
         },
       ],
     },
