@@ -42,7 +42,7 @@ Each stub keeps Viki's original line(s) underneath, verbatim, so the spec is cop
 from her text and never retyped. Paste order kept, except T-17 which runs last on
 purpose — see its note.
 
-- [ ] T-07 · Homepage hero subtitle · auto
+- [x] T-07 · Homepage hero subtitle · auto · shipped 2026-09-11
   > На началната страница вместо “Документален и спокоен подход - вие преживявате деня си, аз го записвам. Сватби, абитуриентски балове, кръщенета и лични фотосесии В цяла България” нека пише “Заснемам вашите събития в цялата страна. Без позиране и напрежение - вие преживявате деня си, а аз го запечатвам.”
 - [x] T-08 · Increase the "30+ заснети събития" figure · needs-you · blocked: to what number? — specced below
   > Може би вместо “30+ заснети събития” да се увеличи числото

@@ -25,6 +25,12 @@ It is a live prerendered URL, in the sitemap and in the LocalBusiness schema, so
 parked it. Confirm: (1) whole category goes — page, nav, footer, index card, sitemap,
 schema offer; (2) plain 404 is fine, or do you want a 301 to `/galerii`?
 
+### About-me meta description (no task yet)
+The verifier noticed "Документален и спокоен подход" also lives in the About-me
+page's meta description (`src/assets/seo.json`). Viki only asked about the
+homepage, so I left it. Say if you want it rewritten to match her new wording —
+that would be needs-you copy.
+
 ### T-17 · Long dashes (no answer needed unless I guessed wrong)
 I will replace every "—" in visible text with " - ", the way Viki writes it herself,
 and run it **last** so it also sweeps her new family and birthday texts, which
@@ -41,9 +47,9 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-07 · Homepage hero subtitle** (exact text given, one line in
-`intro-section.component.html`). Then T-09 → T-10 → T-12 → T-13 → T-14 → T-15 →
-T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-09 · Wedding gallery copy** — lead, body paragraphs, two
+"какво включва" items, the travel FAQ answer, all from her text. Then T-10 →
+T-12 → T-13 → T-14 → T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -51,7 +57,12 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-01 · Verification gate** — commit "Add the verification gate" — `npm run verify` builds and checks
+- **T-07 · Homepage hero subtitle** — commit "Replace the hero subtitle with Viki's text" —
+  her text landed byte-identical on `/`; old paragraph gone from the whole dist;
+  verifier PASS; gate green.
+- **Copy assertion helper** — `50ecc44` — `node tools/check-text.mjs <route> --has "…" --not "…"`
+  is the proof line for every copy task from here on.
+- **T-01 · Verification gate** — `7f56c51` — `npm run verify` builds and checks
   all 44 routes: 13 checks, 44/44 prerendered, 31 gallery pages, unique titles,
   exits 1 with a per-route message on a broken copy of dist (missing route,
   duplicate title, hero preload on a gallery page, `routerLink` on a `<div>`,
