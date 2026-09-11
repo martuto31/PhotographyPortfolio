@@ -30,23 +30,6 @@ tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
 
-Redesign direction is decided and written up in DESIGN-SPEC.md — tokens, glow recipe, type scale, what came from theme 01 vs 02, what was dropped. Read it before touching any visual work.
-Preview artifact, shared with Viki: https://claude.ai/code/artifact/e277ac36-238b-459d-9974-bb89aeb8f9cc
-BLOCKED on Viki: she must name one button colour of four (Костено бяло / Бледо шампанско / Пепелна роза / Само контур). Recommendation is Костено бяло. Nothing visual gets applied until she answers.
-When she answers: apply the direction to every page in one pass — home, galleries index, four service pages, about, contacts. Not page by page.
-Two things must survive that pass, both shipped for indexing: the sibling-gallery strip at the bottom of gallery.component.html, and the real <img> tags seeded from src/app/generated/galleries.ts (first row eager, first photo preloaded).
-
-
-T-06 - Add the sentence yes
-
-T-17b and 16b i dont understand can you run it and verify its good and about the dash you can make the decision
-
-i odnt understand about me meta description - update it if about you was updated?
-
-T-10 change to match the new text yes
-
-For the design there was redesign but unfinished, here is the artifact: design spec md  and also she picked the color and website for reference so i dont have clear instructions about that maybe scope them and decide or give me the decision
-
 
 ---
 
@@ -101,10 +84,28 @@ purpose — see its note.
   > Т-11 I approve
 - [x] T-16 · Remove the "корпоративни" category · auto · part A shipped 2026-09-11; T-16b under Blocked
   > T-16 Remove it and maybe we dont need 301 as it is not indexed but if its indexed do 301 but no for now 404
-- [ ] T-18 · Button colour: "костено бяло" (bone white) from the design artifact · needs-you · blocked: which artifact / exact value? This is Viki's answer to the "button colour" blocker on "Apply the merged design to every page"
+- [x] T-18 · Button colour: "костено бяло" · answered - see T-20
   > Цвят на бутоните костено бяло от артефакта
-- [ ] T-19 · Design reference: anastasiiakharyna.com - Viki likes this design · needs-you · a reference, not a task yet: what to take from it, and does it change the merged design?
+- [x] T-19 · Design reference: anastasiiakharyna.com · decided - see below
   > Вики - Сайта на който ми харесва дизайна https://www.anastasiiakharyna.com/
+- [ ] T-20 · Apply the redesign direction (DESIGN-SPEC.md) to every page in one pass, button = Костено бяло `#F1ECE3` · auto (Martin: "scope them and decide") · after T-17b/T-16b/T-06b/T-10b, so it starts from a settled tree
+  > Redesign direction is decided and written up in DESIGN-SPEC.md — tokens, glow recipe, type scale, what came from theme 01 vs 02, what was dropped. Read it before touching any visual work.
+  > Preview artifact, shared with Viki: https://claude.ai/code/artifact/e277ac36-238b-459d-9974-bb89aeb8f9cc
+  > BLOCKED on Viki: she must name one button colour of four (Костено бяло / Бледо шампанско / Пепелна роза / Само контур). Recommendation is Костено бяло. Nothing visual gets applied until she answers.
+  > When she answers: apply the direction to every page in one pass — home, galleries index, four service pages, about, contacts. Not page by page.
+  > Two things must survive that pass, both shipped for indexing: the sibling-gallery strip at the bottom of gallery.component.html, and the real <img> tags seeded from src/app/generated/galleries.ts (first row eager, first photo preloaded).
+  > For the design there was redesign but unfinished, here is the artifact: design spec md  and also she picked the color and website for reference so i dont have clear instructions about that maybe scope them and decide or give me the decision
+- [x] T-18 · Button colour · answered by Viki: Костено бяло - folded into T-20
+- [x] T-19 · Design reference anastasiiakharyna.com · decided: mood reference only, the merged direction in DESIGN-SPEC.md stands (Viki picked a button from it, i.e. accepted it); nothing from that site is copied unless she names an element
+- [ ] T-06b · Deposit sentence in the refund clause · auto (Martin: "Add the sentence yes") · assumption: капарото не се възстановява at the client's cancellation - the only reading that gives the clause a point
+  > T-06 - Add the sentence yes
+- [x] T-17b · Long dashes in the former held-back files + sitemap image titles · auto · shipped 2026-09-12 (attribution: dash dropped)
+- [x] T-16b · Corporate out of the slug maps, LocalBusiness offer, sitemap generator, `<Type>` lists; unknown category slug → 404 · auto · shipped 2026-09-12
+  > T-17b and 16b i dont understand can you run it and verify its good and about the dash you can make the decision
+- [x] T-07 follow-up · About-me meta description · closed, no change: the About page itself was not edited, so its meta still describes it; only the homepage hero changed
+  > i odnt understand about me meta description - update it if about you was updated?
+- [ ] T-10b · /galerii teaser for abiturienti → "Индивидуална фотосесия в деня на бала и семеен бал." · auto (Martin approved me writing it; exact text in LOG for veto)
+  > T-10 change to match the new text yes
 
 ---
 
@@ -126,13 +127,10 @@ Not startable. Listed so they are not rediscovered every week.
 
 | Task | Blocked on | Who |
 |---|---|---|
-| Apply the merged design to every page | button colour | Viki |
 | Pricing page `/tseni` | package prices | Viki |
 | Venue / town / date on gallery cards | gallery spreadsheet | Viki |
 | Gallery page texts, 80–150 words each | gallery spreadsheet | Viki |
 | Responsive `srcset` and real image dimensions | R2 token 403s | Martin |
-| T-17b · long dashes in the held-back SEO files (H1s, gallery titles, alt text, og:site_name, sitemap image titles) | `bash commit-plan.sh` | Martin |
-| T-16b · corporate category out of the held-back files (slug maps, LocalBusiness offer, sitemap generator, `<Type>` lists) - until then `/galerii/korporativni` is an empty page, not a 404 | `bash commit-plan.sh` | Martin |
 | Testimonials | real quotes | Viki |
 
 The moment the spreadsheet lands, the two gallery tasks become roughly 60 small

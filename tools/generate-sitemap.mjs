@@ -8,7 +8,7 @@
 // Why this is generated rather than hand-written:
 //   - Every subgallery (Weddings/Лора и Асен, ...) is its own indexable page. Maintaining
 //     ~30 of those by hand guarantees drift.
-//   - Categories with no photos yet (Baptisms, Corporate, ...) must stay OUT of the
+//   - Categories with no photos yet (Baptisms, Birthdays, ...) must stay OUT of the
 //     sitemap; submitting empty pages costs crawl budget and reads as thin content.
 //     They come back automatically once the manifest has content under their prefix.
 //
@@ -38,7 +38,6 @@ const TYPE_TO_SLUG = {
   'Graduates': 'abiturienti',
   'Personal': 'lichni',
   'Baptisms': 'krushteneta',
-  'Corporate': 'korporativni',
   'Birthdays': 'rojdeni-dni',
   'Family': 'semeyni',
 };
@@ -49,7 +48,6 @@ const CATEGORY_PRIORITY = {
   'Graduates': { priority: '0.9', changefreq: 'weekly' },
   'Personal': { priority: '0.8', changefreq: 'weekly' },
   'Baptisms': { priority: '0.8', changefreq: 'monthly' },
-  'Corporate': { priority: '0.8', changefreq: 'monthly' },
   'Birthdays': { priority: '0.7', changefreq: 'monthly' },
   'Family': { priority: '0.7', changefreq: 'monthly' },
 };

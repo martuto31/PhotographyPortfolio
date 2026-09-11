@@ -27,7 +27,6 @@ export const SLUG_TO_TYPE: Record<string, string> = {
   'abiturienti': 'Graduates',
   'lichni': 'Personal',
   'krushteneta': 'Baptisms',
-  'korporativni': 'Corporate',
   'rojdeni-dni': 'Birthdays',
   'semeyni': 'Family',
   // Legacy direct values (when arriving via old EN routes that didn't redirect)
@@ -41,7 +40,6 @@ const TYPE_LABEL_BG: Record<string, { heading: string; cardTag: string }> = {
   'Graduates': { heading: 'Абитуриентски', cardTag: 'АБИТУРИЕНТИ' },
   'Personal': { heading: 'Лични', cardTag: 'ПЕРСОНАЛНИ' },
   'Baptisms': { heading: 'Кръщенета', cardTag: 'КРЪЩЕНЕТА' },
-  'Corporate': { heading: 'Корпоративни', cardTag: 'КОРПОРАТИВНИ' },
   'Birthdays': { heading: 'Рождени дни', cardTag: 'РОЖДЕНИ ДНИ' },
   'Family': { heading: 'Семейни', cardTag: 'СЕМЕЙНИ' },
 };
@@ -52,7 +50,6 @@ const TYPE_ALT_PREFIX: Record<string, string> = {
   'Graduates': 'Абитуриентска фотосесия - ',
   'Personal': 'Лична фотосесия - ',
   'Baptisms': 'Фотосесия от кръщене - ',
-  'Corporate': 'Корпоративно събитие - ',
   'Birthdays': 'Рожден ден - ',
   'Family': 'Семейна фотосесия - ',
 };
@@ -153,7 +150,6 @@ export class GalleriesCardsComponent implements OnInit {
       'Graduates': { h1: 'Фотограф за абитуриентски бал - София и Видин', sub: 'Галерии с абитуриентски фотосесии от Виктория Борисова' },
       'Personal': { h1: 'Други събития - София и Видин', sub: 'Галерии с индивидуални фотосесии, рождени дни, кръщенета и други събития от Виктория Борисова' },
       'Baptisms': { h1: 'Фотограф за кръщене - София и Видин', sub: 'Кръщенета и семейни тайнства' },
-      'Corporate': { h1: 'Корпоративен фотограф - София и Видин', sub: 'Бизнес събития, конференции и тийм билдинги' },
       'Birthdays': { h1: 'Фотограф за рожден ден - София и Видин', sub: 'Детски рождени дни, юбилеи и семейни празненства' },
       'Family': { h1: 'Семеен фотограф - София и Видин', sub: 'Семейни и детски фотосесии' },
     };

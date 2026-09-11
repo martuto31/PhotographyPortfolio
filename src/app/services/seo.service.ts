@@ -214,16 +214,22 @@ export class SEOService {
 
         const index = routerUrl.includes('/') ? routerUrl.indexOf('/') : routerUrl.length;
         let key = routerUrl.substring(0, index) as keyof SEOData;
+        let unknownCategory = false;
 
         // Two-segment keys: galleries/X, galerii/X, galeriya/X, gallery/X
         if (key === 'galleries' || key === 'galerii' || key === 'galeriya' || key === 'gallery') {
-          const twoSegment = routerUrl.split('/').slice(0, 2).join('/');
+          const segments = routerUrl.split('/');
+          const twoSegment = segments.slice(0, 2).join('/');
           if (this.seoData[twoSegment]) {
             key = twoSegment;
+          } else if (key === 'galerii' && segments.length > 1) {
+            // /galerii/<unknown> is the not-found page (the route's canMatch sends it
+            // there), so it must not inherit the /galerii index meta and get indexed.
+            unknownCategory = true;
           }
         }
 
-        if (this.seoData[key]) {
+        if (this.seoData[key] && !unknownCategory) {
           this.generate(this.seoData[key]);
         } else {
           this.createDescriptionAndKeywords(this.seoData['not-found']);

@@ -114,7 +114,7 @@ without one returns a hard 404 in production while working perfectly in `npm sta
 **Slug ↔ type mapping** lives in two places that must stay in sync:
 `SLUG_TO_TYPE` in `galleries-cards.component.ts` and `translateSlugToS3Prefix()` in
 `gallery.component.ts`. Slugs: `svatbi=Weddings, abiturienti=Graduates, lichni=Personal,
-krushteneta=Baptisms, korporativni=Corporate, rojdeni-dni=Birthdays, semeyni=Family`.
+krushteneta=Baptisms, rojdeni-dni=Birthdays, semeyni=Family`.
 
 ---
 

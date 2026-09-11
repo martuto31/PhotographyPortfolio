@@ -18,7 +18,6 @@ const TYPE_HEADING: Record<string, { noun: string; category: string }> = {
   'abiturienti': { noun: 'Абитуриентска фотосесия', category: 'Абитуриентски галерии' },
   'lichni': { noun: 'Фотосесия', category: 'Други събития' },
   'krushteneta': { noun: 'Фотосесия от кръщене', category: 'Кръщенета' },
-  'korporativni': { noun: 'Корпоративно събитие', category: 'Корпоративни събития' },
   'rojdeni-dni': { noun: 'Рожден ден', category: 'Рождени дни' },
   'semeyni': { noun: 'Семейна фотосесия', category: 'Семейни галерии' },
 };
@@ -29,7 +28,6 @@ const SLUG_TO_PREFIX: Record<string, string> = {
   'abiturienti': 'Graduates',
   'lichni': 'Personal',
   'krushteneta': 'Baptisms',
-  'korporativni': 'Corporate',
   'rojdeni-dni': 'Birthdays',
   'semeyni': 'Family',
 };

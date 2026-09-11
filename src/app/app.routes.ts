@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlSegment } from '@angular/router';
+
+import { SERVICE_BY_SLUG } from './content/services';
 
 export const routes: Routes = [
     {
@@ -20,6 +22,10 @@ export const routes: Routes = [
     },
     {
         path: 'galerii/:galleryType',
+        // A category exists iff it has service copy. Anything else - a typo, or a
+        // category that was removed - falls through to the not-found route and
+        // prerenders as a real 404, instead of a heading over an empty grid.
+        canMatch: [(_route: unknown, segments: UrlSegment[]) => Object.hasOwn(SERVICE_BY_SLUG, segments[1]?.path ?? '')],
         loadComponent: () => import('./components/galleries-cards/galleries-cards.component').then(c => c.GalleriesCardsComponent),
         // No static title: GalleriesCardsComponent builds it per category from
         // SERVICE_TITLES. Angular's TitleStrategy only overrides when a route

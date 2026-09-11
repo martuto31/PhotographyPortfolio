@@ -52,7 +52,7 @@ npm run deploy      # 3. build + push to Firebase Hosting
 ```
 
 **Step 1 — staging.** `<Type>` must be one of the English keys:
-`Weddings, Graduates, Personal, Baptisms, Corporate, Birthdays, Family`.
+`Weddings, Graduates, Personal, Baptisms, Birthdays, Family`.
 `<Gallery Name>` is what visitors see and becomes the URL, so write it the way it should
 read: `to-upload/Weddings/Лора и Асен/`. Cyrillic, spaces and `&` are all fine — they get
 percent-encoded per path segment. Optionally drop in a `cover.jpg` (any `cover.*`) to pick
@@ -70,7 +70,7 @@ uploading anything, with `npm run publish -- --manifest-only`.
 
 ### Adding a whole new category
 
-The four photo-less types (`Baptisms, Corporate, Birthdays, Family`) already exist in the
+The three photo-less types (`Baptisms, Birthdays, Family`) already exist in the
 code, already have a written service page, and are already in the sitemap. Publishing photos
 under their prefix makes the cards appear above that copy — nothing to change.
 

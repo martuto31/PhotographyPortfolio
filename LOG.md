@@ -9,43 +9,26 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-06 · Refund clause — veto window
-You green-lit it unseen, so here is what is on `/usloviya` now, as its own
-section "Отказ от запазена дата" after "Запитвания, дати и цени":
+### T-06 · Refund clause - veto window
+On `/usloviya` as "Отказ от запазена дата". The deposit sentence you approved
+("Add the sentence yes") goes in with T-06b next tick - exact wording will be
+here. Nothing is live until you deploy.
 
-> Услугите ми се изпълняват на конкретна дата - деня на вашето събитие или на
-> фотосесията. Затова, съгласно чл. 57 от Закона за защита на потребителите, правото
-> на отказ от договора в 14-дневен срок не се прилага, след като датата е запазена.
->
-> Ако все пак се наложи да отмените или да преместите датата, пишете ми възможно
-> най-рано - колкото по-рано знам, толкова по-лесно ще се разберем.
+### T-10b · /galerii teaser for abiturienti - veto window
+You approved me writing it. It will read: "Индивидуална фотосесия в деня на
+бала и семеен бал." Say so if you want different words.
 
-It deliberately says nothing about whether the капаро is refunded - that is a
-business decision. Say the word and I add a sentence. Nothing is live until you
-deploy.
-
-### T-17b + T-16b · the held-back SEO files - blocked on you
-Both leftovers live in the five files `commit-plan.sh` holds: the remaining long
-dashes (H1s, gallery titles, alt text, og:site_name) and the corporate leftovers
-(404 for `/galerii/korporativni`, the JSON-LD offer, the sitemap generator).
-**Run `bash commit-plan.sh`** - or say "edit them anyway" - and both are one
-tick each. Also: the homepage testimonial attribution now reads
-"- Виктория Борисова"; say if it should keep a dash of its own.
-
-### About-me meta description (no task yet)
-"Документален и спокоен подход" still lives in the About-me meta description
-(`src/assets/seo.json`). Say if you want it rewritten to match her new wording.
-
-### T-10 follow-up (no task yet)
-The `/galerii` index teaser still says "Индивидуални и групови фотосесии" for
-abiturienti. Want it changed to match her new text? That is copy, so it waits.
-
-### T-18 / T-19 · Design (no task yet)
-Viki's two lines are stubbed: buttons "костено бяло" from "the artifact", and
-anastasiiakharyna.com as the design she likes. Both are design, so they park.
-To start T-18 I need the artifact (link or the hex value). For T-19: what should
-be taken from that site - and does it replace the merged design that was waiting
-on the button colour?
+### T-20 · The redesign pass - my decision, as you asked
+- Direction: `DESIGN-SPEC.md` as written. Viki chose a button from that preview,
+  which is her accepting the direction.
+- Button: Костено бяло `#F1ECE3`, her answer.
+- anastasiiakharyna.com: mood reference only. Nothing from it is copied unless
+  she names an element ("the big full-width photo", "the thin serif menu"…).
+- One pass over every page, then you look at one preview build, not page by
+  page. The sibling strip and the seeded `<img>` tags survive - the gate checks
+  both on every build.
+- Order: T-06b and T-10b first (two quick ticks), then T-20 starts. It will take
+  several ticks; `Working on` will say where it is.
 
 `WORKER.md` is untracked - commit it yourself or tell me to.
 
@@ -53,15 +36,28 @@ on the button colour?
 
 ## Working on
 
-**The auto queue is empty again.** Idle until T-18/T-19 get answers,
-`commit-plan.sh` runs (T-16b, T-17b), or Intake gets more.
+Next tick: **T-06b** (deposit sentence), then **T-10b** (teaser), then **T-20**
+(the redesign pass, several ticks). Loop is on 15 minutes.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-16 · Remove корпоративни, part A** — commit "Drop the corporate category" —
+- **T-16b · Corporate, part B** — commit "Finish removing the corporate category" —
+  slug maps, LocalBusiness offer + description + keywords, sitemap generator,
+  docs; `/galerii/<anything unknown>` is now a real 404 (noindex,
+  prerender-status-code 404) via a route guard - proven on a throwaway build for
+  `korporativni` and `constructor`. Verifier failed the first guard (`in`
+  admitted prototype names), fixed with `Object.hasOwn`, PASS on retry.
+- **T-17b · Long dashes, part B** — `53e2fa1` — the 26 dashes in the SEO-pass
+  files and the sitemap image titles; only two invisible comments still carry
+  one. Testimonial attribution: dash dropped, my call.
+- **Triaged your answers of the night:** T-04 closed (you keep `prod`); T-18
+  answered (Костено бяло); T-19 decided (mood only); About-me meta closed - the
+  About page itself was never edited, so its meta still fits it; T-06b, T-10b
+  queued; T-20 scoped.
+- **T-16 · Remove корпоративни, part A** — `965a79b` —
   gone from the service copy, /galerii index, footer, meta, type map, routes
   file and sitemap; 43 routes; no link or label to it on any page. Verifier
   PASS. **Part B waits on `commit-plan.sh`:** until then `/galerii/korporativni`

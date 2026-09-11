@@ -64,7 +64,7 @@ Structure (the gallery folders are already created for you):
 to-upload/<Type>/<Gallery Name>/your-photos.jpg
             │          │
             │          └─ MUST match the gallery name shown on the site
-            └─ Weddings | Graduates | Personal | Baptisms | Corporate | Birthdays | Family
+            └─ Weddings | Graduates | Personal | Baptisms | Birthdays | Family
 ```
 
 Steps:

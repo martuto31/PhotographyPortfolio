@@ -19,7 +19,7 @@ The site reads `manifest.json` at runtime, so **adding photos needs no code chan
 ## Adding / updating a gallery
 
 1. Put full-res originals in this layout (the `<Type>` folder must be one of
-   `Weddings`, `Graduates`, `Personal`, `Baptisms`, `Corporate`, `Birthdays`, `Family`):
+   `Weddings`, `Graduates`, `Personal`, `Baptisms`, `Birthdays`, `Family`):
    ```
    to-upload/
      Weddings/

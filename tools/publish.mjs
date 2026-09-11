@@ -20,7 +20,7 @@
 // the bucket does not have.
 //
 // The <Type> folder must be the English S3-style prefix the app uses:
-//   Weddings, Graduates, Personal, Baptisms, Corporate, Birthdays, Family
+//   Weddings, Graduates, Personal, Baptisms, Birthdays, Family
 // (see SLUG_TO_TYPE in galleries-cards.component.ts).
 //
 // ---- Responsive derivatives ---------------------------------------------------
