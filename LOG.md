@@ -48,9 +48,10 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-15 · Birthdays gallery copy** — description, swap the
-"заведение" FAQ for "Колко снимки ще получим?". Then T-17 (dashes), then
-T-02 (og:image) and T-03 (sitemap in publish). T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+All of Viki's copy that could ship without you is shipped (T-07, T-09, T-10,
+T-12, T-13, T-14, T-15). Next tick: **T-17 · Remove long dashes** across all
+visible text — the last of her batch. Then T-02 (og:image) and T-03 (sitemap
+in publish). T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -58,7 +59,11 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-14 · Family gallery copy** — commit "Put Viki's family copy on /galerii/semeyni" —
+- **T-15 · Birthdays gallery copy** — commit "Put Viki's birthdays copy on /galerii/rojdeni-dni" —
+  description in four paragraphs (her block byte-identical when rejoined, three
+  "—" kept for T-17), "заведение" FAQ swapped for "Колко снимки ще получим?" in
+  the same slot. 12/12 assertions, verifier PASS, gate green.
+- **T-14 · Family gallery copy** — `8596a66` —
   description (her two "—" kept for T-17), location and processing items, the
   clothes answer (+ final full stop); lead and other items untouched. 13/13
   assertions, verifier PASS, gate green.
