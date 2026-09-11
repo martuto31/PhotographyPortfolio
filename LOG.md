@@ -50,15 +50,17 @@ on the button colour?
 
 ## Working on
 
-Next tick: **T-08** (30+ → 150+), then T-11 (approved FAQ), then T-16 (remove
-корпоративни, 404), one per tick. Loop is on 10 minutes now.
+Next tick: **T-11** (approved prom FAQ), then T-16 (remove корпоративни, 404).
+Loop is on 10 minutes now.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-05 · Legal name and address** — commit "Publish her name and contact address" —
+- **T-08 · 150+ заснети събития** — commit "Raise the events figure to Viki's count" —
+  homepage credibility line; "30+" gone from the whole build. Verifier PASS.
+- **T-05 · Legal name and address** — `34fbaa6` —
   "Виктория Борисова · ж.к. Александър Стамболийски 1, Видин" in the footer of
   all 44 pages and as an "Адрес" row on both legal pages; the strings live once,
   in `contact.ts`. Verifier PASS (44/44), gate green.

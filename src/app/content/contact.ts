@@ -40,11 +40,12 @@ export const CONTACT = {
   areas: 'София · Видин · цяла България',
 } as const;
 
-// Above-the-fold credibility line. Every figure here is verifiable from the site
-// itself — 31 published galleries and the "над четири години" in her own about-me
-// copy. Nothing is rounded up.
+// Above-the-fold credibility line. "4+" is the "над четири години" in her own
+// about-me copy. "150+" is Viki's own count of events shot (2026-09-11) — the
+// site shows 31 galleries because most clients never publish theirs, so this one
+// figure is hers to stand behind, not derivable from the site.
 export const CREDENTIALS = [
   { value: '4+', label: 'години зад обектива' },
-  { value: '30+', label: 'заснети събития' },
+  { value: '150+', label: 'заснети събития' },
   { value: '24ч', label: 'отговор на запитване' },
 ] as const;

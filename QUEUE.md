@@ -44,7 +44,6 @@ purpose — see its note.
 
 - [x] T-07 · Homepage hero subtitle · auto · shipped 2026-09-11
   > На началната страница вместо “Документален и спокоен подход - вие преживявате деня си, аз го записвам. Сватби, абитуриентски балове, кръщенета и лични фотосесии В цяла България” нека пише “Заснемам вашите събития в цялата страна. Без позиране и напрежение - вие преживявате деня си, а аз го запечатвам.”
-- [x] T-08 · Increase the "30+ заснети събития" figure · needs-you · blocked: to what number? — specced below
   > Може би вместо “30+ заснети събития” да се увеличи числото
 - [x] T-09 · Wedding gallery copy — lead, body, "какво включва" ×2, FAQ travel answer · auto · shipped 2026-09-11
   > Като отвориш сватбената галерия вместо “Сватбата минава по-бързо, отколкото очаквате. Моята работа е да ви я върна такава, каквато с била наистина.” Нека бъде “Сватбеният ден минава по-бързо, отколкото очаквате - с много вълнение, притеснение и сълзи от щастие. Моята работа е да уловя всяка ваша емоция такава, каквато е, за да можете после да преживявате този ден отново и отново, когато погледнете снимките." Нека пише “Всяка сватба, която виждате тук, е различна - защото хората в нея са различни. Няма да ви режисирам или карам да позирате с часове. Ако имате в главата си кадър, който сте видели някъде и не спирате да мислите за него - изпратете ми го предварително и ще го пресъздадем. Но най-много обичам да запечатвам онези непринудени моменти, които не се режисират. Денят е ваш, затова и планът е ваш. Препоръчвам ви да разпределите часовете така, че да не бързате и да имате спокойствие през целия ден. Обикновено денят изглежда така: сутринта започва с подготовката - детайлите, които правят деня истински ваш (бижута, пръстени, часовници, обувки, покана, парфюм), после гражданският брак, а ако имате и църковен ритуал - и той. Следват снимки с кумовете и шаферите, ако има такива и накрая - само вие двамата. Разбира се, имате дете или домашен любимец винаги е добре дошъл в кадъра. Вечерта продължава в ресторанта. Освен танците и купона, там се случват и малките неща, които правят всяка българска сватба. Работя основно в София и Видин, но пътувам в цяла България. Ако сватбата ви е другаде - просто ми пишете и ще намерим решение.”
@@ -82,7 +81,7 @@ purpose — see its note.
   > T-06 thats okay do you need green light? if so yes
 - [x] T-05 · Legal name and contact address in the footer and legal pages · auto · shipped 2026-09-11
   > T-05 Виктория Борисова, адрес: ж.к. Александър Стамболийски 1 Видин
-- [ ] T-08 · "30+" → "150+" заснети събития · auto (number supplied)
+- [x] T-08 · "30+" → "150+" заснети събития · auto · shipped 2026-09-11
   > T-08 150+ събития
 - [ ] T-11 · Prom FAQ — apply the approved draft · auto (approved 2026-09-11)
   > Т-11 I approve
@@ -102,29 +101,6 @@ _Nothing startable. Everything left needs Martin or is blocked — see below._
 ---
 
 # Needs Martin
-
-## T-08 · Increase the "30+ заснети събития" figure
-
-**Why** — Viki wants the number raised, but did not say to what. It is a trust
-figure on the homepage credibility line, and the comment in `contact.ts` says
-every figure there is verifiable ("Nothing is rounded up") — so I am not guessing.
-**Assumption:** only the number changes; the label "заснети събития" stays.
-
-**Scope** — `src/app/content/contact.ts` (`CREDENTIALS`, the `'30+'` entry)
-
-**Done when**
-- WHEN `/` is prerendered, THE page SHALL contain "<N>+" next to "заснети събития",
-  with N the number Martin supplies
-- THE page SHALL NOT contain "30+"
-- `npm run verify` stays green
-
-**Evidence** — the two string assertions on `/`, gate output
-
-**Autonomy** — **needs-you.** One question: what number? (The snapshot has 31
-published galleries; her about-me says "над четири години". If you want a figure
-that is still verifiable from the site, say so and I will count.)
-
----
 
 ## T-11 · Prom FAQ rewrite from the new "какво включва" info
 
