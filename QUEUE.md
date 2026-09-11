@@ -97,19 +97,20 @@ purpose — see its note.
   > For the design there was redesign but unfinished, here is the artifact: design spec md  and also she picked the color and website for reference so i dont have clear instructions about that maybe scope them and decide or give me the decision
 - [x] T-18 · Button colour · answered by Viki: Костено бяло - folded into T-20
 - [x] T-19 · Design reference anastasiiakharyna.com · decided: mood reference only, the merged direction in DESIGN-SPEC.md stands (Viki picked a button from it, i.e. accepted it); nothing from that site is copied unless she names an element
-- [ ] T-06b · Deposit sentence in the refund clause · auto (Martin: "Add the sentence yes") · assumption: капарото не се възстановява at the client's cancellation - the only reading that gives the clause a point
+- [x] T-06b · Deposit sentence in the refund clause · auto · shipped 2026-09-12
   > T-06 - Add the sentence yes
 - [x] T-17b · Long dashes in the former held-back files + sitemap image titles · auto · shipped 2026-09-12 (attribution: dash dropped)
 - [x] T-16b · Corporate out of the slug maps, LocalBusiness offer, sitemap generator, `<Type>` lists; unknown category slug → 404 · auto · shipped 2026-09-12
   > T-17b and 16b i dont understand can you run it and verify its good and about the dash you can make the decision
 - [x] T-07 follow-up · About-me meta description · closed, no change: the About page itself was not edited, so its meta still describes it; only the homepage hero changed
   > i odnt understand about me meta description - update it if about you was updated?
-- [ ] T-10b · /galerii teaser for abiturienti → "Индивидуална фотосесия в деня на бала и семеен бал." · auto (Martin approved me writing it; exact text in LOG for veto)
+- [x] T-10b · /galerii teaser for abiturienti · auto · shipped 2026-09-12
   > T-10 change to match the new text yes
 
 ---
 
 # Ready
+
 
 _Nothing startable. Everything left needs Martin or is blocked — see below._
 

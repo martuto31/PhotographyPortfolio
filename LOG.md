@@ -9,14 +9,16 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-06 · Refund clause - veto window
-On `/usloviya` as "Отказ от запазена дата". The deposit sentence you approved
-("Add the sentence yes") goes in with T-06b next tick - exact wording will be
-here. Nothing is live until you deploy.
+### T-06b · Deposit sentence - veto window
+Now on `/usloviya`, at the end of the "Отказ от запазена дата" section:
 
-### T-10b · /galerii teaser for abiturienti - veto window
-You approved me writing it. It will read: "Индивидуална фотосесия в деня на
-бала и семеен бал." Say so if you want different words.
+> При отказ от ваша страна платеното капаро не се възстановява - датата е била
+> пазена за вас и не е могла да бъде предложена на друг.
+
+It covers cancellation only; moving a date stays "we will work it out".
+
+### T-10b · /galerii teaser - veto window
+Abiturienti now reads "Индивидуална фотосесия в деня на бала и семеен бал."
 
 ### T-20 · The redesign pass - my decision, as you asked
 - Direction: `DESIGN-SPEC.md` as written. Viki chose a button from that preview,
@@ -36,15 +38,18 @@ You approved me writing it. It will read: "Индивидуална фотосе
 
 ## Working on
 
-Next tick: **T-06b** (deposit sentence), then **T-10b** (teaser), then **T-20**
-(the redesign pass, several ticks). Loop is on 15 minutes.
+Next tick: **T-20 · the redesign pass** starts - first the scope and plan get
+written into `QUEUE.md`, then tokens and shared styles, then the pages, one
+preview build at the end. Several ticks; this line will say where it is.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-16b · Corporate, part B** — commit "Finish removing the corporate category" —
+- **T-06b · Deposit sentence** — commit "Say the deposit stays when a booked date is cancelled" — verifier PASS.
+- **T-10b · /galerii teaser** — commit "Match the prom teaser to the new offering" — verifier PASS.
+- **T-16b · Corporate, part B** — `c99ab6e` —
   slug maps, LocalBusiness offer + description + keywords, sitemap generator,
   docs; `/galerii/<anything unknown>` is now a real 404 (noindex,
   prerender-status-code 404) via a route guard - proven on a throwaway build for
