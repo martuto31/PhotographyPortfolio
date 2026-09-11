@@ -48,8 +48,8 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-12 · Other events gallery copy** — description, drop the
-"Локация и светлина" item. Then T-13 → T-14 → T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-13 · Christening gallery copy** — description, three "какво
+включва" texts, first FAQ answer. Then T-14 → T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -57,7 +57,10 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-10 · Prom gallery copy** — commit "Put Viki's prom copy on /galerii/abiturienti" —
+- **T-12 · Other events gallery copy** — commit "Put Viki's other-events copy on /galerii/lichni" —
+  description byte-identical, "Локация и светлина" item gone (three remain),
+  lead untouched. 8/8 assertions, verifier PASS, gate green.
+- **T-10 · Prom gallery copy** — `b0fd56a` —
   description paragraph and a two-item "Какво включва" list, byte-identical to
   her text; the lead under the H1 untouched. 12/12 assertions, verifier PASS,
   gate green. **Until T-11 is approved the FAQ under it still says "преди бала"
