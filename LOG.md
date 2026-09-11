@@ -48,8 +48,8 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-13 · Christening gallery copy** — description, three "какво
-включва" texts, first FAQ answer. Then T-14 → T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-14 · Family gallery copy** — description, location and
+processing items, the "какво да облечем" answer. Then T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -57,7 +57,12 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-12 · Other events gallery copy** — commit "Put Viki's other-events copy on /galerii/lichni" —
+- **T-13 · Christening gallery copy** — commit "Put Viki's christening copy on /galerii/krushteneta" —
+  description, three "какво включва" texts and the first FAQ answer; "Семейни
+  кадри" and the lead untouched. Three of her strings got only a capital first
+  letter / final full stop to match their siblings — no word changed. 14/14
+  assertions, verifier PASS, gate green.
+- **T-12 · Other events gallery copy** — `75130ba` —
   description byte-identical, "Локация и светлина" item gone (three remain),
   lead untouched. 8/8 assertions, verifier PASS, gate green.
 - **T-10 · Prom gallery copy** — `b0fd56a` —
