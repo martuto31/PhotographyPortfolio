@@ -30,6 +30,9 @@ tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
 
+Цвят на бутоните костено бяло от артефакта
+
+Вики - Сайта на който ми харесва дизайна https://www.anastasiiakharyna.com/
 
 ---
 
@@ -71,10 +74,23 @@ purpose — see its note.
 - [x] T-15 · Birthdays gallery copy — description, FAQ swap · auto · shipped 2026-09-11
   > Описанието на галерията “рождени дни” да се промени на “След години остава едно нещо от всеки празник — снимките. Не подредените, а тези, в които наистина сте вие: смехът точно преди да духнете свещите, децата, хванати по средата на игра, бабата, която тайно бърше сълза. На детските партита започваме със снимки на детето с родителите, после и с останалите деца, докато всички са още подредени и усмихнати. Оттам нататък оставям нещата да се случват сами - духването на свещичките, желанието, тортата, игрите. Най-хубавите моменти обикновено се случват, докато никой не гледа към обектива. При юбилеи и по-официални тържества е малко по-различно — има тостове, речи и общи снимки, които трябва да се организират, преди гостите да започнат да се разотиват. Ако искате, поемам и тази роля, за да не се налага на вас да мислите за това в деня на празника. Заснемам детски партита, кръгли годишнини, семейни събирания и фирмени тържества — в София, Видин и страната.”
   > В галерията “рождени дни” в графата “често задавани въпроси” въпросът “може ли да снимате в заведение” да се премахне и да се сложи следния въпрос и отговор: “Колко снимки ще получим? Без ограничение — получавате всеки сполучлив кадър от деня, не предварително зададен брой.”
-- [x] T-16 · Remove the "корпоративни" gallery · needs-you · deletes a live URL — specced below
+- [x] T-16 · Remove the "корпоративни" gallery · needs-you · deletes a live URL — specced below; answered, see below
   > Галерията “корпоративни” да се премахне
 - [x] T-17 · Remove long dashes from all visible text · auto · part A shipped 2026-09-11; T-17b (held-back SEO files) under Blocked
   > Махане на дългите тирета
+
+- [x] T-04 · Delete the dead `prod` branch · closed — Martin keeps `prod` and works there himself
+  > dont delete prod branch ill do myself the work there
+- [x] T-06 · Refund clause for booked dates · auto · shipped 2026-09-11 (wording in LOG for veto)
+  > T-06 thats okay do you need green light? if so yes
+- [ ] T-05 · Legal name and contact address in the footer and legal pages · auto (data supplied 2026-09-11)
+  > T-05 Виктория Борисова, адрес: ж.к. Александър Стамболийски 1 Видин
+- [ ] T-08 · "30+" → "150+" заснети събития · auto (number supplied)
+  > T-08 150+ събития
+- [ ] T-11 · Prom FAQ — apply the approved draft · auto (approved 2026-09-11)
+  > Т-11 I approve
+- [ ] T-16 · Remove the "корпоративни" category, plain 404 · auto (confirmed 2026-09-11)
+  > T-16 Remove it and maybe we dont need 301 as it is not indexed but if its indexed do 301 but no for now 404
 
 ---
 
@@ -85,26 +101,6 @@ _Nothing startable. Everything left needs Martin or is blocked — see below._
 ---
 
 # Needs Martin
-
-## T-04 · Delete the dead `prod` branch
-
-**Why** — `prod` has been stuck in June since deploys moved to `master`. It is a
-loaded gun: one wrong deploy target and three months of work disappears from the
-live site.
-
-**Scope** — git only, no code
-
-**Done when**
-- THE local and remote `prod` branches SHALL be gone
-- IF anything still references `prod`, THEN it SHALL be found and updated first
-
-**Evidence** — `git branch -a` before and after
-
-**Autonomy** — **needs-you.** Deleting a remote branch is not something one
-`git revert` undoes. Worker prepares the exact commands and confirms nothing
-references `prod`; Martin runs them.
-
----
 
 ## T-05 · Publish her legal name and contact address
 
@@ -125,28 +121,6 @@ person their wedding day.
 **Autonomy** — **needs-you.** Live public copy, legal wording, her real name and
 address. Worker drafts the Bulgarian text and parks it. **Martin supplies the
 address** — do not ask Viki, and do not guess a city from the site copy.
-
----
-
-## T-06 · Refund clause for booked dates
-
-**Why** — ЗЗП чл. 57 lets her exclude the 14-day withdrawal right for a service tied
-to a specific date, but only if it is stated. Unstated, a couple can cancel a booked
-Saturday and claim the money back.
-
-**Scope** — terms of use page, `src/app/content/`
-
-**Done when**
-- THE terms page SHALL state that the 14-day withdrawal right does not apply once a
-  date is booked, citing ЗЗП чл. 57
-- THE wording SHALL be in Bulgarian and read as plain language, not boilerplate
-- `npm run verify` stays green
-
-**Evidence** — the drafted clause, for approval before anything is applied
-
-**Autonomy** — **needs-you.** Same reason as T-05.
-
----
 
 ---
 

@@ -9,60 +9,55 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-08 · "30+ заснети събития"
-Viki wants the number raised but did not say to what. What number? The snapshot has
-31 published galleries if you want one that stays verifiable from the site.
+### T-06 · Refund clause — veto window
+You green-lit it unseen, so here is what is on `/usloviya` now, as its own
+section "Отказ от запазена дата" after "Запитвания, дати и цени":
 
-### T-11 · Prom FAQ rewrite
-Her "какво включва" text for abiturienti implies the class-group offering is gone,
-so I read "да се променят на" as *replace all four items with the two she lists*
-(T-10, now shipped — one `git revert` if wrong) and drafted three FAQs from her
-text (T-11, in `QUEUE.md`). Approve, edit, or send her wording. Also: the
-`/galerii` index teaser still says "Индивидуални и групови фотосесии" — want it
-changed too? That is copy, so it waits for you.
+> Услугите ми се изпълняват на конкретна дата - деня на вашето събитие или на
+> фотосесията. Затова, съгласно чл. 57 от Закона за защита на потребителите, правото
+> на отказ от договора в 14-дневен срок не се прилага, след като датата е запазена.
+>
+> Ако все пак се наложи да отмените или да преместите датата, пишете ми възможно
+> най-рано - колкото по-рано знам, толкова по-лесно ще се разберем.
 
-### T-16 · Remove the "корпоративни" gallery
-It is a live prerendered URL, in the sitemap and in the LocalBusiness schema, so I
-parked it. Confirm: (1) whole category goes — page, nav, footer, index card, sitemap,
-schema offer; (2) plain 404 is fine, or do you want a 301 to `/galerii`?
+It deliberately says nothing about whether the капаро is refunded - that is a
+business decision. Say the word and I add a sentence. Nothing is live until you
+deploy.
+
+### T-17b · Long dashes in the held-back SEO files - still blocked on you
+Run `bash commit-plan.sh` (or say "sweep them anyway"). Also the homepage
+testimonial attribution now reads "- Виктория Борисова"; say if it should keep
+a dash of its own.
 
 ### About-me meta description (no task yet)
-The verifier noticed "Документален и спокоен подход" also lives in the About-me
-page's meta description (`src/assets/seo.json`). Viki only asked about the
-homepage, so I left it. Say if you want it rewritten to match her new wording —
-that would be needs-you copy.
+"Документален и спокоен подход" still lives in the About-me meta description
+(`src/assets/seo.json`). Say if you want it rewritten to match her new wording.
 
-### T-17b · Long dashes in the held-back SEO files — blocked on you
-Part A is shipped (see below). The rest of the dashes live in the four files
-`commit-plan.sh` is holding: `gallery.component.ts/.html`,
-`galleries-cards.component.ts`, `src/index.html`, plus `generate-sitemap.mjs`.
-**Run `bash commit-plan.sh`** (or tell me to sweep those files anyway) and the
-worker finishes it next tick. Also: the testimonial attribution on the homepage
-now reads "- Виктория Борисова" (was "— Виктория Борисова") — say if you would
-rather it kept a dash of its own.
+### T-10 follow-up (no task yet)
+The `/galerii` index teaser still says "Индивидуални и групови фотосесии" for
+abiturienti. Want it changed to match her new text? That is copy, so it waits.
 
-Still parked from before: **T-04** (delete `prod`), **T-05** (legal name + address —
-needs the address from you), **T-06** (refund clause).
-
-`WORKER.md` is untracked and not mine to commit — `QUEUE.md` and `LOG.md` go in
-with each task, as it says. Commit it yourself or tell me to.
+`WORKER.md` is untracked - commit it yourself or tell me to.
 
 ---
 
 ## Working on
 
-**The auto queue is empty.** The worker idles (no commits, no log writes) until
-you run `bash commit-plan.sh` (unblocks T-17b), answer a Needs-you item, or
-paste into Intake. Everything shipped today is on `redesign/conversion-pass`,
-unpushed and undeployed — that stays your hand. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
-copy, since her texts are what she is waiting on.
+Next tick: **T-05 · legal name and address** in the footer and both legal pages
+("Виктория Борисова, ж.к. Александър Стамболийски 1, Видин"). Then T-08 (150+),
+T-11 (approved FAQ), T-16 (remove корпоративни, 404), one per tick.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-03 · Fold sitemap into publish** — commit "Regenerate the sitemap at the end of every publish" —
+- **T-06 · Refund clause** — commit "State that a booked date cannot be withdrawn from" —
+  new "Отказ от запазена дата" section on `/usloviya`, citing ЗЗП чл. 57; terms
+  page dated 11 септември 2026, privacy page untouched. Verifier PASS, gate green.
+- **T-04 · Delete `prod`** — closed, you keep it.
+- Triaged your six answers: T-05, T-08, T-11, T-16 are `auto` now, in that order.
+- **T-03 · Fold sitemap into publish** — `62fc654` —
   `publish.mjs` chains `generate-sitemap.mjs` after the manifest rebuild in every
   mode and fails the run if it fails; a failed upload never reaches it. Proven
   with a stubbed harness, no R2 writes. Runbooks in README, GALLERIES,

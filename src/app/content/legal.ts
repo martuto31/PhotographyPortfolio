@@ -314,8 +314,10 @@ export const TERMS: LegalDoc = {
   eyebrow: 'Правна информация',
   h1: 'Общи условия',
   lead: 'Правилата за ползване на този сайт и за снимките в него - кой ги е направил, какво може да се прави с тях и какво се уговаря отделно.',
-  updated: UPDATED,
-  updatedLabel: UPDATED_LABEL,
+  // Moved past the shared date when the withdrawal clause was added; the privacy
+  // policy did not change that day.
+  updated: '2026-09-11',
+  updatedLabel: '11 септември 2026 г.',
   sections: [
     {
       id: 'about',
@@ -409,6 +411,23 @@ export const TERMS: LegalDoc = {
         {
           kind: 'p',
           text: 'Обхватът, сроковете, цената и начинът на предаване на снимките се уговарят индивидуално преди всяко събитие.',
+        },
+      ],
+    },
+    {
+      // ЗЗП чл. 57 excludes the 14-day withdrawal right for a service with a fixed
+      // date - but only if it is stated. Says nothing about the deposit on purpose:
+      // that is a business decision, not a legal default.
+      id: 'withdrawal',
+      heading: 'Отказ от запазена дата',
+      blocks: [
+        {
+          kind: 'p',
+          text: 'Услугите ми се изпълняват на конкретна дата - деня на вашето събитие или на фотосесията. Затова, съгласно чл. 57 от Закона за защита на потребителите, правото на отказ от договора в 14-дневен срок не се прилага, след като датата е запазена.',
+        },
+        {
+          kind: 'p',
+          text: 'Ако все пак се наложи да отмените или да преместите датата, пишете ми възможно най-рано - колкото по-рано знам, толкова по-лесно ще се разберем.',
         },
       ],
     },
