@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
@@ -50,6 +50,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   constructor(
     public dimensionsService: DimensionService,
     private structuredData: StructuredDataService,
+    @Inject(DOCUMENT) private dom: Document,
     @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryName: string = 'Други';
@@ -104,12 +105,23 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   private static readonly MAX_SIBLINGS = 3;
 
+  // Marks the <link rel="preload"> this component owns, so leaving the page removes
+  // that one and not the preloads belonging to the document itself.
+  private static readonly PRELOAD_MARKER = 'data-hero-preload';
+
+  // Tiles rendered eagerly. Three fills the first row of the widest layout; everything
+  // below stays lazy, which is the whole point on a 154-photograph gallery.
+  public static readonly EAGER_IMAGES = 3;
+
   async ngOnInit(): Promise<void> {
     this.setHeadings();
     this.setSiblings();
+    this.setSeedImages();
     this.setStructuredData();
+    this.setHeroPreload();
 
-    // Image fetching happens on the client; gallery routes are SPA-rendered.
+    // The manifest fetch happens on the client only. The seed above is what the
+    // prerendered HTML ships; loadImages() replaces it with the full gallery.
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -121,6 +133,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     // Guard against leaving the page scroll-locked if the component is torn
     // down (e.g. route change) while the modal is open.
     this.unlockBodyScroll();
+    this.clearHeroPreload();
   }
 
   // Arrow keys navigate and Escape closes — but only while the modal is open,
@@ -273,10 +286,17 @@ export class GalleryComponent implements OnInit, OnDestroy {
     // cover.webp is the card thumbnail — keep it out of the photo grid.
     const files = (manifest?.galleries[prefix] ?? []).filter((f) => f !== COVER_FILENAME);
 
-    this.images = galleryImages(manifest, prefix, files);
+    const loaded = galleryImages(manifest, prefix, files);
 
-    // No images (empty gallery or failed manifest): drop the loading mask so we
-    // don't show skeletons forever — onImageSettled would otherwise never fire.
+    // An empty result means the gallery is empty or the manifest fetch failed. Keep
+    // whatever setSeedImages() put there rather than replacing eight photographs with
+    // none — a failed fetch should degrade to the prerendered page, not below it.
+    if (loaded.length) {
+      this.images = loaded;
+    }
+
+    // Still nothing to show: drop the loading mask so we don't show skeletons
+    // forever — onImageSettled would otherwise never fire.
     if (this.images.length === 0) {
       this.areImagesLoaded = true;
       return;
@@ -288,6 +308,18 @@ export class GalleryComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.areImagesLoaded = true;
     }, GalleryComponent.REVEAL_FALLBACK_MS);
+  }
+
+  // The first row loads eagerly — it is what the visitor is looking at, and the LCP
+  // candidate must never be lazy. Everything after it waits until it is scrolled to.
+  public loadingFor(index: number): 'eager' | 'lazy' {
+    return index < GalleryComponent.EAGER_IMAGES ? 'eager' : 'lazy';
+  }
+
+  // Only the single LCP candidate is promoted; marking a whole row "high" would put
+  // three photographs ahead of the stylesheet and delay all of them.
+  public priorityFor(index: number): string | null {
+    return index === 0 ? 'high' : null;
   }
 
   // Alt text carries the gallery name so each photo is distinguishable to crawlers and
@@ -326,6 +358,66 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.siblings = (GALLERY_SNAPSHOT[type] ?? [])
       .filter((gallery) => gallery.name !== this.displayName)
       .slice(0, GalleryComponent.MAX_SIBLINGS);
+  }
+
+  // The photographs compiled into the build-time snapshot, used as the initial value of
+  // `images`. Without this a prerendered gallery page carries no <img> at all: the real
+  // list arrives from the manifest, which is a second network request a crawler only makes
+  // if it renders JS. Google Search Console had all 31 gallery URLs sitting in
+  // "Discovered — currently not indexed" against pages of ~60 words and no pictures.
+  //
+  // On the client this is immediately overwritten by loadImages(). The @for tracks by
+  // src, so the seeded tiles keep their DOM nodes and their already-warm cache entries
+  // rather than flashing when the full list lands.
+  private setSeedImages(): void {
+    const type = SLUG_TO_PREFIX[this.categorySlug];
+    if (!type) {
+      return;
+    }
+
+    const gallery = (GALLERY_SNAPSHOT[type] ?? []).find((item) => item.name === this.displayName);
+    if (!gallery?.photos.length) {
+      return;
+    }
+
+    this.images = gallery.photos.map((photo) => ({
+      src: photo.src,
+      srcset: photo.srcset,
+      width: photo.width,
+      height: photo.height,
+    }));
+  }
+
+  // The first photograph is this page's LCP element. Preloading exactly one of them
+  // starts that download in the document head instead of waiting for the grid to lay
+  // out; preloading more would put the whole first screen in front of the stylesheet
+  // and make every one of them arrive later.
+  private setHeroPreload(): void {
+    const hero = this.images[0];
+    if (!hero) {
+      return;
+    }
+
+    this.clearHeroPreload();
+
+    const link = this.dom.createElement('link');
+    link.setAttribute('rel', 'preload');
+    link.setAttribute('as', 'image');
+    link.setAttribute(GalleryComponent.PRELOAD_MARKER, '');
+    link.setAttribute('href', hero.src);
+    if (hero.srcset) {
+      // Both attributes or neither: with imagesrcset but no imagesizes the browser
+      // assumes 100vw and preloads a wider derivative than the grid will ask for,
+      // which downloads a second copy of the same photograph.
+      link.setAttribute('imagesrcset', hero.srcset);
+      link.setAttribute('imagesizes', this.gridSizes);
+    }
+    this.dom.head.appendChild(link);
+  }
+
+  private clearHeroPreload(): void {
+    const existing = this.dom.head.querySelectorAll(`link[${GalleryComponent.PRELOAD_MARKER}]`);
+    existing.forEach((node) => node.parentNode?.removeChild(node));
   }
 
   private setStructuredData(): void {

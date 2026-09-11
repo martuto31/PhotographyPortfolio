@@ -29,7 +29,8 @@
                     [attr.height]="image.height || null"
                     (load)="onImageSettled()"
                     (error)="onImageSettled()"
-                    loading="lazy"
+                    [attr.loading]="loadingFor($index)"
+                    [attr.fetchpriority]="priorityFor($index)"
                     decoding="async"
                     [alt]="altFor($index)">
             </button>

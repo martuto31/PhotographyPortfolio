@@ -12,7 +12,10 @@ import { COVER_FILENAME, PHONE_SLOT, coverImage, fetchManifest } from './../../c
 import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
 import { SERVICE_BY_SLUG, SERVICE_TITLES, ServiceCopy } from './../../content/services';
 
-interface Gallery extends GallerySnapshotItem {
+// A card needs the name and the cover, never the gallery's photographs — those exist in
+// the snapshot for the gallery pages to prerender with, and the runtime list built from
+// the manifest below has no use for them.
+interface Gallery extends Omit<GallerySnapshotItem, 'photos'> {
   isImgLoaded: boolean;
 }
 
