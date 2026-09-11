@@ -1,11 +1,12 @@
-// Service copy for the seven category pages.
+// Service copy for the six category pages.
 //
-// Four of these categories (krushteneta, korporativni, rojdeni-dni, semeyni) have
+// Three of these categories (krushteneta, rojdeni-dni, semeyni) have
 // no published galleries yet, but the LocalBusiness JSON-LD in index.html has always
 // advertised them via makesOffer. Until now those URLs rendered an empty grid — the
 // schema promised a service the page could not describe. This file is what makes them
 // real pages: a crawler and a visitor both get several hundred words about the service
-// whether or not there are photographs to show yet.
+// whether or not there are photographs to show yet. (The corporate category was
+// removed at Viki's request on 2026-09-11.)
 //
 // Categories that DO have galleries render the cards first and this copy underneath,
 // which also lifts them well clear of the thin-content line.
@@ -154,30 +155,6 @@ export const SERVICES: ServiceCopy[] = [
     ],
   },
   {
-    slug: 'korporativni',
-    type: 'Corporate',
-    label: 'Корпоративни',
-    teaser: 'Събития, конференции, тийм билдинги и екипни портрети.',
-    eyebrow: 'Корпоративна фотография',
-    lead: 'Снимки, които стават за сайта, за LinkedIn и за отчета - а не само за вътрешната папка.',
-    paragraphs: [
-      'Заснемам конференции, награждавания, коктейли, тийм билдинги и отваряния на офиси. Знам кои са кадрите, които после реално ви трябват: говорителят на сцената с добре видим лого-екран, залата пълна, ръкостискането, работата в групи и няколко чисти кадъра на пространството без хора в него.',
-      'Работя тихо и без да преча на програмата. Ако имате прессъобщение или пост, който трябва да излезе същия ден, мога да предам селекция обработени кадри в рамките на часове след събитието - уточняваме го предварително.',
-      'Правя и екипни портрети в еднакъв стил - за сайта или за профилите на екипа, така че цялата страница „Екип“ да изглежда като направена наведнъж, защото е.',
-    ],
-    includes: [
-      { title: 'Преглед на програмата', text: 'Минаваме през сценария предварително, за да знам кои са ключовите пет минути на деня.' },
-      { title: 'Сцена и зала', text: 'Говорители, панели, брандинг и публика - с внимание към това логото да се вижда.' },
-      { title: 'Нетуъркинг и детайли', text: 'Разговорите в паузите, кетърингът и пространството - материалът, който върши работа в социалните мрежи.' },
-      { title: 'Екипни портрети', text: 'По желание - еднакво осветени и обработени портрети на екипа, готови за сайта.' },
-    ],
-    faq: [
-      { q: 'Издавате ли фактура?', a: 'Да, за корпоративни клиенти работя с документи. Условията уточняваме при запитването.' },
-      { q: 'Колко бързо получаваме снимките?', a: 'Пълната галерия - по договорка, но при нужда предавам избрани обработени кадри още същия ден за прессъобщение или публикация.' },
-      { q: 'Кой притежава правата върху снимките?', a: 'Получавате право да използвате снимките за комуникацията на компанията. Конкретният обхват го записваме предварително, за да няма изненади.' },
-    ],
-  },
-  {
     slug: 'lichni',
     type: 'Personal',
     label: 'Други събития',
@@ -219,6 +196,5 @@ export const SERVICE_TITLES: Record<string, string> = {
   'krushteneta': 'Фотограф за кръщене - София и Видин | phbyviki',
   'semeyni': 'Семеен фотограф София и Видин | phbyviki',
   'rojdeni-dni': 'Фотограф за рожден ден София | phbyviki',
-  'korporativni': 'Корпоративен фотограф София | phbyviki',
   'lichni': 'Лични фотосесии София и Видин | phbyviki',
 };

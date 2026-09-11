@@ -68,7 +68,6 @@ purpose — see its note.
 - [x] T-15 · Birthdays gallery copy — description, FAQ swap · auto · shipped 2026-09-11
   > Описанието на галерията “рождени дни” да се промени на “След години остава едно нещо от всеки празник — снимките. Не подредените, а тези, в които наистина сте вие: смехът точно преди да духнете свещите, децата, хванати по средата на игра, бабата, която тайно бърше сълза. На детските партита започваме със снимки на детето с родителите, после и с останалите деца, докато всички са още подредени и усмихнати. Оттам нататък оставям нещата да се случват сами - духването на свещичките, желанието, тортата, игрите. Най-хубавите моменти обикновено се случват, докато никой не гледа към обектива. При юбилеи и по-официални тържества е малко по-различно — има тостове, речи и общи снимки, които трябва да се организират, преди гостите да започнат да се разотиват. Ако искате, поемам и тази роля, за да не се налага на вас да мислите за това в деня на празника. Заснемам детски партита, кръгли годишнини, семейни събирания и фирмени тържества — в София, Видин и страната.”
   > В галерията “рождени дни” в графата “често задавани въпроси” въпросът “може ли да снимате в заведение” да се премахне и да се сложи следния въпрос и отговор: “Колко снимки ще получим? Без ограничение — получавате всеки сполучлив кадър от деня, не предварително зададен брой.”
-- [x] T-16 · Remove the "корпоративни" gallery · needs-you · deletes a live URL — specced below; answered, see below
   > Галерията “корпоративни” да се премахне
 - [x] T-17 · Remove long dashes from all visible text · auto · part A shipped 2026-09-11; T-17b (held-back SEO files) under Blocked
   > Махане на дългите тирета
@@ -83,7 +82,7 @@ purpose — see its note.
   > T-08 150+ събития
 - [x] T-11 · Prom FAQ — apply the approved draft · auto · shipped 2026-09-11
   > Т-11 I approve
-- [ ] T-16 · Remove the "корпоративни" category, plain 404 · auto (confirmed 2026-09-11)
+- [x] T-16 · Remove the "корпоративни" category · auto · part A shipped 2026-09-11; T-16b under Blocked
   > T-16 Remove it and maybe we dont need 301 as it is not indexed but if its indexed do 301 but no for now 404
 - [ ] T-18 · Button colour: "костено бяло" (bone white) from the design artifact · needs-you · blocked: which artifact / exact value? This is Viki's answer to the "button colour" blocker on "Apply the merged design to every page"
   > Цвят на бутоните костено бяло от артефакта
@@ -100,38 +99,7 @@ _Nothing startable. Everything left needs Martin or is blocked — see below._
 
 # Needs Martin
 
-## T-16 · Remove the "корпоративни" gallery
-
-**Why** — Viki: "Галерията “корпоративни” да се премахне". `/galerii/korporativni`
-is a live, prerendered, sitemapped URL with its own `<title>`, and the LocalBusiness
-schema in `index.html` advertises corporate photography via `makesOffer`. Deleting
-a public URL is not a `git revert` decision. **Assumption:** "премахне" means the
-whole category — page, nav/footer entry, index card, sitemap entry, schema offer —
-not just hiding the card.
-
-**Scope** — `src/app/content/services.ts` (the `korporativni` entry and its
-`SERVICE_TITLES` line), `src/app/generated/galleries.ts` / `tools/generate-sitemap.mjs`
-(`TYPE_TO_SLUG`, category list), `galleries-cards.component.ts` (`SLUG_TO_TYPE`),
-`prerender-routes.txt`, `src/index.html` (LocalBusiness `makesOffer`), `src/sitemap.xml`,
-`src/assets/seo.json`, `tools/README.md` (the `<Type>` list)
-
-**Done when**
-- WHEN the site is built, THE route `/galerii/korporativni` SHALL NOT be prerendered
-  and SHALL NOT appear in `sitemap.xml` or `prerender-routes.txt`
-- WHEN any page is prerendered, THE page SHALL NOT contain a link to
-  `/galerii/korporativni` and SHALL NOT contain "Корпоративни"
-- THE LocalBusiness JSON-LD SHALL NOT offer corporate photography
-- IF a visitor opens `/galerii/korporativni`, THEN the site SHALL show the
-  not-found page (no rewrite change needed — `/galerii/**` already routes to the app)
-- `npm run verify` stays green with 43 routes
-  (`prerender-routes.txt` is the route count, so it drops to 43 on its own)
-
-**Evidence** — gate output, `grep -r korporativni dist/` empty
-
-**Autonomy** — **needs-you.** Two things to confirm: (1) remove the whole category
-as above, not just the card; (2) the URL is in Search Console's "discovered" set —
-a 404 is fine and honest, but say if you would rather 301 it to `/galerii` (that
-needs a `firebase.json` redirect, which is also your call).
+_Nothing parked here right now - the open questions are in `LOG.md` → Needs you._
 
 ---
 
@@ -147,6 +115,7 @@ Not startable. Listed so they are not rediscovered every week.
 | Gallery page texts, 80–150 words each | gallery spreadsheet | Viki |
 | Responsive `srcset` and real image dimensions | R2 token 403s | Martin |
 | T-17b · long dashes in the held-back SEO files (H1s, gallery titles, alt text, og:site_name, sitemap image titles) | `bash commit-plan.sh` | Martin |
+| T-16b · corporate category out of the held-back files (slug maps, LocalBusiness offer, sitemap generator, `<Type>` lists) - until then `/galerii/korporativni` is an empty page, not a 404 | `bash commit-plan.sh` | Martin |
 | Testimonials | real quotes | Viki |
 
 The moment the spreadsheet lands, the two gallery tasks become roughly 60 small

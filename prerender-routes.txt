@@ -8,7 +8,6 @@
 /galerii/abiturienti
 /galerii/lichni
 /galerii/krushteneta
-/galerii/korporativni
 /galerii/rojdeni-dni
 /galerii/semeyni
 /galeriya/abiturienti/Ванеса

@@ -30,7 +30,6 @@ const GALLERY_TYPE_COPY: Record<string, { type: string; noun: string; keywords: 
   'abiturienti': { type: 'Graduates', noun: 'Абитуриентска фотосесия', keywords: 'фотограф абитуриентски бал София, абитуриентска фотосесия, абитуриентски снимки' },
   'lichni': { type: 'Personal', noun: 'Лична фотосесия', keywords: 'лична фотосесия София, портретна фотосесия Видин, фотограф за рожден ден' },
   'krushteneta': { type: 'Baptisms', noun: 'Фотосесия от кръщене', keywords: 'фотограф за кръщене София, фотограф за кръщавка, снимки от кръщене' },
-  'korporativni': { type: 'Corporate', noun: 'Корпоративна фотосесия', keywords: 'корпоративен фотограф София, фотограф за събитие, бизнес фотография' },
   'rojdeni-dni': { type: 'Birthdays', noun: 'Фотосесия за рожден ден', keywords: 'фотограф за рожден ден София, детски рожден ден, фотограф за юбилей' },
   'semeyni': { type: 'Family', noun: 'Семейна фотосесия', keywords: 'семеен фотограф София, семейна фотосесия, детска фотосесия' },
 };

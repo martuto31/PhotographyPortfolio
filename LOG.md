@@ -24,10 +24,13 @@ It deliberately says nothing about whether the капаро is refunded - that i
 business decision. Say the word and I add a sentence. Nothing is live until you
 deploy.
 
-### T-17b · Long dashes in the held-back SEO files - still blocked on you
-Run `bash commit-plan.sh` (or say "sweep them anyway"). Also the homepage
-testimonial attribution now reads "- Виктория Борисова"; say if it should keep
-a dash of its own.
+### T-17b + T-16b · the held-back SEO files - blocked on you
+Both leftovers live in the five files `commit-plan.sh` holds: the remaining long
+dashes (H1s, gallery titles, alt text, og:site_name) and the corporate leftovers
+(404 for `/galerii/korporativni`, the JSON-LD offer, the sitemap generator).
+**Run `bash commit-plan.sh`** - or say "edit them anyway" - and both are one
+tick each. Also: the homepage testimonial attribution now reads
+"- Виктория Борисова"; say if it should keep a dash of its own.
 
 ### About-me meta description (no task yet)
 "Документален и спокоен подход" still lives in the About-me meta description
@@ -50,16 +53,23 @@ on the button colour?
 
 ## Working on
 
-Next tick: **T-16** (remove the корпоративни category, plain 404) - the last
-auto task. After it, idle until T-18/T-19 get answers, `commit-plan.sh` runs, or
-Intake gets more.
+**The auto queue is empty again.** Idle until T-18/T-19 get answers,
+`commit-plan.sh` runs (T-16b, T-17b), or Intake gets more.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-11 · Prom FAQ** — commit "Put the approved prom FAQs on /galerii/abiturienti" —
+- **T-16 · Remove корпоративни, part A** — commit "Drop the corporate category" —
+  gone from the service copy, /galerii index, footer, meta, type map, routes
+  file and sitemap; 43 routes; no link or label to it on any page. Verifier
+  PASS. **Part B waits on `commit-plan.sh`:** until then `/galerii/korporativni`
+  renders an empty page client-side instead of a 404, the LocalBusiness JSON-LD
+  in `index.html` still offers "Корпоративна фотография", and the next
+  `npm run sitemap` would put the route back. Nothing of that is live until you
+  deploy.
+- **T-11 · Prom FAQ** — `68f4631` —
   the three approved questions, byte-exact, class-group ones gone; the FAQ under
   her new "какво включва" is consistent again. Verifier PASS, gate green.
 - **T-08 · 150+ заснети събития** — `01b2c18` —
