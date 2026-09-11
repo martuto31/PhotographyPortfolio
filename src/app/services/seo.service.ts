@@ -4,6 +4,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 
 import seoDataJson from '../../assets/seo.json';
+import { GALLERY_SNAPSHOT } from '../generated/galleries';
 
 interface SEODataItem {
   title?: string;
@@ -22,15 +23,16 @@ const DEFAULT_TITLE = 'Фотосесия | Галерия | Виктория Б
 
 // Per-category wording for single-gallery pages. Each gallery is its own indexable page,
 // so it gets a title/description built from the couple/person name rather than inheriting
-// the generic site-wide copy. Keyed by the BG URL slug (see SLUG_TO_TYPE).
-const GALLERY_TYPE_COPY: Record<string, { noun: string; keywords: string }> = {
-  'svatbi': { noun: 'Сватбена фотосесия', keywords: 'сватбен фотограф София, сватбен фотограф Видин, сватбени снимки' },
-  'abiturienti': { noun: 'Абитуриентска фотосесия', keywords: 'фотограф абитуриентски бал София, абитуриентска фотосесия, абитуриентски снимки' },
-  'lichni': { noun: 'Лична фотосесия', keywords: 'лична фотосесия София, портретна фотосесия Видин, фотограф за рожден ден' },
-  'krushteneta': { noun: 'Фотосесия от кръщене', keywords: 'фотограф за кръщене София, фотограф за кръщавка, снимки от кръщене' },
-  'korporativni': { noun: 'Корпоративна фотосесия', keywords: 'корпоративен фотограф София, фотограф за събитие, бизнес фотография' },
-  'rojdeni-dni': { noun: 'Фотосесия за рожден ден', keywords: 'фотограф за рожден ден София, детски рожден ден, фотограф за юбилей' },
-  'semeyni': { noun: 'Семейна фотосесия', keywords: 'семеен фотограф София, семейна фотосесия, детска фотосесия' },
+// the generic site-wide copy. Keyed by the BG URL slug; `type` is the R2 manifest prefix
+// and GALLERY_SNAPSHOT key (mirrors SLUG_TO_TYPE in galleries-cards.component.ts).
+const GALLERY_TYPE_COPY: Record<string, { type: string; noun: string; keywords: string }> = {
+  'svatbi': { type: 'Weddings', noun: 'Сватбена фотосесия', keywords: 'сватбен фотограф София, сватбен фотограф Видин, сватбени снимки' },
+  'abiturienti': { type: 'Graduates', noun: 'Абитуриентска фотосесия', keywords: 'фотограф абитуриентски бал София, абитуриентска фотосесия, абитуриентски снимки' },
+  'lichni': { type: 'Personal', noun: 'Лична фотосесия', keywords: 'лична фотосесия София, портретна фотосесия Видин, фотограф за рожден ден' },
+  'krushteneta': { type: 'Baptisms', noun: 'Фотосесия от кръщене', keywords: 'фотограф за кръщене София, фотограф за кръщавка, снимки от кръщене' },
+  'korporativni': { type: 'Corporate', noun: 'Корпоративна фотосесия', keywords: 'корпоративен фотограф София, фотограф за събитие, бизнес фотография' },
+  'rojdeni-dni': { type: 'Birthdays', noun: 'Фотосесия за рожден ден', keywords: 'фотограф за рожден ден София, детски рожден ден, фотограф за юбилей' },
+  'semeyni': { type: 'Family', noun: 'Семейна фотосесия', keywords: 'семеен фотограф София, семейна фотосесия, детска фотосесия' },
 };
 
 @Injectable({
@@ -186,6 +188,11 @@ export class SEOService {
         // gallery, so Google truncated all ~31 of them mid-sentence.
         description: `${copy.noun} „${name}“ - Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и ми пишете за вашата дата.`,
         keywords: `${name}, ${copy.keywords}, Виктория Борисова, phbyviki`,
+        // A shared gallery link previews that gallery's own cover, not the homepage
+        // image. The cover is the photograph chosen to represent it, and it is in the
+        // build-time snapshot, so the prerendered page carries the tag without a fetch.
+        // A gallery missing from the snapshot falls back to the site default.
+        ogImage: GALLERY_SNAPSHOT[copy.type]?.find((gallery) => gallery.name === name)?.imageSrc,
       },
     };
   }

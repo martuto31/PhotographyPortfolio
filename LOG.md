@@ -51,12 +51,11 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Viki's whole batch is shipped except what needs you (T-08, T-11, T-16, T-17b).
-Next tick: **T-02 · Per-gallery og:image**, then T-03 (sitemap in publish).
-Note: T-02's scope names `gallery.component.ts` and `generate-sitemap.mjs` —
-both held back by `commit-plan.sh`. If it cannot be done without touching them
-it parks too, and the worker goes idle until you run `commit-plan.sh` or paste
-more work. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-03 · Fold sitemap into publish** — but its scope is
+`tools/publish.mjs` + docs, and `generate-sitemap.mjs` is held back; if it
+needs that file it parks. After that the auto queue is empty: the worker goes
+idle until you run `commit-plan.sh`, answer the Needs-you items, or paste more
+work into Intake. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -64,7 +63,17 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-17 · Long dashes, part A** — commit "Replace long dashes with hyphens in the visible text" —
+- **T-02 · Per-gallery og:image** — commit "Preview each gallery's own cover when its link is shared" —
+  all 31 gallery pages now carry `og:image`/`twitter:image` = their cover on
+  images.phbyviki.com; category pages unchanged; falls back to the site default
+  for a gallery missing from the snapshot. Verifier PASS, gate green.
+  **Deviation:** cover, not first photograph — the first-photo data only exists
+  in the held-back SEO pass and a commit must compile at its own HEAD; one
+  property name to switch later. **Cost:** the snapshot chunk (~40 kB raw,
+  ~2 kB gzipped) moved from lazy to the initial bundle because the root SEO
+  service now imports it. Say if you would rather it stayed lazy — then the
+  gallery component (held back) has to hand the cover to the service instead.
+- **T-17 · Long dashes, part A** — `4916d15` —
   97 "—" → "-" across 22 files (content, seo.json, route titles, templates,
   404 page), nothing else changed; verifier PASS; gate green. **905 dashes
   remain in the build and every one comes from the five files `commit-plan.sh`

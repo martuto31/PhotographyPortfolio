@@ -80,29 +80,6 @@ purpose — see its note.
 
 # Ready
 
-## T-02 · Per-gallery og:image
-
-**Why** — every shared link shows the homepage image, so a couple sharing their own
-gallery on Facebook advertises someone else's photo. Direct hit on click-through
-from exactly the channel that matters most here.
-
-**Scope** — `gallery.component.ts`, `tools/generate-sitemap.mjs`, `src/assets/seo.json`
-
-**Done when**
-- WHEN a gallery route is prerendered, THE page SHALL carry `og:image` and
-  `twitter:image` pointing at that gallery's own first photograph
-- THE tag SHALL be an absolute URL on `images.phbyviki.com`
-- IF a gallery has no photographs in the snapshot, THEN the page SHALL fall back to
-  the site default image
-- `npm run verify` stays green
-
-**Evidence** — `npm run verify` green, plus the `og:image` line from three different
-gallery routes in the prerender output
-
-**Autonomy** — auto
-
----
-
 ## T-03 · Fold sitemap into publish
 
 **Why** — `npm run sitemap` is a separate step everyone forgets, and forgetting it
