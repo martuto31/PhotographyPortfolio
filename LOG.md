@@ -48,8 +48,9 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-14 · Family gallery copy** — description, location and
-processing items, the "какво да облечем" answer. Then T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-15 · Birthdays gallery copy** — description, swap the
+"заведение" FAQ for "Колко снимки ще получим?". Then T-17 (dashes), then
+T-02 (og:image) and T-03 (sitemap in publish). T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -57,7 +58,11 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-13 · Christening gallery copy** — commit "Put Viki's christening copy on /galerii/krushteneta" —
+- **T-14 · Family gallery copy** — commit "Put Viki's family copy on /galerii/semeyni" —
+  description (her two "—" kept for T-17), location and processing items, the
+  clothes answer (+ final full stop); lead and other items untouched. 13/13
+  assertions, verifier PASS, gate green.
+- **T-13 · Christening gallery copy** — `2102781` —
   description, three "какво включва" texts and the first FAQ answer; "Семейни
   кадри" and the lead untouched. Three of her strings got only a capital first
   letter / final full stop to match their siblings — no word changed. 14/14
