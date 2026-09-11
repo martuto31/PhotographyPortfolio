@@ -132,8 +132,7 @@ why nothing about the copies themselves has to be recorded anywhere.
 run the one-off backfill (safe to repeat — it skips what is already done):
 
 ```sh
-npm run publish -- --thumbs
-npm run sitemap        # so the prerendered pages use them too
+npm run publish -- --thumbs    # regenerates the sitemap and prerender inputs when it finishes
 ```
 
 ### What the manifest looks like now

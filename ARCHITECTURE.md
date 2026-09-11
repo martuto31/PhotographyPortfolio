@@ -171,10 +171,10 @@ review rich results for a business's own site since 2019 (self-serving reviews),
 buy nothing while making a fabricated entry a policy problem. Stars come from the Google
 Business Profile. The on-page testimonials block exists to convince humans.
 
-### Generated from the manifest — run `npm run sitemap`
+### Generated from the manifest — `npm run publish` runs `npm run sitemap` for you
 
-`tools/generate-sitemap.mjs` reads the live R2 manifest and rewrites three files. **Run it
-after `npm run publish` and before `npm run deploy`:**
+`tools/generate-sitemap.mjs` reads the live R2 manifest and rewrites three files. `publish`
+ends by running it; run it on its own only if the manifest changed by some other route:
 
 | Generated file | Purpose |
 |---|---|
@@ -260,7 +260,7 @@ GitHub Action — not set up yet.**
 
 | I want to… | Do this |
 |---|---|
-| Add/replace photos in a gallery | `to-upload/<Type>/<Gallery>/`, `npm run publish`, `npm run sitemap`, `npm run deploy` |
+| Add/replace photos in a gallery | `to-upload/<Type>/<Gallery>/`, `npm run publish` (regenerates the sitemap itself), `npm run deploy` |
 | Pick a gallery's card cover | drop a `cover.*` into its folder before publishing |
 | Add a brand-new service category | see the list at the end of §5 |
 | Change any page copy | `src/app/content/*.ts` — prose does not live in templates |

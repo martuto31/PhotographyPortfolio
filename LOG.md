@@ -51,11 +51,10 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-03 · Fold sitemap into publish** — but its scope is
-`tools/publish.mjs` + docs, and `generate-sitemap.mjs` is held back; if it
-needs that file it parks. After that the auto queue is empty: the worker goes
-idle until you run `commit-plan.sh`, answer the Needs-you items, or paste more
-work into Intake. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+**The auto queue is empty.** The worker idles (no commits, no log writes) until
+you run `bash commit-plan.sh` (unblocks T-17b), answer a Needs-you item, or
+paste into Intake. Everything shipped today is on `redesign/conversion-pass`,
+unpushed and undeployed — that stays your hand. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -63,7 +62,12 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-02 · Per-gallery og:image** — commit "Preview each gallery's own cover when its link is shared" —
+- **T-03 · Fold sitemap into publish** — commit "Regenerate the sitemap at the end of every publish" —
+  `publish.mjs` chains `generate-sitemap.mjs` after the manifest rebuild in every
+  mode and fails the run if it fails; a failed upload never reaches it. Proven
+  with a stubbed harness, no R2 writes. Runbooks in README, GALLERIES,
+  ARCHITECTURE, tools/README and R2-GUIDE now say publish → deploy. Verifier PASS.
+- **T-02 · Per-gallery og:image** — `ff10b6a` —
   all 31 gallery pages now carry `og:image`/`twitter:image` = their cover on
   images.phbyviki.com; category pages unchanged; falls back to the site default
   for a gallery missing from the snapshot. Verifier PASS, gate green.

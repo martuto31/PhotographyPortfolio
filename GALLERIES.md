@@ -40,16 +40,15 @@ If you don't add a `cover.*`, the first photo (alphabetically/naturally) is used
 
 ## Adding a new gallery — the whole flow
 
-**No code edits are needed. But all four steps are required.** Skipping step 3 is the
-easy mistake: the gallery will appear on the site for humans and be invisible to Google.
+**No code edits are needed.** Three steps; `publish` regenerates the sitemap and prerender
+inputs itself, so the gallery cannot appear for humans and stay invisible to Google.
 
 ```sh
 # 1. stage the originals (see naming rules below)
 #    to-upload/<Type>/<Gallery Name>/*.jpg
 
-npm run publish     # 2. compress → WebP → upload to R2 → rebuild manifest.json
-npm run sitemap     # 3. regenerate sitemap.xml, prerender-routes.txt, generated/galleries.ts
-npm run deploy      # 4. build + push to Firebase Hosting
+npm run publish     # 2. compress → WebP → upload to R2 → rebuild manifest.json → sitemap
+npm run deploy      # 3. build + push to Firebase Hosting
 ```
 
 **Step 1 — staging.** `<Type>` must be one of the English keys:
@@ -60,15 +59,14 @@ percent-encoded per path segment. Optionally drop in a `cover.jpg` (any `cover.*
 the card thumbnail; without one the first photo is used.
 
 **Step 2 — publish.** Encodes to WebP (longest edge 2048, quality 82), uploads, then
-rebuilds `manifest.json` from the *whole bucket*. Only stage NEW galleries in
-`to-upload/` — existing ones are preserved without re-uploading. Faster on big sets:
+rebuilds `manifest.json` from the *whole bucket*, then runs `npm run sitemap` for you —
+three build inputs derive from the manifest, see
+[SEO: what publish regenerates](#seo-what-publish-regenerates). Only stage NEW galleries
+in `to-upload/` — existing ones are preserved without re-uploading. Faster on big sets:
 `npm run publish -- --concurrency 8` (default 6). Rebuild the manifest alone, without
 uploading anything, with `npm run publish -- --manifest-only`.
 
-**Step 3 — sitemap.** Derives three build inputs from the manifest. Details in
-[SEO: why step 3 is not optional](#seo-why-step-3-is-not-optional).
-
-**Step 4 — deploy.** `ng build` + `firebase deploy --only hosting`.
+**Step 3 — deploy.** `ng build` + `firebase deploy --only hosting`.
 
 ### Adding a whole new category
 
@@ -129,14 +127,16 @@ photos come up empty** (no error shown to visitors). Set this once in
   still render locally because they come from the build-time snapshot, not a `fetch`.
 - The manifest is served `no-cache`, so updates show immediately — no cache busting needed.
 
-## SEO: why step 3 is not optional
+## SEO: what publish regenerates
 
-`npm run publish` puts photos in R2, but three build inputs are derived from the manifest
-and must be regenerated before deploying:
+`npm run publish` puts photos in R2, and three build inputs are derived from the manifest
+and must be regenerated before deploying — so `publish` ends by running this itself:
 
 ```sh
 npm run sitemap      # rewrites src/sitemap.xml, prerender-routes.txt, src/app/generated/galleries.ts
 ```
+
+Run it on its own only if the manifest changed by some other route.
 
 - **`src/sitemap.xml`** — home, about, every non-empty category, and **one URL per gallery**
   (with `<image:image>` entries for Google Images). Categories with no photos are left out
@@ -146,6 +146,5 @@ npm run sitemap      # rewrites src/sitemap.xml, prerender-routes.txt, src/app/g
   only exists after JS runs, and the galleries are invisible to most crawlers.
 - **`prerender-routes.txt`** — only the categories that actually have content.
 
-At runtime the live manifest still wins, so a gallery published without re-running this
-appears on the site immediately; it just won't be in the sitemap or the static HTML until
-the next `npm run sitemap && npm run deploy`.
+At runtime the live manifest still wins, so a published gallery appears on the site
+immediately; it is in the sitemap and the static HTML from the next `npm run deploy`.

@@ -254,7 +254,7 @@ for (const route of routes) {
 
   // -- LCP photo: the first photograph is eager, high priority and preloaded
   if (photos.length === 0) {
-    skip(route, 'lcp-photo', 'snapshot has no photographs for this gallery — run npm run sitemap after publishing');
+    skip(route, 'lcp-photo', 'snapshot has no photographs for this gallery — npm run publish (or npm run sitemap) refreshes it');
     skip(route, 'img-dimensions', 'snapshot has no photographs for this gallery');
   } else {
     const first = photos[0].attrs;

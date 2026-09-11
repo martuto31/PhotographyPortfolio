@@ -61,11 +61,12 @@ laptop and **11.8 MB** on a retina screen or a modern phone.
 
 `npm run publish` does this automatically for anything you upload. **`--thumbs` is only
 for photos that were already in the bucket before this existed**, and it can be re-run
-safely — it skips whatever is already done. After it finishes, run `npm run sitemap`
-so the prerendered pages pick the new sizes up too.
+safely — it skips whatever is already done. It regenerates the sitemap and prerender
+inputs when it finishes, like every publish run, so the prerendered pages pick the new
+sizes up too.
 
 To change the ladder, set `THUMB_WIDTHS` / `THUMB_QUALITY` in `tools/.env`, then re-run
-`--thumbs` and `npm run sitemap`. Note that the widths are also baked into the `sizes`
+`--thumbs`. Note that the widths are also baked into the `sizes`
 attributes in `src/app/config.ts`, so a big change wants a look there as well.
 
 ## Notes

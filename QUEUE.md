@@ -80,26 +80,7 @@ purpose — see its note.
 
 # Ready
 
-## T-03 · Fold sitemap into publish
-
-**Why** — `npm run sitemap` is a separate step everyone forgets, and forgetting it
-leaves a gallery visible to visitors and invisible to Google. The README has to warn
-about it in two places, which is the tell that it should not be a separate step.
-
-**Scope** — `tools/publish.mjs`, `package.json`, `README.md`, `GALLERIES.md`
-
-**Done when**
-- WHEN `npm run publish` completes successfully, IT SHALL run the sitemap
-  regeneration automatically
-- IF the upload step fails, THEN the sitemap SHALL NOT run, so a partial upload
-  cannot produce a sitemap that promises pages the bucket does not have
-- THE separate `npm run sitemap` script SHALL still exist and work on its own
-- `README.md` and `GALLERIES.md` SHALL be updated so the publishing runbook is three
-  steps, not four
-
-**Evidence** — the publish script's output showing the chained run, and the docs diff
-
-**Autonomy** — auto
+_Nothing startable. Everything left needs Martin or is blocked — see below._
 
 ---
 

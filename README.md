@@ -19,14 +19,13 @@ npm start          # dev server on :4200
 
 ## Publishing a new gallery
 
-All four steps are required. Skipping `sitemap` leaves the gallery visible to visitors and
-invisible to Google.
+Three steps. `publish` ends by regenerating the sitemap and prerender inputs itself, so
+a gallery cannot end up visible to visitors and invisible to Google.
 
 ```sh
 # stage originals in to-upload/<Type>/<Gallery Name>/*.jpg
 
-npm run publish     # compress → WebP → upload to R2 → rebuild manifest.json
-npm run sitemap     # regenerate sitemap.xml, prerender-routes.txt, generated/galleries.ts
+npm run publish     # compress → WebP → upload to R2 → rebuild manifest.json → sitemap
 npm run deploy      # build + push to Firebase Hosting
 ```
 
@@ -41,8 +40,8 @@ Full detail, naming rules, and how to remove or rename a gallery:
 | `npm run build` | Production build + prerender |
 | `npm run preview` | Serve the built output locally |
 | `npm run deploy` | Build and deploy to Firebase Hosting |
-| `npm run publish` | Compress and upload photos to R2, rebuild the manifest |
-| `npm run sitemap` | Regenerate sitemap and prerender inputs from the manifest |
+| `npm run publish` | Compress and upload photos to R2, rebuild the manifest, regenerate the sitemap |
+| `npm run sitemap` | Regenerate sitemap and prerender inputs from the manifest (publish runs this for you) |
 | `npm run icons` | Regenerate favicon / PWA / apple-touch icons |
 | `npm run logo` | Regenerate the wordmark lockups |
 | `npm run brand` | `icons` + `logo` |
@@ -79,4 +78,5 @@ Meta descriptions are separate, in `src/assets/seo.json`.
   to share, and it throws the visitor home from any other page.
 - **A new top-level route also needs a rewrite in `firebase.json`.** Without one it works in
   `npm start` and returns a hard 404 in production.
-- **Re-run `npm run sitemap` after every publish.** See above.
+- **`npm run publish` regenerates the sitemap itself.** `npm run sitemap` alone is only for
+  when the manifest changed by some other route.

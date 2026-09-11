@@ -6,10 +6,18 @@
 //   1. Put originals in   to-upload/<Type>/<Gallery Name>/*.{jpg,jpeg,png,webp}
 //      e.g.               to-upload/Weddings/Krysteena & Martin/DSC_001.jpg
 //   2. Fill tools/.env (copy from tools/.env.example)
-//   3. npm run publish            # processes ./to-upload then rebuilds the manifest
+//   3. npm run publish            # processes ./to-upload, rebuilds the manifest, then
+//                                  # regenerates the sitemap and prerender inputs
 //      npm run publish -- --dir ./some-other-folder
 //      npm run publish -- --thumbs          # backfill derivatives for photos already in R2
 //      npm run publish -- --manifest-only   # just rebuild manifest from what's already in R2
+//
+// Every mode ends by running tools/generate-sitemap.mjs, because the sitemap,
+// prerender-routes.txt and the build-time gallery snapshot are all derived from the
+// manifest this script just rewrote. It used to be a separate step, and forgetting it
+// left a gallery visible to visitors and invisible to Google. It only runs after the
+// manifest is rebuilt, so a failed upload never produces a sitemap that promises pages
+// the bucket does not have.
 //
 // The <Type> folder must be the English S3-style prefix the app uses:
 //   Weddings, Graduates, Personal, Baptisms, Corporate, Birthdays, Family
@@ -37,6 +45,7 @@
 // only ~1365 wide) and the width/height attributes that stop the gallery from
 // reflowing as photos arrive.
 
+import { spawnSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { join, extname, basename, dirname, resolve } from 'node:path';
@@ -138,7 +147,19 @@ async function main() {
   }
 
   await rebuildManifest();
+  regenerateSitemap();
   console.log('\n✓ Done.');
+}
+
+// The sitemap generator reads the public manifest back, so it sees exactly what was
+// just written. Run as a child process rather than imported: it does its work at
+// module load, and its output belongs in this log as-is.
+function regenerateSitemap() {
+  console.log('\n▶ npm run sitemap');
+  const result = spawnSync(process.execPath, [join(__dirname, 'generate-sitemap.mjs')], { stdio: 'inherit' });
+  if (result.status !== 0) {
+    fail(`Sitemap regeneration failed (exit ${result.status}). The manifest is published; run  npm run sitemap  by hand.`);
+  }
 }
 
 // Walk <root>/<Type>/<Gallery>/*.img and upload each as webp under "Type/Gallery/<slug>.webp".
