@@ -16,9 +16,10 @@ Viki wants the number raised but did not say to what. What number? The snapshot 
 ### T-11 · Prom FAQ rewrite
 Her "какво включва" text for abiturienti implies the class-group offering is gone,
 so I read "да се променят на" as *replace all four items with the two she lists*
-(T-10, auto) and drafted three FAQs from her text (T-11, in `QUEUE.md`). Approve,
-edit, or send her wording. If the replace-all reading is wrong, say so before
-T-10 runs — it is next in line after T-07 and T-09.
+(T-10, now shipped — one `git revert` if wrong) and drafted three FAQs from her
+text (T-11, in `QUEUE.md`). Approve, edit, or send her wording. Also: the
+`/galerii` index teaser still says "Индивидуални и групови фотосесии" — want it
+changed too? That is copy, so it waits for you.
 
 ### T-16 · Remove the "корпоративни" gallery
 It is a live prerendered URL, in the sitemap and in the LocalBusiness schema, so I
@@ -47,9 +48,8 @@ with each task, as it says. Commit it yourself or tell me to.
 
 ## Working on
 
-Next tick: **T-10 · Prom gallery copy** — description and the "какво включва"
-list (replace-all reading, see Needs you). Then T-12 → T-13 → T-14 → T-15 →
-T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
+Next tick: **T-12 · Other events gallery copy** — description, drop the
+"Локация и светлина" item. Then T-13 → T-14 → T-15 → T-17, one per tick. T-02 and T-03 (og:image, sitemap-in-publish) queue behind the
 copy, since her texts are what she is waiting on.
 
 ---
@@ -57,7 +57,12 @@ copy, since her texts are what she is waiting on.
 ## Shipped
 
 ### 2026-09-11
-- **T-09 · Wedding gallery copy** — commit "Put Viki's wedding copy on /galerii/svatbi" —
+- **T-10 · Prom gallery copy** — commit "Put Viki's prom copy on /galerii/abiturienti" —
+  description paragraph and a two-item "Какво включва" list, byte-identical to
+  her text; the lead under the H1 untouched. 12/12 assertions, verifier PASS,
+  gate green. **Until T-11 is approved the FAQ under it still says "преди бала"
+  and mentions class groups** — one more reason to answer T-11.
+- **T-09 · Wedding gallery copy** — `5bddf5e` —
   lead, three body paragraphs, two "какво включва" items and the travel FAQ, all
   byte-identical to her text (her long block split into three `<p>`, words
   untouched). 16/16 string assertions, old lead gone from the whole dist,
