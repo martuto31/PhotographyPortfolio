@@ -21,7 +21,7 @@
     /* 52px tall — comfortably above the 44px minimum tap target. */
     padding: 16px 12px;
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -38,12 +38,14 @@
 /* Messenger blue, used only here. It is the brand of the app rather than of the
    site, and people scan for the colour rather than reading the label. This is the
    primary action now that there is no number to tap. */
+/* One step darker than Messenger's own #0084FF: that one puts the label at 3.05:1,
+   this one clears WCAG's 4.5:1 and still reads as the app's blue. */
 .bar-messenger {
-    background-color: #0084FF;
+    background-color: #0068CC;
 }
 
 .bar-messenger:active {
-    background-color: #0068CC;
+    background-color: #005CB8;
 }
 
 .bar-instagram {

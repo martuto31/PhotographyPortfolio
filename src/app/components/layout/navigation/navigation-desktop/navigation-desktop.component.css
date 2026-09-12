@@ -73,7 +73,7 @@
 
 .actions > a {
     font-family: var(--font-sans);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.13em;
     text-transform: uppercase;
@@ -127,7 +127,7 @@
     border: 0;
     background-color: var(--btn-bg);
     font-family: var(--font-sans);
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;

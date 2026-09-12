@@ -65,7 +65,8 @@
 .menu-btn {
     background: none;
     border: none;
-    padding: 10px 0 10px 10px;
+    /* 26px of lines inside a 44px thumb target; the right edge stays flush. */
+    padding: 16px 0 16px 18px;
     cursor: pointer;
     color: var(--font-high-emphasis);
     transition: color 320ms ease;

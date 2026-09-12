@@ -27,7 +27,7 @@
        Warm off-whites, never pure white for running text. */
     --font-high-emphasis: #F5F1EA;
     --font-medium-emphasis: #ADA49A;
-    --font-low-emphasis: #7E766C;
+    --font-low-emphasis: #8A8278;  /* 5.2:1 on the stage, 4.6:1 on a card - #7E766C was 4.37:1 */
     --font-white: #FFFFFF;     /* headings over photographs only */
     --font-on-ink: #EFEAE1;
     --font-on-ink-mute: #A69E93;

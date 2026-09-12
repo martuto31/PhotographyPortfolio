@@ -112,18 +112,39 @@ purpose — see its note.
 - [x] T-21 · Gallery photos "missing" · diagnosed 2026-09-12, not a bug: the localhost CORS trap (only the 8 seeded photos show off-origin); production and the built HTML are fine - see LOG
   > I think images from galleries are missing
 - [x] T-22 · Same-origin manifest fallback so galleries fill on localhost and on preview URLs · auto · shipped 2026-09-12
-- [ ] T-23 · UI/UX audit of the redesign - headings, type sizes, best practices · auto for the audit and objective fixes (contrast, tap targets, heading order); taste changes get parked with a recommendation
+- [x] T-23 · UI/UX audit of the redesign - headings, type sizes, best practices · auto · shipped 2026-09-13 after Martin's "exempt"; taste calls under LOG → Needs you
+  > well what are the questions with a few words / do that for me and enable the loop  (= exempt, recommended option)
   > check design run agents maybe and test the design and the website make sure we follow bwst ui uxz prctices
   > The redesign is fine and nothing from that website was picked particularly but check the headings the sizes etc it looks good
 - [x] T-20 · Martin: "The redesign is fine" - the Needs-you item is closed; T-19 reconfirmed (nothing from that site picked)
-- [ ] T-24 · Deploy the branch to a Firebase preview channel (not prod) so Martin can send Viki a link · auto · runs last, after T-22 and T-23 · explicitly authorised in Intake; never `npm run deploy`
+- [ ] T-24 · Deploy the branch to a Firebase preview channel (not prod) so Martin can send Viki a link · auto · in progress 2026-09-13 · explicitly authorised in Intake; never `npm run deploy`
   > when you finish, can you deploy to one of the test firebase urls not the prod so i can send it to her
 
 ---
 
 # Ready
 
-_T-23 and T-24 are `auto` and get their block on the tick they are worked._
+### T-24 · Preview channel for Viki
+**Why** — Martin: "deploy to one of the test firebase urls not the prod so i can send it
+to her". There is no separate test site: the `phbyviki` project's only site is the 301
+redirect to phbyviki.com, and `phbyvikiprod` has one site with one channel, `live`.
+Firebase's tool for exactly this is a **preview channel** on the prod site - its own
+`phbyvikiprod--<name>-<hash>.web.app` URL, expiring, never touching `live`.
+Assumption: that is what he means by a test URL. `npm run deploy` (= `live`) is not used.
+**Scope** — `.firebaserc` (target `app` mapped for project `phbyvikiprod`, so `--only app`
+resolves there; previously only mapped under `phbyviki`), `LOG.md`
+**Done when**
+- WHEN `firebase hosting:channel:deploy` runs with `--project phbyvikiprod --only app`,
+  THE result SHALL be a channel URL on site `phbyvikiprod` that is not `live`
+- WHEN `firebase hosting:channel:list --project phbyvikiprod --site phbyvikiprod` runs
+  afterwards, THE `live` channel's release time SHALL be unchanged (2026-08-03 12:25:45)
+- WHEN the channel URL's `/galeriya/svatbi/Лора и Асен` is opened in a browser, THE
+  grid SHALL show 153 photographs (T-22's fallback doing its job on a foreign origin)
+- WHEN the channel URL's `/` is fetched, THE HTML SHALL be the redesign (12px eyebrows,
+  one `<main>`), i.e. the T-23 commit
+- The URL is in `LOG.md` → Needs you with its expiry
+**Evidence** — the CLI output, the channel list before/after, the headless-Chrome count
+**Autonomy** — auto (explicitly authorised in Intake; preview channel only)
 
 ---
 

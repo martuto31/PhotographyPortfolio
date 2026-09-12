@@ -86,7 +86,7 @@
 /* Heading shared by nav + contact columns */
 .footer-heading {
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -172,6 +172,10 @@
 }
 
 .footer-social a {
+    /* The icon is 22px; the link around it has to give a thumb 24px or more. */
+    display: inline-flex;
+    padding: 5px;
+    margin: -5px;
     color: var(--font-high-emphasis);
     transition: opacity 200ms ease;
 }
@@ -206,16 +210,18 @@
     text-align: center;
 }
 
+/* Quiet by colour, not by opacity: 0.7 over the mid tone composited to 4.4:1,
+   just under WCAG's 4.5. The low-emphasis token is the same idea and passes. */
 .footer-credit {
     font-style: italic;
-    opacity: 0.7;
+    color: var(--font-low-emphasis);
 }
 
 /* The legal identity line. Not a postal invitation, so it takes the same quiet
    weight as the credit rather than the emphasis of a heading. */
 .footer-address {
     font-style: normal;
-    opacity: 0.7;
+    color: var(--font-low-emphasis);
 }
 
 .footer-legal {

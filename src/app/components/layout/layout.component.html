@@ -13,9 +13,10 @@
     <app-navigation></app-navigation>
 
     <div class="wrapper">
-        <div class="content">
+        <!-- The one <main> on the page: screen readers jump straight to it. -->
+        <main class="content">
             <router-outlet></router-outlet>
-        </div>
+        </main>
 
         <app-footer></app-footer>
     </div>

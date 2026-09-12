@@ -53,7 +53,8 @@ h3 em,
    appears (the others are hover underlines and hairlines). */
 .eyebrow {
     font-family: var(--font-sans);
-    font-size: 9px;
+    /* 12px is the floor for anything meant to be read (Lighthouse flags less). */
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;

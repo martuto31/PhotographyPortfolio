@@ -43,7 +43,9 @@
                     <div class="card-meta">
                         <span class="tag">{{ cardTag }}</span>
 
-                        <h3>{{ gallery.name }}</h3>
+                        <!-- h2, not h3: the cards follow the h1 directly, and a page that
+                             jumps h1 → h3 reads as a broken outline to a screen reader. -->
+                        <h2>{{ gallery.name }}</h2>
                     </div>
                 </a>
             }

@@ -9,6 +9,15 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
+### T-23 · Taste calls the audit only warns about - yours if you want them
+1. **Hero sentence is 14px desktop / 13.5px phone** (`.hero-sub`) - the most
+   important sentence on the site and its smallest body text. I would go 16/15.
+2. **Buttons are 43px tall on phones**, one under the 44px thumb guideline.
+3. **Footer "Пишете в Messenger / Instagram" links are 24px tall** on phones.
+4. **Mobile drawer links are 33px tall** - fine by WCAG, under Apple's 44.
+5. **Headings read well at the spec's sizes:** h1 39/27, h2 31/24, h3 19-20,
+   body 17px/1.7. I would not take the h1 up.
+
 ### T-21 · The "missing" gallery photos - nothing to fix, but read this once
 You were looking at localhost (the `.verify` screenshots or a preview server). The
 bucket's CORS policy allows `https://phbyviki.com` only, so off that origin the
@@ -29,14 +38,38 @@ which `npm run publish` already does.
 
 ## Working on
 
-Next tick **T-23** - the UI/UX audit of the redesign (headings, type sizes, the
-objective checks: contrast, tap targets, heading order; taste calls get parked
-with a recommendation). Then **T-24** - the branch onto a Firebase **preview
-channel**, not the live site, and the link goes here.
+**T-24** - the branch onto a Firebase preview channel; the link goes here.
 
 ---
 
 ## Shipped
+
+### 2026-09-13
+- **T-23 · UI/UX audit of the redesign** — commit "Bring the redesign up to the
+  measurable UI rules" — new `npm run ux` (`tools/audit-ux.mjs`) loads eight
+  routes at 1440 and 390 in headless Chrome and measures heading order, text
+  size, WCAG contrast against the rendered background (opacity included),
+  tap targets with WCAG 2.5.8's own exceptions, horizontal overflow, alt text,
+  accessible names, landmarks, line-height, paragraph measure and form labels.
+  Before: 392 FAIL. After: 0 FAIL, 201 WARN (all "under 44px", listed above).
+  What changed, all threshold failures:
+  - **12px floor on reading text** - eyebrows 9→12, buttons 11→12, desktop nav
+    10→12, breadcrumbs / tags / labels / footer headings / row counts / CTA
+    note 9.5-11→12. Same tracking, same weights. The 8px "Photography" under
+    the wordmark stays: it is the logo lockup and the audit exempts it by name.
+  - **Contrast** - `--font-low-emphasis` #7E766C → #8A8278 (4.37:1 → 5.2:1 on
+    the stage, 4.6:1 on a card); the mobile Messenger bar #0084FF → #0068CC
+    (3.05:1 → 4.55:1); the footer credit and address lines drop `opacity: 0.7`
+    (composited to 4.4:1) for the token.
+  - **One `<main>`** around the router outlet - no page had one.
+  - **Category cards are `<h2>`** - the outline jumped h1 → h3.
+  - **Hit areas** - footer social icons 22 → 32px, hamburger 36×32 → 44×44.
+    Neither moves a pixel.
+  Three verifier rounds: the first caught the footer opacity (real, fixed on
+  both sides); the second failed the home-page display quote at line-height
+  1.2 against a rule written as "every `<p>`" - you said "exempt", so display
+  paragraphs (24px+) are leaded like headings and the rule stays for reading
+  text; the third: PASS on all twelve lines. Gate green. One commit.
 
 ### 2026-09-12
 - **T-22 · Same-origin manifest fallback** — commit "Fall back to a same-origin
