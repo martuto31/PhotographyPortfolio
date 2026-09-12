@@ -9,6 +9,18 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
+### T-24 · The preview for Viki
+**https://phbyvikiprod--preview-yb28hwie.web.app** — expires 2026-10-13.
+A Firebase *preview channel* on the prod site: its own URL, nothing on
+phbyviki.com changed (the `live` release is still 2026-08-03). Galleries are
+complete on it - the bucket's CORS refuses that origin, so T-22's fallback
+copy is doing the work; photos published after 2026-09-12 will not show there
+until the next `npm run sitemap` + redeploy. To refresh it after more commits:
+`npm run build && npx firebase hosting:channel:deploy preview --project phbyvikiprod --only app --expires 30d`
+(the `app` target mapping for that project lives in the gitignored
+`.firebaserc`; on another machine run
+`npx firebase target:apply hosting app phbyvikiprod --project phbyvikiprod` first).
+
 ### T-23 · Taste calls the audit only warns about - yours if you want them
 1. **Hero sentence is 14px desktop / 13.5px phone** (`.hero-sub`) - the most
    important sentence on the site and its smallest body text. I would go 16/15.
@@ -38,13 +50,20 @@ which `npm run publish` already does.
 
 ## Working on
 
-**T-24** - the branch onto a Firebase preview channel; the link goes here.
+**The auto queue is empty.** Idle until you paste into Intake or answer a
+Needs-you item.
 
 ---
 
 ## Shipped
 
 ### 2026-09-13
+- **T-24 · Preview channel** — https://phbyvikiprod--preview-yb28hwie.web.app
+  (expires 2026-10-13) — `firebase hosting:channel:deploy preview --project
+  phbyvikiprod --only app --expires 30d`; the `live` channel's release time is
+  unchanged; the Лора и Асен grid shows all 153 photographs on that origin
+  (headless Chrome), the HTML carries `<main>` and the 12px floor. `npm run
+  deploy` was not used.
 - **T-23 · UI/UX audit of the redesign** — commit "Bring the redesign up to the
   measurable UI rules" — new `npm run ux` (`tools/audit-ux.mjs`) loads eight
   routes at 1440 and 390 in headless Chrome and measures heading order, text
