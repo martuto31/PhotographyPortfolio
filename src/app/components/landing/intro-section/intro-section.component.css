@@ -1,16 +1,47 @@
+/* ---- The print --------------------------------------------------------------
+   DESIGN-SPEC.md: the hero is a photograph hung in a dark room — inset from the
+   edges of the stage, lit from behind, the copy sitting inside the frame at the
+   bottom. Not a full-bleed backdrop any more. */
 .hero {
     position: relative;
     width: 100vw;
-    /* svh, not vh: on mobile Safari, 100vh is the *expanded* viewport, so the
-       bottom of the hero — where the buttons are — sits under the browser chrome
-       until the user scrolls. */
-    height: 100svh;
-    min-height: 620px;
-    max-height: 1000px;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    overflow: hidden;
+    /* Top padding clears the fixed header, which sits on the stage rather than
+       over the photograph; the rest is the inset. */
+    --hero-inset: 24px;
+    padding: calc(var(--nav-h, 84px) + var(--hero-inset)) var(--hero-inset) 0;
+    box-sizing: border-box;
     color: var(--font-white);
+}
+
+:host-context(.mobile) .hero {
+    --hero-inset: 16px;
+}
+
+.hero-print {
+    position: relative;
+    /* svh, not vh: on mobile Safari, 100vh is the *expanded* viewport, so the
+       bottom of the print — where the buttons are — would sit under the browser
+       chrome until the user scrolls. */
+    height: calc(100svh - var(--nav-h, 84px) - var(--hero-inset));
+    min-height: 520px;
+    max-height: 760px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--glow-edge);
+}
+
+:host-context(.mobile) .hero-print {
+    min-height: 460px;
+    max-height: 640px;
+}
+
+.hero-glow {
+    position: absolute;
+    inset: calc(var(--nav-h, 84px) + var(--hero-inset)) var(--hero-inset) 0;
+    pointer-events: none;
+    z-index: 1;
+    box-shadow: 0 30px 70px -30px var(--glow);
 }
 
 .hero-image {
@@ -20,90 +51,72 @@
     background-size: cover;
     background-position: center 30%;
     background-repeat: no-repeat;
+    filter: brightness(1.05) contrast(1.03);
     transform: scale(1.05);
     animation: heroFloat 24s ease-in-out infinite alternate;
 }
 
-/* Two scrims, not one.
-
-   The vertical gradient lifts type off the bottom of the frame. The horizontal
-   one darkens the left third, where the text sits — without it the headline lands
-   on a brightly lit floral arch, and a previous client's name and date are legible
-   in the background behind it. */
+/* The ramp: the headline lands around 60% of the height, so the frame has to be
+   dark by there or it sits on the bright part of the arch. The faint left-hand
+   scrim keeps a previous client's name in the background from reading. */
 .hero-image::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(100deg, rgba(18, 17, 16, 0.72) 0%, rgba(18, 17, 16, 0.42) 38%, rgba(18, 17, 16, 0) 68%),
-        linear-gradient(180deg, rgba(18, 17, 16, 0.55) 0%, rgba(18, 17, 16, 0.10) 34%, rgba(18, 17, 16, 0.72) 100%);
+        linear-gradient(100deg, rgba(13, 12, 11, 0.38) 0%, rgba(13, 12, 11, 0.16) 38%, rgba(13, 12, 11, 0) 68%),
+        linear-gradient(180deg, rgba(13, 12, 11, 0.30) 0%, rgba(13, 12, 11, 0) 26%, rgba(13, 12, 11, 0.46) 56%, rgba(13, 12, 11, 0.90) 100%);
 }
 
 .hero-overlay {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
     box-sizing: border-box;
-    /* Top padding clears the fixed header; bottom padding leaves room for the
-       scroll cue. Both buttons now land inside the fold at 1440x900, which is
-       where they were being clipped. */
-    padding: var(--nav-h, 84px) 80px 128px;
+    padding: 0 40px 34px;
 }
 
 :host-context(.tablet) .hero-overlay {
-    padding: var(--nav-h, 72px) 40px 104px;
+    padding: 0 32px 30px;
 }
 
 :host-context(.mobile) .hero-overlay {
-    padding: var(--nav-h, 64px) 20px 88px;
+    padding: 0 22px 26px;
 }
 
 .hero-inner {
-    max-width: 900px;
+    max-width: 760px;
 }
 
 .hero-kicker {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.32em;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 26px;
-    color: var(--brass-bright);
+    margin-bottom: 14px;
+    color: var(--eyebrow);
 }
 
 .hero-kicker::before {
     content: '';
-    width: 34px;
+    width: 24px;
     height: 1px;
-    background-color: var(--brass-bright);
+    background-color: currentColor;
     flex: none;
 }
 
-:host-context(.mobile) .hero-kicker {
-    font-size: 10px;
-    letter-spacing: 0.26em;
-    margin-bottom: 18px;
-}
-
 .hero h1 {
-    font-family: var(--font-serif);
-    font-weight: 400;
     color: var(--font-white);
-    font-size: clamp(36px, 5vw, 64px);
-    line-height: 1.08;
-    margin: 0 0 26px;
-    /* Wide enough for "Сватбен и събитиен фотограф" to hold one line at 64px —
-       the explicit <br> in the markup owns where the headline breaks, and a
-       tighter measure was overriding it and orphaning "Сватбен и". */
+    line-height: 1.05;
+    margin: 0 0 12px;
+    /* The explicit <br> in the markup owns where the headline breaks; a tighter
+       measure would override it and orphan "Сватбен и". */
     max-width: 28ch;
-    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
 }
 
 .hero h1 em {
@@ -113,22 +126,22 @@
 
 .hero-sub {
     font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.65;
-    margin: 0 0 34px;
-    max-width: 54ch;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 24px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 22px;
+    max-width: 46ch;
+    color: rgba(239, 234, 225, 0.88);
+    text-shadow: 0 1px 20px rgba(0, 0, 0, 0.45);
 }
 
 :host-context(.mobile) .hero-sub {
-    font-size: 15px;
-    margin-bottom: 26px;
+    font-size: 13.5px;
+    margin-bottom: 18px;
 }
 
 .btn-group {
     display: flex;
-    gap: 14px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -157,7 +170,7 @@
 .scroll-cue {
     position: absolute;
     z-index: 1;
-    bottom: 44px;
+    bottom: 22px;
     left: 50%;
     transform: translateX(-50%);
     width: 40px;

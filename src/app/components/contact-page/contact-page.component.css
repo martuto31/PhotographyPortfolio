@@ -69,8 +69,8 @@
 
 .method-value {
     font-family: var(--font-serif);
-    font-size: clamp(34px, 4.2vw, 50px);
-    font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 400;
     line-height: 1.05;
     letter-spacing: -0.01em;
     color: var(--font-high-emphasis);
@@ -83,7 +83,7 @@
 /* Everything after the phone number steps down a level, so the page has one
    obvious primary action rather than four competing ones. */
 .method-value-sm {
-    font-size: clamp(22px, 2.4vw, 28px);
+    font-size: clamp(18px, 1.8vw, 22px);
     font-style: italic;
     font-weight: 400;
 }
@@ -134,6 +134,7 @@ a.method:hover .method-value {
 .social-links img {
     width: 18px;
     height: 18px;
+    filter: invert(0.92);
 }
 
 /* ---- Form ---------------------------------------------------------------

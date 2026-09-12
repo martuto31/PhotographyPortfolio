@@ -16,12 +16,13 @@
 
 .column {
     break-inside: avoid;
-    margin-bottom: 16px;
-    overflow: hidden;
+    /* Room for the glow below each print; the column itself must not clip it. */
+    margin-bottom: 28px;
+    padding-bottom: 2px;
 }
 
 :host-context(.mobile) .column {
-    margin-bottom: 12px;
+    margin-bottom: 22px;
 }
 
 .column.loading {
@@ -38,7 +39,6 @@
     border: 0;
     background: none;
     cursor: pointer;
-    overflow: hidden;
     font: inherit;
     color: inherit;
 }
@@ -48,19 +48,22 @@
     outline-offset: 3px;
 }
 
+/* Each photograph is a print lit from above — the glow recipe from
+   DESIGN-SPEC.md, on the image itself so the light follows its edge. */
 .column img {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
-    transition: transform 700ms cubic-bezier(0.2, 0.6, 0.2, 1), filter 400ms ease;
-    will-change: transform;
+    filter: brightness(1.05) contrast(1.02);
+    box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
+    transition: transform 300ms ease, box-shadow 300ms ease;
 }
 
 .image-btn:hover img,
 .image-btn:focus-visible img {
-    transform: scale(1.025);
-    filter: brightness(1.04);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1px var(--glow-edge-hover), 0 32px 60px -24px var(--glow);
 }
 
 .modal-container {
@@ -203,15 +206,15 @@
 .skeleton {
     width: 100%;
     height: 280px;
-    background-color: var(--bg-cream);
+    background-color: var(--surface);
     animation: pulse 1.5s infinite;
     margin-bottom: 16px;
 }
 
 @keyframes pulse {
-    0%   { background-color: #ECE6DC; }
-    50%  { background-color: #F5F0E8; }
-    100% { background-color: #ECE6DC; }
+    0%   { background-color: #1C1916; }
+    50%  { background-color: #262019; }
+    100% { background-color: #1C1916; }
 }
 
 @keyframes fadeIn {
@@ -234,9 +237,9 @@
     justify-content: center;
     gap: 10px;
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: 9.5px;
     font-weight: 600;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--font-low-emphasis);
 }
@@ -251,18 +254,14 @@
 }
 
 .gallery-heading h1 {
-    font-family: var(--font-serif);
-    font-weight: 500;
     font-style: italic;
-    font-size: clamp(34px, 4.5vw, 54px);
-    line-height: 1.1;
-    margin: 14px 0 10px;
+    margin: 14px 0 8px;
     color: var(--font-high-emphasis);
 }
 
 .gallery-heading p {
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 14px;
     color: var(--font-medium-emphasis);
     margin: 0;
 }
@@ -289,16 +288,16 @@
 }
 
 .siblings-heading h2 {
-    font-size: clamp(24px, 2.6vw, 34px);
     margin: 0;
 }
 
 .siblings-all {
     font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
+    color: var(--font-on-ink-mute);
     flex: none;
 }
 
@@ -321,26 +320,30 @@
 .sibling-image {
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background-color: var(--paper-warm);
+    background-color: var(--surface);
     margin-bottom: 18px;
+    box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
+    transition: transform 300ms ease, box-shadow 300ms ease;
 }
 
 .sibling-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 900ms cubic-bezier(0.2, 0.6, 0.2, 1);
+    filter: brightness(1.05) contrast(1.02);
 }
 
-.sibling:hover .sibling-image img {
-    transform: scale(1.045);
+.sibling:hover .sibling-image,
+.sibling:focus-visible .sibling-image {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1px var(--glow-edge-hover), 0 32px 60px -24px var(--glow);
 }
 
 .sibling h3 {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 23px;
-    font-weight: 500;
+    font-size: 19px;
+    font-weight: 400;
     margin: 0;
     text-align: center;
     transition: color 200ms ease;

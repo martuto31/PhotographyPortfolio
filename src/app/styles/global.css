@@ -3,8 +3,8 @@ html, body {
     min-height: 100vh;
     font-family: var(--font-sans);
     font-weight: 400;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.55;
     color: var(--font-medium-emphasis);
     background-color: var(--paper);
     margin: 0;
@@ -57,9 +57,9 @@ img {
 
 /* ---- Full-bleed sections -------------------------------------------------
    The page is laid out inside a 1400px wrapper with side padding. A section
-   that needs edge-to-edge colour or photography escapes it by pulling itself
-   back out to the viewport width. Alternating paper and ink bands is what
-   gives the page its photo-book rhythm. */
+   that needs edge-to-edge photography escapes it by pulling itself back out
+   to the viewport width. On the dark stage the bands no longer alternate in
+   colour; a hairline above and below is what marks them. */
 .bleed {
     width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -69,6 +69,8 @@ img {
 .on-ink {
     background-color: var(--ink-deep);
     color: var(--font-on-ink);
+    border-top: 1px solid var(--rule-on-ink);
+    border-bottom: 1px solid var(--rule-on-ink);
 }
 
 .on-ink h1,
@@ -100,7 +102,31 @@ img {
 
 ::selection {
     background: var(--brass);
-    color: var(--font-white);
+    color: var(--btn-fg);
+}
+
+/* ---- The glow ----------------------------------------------------------
+   Warm light thrown under a photograph, like a print lit from above (see
+   DESIGN-SPEC.md). Put it on the <img>, never on a wrapper: the shadow has
+   to follow the picture's own edge. The hover lift belongs to the link
+   around it, so keyboard focus and mouse hover behave the same. */
+.glow {
+    filter: brightness(1.05) contrast(1.02);
+    box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+a:hover .glow,
+a:focus-visible .glow {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1px var(--glow-edge-hover), 0 32px 60px -24px var(--glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    a:hover .glow,
+    a:focus-visible .glow {
+        transform: none;
+    }
 }
 
 /* Visible to screen readers, not on screen. Used for headings that structure

@@ -88,7 +88,7 @@ purpose — see its note.
   > Цвят на бутоните костено бяло от артефакта
 - [x] T-19 · Design reference: anastasiiakharyna.com · decided - see below
   > Вики - Сайта на който ми харесва дизайна https://www.anastasiiakharyna.com/
-- [ ] T-20 · Apply the redesign direction (DESIGN-SPEC.md) to every page in one pass, button = Костено бяло `#F1ECE3` · auto (Martin: "scope them and decide") · after T-17b/T-16b/T-06b/T-10b, so it starts from a settled tree
+- [x] T-20 · Apply the redesign direction (DESIGN-SPEC.md) to every page in one pass, button = Костено бяло `#F1ECE3` · auto · shipped 2026-09-12 as one commit
   > Redesign direction is decided and written up in DESIGN-SPEC.md — tokens, glow recipe, type scale, what came from theme 01 vs 02, what was dropped. Read it before touching any visual work.
   > Preview artifact, shared with Viki: https://claude.ai/code/artifact/e277ac36-238b-459d-9974-bb89aeb8f9cc
   > BLOCKED on Viki: she must name one button colour of four (Костено бяло / Бледо шампанско / Пепелна роза / Само контур). Recommendation is Костено бяло. Nothing visual gets applied until she answers.
@@ -106,10 +106,15 @@ purpose — see its note.
   > i odnt understand about me meta description - update it if about you was updated?
 - [x] T-10b · /galerii teaser for abiturienti · auto · shipped 2026-09-12
   > T-10 change to match the new text yes
+- [x] T-06b / T-10b · veto windows closed - Martin OK'd both wordings 2026-09-12
+  > okay for the deposit sentence and i think t-10b its okay too
+- [x] T-20 · Martin: "okay" to the decision
+  > t-20 - i mean okay i dont understand but okay
 
 ---
 
 # Ready
+
 
 
 _Nothing startable. Everything left needs Martin or is blocked — see below._

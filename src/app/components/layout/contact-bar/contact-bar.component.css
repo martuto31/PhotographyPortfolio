@@ -8,8 +8,9 @@
     grid-template-columns: 1fr 1fr;
     /* Keeps the bar clear of the iOS home indicator. */
     padding-bottom: env(safe-area-inset-bottom, 0);
-    background-color: var(--ink);
-    box-shadow: 0 -8px 28px rgba(25, 24, 23, 0.18);
+    background-color: var(--surface);
+    border-top: 1px solid var(--rule-on-ink);
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.45);
 }
 
 .bar-action {
@@ -20,11 +21,11 @@
     /* 52px tall — comfortably above the 44px minimum tap target. */
     padding: 16px 12px;
     font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--font-white);
+    color: var(--font-on-ink);
 }
 
 .bar-action svg {
@@ -46,9 +47,9 @@
 }
 
 .bar-instagram {
-    background-color: var(--ink);
+    background-color: var(--surface);
 }
 
 .bar-instagram:active {
-    background-color: #2A2724;
+    background-color: var(--rule-strong);
 }

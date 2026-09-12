@@ -25,15 +25,15 @@
 
 .heading h2 {
     font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: clamp(36px, 4.6vw, 56px);
+    font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 31px);
     line-height: 1.1;
     margin: 0 0 16px;
     color: var(--font-high-emphasis);
 }
 
 .heading-embedded h2 {
-    font-size: clamp(28px, 3vw, 36px);
+    font-size: clamp(20px, 2.2vw, 26px);
 }
 
 /* The standalone heading centres its sub-line with auto margins; in the column

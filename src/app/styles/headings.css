@@ -1,52 +1,37 @@
+/* The scale is DESIGN-SPEC.md's, taken literally: Cormorant 400, normal case,
+   and headings that stop well short of poster size. What she liked about the
+   paper theme was "изчистеното, семплото" — the quiet comes from the size. */
 h1,
 h2,
 h3 {
     font-family: var(--font-serif);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.002em;
     color: var(--font-high-emphasis);
     margin: 0;
     text-wrap: balance;
 }
 
 h1 {
-    font-size: clamp(40px, 6vw, 72px);
-    margin-bottom: 32px;
+    font-size: clamp(27px, 4.4vw, 39px);
+    margin-bottom: 20px;
     line-height: 1.05;
 }
 
-.tablet h1 {
-    font-size: 52px;
-    margin-bottom: 24px;
-}
-
 .mobile h1 {
-    font-size: 38px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 h2 {
-    font-size: clamp(32px, 4.5vw, 52px);
+    font-size: clamp(24px, 3.2vw, 31px);
+    line-height: 1.14;
     margin-bottom: 24px;
 }
 
-.tablet h2 {
-    font-size: 38px;
-}
-
-.mobile h2 {
-    font-size: 29px;
-}
-
 h3 {
-    font-size: 28px;
-    font-weight: 500;
-}
-
-.tablet h3,
-.mobile h3 {
-    font-size: 22px;
+    font-size: 19px;
+    line-height: 1.2;
 }
 
 /* Emphasis inside a heading is carried by the italic alone, not by colour.
@@ -63,72 +48,61 @@ h3 em,
 }
 
 /* ---- Section label ------------------------------------------------------
-   Small caps over a short amber rule. This is the site's structural signature:
+   Small caps over a short brass rule. This is the site's structural signature:
    it opens every section, and it is one of only three places the accent colour
    appears (the others are hover underlines and hairlines). */
 .eyebrow {
     font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.28em;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--brass);
-    margin-bottom: 20px;
+    color: var(--eyebrow);
+    margin-bottom: 13px;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .eyebrow::before {
     content: '';
-    width: 28px;
+    width: 24px;
     height: 1px;
-    background-color: var(--brass);
+    background-color: currentColor;
     flex: none;
 }
 
 /* Centred headings put the rule on both sides so the label stays symmetrical. */
 .eyebrow-center::after {
     content: '';
-    width: 28px;
+    width: 24px;
     height: 1px;
-    background-color: var(--brass);
+    background-color: currentColor;
     flex: none;
-}
-
-.on-ink .eyebrow,
-.on-ink .eyebrow::before,
-.on-ink .eyebrow::after {
-    color: var(--brass-bright);
-    background-color: var(--brass-bright);
-}
-
-.on-ink .eyebrow {
-    background-color: transparent;
 }
 
 .text-medium {
     font-family: var(--font-sans);
-    font-size: 18px;
-    line-height: 1.75;
+    font-size: 16px;
+    line-height: 1.7;
     color: var(--font-medium-emphasis);
 }
 
 .tablet .text-medium,
 .mobile .text-medium {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .text-small {
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
     color: var(--font-medium-emphasis);
 }
 
 .tablet .text-small,
 .mobile .text-small {
-    font-size: 14px;
+    font-size: 13.5px;
 }
 
 /* Running prose caps its own measure — long lines are the fastest way to make

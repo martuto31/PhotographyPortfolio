@@ -9,28 +9,23 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-06b · Deposit sentence - veto window
-Now on `/usloviya`, at the end of the "Отказ от запазена дата" section:
+### T-20 · The redesign is on the branch - look at one preview build
+`npm run build && npm run preview`, or just the screenshots in `.verify/t20c-*.png`
+(desktop) and `.verify/t20m-*.png` (phone). It is one commit; `git revert` undoes
+it whole. Things I decided that you may want to overrule:
+- **The About portrait** has the old coral backdrop baked into `about-me.png`. On
+  the dark stage it is the loudest thing on the site. Needs a re-cut or a new
+  portrait from Viki - not a CSS fix.
+- The UI font is now the system stack (as the spec names it); Overpass is no
+  longer used for text. Cormorant stays for headings.
+- The type scale is the spec's, literally: h1 tops out at 39px. It reads quiet
+  on a 1440 screen, which is the point she named ("изчистеното, семплото") - say
+  if you want it a notch up.
+- Wordmark stays Latin "Victoria Borisova / PHOTOGRAPHY", as previewed.
 
-> При отказ от ваша страна платеното капаро не се възстановява - датата е била
-> пазена за вас и не е могла да бъде предложена на друг.
-
-It covers cancellation only; moving a date stays "we will work it out".
-
-### T-10b · /galerii teaser - veto window
-Abiturienti now reads "Индивидуална фотосесия в деня на бала и семеен бал."
-
-### T-20 · The redesign pass - my decision, as you asked
-- Direction: `DESIGN-SPEC.md` as written. Viki chose a button from that preview,
-  which is her accepting the direction.
-- Button: Костено бяло `#F1ECE3`, her answer.
-- anastasiiakharyna.com: mood reference only. Nothing from it is copied unless
-  she names an element ("the big full-width photo", "the thin serif menu"…).
-- One pass over every page, then you look at one preview build, not page by
-  page. The sibling strip and the seeded `<img>` tags survive - the gate checks
-  both on every build.
-- Order: T-06b and T-10b first (two quick ticks), then T-20 starts. It will take
-  several ticks; `Working on` will say where it is.
+### T-18 / T-19 - closed by T-20
+Costено бяло is in; anastasiiakharyna.com was treated as mood only. If Viki wants
+a specific element from it, name it and it becomes a task.
 
 `WORKER.md` is untracked - commit it yourself or tell me to.
 
@@ -38,16 +33,21 @@ Abiturienti now reads "Индивидуална фотосесия в деня �
 
 ## Working on
 
-Next tick: **T-20 · the redesign pass** starts - first the scope and plan get
-written into `QUEUE.md`, then tokens and shared styles, then the pages, one
-preview build at the end. Several ticks; this line will say where it is.
+**The auto queue is empty.** Idle until you react to the redesign, answer a
+Needs-you item, or paste into Intake.
 
 ---
 
 ## Shipped
 
 ### 2026-09-11
-- **T-06b · Deposit sentence** — commit "Say the deposit stays when a booked date is cancelled" — verifier PASS.
+- **T-20 · The redesign** — commit "Apply the redesign direction to every page" —
+  "Тъмна зала, изчистена" on every route in one pass: dark stage tokens, brass
+  hairlines, bone-white buttons, the spec's type scale, the hero as the inset
+  lit print, the glow under every photograph, nav wordmark and CTA, mobile bar,
+  inverted social icons. 24 files, CSS plus one template; no TypeScript touched,
+  hero preload and the seeded photographs intact. Verifier PASS, gate green.
+- **T-06b · Deposit sentence** — `55c93ce` — verifier PASS.
 - **T-10b · /galerii teaser** — commit "Match the prom teaser to the new offering" — verifier PASS.
 - **T-16b · Corporate, part B** — `c99ab6e` —
   slug maps, LocalBusiness offer + description + keywords, sitemap generator,

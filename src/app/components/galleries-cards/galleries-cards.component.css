@@ -42,17 +42,13 @@
 }
 
 .page-heading h1 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: clamp(36px, 5vw, 60px);
-    line-height: 1.1;
-    margin: 0 0 20px;
+    margin: 0 0 16px;
     color: var(--font-high-emphasis);
 }
 
 .page-heading p {
     font-family: var(--font-sans);
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.7;
     color: var(--font-medium-emphasis);
     margin: 0;
@@ -64,7 +60,7 @@
 .page-heading .lead {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: clamp(20px, 2.2vw, 26px);
+    font-size: clamp(18px, 1.8vw, 22px);
     line-height: 1.45;
     color: var(--font-high-emphasis);
     max-width: 42ch;
@@ -106,11 +102,21 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 900ms cubic-bezier(0.2, 0.6, 0.2, 1), opacity 600ms ease;
+    filter: brightness(1.05) contrast(1.02);
+    transition: opacity 600ms ease;
 }
 
-.card:hover img {
-    transform: scale(1.045);
+/* The print lit from above: the glow sits on the frame, which is the picture's
+   own rectangle, and the whole print lifts on hover instead of zooming. */
+.card .image-wrap {
+    box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.card:hover .image-wrap,
+.card:focus-visible .image-wrap {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1px var(--glow-edge-hover), 0 32px 60px -24px var(--glow);
 }
 
 .lazy-load {
@@ -129,9 +135,9 @@
 }
 
 @keyframes pulse {
-    0%   { background-color: #ECE6DC; }
-    50%  { background-color: #F5F0E8; }
-    100% { background-color: #ECE6DC; }
+    0%   { background-color: #1C1916; }
+    50%  { background-color: #262019; }
+    100% { background-color: #1C1916; }
 }
 
 .card-meta {
@@ -144,21 +150,21 @@
 
 .card-meta .tag {
     font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.28em;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--font-low-emphasis);
+    color: var(--font-on-ink-mute);
 }
 
 .card-meta h3 {
     font-family: var(--font-serif);
-    font-weight: 500;
+    font-weight: 400;
     font-style: italic;
-    font-size: 26px;
+    font-size: 20px;
     line-height: 1.2;
     margin: 0;
-    color: var(--font-high-emphasis);
+    color: var(--font-on-ink);
     transition: color 200ms ease;
 }
 
@@ -168,7 +174,7 @@
 
 .empty-state {
     font-family: var(--font-sans);
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.75;
     color: var(--font-medium-emphasis);
     max-width: 62ch;
@@ -204,8 +210,8 @@
 
 .service-text p {
     font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.75;
     color: var(--font-medium-emphasis);
     margin: 0;
     max-width: 62ch;
@@ -216,7 +222,6 @@
 }
 
 .includes-heading {
-    font-size: clamp(26px, 2.8vw, 34px);
     margin: 0 0 8px;
 }
 
@@ -236,7 +241,7 @@
 }
 
 .includes-list h3 {
-    font-size: 21px;
+    font-size: 18px;
     margin: 0 0 8px;
 }
 

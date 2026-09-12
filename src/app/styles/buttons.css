@@ -1,74 +1,49 @@
 .btn {
     font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     border-radius: 0;
     cursor: pointer;
-    padding: 15px 30px;
-    border: 1px solid transparent;
-    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+    padding: 12px 22px;
+    border: 0;
+    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
     display: inline-block;
     text-align: center;
-    /* Buttons carry Cyrillic set in Overpass; the extra word-spacing keeps the
-       wide letter-spacing from running words together. */
+    /* Buttons carry Cyrillic in a tracked sans; the extra word-spacing keeps
+       the letter-spacing from running words together. */
     word-spacing: 0.06em;
 }
 
-.tablet .btn,
-.mobile .btn {
-    font-size: 11px;
-    padding: 14px 24px;
-}
-
-/* Solid ink rather than a saturated fill. The photographs are the only place
-   colour belongs on this site; a coloured button competes with them. */
-.btn-primary {
-    color: var(--font-white);
-    background-color: var(--ink);
-    border-color: var(--ink);
-}
-
-.btn-primary:hover {
-    background-color: var(--brass);
-    border-color: var(--brass);
-}
-
-.btn-secondary {
-    color: var(--font-high-emphasis);
-    background-color: transparent;
-    border-color: var(--rule-strong);
-}
-
-.btn-secondary:hover {
-    color: var(--font-white);
-    background-color: var(--ink);
-    border-color: var(--ink);
-}
-
-/* On photographs and ink sections */
-.btn-ghost-light {
-    color: var(--font-white);
-    background-color: transparent;
-    border-color: rgba(255, 255, 255, 0.7);
-}
-
-.btn-ghost-light:hover {
-    background-color: var(--font-white);
-    color: var(--font-high-emphasis);
-    border-color: var(--font-white);
-}
-
+/* ---- Костено бяло --------------------------------------------------------
+   Viki's pick from the four in the preview. A bone-white block on the dark
+   stage: it is the one thing on the page that earns enquiries, so it is the
+   one thing allowed to be bright — and it is still not a colour. */
+.btn-primary,
 .btn-light {
-    color: var(--ink);
-    background-color: var(--paper);
-    border-color: var(--paper);
+    color: var(--btn-fg);
+    background-color: var(--btn-bg);
+    box-shadow: inset 0 0 0 1px transparent;
 }
 
+.btn-primary:hover,
 .btn-light:hover {
-    background-color: var(--brass-bright);
-    border-color: var(--brass-bright);
+    background-color: var(--btn-bg-hover);
+}
+
+/* The quiet second action: an outline in the text colour at low opacity. */
+.btn-secondary,
+.btn-ghost-light {
+    color: var(--font-on-ink);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1px var(--btn-line);
+}
+
+.btn-secondary:hover,
+.btn-ghost-light:hover {
+    box-shadow: inset 0 0 0 1px var(--btn-line-hover);
+    color: var(--font-white);
 }
 
 /* ---- Text links ---------------------------------------------------------

@@ -1,4 +1,10 @@
 <section class="hero">
+    <!-- The print hung in a dark room: inset from the edges and lit from behind.
+         The glow is a sibling of the print, not a child, so the clipped image
+         cannot swallow its shadow. -->
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="hero-print">
     <div class="hero-image" aria-hidden="true"></div>
 
     <div class="hero-overlay">
@@ -25,4 +31,5 @@
     <button type="button" class="scroll-cue" (click)="scrollToWork()" aria-label="Към работите">
         <span class="scroll-line" aria-hidden="true"></span>
     </button>
+    </div>
 </section>
