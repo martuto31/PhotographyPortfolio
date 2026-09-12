@@ -12,10 +12,12 @@ npm install
 npm start          # dev server on :4200
 ```
 
-> **Heads up when working locally:** the R2 bucket's CORS policy allows `https://phbyviki.com`
-> only, so photo grids come up **empty on localhost**. Card covers still render because they
-> come from a build-time snapshot. Verify gallery work against production, or add a localhost
-> origin to the bucket's CORS policy. See [GALLERIES.md](GALLERIES.md#required-one-time-setup-r2-cors).
+> **Working locally:** the R2 bucket's CORS policy allows `https://phbyviki.com` only, so
+> the live manifest fetch is refused on localhost and on Firebase preview channels. The
+> client then reads the build-time copy at `src/assets/manifest.json` (written by
+> `npm run sitemap`), so galleries fill on any origin - stale by at most one publish. Run
+> `npm run sitemap` after publishing photos or the local copy drifts.
+> See [GALLERIES.md](GALLERIES.md#required-one-time-setup-r2-cors).
 
 ## Publishing a new gallery
 

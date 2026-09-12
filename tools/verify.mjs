@@ -177,6 +177,7 @@ const isHome = (route) => route === '/';
 // Per-route checks
 
 const titles = new Map(); // title -> [routes]
+const seededPrefixes = new Set(); // "Weddings/Лора и Асен" of every seeded photograph
 
 for (const route of routes) {
   const file = routeFile(route);
@@ -231,6 +232,11 @@ for (const route of routes) {
 
   if (imgs.length > 0) pass(route, 'images');
   else fail(route, 'images', 'zero <img> tags');
+
+  for (const p of photos) {
+    const path = decodeURIComponent(p.attrs.src.slice(IMAGE_HOST.length));
+    seededPrefixes.add(path.slice(0, path.lastIndexOf('/')));
+  }
 
   const words = wordCount(bodyText(html));
   if (words >= MIN_GALLERY_WORDS) pass(route, 'words');
@@ -307,6 +313,26 @@ for (const file of sourceFiles) {
 }
 if (sourceOffenders.length === 0) pass('*', 'source-routerlink');
 else fail('*', 'source-routerlink', `routerLink on a non-anchor: ${sourceOffenders.join('; ')}`);
+
+// -- the same-origin manifest copy is in the build and knows every seeded gallery.
+// It is what the client reads on an origin the bucket's CORS policy refuses
+// (localhost, a preview channel); a stale or missing copy means those origins show
+// eight photographs per gallery and stop.
+const fallbackFile = join(DIST, 'assets', 'manifest.json');
+if (!existsSync(fallbackFile)) {
+  fail('*', 'manifest-fallback', 'assets/manifest.json missing from the build — run npm run sitemap');
+} else {
+  let fallback = null;
+  try { fallback = JSON.parse(readFileSync(fallbackFile, 'utf8')); } catch { /* reported below */ }
+  const galleries = fallback?.galleries;
+  if (!galleries || typeof galleries !== 'object') {
+    fail('*', 'manifest-fallback', 'assets/manifest.json is not a manifest (no "galleries" object)');
+  } else {
+    const missing = [...seededPrefixes].filter((prefix) => !Array.isArray(galleries[prefix]) || galleries[prefix].length === 0);
+    if (missing.length === 0) pass('*', 'manifest-fallback');
+    else fail('*', 'manifest-fallback', `seeded galleries absent from assets/manifest.json: ${missing.join(', ')}`);
+  }
+}
 
 // -- every top-level route has a Firebase rewrite, or it 404s in production
 const firebase = JSON.parse(readFileSync(FIREBASE_JSON, 'utf8'));

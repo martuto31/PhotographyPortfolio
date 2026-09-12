@@ -102,8 +102,9 @@ entry there is loud rather than silent.
 ## Required one-time setup: R2 CORS
 
 The browser fetches `manifest.json` cross-origin (`phbyviki.com` → `images.phbyviki.com`).
-Without a CORS policy on the bucket the fetch is blocked and **both the cards and the
-photos come up empty** (no error shown to visitors). Set this once in
+Without a CORS policy on the bucket that fetch is blocked and the client silently falls
+back to the build-time copy at `src/assets/manifest.json` - galleries then show what
+existed at the last `npm run sitemap`, and nothing published since. Set this once in
 **Cloudflare dash → R2 → bucket → Settings → CORS Policy**:
 
 ```json
@@ -117,14 +118,16 @@ photos come up empty** (no error shown to visitors). Set this once in
 ]
 ```
 
-`localhost:4200` is included so the cards/photos also work when running `ng serve` locally.
+`localhost:4200` is optional: locally the fallback copy serves the galleries anyway, the
+live fetch only adds photos published since the last `npm run sitemap`.
 
 ## Gotchas
 
-- **Cards/photos empty after deploy?** 99% of the time it's the CORS policy above.
-  Note the policy shown above is the *intended* one — as of 2026-07-31 the live bucket
-  answers only `https://phbyviki.com`, so photo grids are empty on localhost. Card covers
-  still render locally because they come from the build-time snapshot, not a `fetch`.
+- **New photos not showing after publish?** Either the CORS policy above lost the
+  origin (the client is on the fallback copy) or `npm run sitemap` was not re-run after
+  the publish (the fallback copy and the snapshot are stale). As of 2026-07-31 the live
+  bucket answers only `https://phbyviki.com`; localhost and Firebase preview channels are
+  always on the fallback copy, which is exactly why it exists.
 - The manifest is served `no-cache`, so updates show immediately — no cache busting needed.
 
 ## SEO: what publish regenerates

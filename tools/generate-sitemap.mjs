@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Regenerates src/sitemap.xml (and the category list in prerender-routes.txt) from the
-// live R2 manifest, so the sitemap always matches the photos that actually exist.
+// live R2 manifest, so the sitemap always matches the photos that actually exist. Also
+// writes the manifest itself to src/assets/manifest.json - the same-origin copy the
+// client falls back to when the bucket's CORS policy refuses the origin it runs on.
 //
 // Usage:
 //   npm run sitemap
@@ -147,6 +149,13 @@ async function main() {
     throw new Error(`Could not fetch manifest: HTTP ${response.status}`);
   }
   const manifest = await response.json();
+
+  // Same-origin copy of the manifest, served from /assets/. The bucket's CORS policy
+  // allows https://phbyviki.com only, so on any other origin - localhost, a Firebase
+  // preview channel - the live fetch is blocked and fetchManifest() in config.ts reads
+  // this file instead. Stale by at most one publish, which is exactly as stale as the
+  // snapshot below; the live manifest still wins wherever CORS lets it through.
+  await writeFile(join(REPO_ROOT, 'src', 'assets', 'manifest.json'), JSON.stringify(manifest) + '\n', 'utf8');
 
   // Group manifest prefixes ("Weddings/Лора и Асен") by their type.
   const byType = new Map();
@@ -323,7 +332,8 @@ async function main() {
   ];
   await writeFile(join(REPO_ROOT, 'prerender-routes.txt'), prerenderRoutes.join('\n') + '\n', 'utf8');
 
-  console.log(`\nWrote src/sitemap.xml — ${entries.length} URLs (${galleryCount} galleries).`);
+  console.log(`\nWrote src/assets/manifest.json — ${Object.keys(manifest.galleries).length} manifest prefixes.`);
+  console.log(`Wrote src/sitemap.xml — ${entries.length} URLs (${galleryCount} galleries).`);
   console.log(`Wrote prerender-routes.txt — ${prerenderRoutes.length} routes.`);
 }
 

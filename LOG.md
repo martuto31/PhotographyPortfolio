@@ -9,36 +9,48 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-20 · The redesign is on the branch - look at one preview build
-`npm run build && npm run preview`, or just the screenshots in `.verify/t20c-*.png`
-(desktop) and `.verify/t20m-*.png` (phone). It is one commit; `git revert` undoes
-it whole. Things I decided that you may want to overrule:
-- **The About portrait** has the old coral backdrop baked into `about-me.png`. On
-  the dark stage it is the loudest thing on the site. Needs a re-cut or a new
-  portrait from Viki - not a CSS fix.
-- The UI font is now the system stack (as the spec names it); Overpass is no
-  longer used for text. Cormorant stays for headings.
-- The type scale is the spec's, literally: h1 tops out at 39px. It reads quiet
-  on a 1440 screen, which is the point she named ("изчистеното, семплото") - say
-  if you want it a notch up.
-- Wordmark stays Latin "Victoria Borisova / PHOTOGRAPHY", as previewed.
+### T-21 · The "missing" gallery photos - nothing to fix, but read this once
+You were looking at localhost (the `.verify` screenshots or a preview server). The
+bucket's CORS policy allows `https://phbyviki.com` only, so off that origin the
+manifest fetch is refused and a gallery shows the 8 seeded photographs and stops -
+Лора и Асен has 153. Production was never affected; the built HTML carries the
+seeds; every image URL answers 200. T-22 (shipped below) makes the site fall back
+to its own copy of the manifest, so localhost and the preview link for Viki now
+show whole galleries. New photos still need `npm run sitemap` after a publish,
+which `npm run publish` already does.
 
-### T-18 / T-19 - closed by T-20
-Costено бяло is in; anastasiiakharyna.com was treated as mood only. If Viki wants
-a specific element from it, name it and it becomes a task.
-
-`WORKER.md` is untracked - commit it yourself or tell me to.
+### Still open from T-20
+- **The About portrait** has the old coral backdrop baked into `about-me.png` and
+  is the loudest thing on the dark stage. Needs a new portrait from Viki, not CSS.
+- `WORKER.md` is untracked - commit it yourself or tell me to. Its "R2 CORS blocks
+  localhost" trap is out of date after T-22: galleries fill locally now.
 
 ---
 
 ## Working on
 
-**The auto queue is empty.** Idle until you react to the redesign, answer a
-Needs-you item, or paste into Intake.
+Next tick **T-23** - the UI/UX audit of the redesign (headings, type sizes, the
+objective checks: contrast, tap targets, heading order; taste calls get parked
+with a recommendation). Then **T-24** - the branch onto a Firebase **preview
+channel**, not the live site, and the link goes here.
 
 ---
 
 ## Shipped
+
+### 2026-09-12
+- **T-22 · Same-origin manifest fallback** — commit "Fall back to a same-origin
+  copy of the manifest" — `npm run sitemap` now also writes
+  `src/assets/manifest.json`; `fetchManifest()` tries the live manifest, then that
+  copy, then gives up. On localhost the Лора и Асен grid went from 8 tiles to 153
+  (headless Chrome, DOM count); the gate has a new `manifest-fallback` check that
+  fails on a missing, malformed or stale copy - proven on a throwaway dist. No
+  visual change, one TypeScript file. Verifier PASS, gate green.
+- **T-21 · Gallery photos "missing"** — diagnosed, not a bug: the localhost CORS
+  trap. See Needs you.
+- Triaged your four lines: T-21 closed, T-22 shipped, T-23 (audit) and T-24
+  (preview deploy) queued in that order. "The redesign is fine" closes the T-20
+  question; T-19 reconfirmed.
 
 ### 2026-09-11
 - **T-20 · The redesign** — commit "Apply the redesign direction to every page" —

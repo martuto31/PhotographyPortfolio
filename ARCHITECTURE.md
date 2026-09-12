@@ -133,8 +133,9 @@ Full detail in [`GALLERIES.md`](./GALLERIES.md). Summary:
   `fetchManifest()` / `imageUrl()` / `COVER_FILENAME` helpers.
 
 **One required setup step:** the R2 bucket needs a **CORS policy** allowing `GET` from
-`https://phbyviki.com` (+ `http://localhost:4200` for dev). Without it the manifest fetch
-is blocked and galleries silently show empty. JSON is in `GALLERIES.md`.
+`https://phbyviki.com`. Without it the live manifest fetch is blocked and the client falls
+back to the build-time copy in `src/assets/manifest.json` (written by `npm run sitemap`) -
+galleries still fill, but only with what existed at the last build. JSON is in `GALLERIES.md`.
 
 ### Publishing images
 ```sh
@@ -269,15 +270,17 @@ GitHub Action — not set up yet.**
 | Change page meta/description | `src/assets/seo.json` |
 | Change a category `<title>` | `SERVICE_TITLES` in `src/app/content/services.ts` |
 | Change the images domain | `IMAGE_BASE_URL` in `src/app/config.ts` (+ `index.html` preconnect) |
-| Galleries show empty in browser | check the R2 **CORS** policy (§4) |
-| Run locally | `npm start` (needs R2 CORS to include `localhost:4200`) |
+| Galleries show only the first photos | CORS refused the origin and the fallback copy is stale - `npm run sitemap` (§4) |
+| Run locally | `npm start` (galleries come from the fallback copy; CORS is not needed) |
 | Deploy | `npm run deploy` |
 
 ---
 
 ## 8. Gotchas
 
-- **Empty galleries/cards after deploy** → almost always the missing R2 CORS policy.
+- **Galleries stop at the photos of the last build** → the R2 CORS policy refused the
+  origin (a preview channel, localhost) and the client is on the fallback copy. Fine for a
+  preview; on the live site it means the CORS policy lost `https://phbyviki.com`.
 - **The pipeline never deletes.** Removing a folder from `to-upload/` does not remove it
   from R2 or the manifest; delete in the R2 dashboard then `--manifest-only`.
 - **Filenames are slugified** on upload (lowercased, ascii). Re-exporting a photo under a

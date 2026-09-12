@@ -5,6 +5,13 @@ export const IMAGE_BASE_URL = 'https://images.phbyviki.com';
 
 export const MANIFEST_URL = `${IMAGE_BASE_URL}/manifest.json`;
 
+// Build-time copy of the same manifest, written by tools/generate-sitemap.mjs and served
+// from this site's own origin. The bucket's CORS policy allows https://phbyviki.com only,
+// so on localhost or a Firebase preview channel the live fetch is refused; without this
+// a 120-photo wedding shows its 8 seeded photographs and stops. Same-origin, so it can
+// never be blocked - and stale by at most one publish, same as the snapshot.
+export const MANIFEST_FALLBACK_URL = '/assets/manifest.json';
+
 // A gallery whose file list contains this name uses it as the card cover, and it is
 // hidden from the in-gallery photo grid. The publish pipeline lowercases + slugifies
 // basenames, so any uploaded `cover.*` always lands as exactly this filename.
@@ -46,12 +53,17 @@ export interface ResponsiveImage {
   height: number;
 }
 
-// Fetch the R2 manifest. Cross-origin to the images domain, so a CORS/network
-// failure throws a TypeError (not a non-ok response) — return null so callers can
-// degrade gracefully (empty cards/gallery) instead of crashing.
+// Fetch the R2 manifest, live first. Cross-origin to the images domain, so a CORS/network
+// failure throws a TypeError (not a non-ok response); either way fall back to the
+// same-origin copy, and only if that fails too return null so callers can degrade
+// gracefully (snapshot cards/gallery) instead of crashing.
 export async function fetchManifest(): Promise<GalleryManifest | null> {
+  return (await fetchManifestFrom(MANIFEST_URL)) ?? (await fetchManifestFrom(MANIFEST_FALLBACK_URL));
+}
+
+async function fetchManifestFrom(url: string): Promise<GalleryManifest | null> {
   try {
-    const response = await fetch(MANIFEST_URL, { cache: 'no-cache' });
+    const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) {
       return null;
     }

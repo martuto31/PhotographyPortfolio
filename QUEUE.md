@@ -30,7 +30,6 @@ tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
 
-
 ---
 
 ## Triaged
@@ -110,14 +109,21 @@ purpose — see its note.
   > okay for the deposit sentence and i think t-10b its okay too
 - [x] T-20 · Martin: "okay" to the decision
   > t-20 - i mean okay i dont understand but okay
+- [x] T-21 · Gallery photos "missing" · diagnosed 2026-09-12, not a bug: the localhost CORS trap (only the 8 seeded photos show off-origin); production and the built HTML are fine - see LOG
+  > I think images from galleries are missing
+- [x] T-22 · Same-origin manifest fallback so galleries fill on localhost and on preview URLs · auto · shipped 2026-09-12
+- [ ] T-23 · UI/UX audit of the redesign - headings, type sizes, best practices · auto for the audit and objective fixes (contrast, tap targets, heading order); taste changes get parked with a recommendation
+  > check design run agents maybe and test the design and the website make sure we follow bwst ui uxz prctices
+  > The redesign is fine and nothing from that website was picked particularly but check the headings the sizes etc it looks good
+- [x] T-20 · Martin: "The redesign is fine" - the Needs-you item is closed; T-19 reconfirmed (nothing from that site picked)
+- [ ] T-24 · Deploy the branch to a Firebase preview channel (not prod) so Martin can send Viki a link · auto · runs last, after T-22 and T-23 · explicitly authorised in Intake; never `npm run deploy`
+  > when you finish, can you deploy to one of the test firebase urls not the prod so i can send it to her
 
 ---
 
 # Ready
 
-
-
-_Nothing startable. Everything left needs Martin or is blocked — see below._
+_T-23 and T-24 are `auto` and get their block on the tick they are worked._
 
 ---
 
