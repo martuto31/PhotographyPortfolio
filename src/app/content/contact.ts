@@ -28,8 +28,9 @@ export const CONTACT = {
   emailHref: 'mailto:phbyviki@gmail.com',
 
   // ЗЕТ чл. 4: anyone providing services online has to publish a name and a
-  // contact address. Rendered in the footer of every page and on both legal
-  // pages. Supplied by Martin, 2026-09-11.
+  // contact address. Rendered on both legal pages; the name also signs the
+  // footer. The address was taken out of the footer on 2026-09-13 at Martin's
+  // request ("for now"). Supplied by Martin, 2026-09-11.
   legalName: 'Виктория Борисова',
   address: 'ж.к. Александър Стамболийски 1, Видин',
 

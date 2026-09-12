@@ -58,6 +58,12 @@ Needs-you item.
 ## Shipped
 
 ### 2026-09-13
+- **T-25 · Address out of the footer** — commit "Take the address out of the
+  footer" — the "Виктория Борисова · ж.к. Александър Стамболийски 1, Видин"
+  line is gone from all 43 pages; the © line still signs the footer with the
+  name; `/usloviya` and `/poveritelnost` keep their "Адрес" row, which is what
+  ЗЕТ чл. 4 needs. String assertions 4/4, verifier PASS, gate green. Preview
+  channel refreshed.
 - **T-24 · Preview channel** — https://phbyvikiprod--preview-yb28hwie.web.app
   (expires 2026-10-13) — `firebase hosting:channel:deploy preview --project
   phbyvikiprod --only app --expires 30d`; the `live` channel's release time is

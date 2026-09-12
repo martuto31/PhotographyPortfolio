@@ -118,6 +118,8 @@ purpose — see its note.
   > The redesign is fine and nothing from that website was picked particularly but check the headings the sizes etc it looks good
 - [x] T-20 · Martin: "The redesign is fine" - the Needs-you item is closed; T-19 reconfirmed (nothing from that site picked)
 - [x] T-24 · Deploy the branch to a Firebase preview channel (not prod) so Martin can send Viki a link · auto · shipped 2026-09-13: https://phbyvikiprod--preview-yb28hwie.web.app (expires 2026-10-13)
+- [x] T-25 · Take the address out of the footer (legal pages keep it) · auto · shipped 2026-09-13
+  > okay can we remove the personall address at the footer for now
   > when you finish, can you deploy to one of the test firebase urls not the prod so i can send it to her
 
 ---
