@@ -58,6 +58,15 @@ T-29 gallery W3 → T-30 contacts K3 → T-31 canvas round two → T-32 preview.
 ## Shipped
 
 ### 2026-09-15
+- **T-27 · Hero H3** — commit "Show the whole hero photograph" — the photo is a
+  real `<img>` at `width: min(100vw, 150vh, 2400px); height: auto`: the full
+  viewport height at its own 3:2, never cropped, paper either side on screens
+  wider than that (laptop 1350×900 with 45px sides, 27" 200px, 4K 720px - a
+  3600px export would fill 4K). Copy bottom-left over the gradient on desktop,
+  as you picked; on phones and tablets the photo is too short to carry it
+  (390 wide → 260 tall) so the headline and buttons sit under it on paper.
+  Hero sentence 16px/15px. Preload kept, exactly once. Verifier PASS at
+  1440×900 (1350×900, copy inside the frame) and 390 (h1 under the photo).
 - **T-26 · Хартия и месинг** — commit "Put the site on paper" — direction B's
   light tokens on every route in one pass: paper `#FAF7F2`, ink text, brass one
   step darker (`#806220`) so 12px labels clear 4.5:1 on the warm band, the glow

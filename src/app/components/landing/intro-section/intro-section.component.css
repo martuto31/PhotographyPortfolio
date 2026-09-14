@@ -1,91 +1,84 @@
-/* ---- The print --------------------------------------------------------------
-   DESIGN-SPEC.md: the hero is a photograph hung in a dark room — inset from the
-   edges of the stage, lit from behind, the copy sitting inside the frame at the
-   bottom. Not a full-bleed backdrop any more. */
+/* ---- The photograph, whole ----------------------------------------------------
+   Canvas page 3 (2026-09-15): a full-viewport hero and an uncropped photograph
+   only both hold if the photo keeps its own shape and the screen shows what is
+   left over. So the frame is the viewport height, 1.5 x that wide (3:2), never
+   wider than the screen or the 2400px file. Laptop 1440x900: 1350 wide with
+   45px of paper each side. 27": 200px each side. 4K: the file is the ceiling,
+   720px each side and paper under it - a 3600px export would fill it. */
 .hero {
     position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    /* Top padding clears the fixed header, which sits on the stage rather than
-       over the photograph; the rest is the inset. */
-    --hero-inset: 24px;
-    padding: calc(var(--nav-h, 84px) + var(--hero-inset)) var(--hero-inset) 0;
-    box-sizing: border-box;
-    color: var(--font-white);
 }
 
-:host-context(.mobile) .hero {
-    --hero-inset: 16px;
-}
-
-.hero-print {
+.hero-frame {
     position: relative;
-    /* svh, not vh: on mobile Safari, 100vh is the *expanded* viewport, so the
-       bottom of the print — where the buttons are — would sit under the browser
-       chrome until the user scrolls. */
-    height: calc(100svh - var(--nav-h, 84px) - var(--hero-inset));
-    min-height: 520px;
-    max-height: 760px;
-    overflow: hidden;
-    box-shadow: 0 0 0 1px var(--glow-edge);
+    width: min(100vw, 150vh, 2400px);
+    max-width: 100%;
+    margin-inline: auto;
+    background-color: var(--paper-warm);
 }
 
-:host-context(.mobile) .hero-print {
-    min-height: 460px;
-    max-height: 640px;
+.hero-photo {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-.hero-glow {
+/* Two scrims on the photograph, nothing on the page: a short one at the top so
+   the transparent header's white wordmark reads on a bright sky, and, on
+   desktop only, the ramp under the copy. The faint left-hand band keeps a
+   previous client's name on the welcome board from competing with the h1. */
+.hero-scrim {
     position: absolute;
-    inset: calc(var(--nav-h, 84px) + var(--hero-inset)) var(--hero-inset) 0;
+    inset: 0;
     pointer-events: none;
-    z-index: 1;
-    box-shadow: 0 30px 70px -30px var(--glow);
+    background: linear-gradient(180deg, rgba(13, 12, 11, 0.36) 0%, rgba(13, 12, 11, 0) 24%);
 }
 
-.hero-image {
-    position: absolute;
-    inset: 0;
-    background-image: var(--hero-image);
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    filter: brightness(1.05) contrast(1.03);
-    transform: scale(1.05);
-    animation: heroFloat 24s ease-in-out infinite alternate;
-}
-
-/* The ramp: the headline lands around 60% of the height, so the frame has to be
-   dark by there or it sits on the bright part of the arch. The faint left-hand
-   scrim keeps a previous client's name in the background from reading. */
-.hero-image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
+:host-context(.desktop) .hero-scrim {
     background:
-        linear-gradient(100deg, rgba(13, 12, 11, 0.38) 0%, rgba(13, 12, 11, 0.16) 38%, rgba(13, 12, 11, 0) 68%),
-        linear-gradient(180deg, rgba(13, 12, 11, 0.30) 0%, rgba(13, 12, 11, 0) 26%, rgba(13, 12, 11, 0.46) 56%, rgba(13, 12, 11, 0.90) 100%);
+        linear-gradient(100deg, rgba(13, 12, 11, 0.34) 0%, rgba(13, 12, 11, 0.12) 36%, rgba(13, 12, 11, 0) 62%),
+        linear-gradient(180deg, rgba(13, 12, 11, 0.36) 0%, rgba(13, 12, 11, 0) 24%, rgba(13, 12, 11, 0) 46%, rgba(13, 12, 11, 0.52) 72%, rgba(13, 12, 11, 0.88) 100%);
 }
 
+/* ---- Where the words go -------------------------------------------------------
+   H3: today's composition, uncropped. On desktop the copy sits over the lower
+   left of the photograph, inside the frame, so it always has the ramp under it
+   however wide the screen. On phones the photograph is 260px tall - too short
+   to carry three lines and two buttons - so the copy follows it on the paper. */
 .hero-overlay {
-    position: absolute;
-    inset: auto 0 0 0;
-    z-index: 2;
     box-sizing: border-box;
-    padding: 0 40px 34px;
+    padding: 28px 18px 0;
 }
 
 :host-context(.tablet) .hero-overlay {
-    padding: 0 32px 30px;
+    padding: 36px 24px 0;
 }
 
-:host-context(.mobile) .hero-overlay {
-    padding: 0 22px 26px;
+:host-context(.desktop) .hero-overlay {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    /* Pinned to the frame, not the section: the frame is centred and may be
+       narrower than the viewport. */
+    width: min(100vw, 150vh, 2400px);
+    max-width: 100%;
+    transform: translateX(-50%);
+    padding: 0 56px 56px;
+    color: var(--font-white);
+    /* The bone button over the photograph - an ink block would sink into it. */
+    --btn-bg: #F1ECE3;
+    --btn-bg-hover: #FFFFFF;
+    --btn-fg: #100E0C;
+    --btn-ghost-fg: #FFFFFF;
+    --btn-line: rgba(255, 255, 255, 0.62);
+    --btn-line-hover: rgba(255, 255, 255, 0.95);
 }
 
 .hero-inner {
-    max-width: 760px;
+    max-width: 640px;
 }
 
 .hero-kicker {
@@ -101,6 +94,10 @@
     color: var(--eyebrow);
 }
 
+:host-context(.desktop) .hero-kicker {
+    color: var(--brass-bright);
+}
+
 .hero-kicker::before {
     content: '';
     width: 24px;
@@ -110,33 +107,36 @@
 }
 
 .hero h1 {
-    color: var(--font-white);
     line-height: 1.05;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     /* The explicit <br> in the markup owns where the headline breaks; a tighter
        measure would override it and orphan "Сватбен и". */
     max-width: 28ch;
-    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
 }
 
-.hero h1 em {
-    font-style: italic;
+:host-context(.desktop) .hero h1,
+:host-context(.desktop) .hero h1 em {
     color: var(--font-white);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
 }
 
 .hero-sub {
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
-    margin: 0 0 22px;
+    margin: 0 0 24px;
     max-width: 46ch;
-    color: rgba(239, 234, 225, 0.88);
+    color: var(--font-medium-emphasis);
+}
+
+:host-context(.desktop) .hero-sub {
+    color: rgba(255, 255, 255, 0.88);
     text-shadow: 0 1px 20px rgba(0, 0, 0, 0.45);
 }
 
 :host-context(.mobile) .hero-sub {
-    font-size: 13.5px;
-    margin-bottom: 18px;
+    font-size: 15px;
+    margin-bottom: 20px;
 }
 
 .btn-group {
@@ -159,7 +159,7 @@
     flex: none;
 }
 
-/* Redundant on handhelds — the fixed contact bar is always on screen. */
+/* Redundant on handhelds - the fixed contact bar is always on screen. */
 :host-context(.mobile) .call-btn {
     display: none;
 }
@@ -183,8 +183,8 @@
     overflow: hidden;
 }
 
-/* Hidden on handhelds: the fixed call bar occupies the bottom of the viewport,
-   and scrolling needs no invitation on a touch screen. */
+/* Hidden on handhelds: the copy follows the photograph there, and scrolling
+   needs no invitation on a touch screen. */
 :host-context(.mobile) .scroll-cue,
 :host-context(.tablet) .scroll-cue {
     display: none;
@@ -196,11 +196,6 @@
     height: 100%;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%);
     animation: scrollCue 2600ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-@keyframes heroFloat {
-    from { transform: scale(1.05) translateY(0); }
-    to { transform: scale(1.1) translateY(-14px); }
 }
 
 @keyframes scrollCue {

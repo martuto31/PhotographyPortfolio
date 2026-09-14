@@ -123,7 +123,7 @@ purpose — see its note.
   > when you finish, can you deploy to one of the test firebase urls not the prod so i can send it to her
 - [x] T-26 · Хартия и месинг - direction B's light tokens on every page in one pass · auto · shipped 2026-09-15
   > okay so from the artifact we choose - N1, C1, P1, S3, Q3, F1, T1, Ft1 or the footer how it was for the landing page and lets go with the white - хартия и месинг flow of the app and colors.
-- [ ] T-27 · Home hero H3 - whole page, whole photo, copy bottom-left over a gradient · auto · decided in chat 2026-09-15 (H3 picked when asked)
+- [x] T-27 · Home hero H3 - whole page, whole photo, copy bottom-left over a gradient · auto · shipped 2026-09-15 (H3 picked when asked)
 - [ ] T-28 · Home sections - P1 three cards, S3 list + photo, Q3 photo whole + words beside; N1 C1 F1 T1 Ft1 stay as shipped · auto
 - [ ] T-29 · Gallery page W3 - one column, big whole photographs, portraits two-up; phone and tablet checked · auto
   > for W i want W3 is perfect lets try it and make sure you check mobile designs tablet designs bugs qa conventions etc

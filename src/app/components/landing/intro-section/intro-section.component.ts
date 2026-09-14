@@ -23,12 +23,13 @@ export class IntroSectionComponent implements OnInit {
 
   public readonly contact = CONTACT;
 
-  // The hero is a CSS background, so nothing in the markup tells the browser to start
-  // fetching it — hence the preload. It lives here rather than in index.html because
-  // index.html is inherited by all 44 prerendered pages, and on the 31 gallery pages it
-  // was a high-priority download of an image that never appears, racing the photograph
-  // that actually is the LCP element there. Injected during prerender, so the homepage's
-  // static HTML still carries it in <head> exactly as before.
+  // The hero is the home page's LCP element. It is a real <img> now, but the preload
+  // still moves its discovery to the document head, ahead of the stylesheet and the
+  // component bundle. It lives here rather than in index.html because index.html is
+  // inherited by all 44 prerendered pages, and on the 31 gallery pages it was a
+  // high-priority download of an image that never appears, racing the photograph that
+  // actually is the LCP element there. Injected during prerender, so the homepage's
+  // static HTML carries it in <head>.
   ngOnInit(): void {
     if (this.dom.head.querySelector(`link[${IntroSectionComponent.PRELOAD_MARKER}]`)) {
       return;
@@ -43,7 +44,7 @@ export class IntroSectionComponent implements OnInit {
     this.dom.head.appendChild(link);
   }
 
-  // Keep in sync with --hero-image in src/app/styles/variables.css.
+  // Keep in sync with the <img src> in the template.
   private static readonly HERO_IMAGE = '/assets/img/hero/hero-arch.webp';
 
   private static readonly PRELOAD_MARKER = 'data-hero-image-preload';

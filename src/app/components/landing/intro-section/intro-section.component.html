@@ -1,11 +1,24 @@
 <section class="hero">
-    <!-- The print hung in a dark room: inset from the edges and lit from behind.
-         The glow is a sibling of the print, not a child, so the clipped image
-         cannot swallow its shadow. -->
-    <div class="hero-glow" aria-hidden="true"></div>
+    <!-- The photograph, whole. width: min(100vw, 150vh, 2400px) keeps its own 3:2
+         at the full viewport height and leaves paper either side on screens wider
+         than that - nothing is ever cropped (canvas page 3, the rule). The copy
+         sits over the lower-left on a gradient where the photograph is tall
+         enough to carry it, and under it on phones and tablets. -->
+    <div class="hero-frame">
+        <img class="hero-photo"
+             src="assets/img/hero/hero-arch.webp"
+             width="2400"
+             height="1600"
+             fetchpriority="high"
+             decoding="async"
+             alt="Младоженци се целуват под цветна арка - сватбена фотография от Виктория Борисова">
 
-    <div class="hero-print">
-    <div class="hero-image" aria-hidden="true"></div>
+        <div class="hero-scrim" aria-hidden="true"></div>
+
+        <button type="button" class="scroll-cue" (click)="scrollToWork()" aria-label="Към работите">
+            <span class="scroll-line" aria-hidden="true"></span>
+        </button>
+    </div>
 
     <div class="hero-overlay">
         <div class="hero-inner">
@@ -26,10 +39,5 @@
                 </a>
             </div>
         </div>
-    </div>
-
-    <button type="button" class="scroll-cue" (click)="scrollToWork()" aria-label="Към работите">
-        <span class="scroll-line" aria-hidden="true"></span>
-    </button>
     </div>
 </section>
