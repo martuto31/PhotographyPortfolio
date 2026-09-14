@@ -58,14 +58,16 @@ img {
 /* ---- Full-bleed sections -------------------------------------------------
    The page is laid out inside a 1400px wrapper with side padding. A section
    that needs edge-to-edge photography escapes it by pulling itself back out
-   to the viewport width. On the dark stage the bands no longer alternate in
-   colour; a hairline above and below is what marks them. */
+   to the viewport width. */
 .bleed {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 }
 
+/* The one dark band left from "Тъмна зала": the closing CTA on every page.
+   Its palette overrides live in variables.css so anything placed inside reads
+   the stage tokens without a second set of rules. */
 .on-ink {
     background-color: var(--ink-deep);
     color: var(--font-on-ink);
@@ -106,12 +108,12 @@ img {
 }
 
 /* ---- The glow ----------------------------------------------------------
-   Warm light thrown under a photograph, like a print lit from above (see
-   DESIGN-SPEC.md). Put it on the <img>, never on a wrapper: the shadow has
-   to follow the picture's own edge. The hover lift belongs to the link
-   around it, so keyboard focus and mouse hover behave the same. */
+   A print pinned to the paper: a hairline edge and a soft warm shadow under
+   it. Inside .on-ink the same tokens turn it back into the warm light of
+   DESIGN-SPEC.md. Put it on the <img>, never on a wrapper: the shadow has to
+   follow the picture's own edge. The hover lift belongs to the link around
+   it, so keyboard focus and mouse hover behave the same. */
 .glow {
-    filter: brightness(1.05) contrast(1.02);
     box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

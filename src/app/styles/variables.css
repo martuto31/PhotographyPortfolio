@@ -1,58 +1,65 @@
- :root {
+:root {
     /* ---- Ground -------------------------------------------------------------
-       "Тъмна зала, изчистена" (DESIGN-SPEC.md): one dark stage, on purpose. The
-       photographs are prints hung in a dark room and lit from above; the page
-       itself stays almost colourless so they carry every bit of saturation. */
-    --paper: #0D0C0B;          /* the stage — page ground everywhere */
-    --paper-warm: #14120F;     /* a lifted band: panels, image placeholders */
-    --surface: #1C1916;        /* cards, inputs, anything that sits on the band */
-    --ink: #14120F;            /* kept for the few places that want a band */
-    --ink-deep: #0D0C0B;       /* full-bleed sections sit flush with the stage */
+       "Хартия и месинг" - direction B from the 2026-09 canvas, theme 01's tokens
+       from DESIGN-SPEC.md. Warm paper, not white: the photographs are the only
+       saturated thing on the page and white dresses in daylight read better on
+       paper than on a black stage. The stage survives in one place, the dark
+       band at the foot of every page (.on-ink), which keeps the premium note
+       Viki liked. */
+    --paper: #FAF7F2;          /* page ground everywhere */
+    --paper-warm: #F4F0E8;     /* a lifted band: the quote band, panels, image placeholders */
+    --surface: #FFFFFF;        /* cards, inputs, anything that sits on the band */
+    --ink: #14120F;            /* the dark band */
+    --ink-deep: #0D0C0B;       /* full-bleed dark sections */
 
     /* ---- Accent -------------------------------------------------------------
        Brass, quieter than the old gold: hairlines, eyebrow labels and hover
-       underlines only. Never a filled button — she said so directly. */
-    --brass: #C8A05A;          /* on the stage */
-    --brass-bright: #D8A64A;   /* the glow's own colour, for the rare hot line */
-    --eyebrow: #C79A4E;
+       underlines only. Never a filled button - she said so directly. One step
+       darker than the spec's #8A6A22 so 12px labels clear 4.5:1 on the band. */
+    --brass: #806220;          /* on paper: 5.3:1, on the band 5.0:1 */
+    --brass-bright: #D8A64A;   /* on ink only - the CTA band's icon and hover */
+    --eyebrow: #806220;
 
     /* ---- The glow -----------------------------------------------------------
-       Warm light thrown under a photograph, like a print lit from above. Not a
-       border, not a filter on the page. Applied by .glow in global.css. */
-    --glow: rgba(255, 206, 148, 0.42);
-    --glow-edge: rgba(255, 255, 255, 0.07);
-    --glow-edge-hover: rgba(255, 255, 255, 0.11);
+       On the dark stage this was warm light thrown under a print. On paper the
+       same recipe becomes a soft warm shadow plus a hairline edge - the print
+       is now pinned to a wall instead of lit from above. Applied by .glow in
+       global.css and copied by the card and gallery stylesheets. */
+    --glow: rgba(26, 23, 20, 0.30);
+    --glow-edge: #E7E0D5;
+    --glow-edge-hover: #D6CCBE;
 
     /* ---- Text ---------------------------------------------------------------
-       Warm off-whites, never pure white for running text. */
-    --font-high-emphasis: #F5F1EA;
-    --font-medium-emphasis: #ADA49A;
-    --font-low-emphasis: #8A8278;  /* 5.2:1 on the stage, 4.6:1 on a card - #7E766C was 4.37:1 */
+       Warm near-blacks, never pure black for running text. */
+    --font-high-emphasis: #1A1714;
+    --font-medium-emphasis: #5C5449;
+    --font-low-emphasis: #756B5F;  /* 4.9:1 on paper, 4.6:1 on the band */
     --font-white: #FFFFFF;     /* headings over photographs only */
-    --font-on-ink: #EFEAE1;
+    --font-on-ink: #EFEAE1;    /* inside .on-ink only */
     --font-on-ink-mute: #A69E93;
 
     /* ---- Rules --------------------------------------------------------------
        Hairlines carry most of the structure, so they get tokens. */
-    --rule: #302B25;
-    --rule-strong: #3E372F;
+    --rule: #E7E0D5;
+    --rule-strong: #D6CCBE;
     --rule-on-ink: rgba(216, 166, 74, 0.20);
 
     /* ---- Buttons ------------------------------------------------------------
-       Костено бяло — Viki's pick from the four in the preview. Ages best and
-       never competes with the photographs. */
-    --btn-bg: #F1ECE3;
-    --btn-bg-hover: #FFFFFF;
-    --btn-fg: #100E0C;
-    --btn-line: rgba(239, 234, 225, 0.26);
-    --btn-line-hover: rgba(239, 234, 225, 0.62);
+       Ink on paper. Inside .on-ink the pair flips back to костено бяло, Viki's
+       pick, so the one bright thing on the dark band is still the button. */
+    --btn-bg: #1A1714;
+    --btn-bg-hover: #000000;
+    --btn-fg: #FAF7F2;
+    --btn-ghost-fg: #1A1714;
+    --btn-line: rgba(26, 23, 20, 0.45);
+    --btn-line-hover: rgba(26, 23, 20, 0.85);
 
     /* ---- Legacy aliases -----------------------------------------------------
        Older names still reached for in a few stylesheets land on the new
        palette instead of breaking. */
     --primary-brand: var(--brass);
     --primary-brand-light: var(--brass-bright);
-    --primary-brand-dark: #8A6A22;
+    --primary-brand-dark: #806220;
 
     --bg-white: var(--paper);
     --bg-cream: var(--paper-warm);
@@ -62,10 +69,10 @@
     --border-warm: var(--rule);
 
     /* ---- Error --------------------------------------------------------------- */
-    --error-color: #E06C5C;
+    --error-color: #B5453A;    /* 5.1:1 on paper */
 
     /* ---- Type ---------------------------------------------------------------
-       Cormorant for headings, in normal case — half of why the old dark theme
+       Cormorant for headings, in normal case - half of why the old dark theme
        read cold was its tracked uppercase. The UI face is the system stack, as
        the spec names it; Overpass is no longer loaded for text. */
     --font-serif: 'Cormorant', Georgia, 'Times New Roman', serif;
@@ -76,7 +83,31 @@
        page padding, the hero's safe area and ScrollService's scroll offset all
        read it. Overridden per breakpoint in layout.component.css. */
     --nav-h: 84px;
-
-    /* Hero image (swap to feature-love.webp for cinematic B&W variant) */
-    --hero-image: url('/assets/img/hero/hero-arch.webp');
  }
+
+/* ---- The dark band ----------------------------------------------------------
+   Everything inside .on-ink reads the stage palette, so a component dropped
+   into the band needs no second set of rules: text, rules, brass, the glow
+   and the button pair all flip here and only here. */
+.on-ink {
+    --paper: #0D0C0B;
+    --paper-warm: #14120F;
+    --surface: #1C1916;
+    --brass: #C8A05A;
+    --eyebrow: #C79A4E;
+    --glow: rgba(255, 206, 148, 0.42);
+    --glow-edge: rgba(255, 255, 255, 0.07);
+    --glow-edge-hover: rgba(255, 255, 255, 0.11);
+    --font-high-emphasis: #F5F1EA;
+    --font-medium-emphasis: #ADA49A;
+    --font-low-emphasis: #8A8278;
+    --rule: #302B25;
+    --rule-strong: #3E372F;
+    --btn-bg: #F1ECE3;
+    --btn-bg-hover: #FFFFFF;
+    --btn-fg: #100E0C;
+    --btn-ghost-fg: #EFEAE1;
+    --btn-line: rgba(239, 234, 225, 0.26);
+    --btn-line-hover: rgba(239, 234, 225, 0.62);
+    --border-warm: #302B25;
+}

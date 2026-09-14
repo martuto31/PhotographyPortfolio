@@ -187,8 +187,6 @@
 .footer-social img {
     width: 22px;
     height: 22px;
-    /* The icon files are drawn in black; on the stage they read as the text. */
-    filter: invert(0.92);
 }
 
 /* Bottom bar */

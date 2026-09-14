@@ -22,8 +22,8 @@ until the next `npm run sitemap` + redeploy. To refresh it after more commits:
 `npx firebase target:apply hosting app phbyvikiprod --project phbyvikiprod` first).
 
 ### T-23 · Taste calls the audit only warns about - yours if you want them
-1. **Hero sentence is 14px desktop / 13.5px phone** (`.hero-sub`) - the most
-   important sentence on the site and its smallest body text. I would go 16/15.
+1. ~~Hero sentence 14px / 13.5px~~ - went to 16/15 with the H3 hero (T-27), as
+   drawn on the canvas.
 2. **Buttons are 43px tall on phones**, one under the 44px thumb guideline.
 3. **Footer "Пишете в Messenger / Instagram" links are 24px tall** on phones.
 4. **Mobile drawer links are 33px tall** - fine by WCAG, under Apple's 44.
@@ -50,12 +50,28 @@ which `npm run publish` already does.
 
 ## Working on
 
-**The auto queue is empty.** Idle until you paste into Intake or answer a
-Needs-you item.
+Your 2026-09-15 picks, as tasks: T-26 theme → T-27 hero → T-28 sections →
+T-29 gallery W3 → T-30 contacts K3 → T-31 canvas round two → T-32 preview.
 
 ---
 
 ## Shipped
+
+### 2026-09-15
+- **T-26 · Хартия и месинг** — commit "Put the site on paper" — direction B's
+  light tokens on every route in one pass: paper `#FAF7F2`, ink text, brass one
+  step darker (`#806220`) so 12px labels clear 4.5:1 on the warm band, the glow
+  turned into a warm shadow, ink-on-paper buttons that flip back to bone inside
+  the one dark band left (the closing CTA, as on board B). Every stage colour
+  that was hard-coded - nav bars, skeletons, mobile bar, inverted icons, the
+  404 page, theme-color, the web manifest - now reads a token. One real bug
+  found on the way: in the browser the nav decided "home" from the router's
+  url before the first navigation finished, so every inner page started with a
+  transparent bar - invisible on paper; it reads the address bar now. `npm run
+  ux` 0 FAIL (the audit learned that text over a sibling `<img>` is over a
+  photograph). New `npm run shots` (`tools/shots.mjs`) writes headless
+  full-page or fold screenshots per route × width into `.verify/shots/` -
+  nothing opens on screen. Verifier PASS, gate green.
 
 ### 2026-09-13
 - **T-25 · Address out of the footer** — commit "Take the address out of the

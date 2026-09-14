@@ -9,8 +9,8 @@
     /* Keeps the bar clear of the iOS home indicator. */
     padding-bottom: env(safe-area-inset-bottom, 0);
     background-color: var(--surface);
-    border-top: 1px solid var(--rule-on-ink);
-    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.45);
+    border-top: 1px solid var(--rule);
+    box-shadow: 0 -8px 28px rgba(26, 23, 20, 0.12);
 }
 
 .bar-action {
@@ -25,7 +25,7 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--font-on-ink);
+    color: var(--font-high-emphasis);
 }
 
 .bar-action svg {
@@ -42,6 +42,7 @@
    this one clears WCAG's 4.5:1 and still reads as the app's blue. */
 .bar-messenger {
     background-color: #0068CC;
+    color: #FFFFFF;
 }
 
 .bar-messenger:active {
@@ -53,5 +54,5 @@
 }
 
 .bar-instagram:active {
-    background-color: var(--rule-strong);
+    background-color: var(--paper-warm);
 }

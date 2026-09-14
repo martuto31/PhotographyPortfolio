@@ -1,8 +1,8 @@
 .bar {
-    background-color: rgba(13, 12, 11, 0.88);
+    background-color: rgba(250, 247, 242, 0.88);
     -webkit-backdrop-filter: saturate(140%) blur(12px);
     backdrop-filter: saturate(140%) blur(12px);
-    border-bottom: 1px solid var(--rule-on-ink);
+    border-bottom: 1px solid var(--rule);
     transition: background-color 320ms ease, border-color 320ms ease;
 }
 
@@ -48,7 +48,7 @@
     font-weight: 500;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--font-on-ink-mute);
+    color: var(--font-medium-emphasis);
     margin-top: 4px;
     transition: color 320ms ease;
 }
@@ -207,5 +207,4 @@
 .links img {
     width: 22px;
     height: 22px;
-    filter: invert(0.92);
 }

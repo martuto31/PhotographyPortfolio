@@ -134,7 +134,6 @@ a.method:hover .method-value {
 .social-links img {
     width: 18px;
     height: 18px;
-    filter: invert(0.92);
 }
 
 /* ---- Form ---------------------------------------------------------------

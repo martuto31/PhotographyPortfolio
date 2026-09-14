@@ -40,7 +40,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private static readonly SOLID_AFTER_PX = 120;
 
   public ngOnInit(): void {
-    this.isHome = this.isHomeUrl(this.router.url);
+    // In the browser the router's url is still "/" until the initial navigation
+    // completes, which on a lazy route can be a second or more after hydration.
+    // Reading the address bar instead keeps an inner page's bar solid from the
+    // first paint - on paper, a transparent bar with white text is invisible.
+    this.isHome = this.isHomeUrl(isPlatformBrowser(this.platformId) ? window.location.pathname : this.router.url);
 
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

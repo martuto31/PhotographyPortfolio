@@ -29,8 +29,9 @@ const DIST = join(REPO_ROOT, 'dist', 'photography-portfolio', 'browser');
 const OUT_DIR = join(REPO_ROOT, '.verify');
 const OUT_FILE = join(OUT_DIR, 'ux-audit.json');
 
-const PORT = 4519;
-const DEBUG_PORT = 9337;
+// Random ports, so a verifier's run and the author's can overlap.
+const PORT = 4900 + Math.floor(Math.random() * 300);
+const DEBUG_PORT = 9700 + Math.floor(Math.random() * 300);
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const WIDTHS = [1440, 390];
 
@@ -110,9 +111,44 @@ const AUDIT_SOURCE = `(() => {
   const contrast = (a, b) => { const la = luminance(a), lb = luminance(b); return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05); };
   const blend = (fg, bg) => ({ r: fg.r * fg.a + bg.r * (1 - fg.a), g: fg.g * fg.a + bg.g * (1 - fg.a), b: fg.b * fg.a + bg.b * (1 - fg.a), a: 1 });
 
+  // Everything that paints a picture: <img>, <video> and any element carrying a
+  // background image or gradient. Text over one of these sits on a photograph
+  // and cannot be measured - whether the picture is an ancestor (a CSS
+  // background) or a sibling painted underneath (a real <img> with the copy
+  // positioned over it, like the hero).
+  const paintedImages = [...document.querySelectorAll('*')].filter((n) => {
+    if (n.tagName === 'IMG' || n.tagName === 'VIDEO') return true;
+    const bg = getComputedStyle(n).backgroundImage;
+    return bg && bg !== 'none';
+  });
+  // A fixed or sticky ancestor (the header) is lifted above everything after it
+  // in the document, so for its text a later picture still lies underneath.
+  const elevated = (el) => {
+    for (let node = el; node; node = node.parentElement) {
+      const pos = getComputedStyle(node).position;
+      if (pos === 'fixed' || pos === 'sticky') return true;
+    }
+    return false;
+  };
+  const coveredByImage = (el) => {
+    const r = el.getBoundingClientRect();
+    if (r.width === 0 || r.height === 0) return false;
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const lifted = elevated(el);
+    return paintedImages.some((n) => {
+      if (n === el || n.contains(el) || el.contains(n)) return false;
+      // Painted before the text in document order, i.e. underneath it - unless
+      // the text rides in the fixed header, which is above the whole page.
+      if (!lifted && !(n.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)) return false;
+      const b = n.getBoundingClientRect();
+      return b.left <= cx && cx <= b.right && b.top <= cy && cy <= b.bottom;
+    });
+  };
+
   // Walk up until something paints an opaque colour. An image or gradient on the
   // way means the text sits over a photograph and cannot be measured.
   const backgroundOf = (el) => {
+    if (coveredByImage(el)) return { overImage: true };
     let acc = null; // accumulated translucent layers, bottom-up is easier so collect first
     const layers = [];
     for (let node = el; node; node = node.parentElement) {

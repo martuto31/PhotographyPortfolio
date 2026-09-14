@@ -121,12 +121,92 @@ purpose — see its note.
 - [x] T-25 · Take the address out of the footer (legal pages keep it) · auto · shipped 2026-09-13
   > okay can we remove the personall address at the footer for now
   > when you finish, can you deploy to one of the test firebase urls not the prod so i can send it to her
+- [x] T-26 · Хартия и месинг - direction B's light tokens on every page in one pass · auto · shipped 2026-09-15
+  > okay so from the artifact we choose - N1, C1, P1, S3, Q3, F1, T1, Ft1 or the footer how it was for the landing page and lets go with the white - хартия и месинг flow of the app and colors.
+- [ ] T-27 · Home hero H3 - whole page, whole photo, copy bottom-left over a gradient · auto · decided in chat 2026-09-15 (H3 picked when asked)
+- [ ] T-28 · Home sections - P1 three cards, S3 list + photo, Q3 photo whole + words beside; N1 C1 F1 T1 Ft1 stay as shipped · auto
+- [ ] T-29 · Gallery page W3 - one column, big whole photographs, portraits two-up; phone and tablet checked · auto
+  > for W i want W3 is perfect lets try it and make sure you check mobile designs tablet designs bugs qa conventions etc
+- [ ] T-30 · Contacts K3 - the form in the centre, the ways under it · auto
+  > for contacts lets leave it K3 and maybe some other choices
+- [ ] T-31 · Canvas round 2 - new options for /galerii (G3 kept), /galerii/svatbi, About (incl. what to do with the portrait) and Contacts · auto (design proposals, no site code)
+  > For the galleries now - lets go with some other design what can we do G1 and G2 i dont like so im left only with G3 and i want other options. For K i dont like neither K1, K2 nor K3 to be honest, K1 is okayish but i want choices
+  > for about me i dont like A1, A2 nor A3 designs as well and maybe we should do somehting about the photo what do yo suggest
+  > and split your works to tasks or whatever you need
+- [ ] T-32 · Refresh the preview channel for Viki after T-26..T-30 · auto
 
 ---
 
 # Ready
 
-_Nothing startable. Everything left needs Martin or is blocked — see below._
+### T-26 · Хартия и месинг - the light tokens on every page
+**Why** — Martin picked direction B from the canvas ("lets go with the white - хартия и месинг flow of the app and colors"). Viki's own words for theme 01 were "изчистеното, семплото"; wedding photographs read better on paper than on black; and the black was the thing Martin was unsure about. Assumption: the CTA band at the foot of every page stays dark, as drawn on board B ("keeps a premium note") - the one place the glow survives.
+**Scope** — `src/app/styles/*.css`, every component stylesheet that hard-codes a stage colour (nav bars, skeletons, mobile bar, icons), `src/index.html` theme-color
+**Done when**
+- WHEN any route is prerendered, THE `<body>` ground SHALL be `#FAF7F2` and running text `#5C5449` on `#1A1714` headings (tokens in `variables.css`)
+- THE primary button SHALL be ink on paper (`#1A1714` / `#FAF7F2`) outside the dark band and bone (`#F1ECE3` / `#100E0C`) inside `.on-ink`
+- WHEN `npm run ux` runs, THE contrast check SHALL report 0 FAIL on all eight routes at 1440 and 390
+- No rgba(13,12,11,…) or `#1C1916`-style stage colour is left outside `.on-ink` and the photo modal
+- `sh scripts/qa.sh` green
+**Evidence** — gate output, `npm run ux` table, screenshots in `.verify/`
+**Autonomy** — auto (decided in chat)
+
+### T-27 · Home hero H3
+**Why** — Viki did not like the cropped hero; Martin wants it "to take the whole page like it was initially but not cut" and, asked which copy placement, picked H3: today's composition, uncropped - copy bottom-left over a gradient. Assumption: on phones and tablets the photo is too short to carry the copy (390px wide → 260px tall), so there the headline and buttons sit under it, as drawn on the page-3 phone frame.
+**Scope** — `intro-section.component.*`, `variables.css` (`--hero-image` goes), `navigation.component.ts` unchanged
+**Done when**
+- WHEN the home page renders on desktop, THE hero photograph SHALL be an `<img>` at `width: min(100vw, 150vh, 2400px); height: auto` centred, never `object-fit: cover`
+- WHEN the viewport is 1440×900, THE photograph SHALL be 1350×900 with the h1, sentence and buttons over its lower-left on a gradient
+- WHEN the viewport is 390 wide, THE photograph SHALL span the width whole and the h1 SHALL sit under it on paper
+- THE home page SHALL still preload the hero exactly once (`hero-preload` gate check)
+- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL
+**Evidence** — gate, ux, screenshots at 390 / 1024 / 1440 / 2560 / 3840 in `.verify/`
+**Autonomy** — auto
+
+### T-28 · Home sections P1 · S3 · Q3
+**Why** — Martin's picks per row: nav N1, credentials C1, FAQ F1, CTA T1 and footer Ft1 are what is shipped; P1 (three cards, the same object as /galerii), S3 (steps beside a photograph) and Q3 (the quote photograph whole, the words beside it on a band) are new.
+**Scope** — `projects.component.*`, `process.component.*`, `landing.component.*`
+**Done when**
+- WHEN `/` is prerendered, THE portfolio section SHALL contain three `<a>` cards to `/galerii/svatbi`, `/galerii/abiturienti`, `/galerii/lichni` with the 4:5 cover, the tag and the italic name, plus the "Всички категории" link
+- THE page SHALL NOT contain the three teaser paragraphs ("Заснемане на сватби - подготовка на булка", "Заснемам индивидуални и групови", "Обичам да улавям емоцията")
+- THE process section SHALL render the four steps as a ruled list beside `detail-hands.webp` on desktop, stacked on phones
+- THE quote section SHALL show `feature-love.webp` whole (no `object-fit: cover`, no scrim) with "Истории, които остават." beside it on the `--paper-warm` band
+- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL
+**Evidence** — string assertions, gate, ux, screenshots
+**Autonomy** — auto
+
+### T-29 · Gallery page W3
+**Why** — "W3 is perfect lets try it". One column, each photograph big and whole; two portraits share a row. The manifest carries no dimensions yet (thumbs backfill is blocked on the R2 token), so orientation is read from the image itself as it loads and the pairing happens on the client; once widths land in the manifest the same pairing can move to prerender time.
+**Scope** — `gallery.component.*`
+**Done when**
+- WHEN a gallery renders on desktop, THE photographs SHALL sit in one column of at most 1040px, each at its own ratio, `height: auto`
+- WHEN two consecutive photographs are portrait, THEY SHALL share one row at half width each; a lone portrait SHALL be centred at 60% width
+- WHEN the viewport is under 960px, THE photographs SHALL all be one column at full width
+- THE prerendered HTML SHALL still carry the eight seeded `<img>` tags, the first eager and preloaded (`lcp-photo` gate check), and the sibling strip
+- The modal still opens, arrows and Escape work, focus returns to the trigger
+- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL
+**Evidence** — gate, ux, screenshots at 390 / 768 / 1440 on Лора и Асен
+**Autonomy** — auto
+
+### T-30 · Contacts K3
+**Why** — "for contacts lets leave it K3": the form is the page, the ways to write sit under it in one quiet line.
+**Scope** — `contact-page.component.*`, `contact-me.component.css`
+**Done when**
+- WHEN `/kontakti` is prerendered, THE h1 and lead SHALL be centred, THE form SHALL follow at ≤560px wide, and Messenger / Instagram / email / where-I-shoot SHALL follow the form as one row of links (stacked on phones)
+- THE form labels, inputs and the submit SHALL be unchanged in markup (ids, formControlNames)
+- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL (form labels, tap targets)
+**Evidence** — gate, ux, screenshots
+**Autonomy** — auto
+
+### T-31 · Canvas round 2
+**Why** — Martin rejected G1/G2, K1–K3, A1–A3 and wants more choices, plus a proposal for the About portrait; K3 for contacts "and maybe some other choices".
+**Scope** — `.verify/design-canvas/` (build4.py, new boards, canvas page 7), the artifact
+**Done when**
+- THE canvas SHALL gain a page with new numbered options: /galerii G4–G6, /galerii/svatbi K4–K6, About A4–A6, Contacts K4–K5, each with the dark/light chip
+- THE About row SHALL include the portrait with the coral keyed out (a real re-cut of `about-me.png`, not a mock) so the option can be judged
+- Sticky notes SHALL say what each option costs and which needs data or a new photo from Viki
+**Evidence** — artifact URL, `--check` ok
+**Autonomy** — auto (proposals only; nothing ships until Martin picks)
 
 ---
 
