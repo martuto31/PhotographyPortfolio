@@ -1,29 +1,27 @@
-<section id="projects" class="container">
+<section id="projects">
     <header class="section-heading">
-        <span class="eyebrow eyebrow-center">Портфолио</span>
+        <div class="section-title">
+            <span class="eyebrow">Портфолио</span>
 
-        <h2>Галерия - <em>сватби, абитуриенти,<br>други събития</em></h2>
+            <h2>Галерия - <em>сватби, абитуриенти, други събития</em></h2>
+        </div>
+
+        <a routerLink="/galerii" class="link-underline all-galleries">Всички категории</a>
     </header>
 
-    @for (project of projects; track $index) {
-        <article class="project" [class.reverse]="$index % 2 !== 0">
-            <a class="project-image-link" [routerLink]="project.btnLink" [attr.aria-label]="project.name">
-                <img [src]="project.imageSrc" [alt]="project.name + ' - фотограф София и Видин'" loading="lazy">
+    <!-- P1 from the 2026-09 canvas: three cards, the same object as a card on
+         /galerii, so the flow is one step - card → category → gallery. -->
+    <div class="cards">
+        @for (project of projects; track project.btnLink) {
+            <a class="card" [routerLink]="project.btnLink">
+                <img class="card-image glow" [src]="project.imageSrc" [alt]="project.name + ' - фотограф София и Видин'" width="800" height="1000" loading="lazy" decoding="async">
+
+                <span class="card-meta">
+                    <span class="card-tag">{{ project.tag }}</span>
+
+                    <h3>{{ project.name }}</h3>
+                </span>
             </a>
-
-            <div class="project-summary">
-                <span class="eyebrow">{{ project.tag }}</span>
-
-                <h3>{{ project.name }}</h3>
-
-                <p>{{ project.summary }}</p>
-
-                <a [routerLink]="project.btnLink" class="link-underline">Към галерията</a>
-            </div>
-        </article>
-    }
-
-    <div class="all-galleries">
-        <a routerLink="/galerii" class="btn btn-secondary">Всички категории</a>
+        }
     </div>
 </section>

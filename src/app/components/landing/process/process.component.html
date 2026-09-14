@@ -1,21 +1,29 @@
 <section class="process">
-    <header class="process-heading">
-        <span class="eyebrow">Как работим заедно</span>
+    <div class="process-text">
+        <header class="process-heading">
+            <span class="eyebrow">Как работим заедно</span>
 
-        <h2>От първото съобщение<br>до готовите снимки</h2>
+            <h2>От първото съобщение<br>до готовите снимки</h2>
 
-        <p class="process-lead measure">Няма формуляри, няма чакане с дни и няма изненади накрая. Ето какво следва, ако решите да ми пишете.</p>
-    </header>
+            <p class="process-lead measure">Няма формуляри, няма чакане с дни и няма изненади накрая. Ето какво следва, ако решите да ми пишете.</p>
+        </header>
 
-    <ol class="steps">
-        @for (step of steps; track step.title) {
-            <li class="step">
-                <span class="step-index" aria-hidden="true">{{ '0' + ($index + 1) }}</span>
+        <ol class="steps">
+            @for (step of steps; track step.title) {
+                <li class="step">
+                    <span class="step-index" aria-hidden="true">{{ '0' + ($index + 1) }}</span>
 
-                <h3>{{ step.title }}</h3>
+                    <div class="step-body">
+                        <h3>{{ step.title }}</h3>
 
-                <p>{{ step.text }}</p>
-            </li>
-        }
-    </ol>
+                        <p>{{ step.text }}</p>
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+
+    <!-- S3 from the 2026-09 canvas: the list beside a photograph, so the section
+         is not all text. Decorative - the steps carry the meaning. -->
+    <img class="process-photo glow" src="assets/img/hero/detail-hands.webp" alt="" width="1280" height="1600" loading="lazy" decoding="async">
 </section>

@@ -58,6 +58,16 @@ T-29 gallery W3 → T-30 contacts K3 → T-31 canvas round two → T-32 preview.
 ## Shipped
 
 ### 2026-09-15
+- **T-28 · Home sections P1 · S3 · Q3** — commit "Rebuild the home sections
+  Martin picked" — portfolio is three cards (cover 4:5, tag, italic name;
+  the same object as a /galerii card, one step to a category) with "Всички
+  категории" beside the heading; the three teaser paragraphs are gone from
+  the page. Process is the four steps as a ruled list beside the hands
+  photograph (hidden on phones, under the list between 481 and 719px).
+  The quote is the photograph whole with the words beside it on the warm
+  band - no scrim, no crop. N1, C1, F1, T1 and Ft1 were already what is
+  shipped. String assertions 3/3 absent, cards 3/3 present; verifier PASS;
+  `npm run ux` 0 FAIL.
 - **T-27 · Hero H3** — commit "Show the whole hero photograph" — the photo is a
   real `<img>` at `width: min(100vw, 150vh, 2400px); height: auto`: the full
   viewport height at its own 3:2, never cropped, paper either side on screens

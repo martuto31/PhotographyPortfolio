@@ -1,144 +1,104 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 120px;
-}
-
-:host-context(.tablet) .container {
-    gap: 80px;
-}
-
-:host-context(.mobile) .container {
-    gap: 60px;
-}
-
 .section-heading {
-    text-align: center;
-    margin-bottom: 30px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 44px;
 }
 
-.section-heading h2 {
+:host-context(.mobile) .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 32px;
+}
+
+.section-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.section-title h2 {
     margin: 0;
+    max-width: 26ch;
 }
 
 .all-galleries {
-    display: flex;
-    justify-content: center;
-}
-
-.project {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.project.reverse {
-    grid-template-columns: 1fr 1.15fr;
-}
-
-.project.reverse .project-image-link {
-    order: 2;
-}
-
-:host-context(.tablet) .project,
-:host-context(.tablet) .project.reverse,
-:host-context(.mobile) .project,
-:host-context(.mobile) .project.reverse {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: 28px;
-}
-
-:host-context(.tablet) .project.reverse .project-image-link,
-:host-context(.mobile) .project.reverse .project-image-link {
-    order: 0;
-}
-
-/* Stop the image ballooning to full width on the single-column layout. */
-:host-context(.tablet) .project-image-link,
-:host-context(.mobile) .project-image-link {
-    width: 100%;
-    max-width: 460px;
-    margin-inline: auto;
-}
-
-:host-context(.tablet) .project-summary,
-:host-context(.mobile) .project-summary {
-    align-items: center;
-}
-
-:host-context(.tablet) .project-summary .link-underline,
-:host-context(.mobile) .project-summary .link-underline {
-    align-self: center;
-}
-
-.project-image-link {
-    display: block;
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-    box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
-    transition: transform 300ms ease, box-shadow 300ms ease;
-}
-
-.project-image-link:hover,
-.project-image-link:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 1px var(--glow-edge-hover), 0 32px 60px -24px var(--glow);
-}
-
-/* On desktop/laptop the grid cell can grow tall enough to dominate the
-   viewport — cap the image and tuck it next to the text. */
-:host-context(.desktop) .project-image-link {
-    width: 100%;
-    max-width: 440px;
-    justify-self: end;
-}
-
-:host-context(.desktop) .project.reverse .project-image-link {
-    justify-self: start;
-}
-
-.project-image-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(1.05) contrast(1.02);
-}
-
-.project-summary {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    padding: 0 12px;
-    max-width: 520px;
-}
-
-.project-summary h3 {
-    font-size: clamp(24px, 3.2vw, 31px);
-    font-family: var(--font-serif);
-    font-weight: 400;
-    line-height: 1.14;
-    margin: 0;
-}
-
-.project-summary p {
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--font-medium-emphasis);
-    margin: 0;
-}
-
-.project-summary .link-underline {
-    align-self: flex-start;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    margin-top: 6px;
+    white-space: nowrap;
+    flex: none;
+    /* Sits on the h2's baseline; the h2 has no bottom margin, so a little lift. */
+    margin-bottom: 6px;
+}
+
+/* ---- The three cards --------------------------------------------------------
+   One card pattern for the whole site: cover at 4:5, tag, italic name. The
+   shadow and the hover lift come from .glow in global.css. */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+}
+
+:host-context(.tablet) .cards {
+    gap: 20px;
+}
+
+:host-context(.mobile) .cards {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 460px;
+    margin-inline: auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-fit: cover;
+    background-color: var(--paper-warm);
+}
+
+.card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-tag {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--font-low-emphasis);
+}
+
+.card h3 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 0;
+    transition: color 200ms ease;
+}
+
+:host-context(.mobile) .card h3 {
+    font-size: 22px;
+}
+
+.card:hover h3,
+.card:focus-visible h3 {
+    color: var(--brass);
 }

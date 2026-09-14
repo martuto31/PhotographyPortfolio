@@ -1,10 +1,28 @@
-.process-heading {
-    margin-bottom: 72px;
-    max-width: 640px;
+.process {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 440px;
+    gap: 80px;
+    align-items: center;
 }
 
-:host-context(.mobile) .process-heading {
-    margin-bottom: 44px;
+:host-context(.tablet) .process {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 40px;
+}
+
+:host-context(.mobile) .process {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+}
+
+.process-text {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.process-heading {
+    max-width: 640px;
 }
 
 .process-heading h2 {
@@ -23,79 +41,53 @@
     font-size: 15px;
 }
 
+/* The steps as a ruled list: number in the margin, title and text beside it. */
 .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
-    /* The rule runs the full width and the steps hang off it, like a timeline. */
-    border-top: 1px solid var(--rule);
-}
-
-:host-context(.tablet) .steps {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-:host-context(.mobile) .steps {
-    grid-template-columns: 1fr;
 }
 
 .step {
-    padding: 34px 36px 8px 0;
-    position: relative;
-}
-
-:host-context(.tablet) .step,
-:host-context(.mobile) .step {
-    padding-right: 24px;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 16px;
+    padding: 22px 0;
     border-top: 1px solid var(--rule);
 }
 
-/* The first row already sits under the list's own top rule. */
-:host-context(.tablet) .step:nth-child(-n + 2) {
-    border-top: none;
-}
-
-:host-context(.mobile) .step:first-child {
-    border-top: none;
-}
-
-/* A short amber tick where each step meets the timeline. */
-.step::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    width: 34px;
-    height: 1px;
-    background-color: var(--brass);
-}
-
-:host-context(.tablet) .step::before,
-:host-context(.mobile) .step::before {
-    top: -1px;
+:host-context(.mobile) .step {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    padding: 18px 0;
 }
 
 .step-index {
-    display: block;
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.26em;
     color: var(--brass);
     font-variant-numeric: tabular-nums;
-    margin-bottom: 18px;
+    /* On the title's first line, not the block's centre. */
+    padding-top: 6px;
+}
+
+.step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .step h3 {
-    font-size: 25px;
-    margin: 0 0 12px;
+    font-size: 22px;
+    margin: 0;
 }
 
 :host-context(.mobile) .step h3 {
-    font-size: 21px;
+    font-size: 20px;
 }
 
 .step p {
@@ -104,4 +96,32 @@
     line-height: 1.7;
     color: var(--font-medium-emphasis);
     margin: 0;
+    max-width: 52ch;
+}
+
+/* ---- The photograph ---------------------------------------------------------
+   A detail, not a hero: cropped to 4:5 on purpose so it sits beside the list
+   at the list's own height. On phones the list is the section. */
+.process-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background-color: var(--paper-warm);
+}
+
+:host-context(.mobile) .process-photo {
+    display: none;
+}
+
+/* Between phone and the 720px where a second column fits, the photo goes under
+   the list at a modest width rather than squeezing the steps. */
+@media (max-width: 719px) {
+    :host-context(.tablet) .process {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    :host-context(.tablet) .process-photo {
+        max-width: 360px;
+    }
 }
