@@ -12,6 +12,7 @@
     "verify": "node tools/verify.mjs",
     "ux": "node tools/audit-ux.mjs",
     "shots": "node tools/shots.mjs",
+    "hero:try": "node tools/hero-try.mjs",
     "publish": "node tools/publish.mjs",
     "sitemap": "node tools/generate-sitemap.mjs",
     "icons": "node tools/generate-icons.mjs",
