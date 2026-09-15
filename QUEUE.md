@@ -125,15 +125,15 @@ purpose — see its note.
   > okay so from the artifact we choose - N1, C1, P1, S3, Q3, F1, T1, Ft1 or the footer how it was for the landing page and lets go with the white - хартия и месинг flow of the app and colors.
 - [x] T-27 · Home hero H3 - whole page, whole photo, copy bottom-left over a gradient · auto · shipped 2026-09-15 (H3 picked when asked)
 - [x] T-28 · Home sections - P1 three cards, S3 list + photo, Q3 photo whole + words beside; N1 C1 F1 T1 Ft1 stay as shipped · auto · shipped 2026-09-15
-- [ ] T-29 · Gallery page W3 - one column, big whole photographs, portraits two-up; phone and tablet checked · auto
+- [x] T-29 · Gallery page W3 - one column, big whole photographs, portraits two-up; phone and tablet checked · auto · shipped 2026-09-15
   > for W i want W3 is perfect lets try it and make sure you check mobile designs tablet designs bugs qa conventions etc
-- [ ] T-30 · Contacts K3 - the form in the centre, the ways under it · auto
+- [x] T-30 · Contacts K3 - the form in the centre, the ways under it · auto · shipped 2026-09-15
   > for contacts lets leave it K3 and maybe some other choices
-- [ ] T-31 · Canvas round 2 - new options for /galerii (G3 kept), /galerii/svatbi, About (incl. what to do with the portrait) and Contacts · auto (design proposals, no site code)
+- [x] T-31 · Canvas round 2 - new options for /galerii (G3 kept), /galerii/svatbi, About (incl. what to do with the portrait) and Contacts · auto · published 2026-09-15 (artifact v6, page 7) - picks needed, see LOG
   > For the galleries now - lets go with some other design what can we do G1 and G2 i dont like so im left only with G3 and i want other options. For K i dont like neither K1, K2 nor K3 to be honest, K1 is okayish but i want choices
   > for about me i dont like A1, A2 nor A3 designs as well and maybe we should do somehting about the photo what do yo suggest
   > and split your works to tasks or whatever you need
-- [ ] T-32 · Refresh the preview channel for Viki after T-26..T-30 · auto
+- [x] T-32 · Refresh the preview channel for Viki after T-26..T-30 · auto · done 2026-09-15
 
 ---
 

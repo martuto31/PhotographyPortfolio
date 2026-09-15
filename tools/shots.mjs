@@ -47,6 +47,9 @@ const settle = Number(opt('--settle', '2800'));
 // --eval '<js>' prints the expression's value for every route x width, for
 // checking a class or a computed style without opening a PNG.
 const evalExpr = opt('--eval', '');
+// --scroll <px>: fold capture from that offset, after scrolling down to it in
+// steps so lazy images on the way have been asked for.
+const scrollTo = Number(opt('--scroll', '0'));
 const routes = argv.length ? argv : DEFAULT_ROUTES;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -119,11 +122,19 @@ try {
     for (const route of routes) {
       await cdp.send('Page.navigate', { url: `http://localhost:${PORT}${route}` });
       await sleep(settle);
-      // Scroll through once so lazy images below the fold are fetched before the capture.
-      await cdp.send('Runtime.evaluate', { expression: `(async () => { const h = document.documentElement.scrollHeight; for (let y = 0; y < h; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo(0, 0); })()`, awaitPromise: true });
-      await sleep(900);
+      // Full page: scroll through once so lazy images below the fold are fetched
+      // before the capture (capped at 40 screens - a 150-photo gallery is not a
+      // full-page job). The fold capture leaves the page where it loaded.
+      if (fullPage) {
+        await cdp.send('Runtime.evaluate', { expression: `(async () => { const h = Math.min(document.documentElement.scrollHeight, 40 * innerHeight); for (let y = 0; y < h; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo(0, 0); })()`, awaitPromise: true });
+        await sleep(900);
+      }
+      if (scrollTo > 0) {
+        await cdp.send('Runtime.evaluate', { expression: `(async () => { for (let y = 0; y <= ${scrollTo}; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 150)); } window.scrollTo(0, ${scrollTo}); })()`, awaitPromise: true });
+        await sleep(settle);
+      }
       if (evalExpr) {
-        const { result: r } = await cdp.send('Runtime.evaluate', { expression: evalExpr, returnByValue: true });
+        const { result: r } = await cdp.send('Runtime.evaluate', { expression: evalExpr, returnByValue: true, awaitPromise: true });
         console.log(`${routeName(route)}@${width}  eval: ${JSON.stringify(r.value)}`);
       }
       const { result } = await cdp.send('Runtime.evaluate', { expression: 'document.documentElement.scrollHeight', returnByValue: true });

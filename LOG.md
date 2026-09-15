@@ -9,6 +9,24 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
+### T-31 · Round two on the canvas - pick numbers
+https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
+New options for the pages you sent back, each with the dark/light chip:
+- **/galerii:** G4 колаж · G5 каталог (list + big photo of the pointed one; on
+  phones = G3) · G6 ленти (each category with its latest covers). My pick: G5
+  with G3 as its phone form, or G6 if the index should sell the work itself.
+- **/galerii/svatbi:** K4 мозайка · K5 корица + три кадъра (needs no new data)
+  · K6 списък с преглед (needs a date per gallery - same spreadsheet as the
+  venue). My pick: K5 - the only one that shows what a click gets you.
+- **About:** the coral is keyed out of the existing portrait (a real re-cut,
+  `.verify/design-canvas/portrait-keyed.png`; a faint sunlit rim on the hair
+  remains). A4 писмо · A5 портретът на хартия · A6 интервю (draft questions,
+  yours to change). My pick: A4 - needs the portrait least and opens with her
+  work. Better still: one new photo from Viki, her at work, 4:5, daylight.
+- **Contacts, besides K3:** K4 три стъпки (chips + two fields; the send would
+  need rebuilding) · K5 снимка + форма. K3 is built.
+Say the numbers and they become tasks.
+
 ### T-24 · The preview for Viki
 **https://phbyvikiprod--preview-yb28hwie.web.app** — expires 2026-10-13.
 A Firebase *preview channel* on the prod site: its own URL, nothing on
@@ -41,8 +59,8 @@ show whole galleries. New photos still need `npm run sitemap` after a publish,
 which `npm run publish` already does.
 
 ### Still open from T-20
-- **The About portrait** has the old coral backdrop baked into `about-me.png` and
-  is the loudest thing on the dark stage. Needs a new portrait from Viki, not CSS.
+- **The About portrait** - see T-31 above: keyed off the coral now; a new photo
+  from Viki is still the better fix.
 - `WORKER.md` is untracked - commit it yourself or tell me to. Its "R2 CORS blocks
   localhost" trap is out of date after T-22: galleries fill locally now.
 
@@ -50,14 +68,37 @@ which `npm run publish` already does.
 
 ## Working on
 
-Your 2026-09-15 picks, as tasks: T-26 theme → T-27 hero → T-28 sections →
-T-29 gallery W3 → T-30 contacts K3 → T-31 canvas round two → T-32 preview.
+**The auto queue is empty.** T-26…T-32 from your 2026-09-15 picks are shipped;
+the next tasks come from your answers under Needs you.
 
 ---
 
 ## Shipped
 
 ### 2026-09-15
+- **T-32 · Preview channel refreshed** — https://phbyvikiprod--preview-yb28hwie.web.app
+  now shows the paper theme, the H3 hero, the new sections, W3 galleries and
+  K3 contacts. Live untouched.
+- **T-31 · Canvas round two** — artifact v6, page 7: eleven new boards (G4-G6,
+  K4-K6, A4-A6, contacts K4-K5) with notes and a recommendation per row; the
+  About portrait keyed off its coral disc (`rekey.mjs`, region-grown from the
+  rim so skin tones stay). Rendered headless before publishing - three boards
+  had nested `<a>` tags that broke their layout, fixed. See Needs you.
+- **T-30 · Contacts K3** — commit "Centre the contact form" — the h1 and lead
+  centred, the form under them at 560px, the four ways to write as one ruled
+  line under it (stacked on phones); the form markup itself is untouched, only
+  its duplicate embedded heading is off on /kontakti. Verifier PASS, `npm run
+  ux` 0 FAIL.
+- **T-29 · Gallery page W3** — commit "Show gallery photographs whole, one to
+  a row" — one column of at most 1040px, every photo at its own ratio; two
+  portraits share a row, a lone one is centred at 60%; one full-width column
+  under 960px. The manifest has no dimensions yet, so orientation is read from
+  each photo as it loads (rows re-lay as portraits arrive); each unloaded
+  photo holds a 3:2 box so the lazy loader only fetches what is near the
+  viewport - before this fix all 153 collapsed to zero height and every one
+  was requested at once. Modal keeps the right index; arrows, Escape and
+  focus return checked. First photo still eager, preloaded; siblings strip
+  intact. Verifier PASS, gate green, `npm run ux` 0 FAIL.
 - **T-28 · Home sections P1 · S3 · Q3** — commit "Rebuild the home sections
   Martin picked" — portfolio is three cards (cover 4:5, tag, italic name;
   the same object as a /galerii card, one step to a category) with "Всички

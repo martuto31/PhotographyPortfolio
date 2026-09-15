@@ -12,6 +12,16 @@ import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleri
 
 type SiblingGallery = GallerySnapshotItem;
 
+type Orientation = 'portrait' | 'landscape';
+
+// One line of the gallery: a landscape photograph on its own, two portraits side
+// by side, or a lone portrait (centred, narrower - see the stylesheet).
+interface GalleryRow {
+  key: string;
+  kind: 'wide' | 'pair' | 'portrait';
+  entries: { image: ResponsiveImage; index: number }[];
+}
+
 // Heading wording + the label of the category this gallery belongs to, keyed by URL slug.
 const TYPE_HEADING: Record<string, { noun: string; category: string }> = {
   'svatbi': { noun: 'Сватбена фотосесия', category: 'Сватбени галерии' },
@@ -64,9 +74,24 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   public images: ResponsiveImage[] = [];
 
-  // The grid is three columns inside a 1400px shell, two on tablet and one on
-  // mobile — the breakpoints mirror DimensionService, which drives the CSS.
-  public readonly gridSizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 48vw, (min-width: 1440px) 440px, 31vw`;
+  // The photographs grouped into rows for the template. Rebuilt whenever the list
+  // changes or a photograph's orientation becomes known.
+  public rows: GalleryRow[] = [];
+
+  // Orientation by src. The manifest carries no dimensions yet (the thumbs
+  // backfill is blocked on the R2 token), so until it does the orientation is
+  // read from each photograph as it loads; a photo not yet measured is laid out
+  // wide, and the rows below it shift once it turns out to be portrait. When the
+  // manifest gains widths, setSeedImages/loadImages fill this at once and the
+  // layout is final from the first paint.
+  private orientation = new Map<string, Orientation>();
+
+  // One column of at most 1040px on desktop, the full width under 960px - the
+  // breakpoints mirror DimensionService, which drives the CSS.
+  public readonly gridSizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 94vw, 1040px`;
+
+  // Two portraits share the column.
+  public readonly pairSizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 94vw, 512px`;
 
   // The sibling strip stays three-up from tablet width and goes full-bleed on mobile.
   public readonly siblingSizes = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 425px, 31vw`;
@@ -107,9 +132,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
   // that one and not the preloads belonging to the document itself.
   private static readonly PRELOAD_MARKER = 'data-hero-preload';
 
-  // Tiles rendered eagerly. Three fills the first row of the widest layout; everything
-  // below stays lazy, which is the whole point on a 154-photograph gallery.
-  public static readonly EAGER_IMAGES = 3;
+  // Tiles rendered eagerly. Two fills the first screen of the single column;
+  // everything below stays lazy, which is the whole point on a 154-photograph gallery.
+  public static readonly EAGER_IMAGES = 2;
 
   async ngOnInit(): Promise<void> {
     this.setHeadings();
@@ -161,6 +186,24 @@ export class GalleryComponent implements OnInit, OnDestroy {
     if (event.target === event.currentTarget) {
       this.closeModal();
     }
+  }
+
+  // True once the photograph's shape is known - from the manifest or from the
+  // loaded file. Until then the stylesheet reserves a 3:2 box for it, so 150
+  // unloaded photographs do not collapse to nothing and all sit "in view" for
+  // the browser's lazy loader, which would then fetch every one at once.
+  public isSettled(image: ResponsiveImage): boolean {
+    return this.orientation.has(image.src);
+  }
+
+  // A loaded photograph tells us its shape; a portrait one may change the rows.
+  public onImageLoad(image: ResponsiveImage, event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (img.naturalWidth && img.naturalHeight && !this.orientation.has(image.src)) {
+      this.orientation.set(image.src, img.naturalHeight > img.naturalWidth ? 'portrait' : 'landscape');
+      this.layoutRows();
+    }
+    this.onImageSettled();
   }
 
   // Fires on both load and error so a failed image can't strand the skeleton.
@@ -291,6 +334,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
     // none — a failed fetch should degrade to the prerendered page, not below it.
     if (loaded.length) {
       this.images = loaded;
+      this.rememberOrientations();
+      this.layoutRows();
     }
 
     // Still nothing to show: drop the loading mask so we don't show skeletons
@@ -384,6 +429,44 @@ export class GalleryComponent implements OnInit, OnDestroy {
       width: photo.width,
       height: photo.height,
     }));
+    this.rememberOrientations();
+    this.layoutRows();
+  }
+
+  // Photographs whose dimensions are already known need no load event.
+  private rememberOrientations(): void {
+    for (const image of this.images) {
+      if (image.width && image.height && !this.orientation.has(image.src)) {
+        this.orientation.set(image.src, image.height > image.width ? 'portrait' : 'landscape');
+      }
+    }
+  }
+
+  // Walks the list once: a landscape photograph takes a row; a portrait one pairs
+  // with a portrait right after it, or stands alone. Order is never changed - a
+  // gallery is chronological and a moved photograph reads as a mistake.
+  private layoutRows(): void {
+    const rows: GalleryRow[] = [];
+    const isPortrait = (image: ResponsiveImage) => this.orientation.get(image.src) === 'portrait';
+
+    for (let i = 0; i < this.images.length; i++) {
+      const image = this.images[i];
+      if (!isPortrait(image)) {
+        rows.push({ key: image.src, kind: 'wide', entries: [{ image, index: i }] });
+        continue;
+      }
+
+      const next = this.images[i + 1];
+      if (next && isPortrait(next)) {
+        rows.push({ key: image.src, kind: 'pair', entries: [{ image, index: i }, { image: next, index: i + 1 }] });
+        i += 1;
+        continue;
+      }
+
+      rows.push({ key: image.src, kind: 'portrait', entries: [{ image, index: i }] });
+    }
+
+    this.rows = rows;
   }
 
   // The first photograph is this page's LCP element. Preloading exactly one of them

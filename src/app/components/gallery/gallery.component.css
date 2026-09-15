@@ -1,32 +1,43 @@
+/* ---- The column ---------------------------------------------------------------
+   W3: one column, at most 1040px wide, every photograph at its own ratio. Two
+   portraits share a row; a lone portrait is centred at 60% so it does not tower
+   over the landscapes around it. Under 960px everything is one full-width
+   column. */
 .container {
     width: 100%;
+    max-width: 1040px;
+    margin: 0 auto;
     position: relative;
-    column-count: 3;
-    column-gap: 16px;
-}
-
-:host-context(.tablet) .container {
-    column-count: 2;
-    column-gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 :host-context(.mobile) .container {
-    column-count: 1;
+    gap: 14px;
 }
 
-.column {
-    break-inside: avoid;
-    /* Room for the glow below each print; the column itself must not clip it. */
-    margin-bottom: 28px;
+.row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+:host-context(.desktop) .row.pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+:host-context(.desktop) .row.portrait {
+    justify-items: center;
+}
+
+:host-context(.desktop) .row.portrait .photo {
+    width: 60%;
+}
+
+.photo {
+    /* Room for the shadow below each print; the row must not clip it. */
     padding-bottom: 2px;
-}
-
-:host-context(.mobile) .column {
-    margin-bottom: 22px;
-}
-
-.column.loading {
-    z-index: -100;
 }
 
 /* The thumbnail is a real <button> for keyboard/screen-reader access; strip the
@@ -48,16 +59,22 @@
     outline-offset: 3px;
 }
 
-/* Each photograph is a print lit from above — the glow recipe from
-   DESIGN-SPEC.md, on the image itself so the light follows its edge. */
-.column img {
+/* Each photograph is a print pinned to the paper - the glow recipe from
+   global.css, on the image itself so the shadow follows its edge. */
+.photo img {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
-    filter: brightness(1.05) contrast(1.02);
+    background-color: var(--paper-warm);
     box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
     transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+/* A photograph whose shape is not known yet holds a 3:2 box: the column keeps
+   its length while the files arrive and the lazy loader only fetches what is
+   near the viewport. Once it loads it takes its own ratio. */
+.photo img:not(.settled) {
+    aspect-ratio: 3 / 2;
 }
 
 .image-btn:hover img,
@@ -187,34 +204,26 @@
     position: absolute;
     top: 0;
     left: 0;
-    column-count: 3;
-    column-gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     background-color: var(--bg-white);
     overflow: hidden;
     z-index: 100;
 }
 
-:host-context(.tablet) .loading-mask {
-    column-count: 2;
-    column-gap: 12px;
-}
-
-:host-context(.mobile) .loading-mask {
-    column-count: 1;
-}
-
 .skeleton {
     width: 100%;
-    height: 280px;
-    background-color: var(--surface);
+    aspect-ratio: 3 / 2;
+    flex: none;
+    background-color: var(--paper-warm);
     animation: pulse 1.5s infinite;
-    margin-bottom: 16px;
 }
 
 @keyframes pulse {
-    0%   { background-color: #1C1916; }
-    50%  { background-color: #262019; }
-    100% { background-color: #1C1916; }
+    0%   { opacity: 1; }
+    50%  { opacity: 0.55; }
+    100% { opacity: 1; }
 }
 
 @keyframes fadeIn {
@@ -297,7 +306,7 @@
     font-weight: 500;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--font-on-ink-mute);
+    color: var(--font-medium-emphasis);
     flex: none;
 }
 
@@ -320,7 +329,7 @@
 .sibling-image {
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background-color: var(--surface);
+    background-color: var(--paper-warm);
     margin-bottom: 18px;
     box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
     transition: transform 300ms ease, box-shadow 300ms ease;
@@ -330,7 +339,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(1.05) contrast(1.02);
 }
 
 .sibling:hover .sibling-image,
