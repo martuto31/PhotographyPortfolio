@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, Input, PLATFORM_ID } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -24,7 +24,7 @@ interface CategoryLink {
   imports: [RouterLink],
 })
 
-export class CategoryNavComponent implements AfterViewInit {
+export class CategoryNavComponent implements AfterViewInit, AfterViewChecked, OnChanges {
 
   constructor(
     private host: ElementRef<HTMLElement>,
@@ -33,10 +33,32 @@ export class CategoryNavComponent implements AfterViewInit {
   /** Slug of the category page being shown; null on the index. */
   @Input() active: string | null = null;
 
+  // The router keeps the category page from one category to the next, so the
+  // row is not rebuilt either - only `active` moves. Scroll again once the
+  // template has moved the mark.
+  private activeMoved = false;
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['active']?.firstChange === false) {
+      this.activeMoved = true;
+    }
+  }
+
   // On a phone the row scrolls sideways; bring the current category into view
   // so a visitor on /galerii/krushteneta does not land on a row that appears
   // to say "Всички · Сватби · Абитуриенти".
   public ngAfterViewInit(): void {
+    this.scrollToActive();
+  }
+
+  public ngAfterViewChecked(): void {
+    if (this.activeMoved) {
+      this.activeMoved = false;
+      this.scrollToActive();
+    }
+  }
+
+  private scrollToActive(): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }

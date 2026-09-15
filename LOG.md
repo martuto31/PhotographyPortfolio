@@ -9,6 +9,14 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
+### T-35 · The five hero candidates - I need the files
+The photos you pasted into the chat are not on disk here. Drop the five
+originals (full-size JPGs are best) into `.verify/hero-candidates/` in the
+repo, or tell me a folder, and say "hero try". I then run each through the
+home page at 16:9, 16:10, tablet and phone (`node tools/hero-try.mjs <dir>`)
+and put every one on its own preview URL, so you and Viki can open the real
+page with each photo on your own phones and pick a number.
+
 ### T-33 · The wall on the preview - yes or what is wrong
 https://phbyvikiprod--preview-yb28hwie.web.app/galerii and /galerii/svatbi.
 G1-G6 and K1-K6 are off the table; this replaces both pages. See Shipped.
@@ -65,6 +73,16 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-15
+- **T-34 · Gallery kept the previous couple after a sibling click** — commit
+  "Reload the gallery when only the URL changes". Viki's bug: open a gallery
+  from the suggestions, go back, open another - the URL and the tab title
+  changed, the page did not. Angular keeps the same component when only the
+  parameters change and both list pages did their work once, on init. Now a
+  parameter change resets and reloads (gallery page, category page, and the
+  category row's mark), and a manifest arriving for a page already left is
+  dropped. Verified headlessly: sibling → back → other sibling, and
+  /galerii/svatbi → Абитуриенти, each shows its own h1, photographs, strip.
+  Preview refreshed.
 - **T-33 · One wall for /galerii and the category pages** — commit "Put every
   gallery on one wall" — on the preview now, as the proposal for the two
   pages you sent back twice. `/galerii` is every published gallery as a 4:5

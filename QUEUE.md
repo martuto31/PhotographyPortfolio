@@ -140,6 +140,9 @@ purpose — see its note.
 - [x] T-32 · Refresh the preview channel for Viki after T-26..T-30 · auto · done 2026-09-15
 - [x] T-33 · One wall for /galerii and the category pages (G/K rounds one and two rejected) · auto · shipped to the preview as the proposal 2026-09-15 - awaiting Martin
   > I dont like them i dont know they dont look visually apealing and its not normal flow like i dont want it to be basic but i dont want them overdone i want something that is with nice ui ux
+- [x] T-34 · Gallery → sibling → back → other gallery keeps showing the first one; category row too · auto · done 2026-09-15
+  > she likes the website and galleries like that but said there were bugs can you fix it like opening a gallery from the suggestion, going back opening other doesnt open it etc
+- [ ] T-35 · Home page with each of Viki's five candidate photos, for her and Martin to pick · needs-you · blocked: the five files (pasted into chat, not on disk)
 
 ---
 
@@ -215,6 +218,18 @@ purpose — see its note.
 - `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
 **Evidence** — gate, ux, screenshots at 1440/768/390
 **Autonomy** — auto (revertable proposal)
+
+### T-34 · Gallery page keeps the previous gallery after a sibling click
+**Why** — Viki: opening a gallery from the suggestions, going back and opening another "doesn't open it". Reproduced headlessly: the URL and tab title change, the page keeps the first couple. The router reuses the component when only the parameters change and both list pages did their work in `ngOnInit` only; the category row (T-33) has the same fault from one category to the next.
+**Scope** — `gallery.component.ts`, `galleries-cards.component.ts`, `category-nav.component.ts`
+**Done when**
+- WHEN a visitor on `/galeriya/svatbi/<A>` clicks a sibling `<B>`, THE h1, the photographs and the sibling strip SHALL be B's
+- WHEN they press Back, THE page SHALL be A's again; a further sibling click SHALL show that gallery
+- WHEN a visitor on `/galerii/svatbi` clicks "Абитуриенти" in the row, THE h1, title and wall SHALL be the graduates' and the row SHALL mark it current
+- IF two navigations overlap, THEN the later one SHALL win (no stale manifest result lands)
+- `sh scripts/qa.sh` green; prerendered HTML unchanged in substance
+**Evidence** — gate; scratchpad `flow.mjs` click-through: steps 2, 4, 6 report the new gallery's h1 and first photo
+**Autonomy** — auto
 
 ### T-31 · Canvas round 2
 **Why** — Martin rejected G1/G2, K1–K3, A1–A3 and wants more choices, plus a proposal for the About portrait; K3 for contacts "and maybe some other choices".

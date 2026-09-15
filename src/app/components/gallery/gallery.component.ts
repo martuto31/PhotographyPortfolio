@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -53,7 +53,7 @@ const SLUG_TO_PREFIX: Record<string, string> = {
   ],
 })
 
-export class GalleryComponent implements OnInit, OnDestroy {
+export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     public dimensionsService: DimensionService,
@@ -136,7 +136,30 @@ export class GalleryComponent implements OnInit, OnDestroy {
   // everything below stays lazy, which is the whole point on a 154-photograph gallery.
   public static readonly EAGER_IMAGES = 2;
 
-  async ngOnInit(): Promise<void> {
+  // Counts the loads started, so a manifest that arrives for a gallery the
+  // visitor has already left (two sibling clicks in a row) is dropped.
+  private loadGeneration = 0;
+
+  ngOnInit(): void {
+    void this.load();
+  }
+
+  // The router keeps this component when only the URL parameters change - a
+  // click in the sibling strip, or Back to the previous gallery - and hands it
+  // the new inputs without a new ngOnInit. Viki saw the URL and the tab title
+  // change while the page kept showing the old couple. Reload for the new one.
+  ngOnChanges(changes: SimpleChanges): void {
+    const first = Object.values(changes).every((change) => change.firstChange);
+    if (first) {
+      return;
+    }
+    this.reset();
+    void this.load();
+  }
+
+  private async load(): Promise<void> {
+    const generation = ++this.loadGeneration;
+
     this.setHeadings();
     this.setSiblings();
     this.setSeedImages();
@@ -149,7 +172,25 @@ export class GalleryComponent implements OnInit, OnDestroy {
       return;
     }
 
-    await this.loadImages();
+    await this.loadImages(generation);
+  }
+
+  // Back to the empty state before another gallery is loaded into the same
+  // instance: the photographs, the rows, the skeleton mask, a modal left open.
+  private reset(): void {
+    this.closeModal();
+    this.clearHeroPreload();
+    this.images = [];
+    this.rows = [];
+    this.orientation.clear();
+    this.settledImages = 0;
+    this.areImagesLoaded = false;
+    this.siblings = [];
+    this.pageHeading = '';
+    this.categoryLabel = '';
+    this.categoryLink = '';
+    this.categorySlug = '';
+    this.displayName = '';
   }
 
   ngOnDestroy(): void {
@@ -216,8 +257,11 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     const target = Math.min(GalleryComponent.REVEAL_THRESHOLD, this.images.length);
     if (this.settledImages >= target) {
+      const generation = this.loadGeneration;
       setTimeout(() => {
-        this.areImagesLoaded = true;
+        if (generation === this.loadGeneration) {
+          this.areImagesLoaded = true;
+        }
       }, 150);
     }
   }
@@ -318,12 +362,15 @@ export class GalleryComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async loadImages(): Promise<void> {
+  private async loadImages(generation: number): Promise<void> {
     // Map Bulgarian URL slugs (svatbi/abiturienti/lichni/...) back to the
     // English prefix (Weddings/Graduates/Personal/...) used as the manifest key.
     const prefix = this.translateSlugToS3Prefix(this.slugPath);
 
     const manifest = await fetchManifest();
+    if (generation !== this.loadGeneration) {
+      return;
+    }
     // cover.webp is the card thumbnail — keep it out of the photo grid.
     const files = (manifest?.galleries[prefix] ?? []).filter((f) => f !== COVER_FILENAME);
 
@@ -349,7 +396,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
     // browser fetches up front, so guarantee the mask lifts even if the reveal
     // threshold is never reached.
     setTimeout(() => {
-      this.areImagesLoaded = true;
+      if (generation === this.loadGeneration) {
+        this.areImagesLoaded = true;
+      }
     }, GalleryComponent.REVEAL_FALLBACK_MS);
   }
 

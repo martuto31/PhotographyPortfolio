@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -63,7 +63,7 @@ const TYPE_ALT_PREFIX: Record<string, string> = {
   ],
 })
 
-export class GalleriesCardsComponent implements OnInit {
+export class GalleriesCardsComponent implements OnInit, OnChanges {
 
   constructor(
     private title: Title,
@@ -84,7 +84,26 @@ export class GalleriesCardsComponent implements OnInit {
   // an empty grid — while the LocalBusiness JSON-LD advertised them as offers.
   public service?: ServiceCopy;
 
-  public async ngOnInit(): Promise<void> {
+  // Counts the loads started, so a manifest that arrives for a category the
+  // visitor has already left is dropped.
+  private loadGeneration = 0;
+
+  public ngOnInit(): void {
+    void this.load();
+  }
+
+  // The router keeps this component from one category to the next (the row of
+  // categories above the wall) and only changes the input - no new ngOnInit.
+  // Without this the URL said abiturienti while the page still showed weddings.
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['galleryType']?.firstChange === false) {
+      void this.load();
+    }
+  }
+
+  private async load(): Promise<void> {
+    const generation = ++this.loadGeneration;
+
     this.type = SLUG_TO_TYPE[this.galleryType] || this.galleryType;
     this.altPrefix = TYPE_ALT_PREFIX[this.type] || '';
     this.service = SERVICE_BY_SLUG[this.galleryType];
@@ -103,7 +122,7 @@ export class GalleriesCardsComponent implements OnInit {
     // Then refresh from the live manifest, so galleries published since the last deploy
     // still show up without a code change. A failed fetch keeps the snapshot on screen.
     const manifest = await fetchManifest();
-    if (manifest) {
+    if (manifest && generation === this.loadGeneration) {
       this.wall = this.tiles(manifestGalleries(manifest, this.type));
     }
   }
