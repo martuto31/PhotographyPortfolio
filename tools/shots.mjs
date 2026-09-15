@@ -150,7 +150,8 @@ try {
       // paints images as blank boxes in headless Chrome.
       if (fullPage) {
         await cdp.send('Emulation.setDeviceMetricsOverride', { width, height: Math.min(docHeight, 16000), deviceScaleFactor: 1, mobile: width < 700 });
-        await sleep(700);
+        // Long enough for reveal-on-scroll transitions to finish once everything is "in view".
+        await sleep(1600);
       }
       const shot = await cdp.send('Page.captureScreenshot', { format: 'png' });
       if (fullPage) {

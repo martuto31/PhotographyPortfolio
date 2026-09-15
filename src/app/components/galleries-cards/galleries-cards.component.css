@@ -6,13 +6,13 @@
    Left-aligned rather than centred: it now carries a breadcrumb above it and a
    long lead sentence below, and centred multi-line prose is hard to scan. */
 .page-heading {
-    margin-bottom: 72px;
+    margin-bottom: 40px;
     max-width: 780px;
 }
 
 :host-context(.tablet) .page-heading,
 :host-context(.mobile) .page-heading {
-    margin-bottom: 48px;
+    margin-bottom: 28px;
 }
 
 .breadcrumb {
@@ -68,109 +68,13 @@
     max-width: 42ch;
 }
 
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 80px 48px;
+app-category-nav {
+    display: block;
+    margin-bottom: 44px;
 }
 
-:host-context(.tablet) .cards-container {
-    gap: 60px 32px;
-}
-
-:host-context(.mobile) .cards-container {
-    grid-template-columns: 1fr;
-    gap: 56px;
-}
-
-.card {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    /* Cards are <a> so crawlers see a real href — reset the anchor defaults. */
-    text-decoration: none;
-    color: inherit;
-}
-
-.card .image-wrap {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    margin-bottom: 22px;
-    background-color: var(--paper-warm);
-}
-
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 600ms ease;
-}
-
-/* The print pinned to the paper: the shadow sits on the frame, which is the
-   picture's own rectangle, and the whole print lifts on hover instead of zooming. */
-.card .image-wrap {
-    box-shadow: 0 0 0 1px var(--glow-edge), 0 26px 52px -26px var(--glow);
-    transition: transform 300ms ease, box-shadow 300ms ease;
-}
-
-.card:hover .image-wrap,
-.card:focus-visible .image-wrap {
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 1px var(--glow-edge-hover), 0 32px 60px -24px var(--glow);
-}
-
-.lazy-load {
-    opacity: 0;
-}
-
-.lazy-load.loaded {
-    opacity: 1;
-}
-
-.skeleton {
-    position: absolute;
-    inset: 0;
-    background-color: var(--paper-warm);
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0%   { opacity: 1; }
-    50%  { opacity: 0.55; }
-    100% { opacity: 1; }
-}
-
-.card-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-}
-
-.card-meta .tag {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--font-low-emphasis);
-}
-
-.card-meta h2 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-style: italic;
-    font-size: 20px;
-    line-height: 1.2;
-    margin: 0;
-    color: var(--font-high-emphasis);
-    transition: color 200ms ease;
-}
-
-.card:hover .card-meta h2 {
-    color: var(--brass);
+:host-context(.mobile) app-category-nav {
+    margin-bottom: 28px;
 }
 
 .empty-state {

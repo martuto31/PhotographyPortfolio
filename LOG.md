@@ -9,23 +9,19 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-31 · Round two on the canvas - pick numbers
+### T-33 · The wall on the preview - yes or what is wrong
+https://phbyvikiprod--preview-yb28hwie.web.app/galerii and /galerii/svatbi.
+G1-G6 and K1-K6 are off the table; this replaces both pages. See Shipped.
+
+### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
-New options for the pages you sent back, each with the dark/light chip:
-- **/galerii:** G4 колаж · G5 каталог (list + big photo of the pointed one; on
-  phones = G3) · G6 ленти (each category with its latest covers). My pick: G5
-  with G3 as its phone form, or G6 if the index should sell the work itself.
-- **/galerii/svatbi:** K4 мозайка · K5 корица + три кадъра (needs no new data)
-  · K6 списък с преглед (needs a date per gallery - same spreadsheet as the
-  venue). My pick: K5 - the only one that shows what a click gets you.
 - **About:** the coral is keyed out of the existing portrait (a real re-cut,
   `.verify/design-canvas/portrait-keyed.png`; a faint sunlit rim on the hair
   remains). A4 писмо · A5 портретът на хартия · A6 интервю (draft questions,
   yours to change). My pick: A4 - needs the portrait least and opens with her
   work. Better still: one new photo from Viki, her at work, 4:5, daylight.
-- **Contacts, besides K3:** K4 три стъпки (chips + two fields; the send would
-  need rebuilding) · K5 снимка + форма. K3 is built.
-Say the numbers and they become tasks.
+- Contacts: K3 stays (Martin, 2026-09-15). The G and K rows on page 7 are
+  superseded by T-33.
 
 ### T-24 · The preview for Viki
 **https://phbyvikiprod--preview-yb28hwie.web.app** — expires 2026-10-15.
@@ -69,6 +65,20 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-15
+- **T-33 · One wall for /galerii and the category pages** — commit "Put every
+  gallery on one wall" — on the preview now, as the proposal for the two
+  pages you sent back twice. `/galerii` is every published gallery as a 4:5
+  cover with the name and a small category label, the categories dealt in
+  turns; a row of the categories with counts above it (real links, so the
+  search landing pages keep their URLs and copy). Each category page is the
+  same wall for its galleries with the row marking it, then the copy, FAQ
+  and CTA as before. No card chrome; covers ease in, a touch of zoom on
+  hover, tiles rise as they enter the viewport, the row scrolls sideways on
+  phones with the current category brought into view. Three columns on
+  desktop, two on tablets and phones. Verifier caught one thing - covers
+  were invisible without script - fixed and re-verified PASS. Gate green,
+  `npm run ux` 0 FAIL. If it is not it either, one `git revert` takes it
+  out; say what is wrong with it rather than which number.
 - **T-23b · Thumb targets** — commit "Give every phone tap target 44px" —
   buttons 43→44 (one pixel of padding, all sizes); on phones and tablets the
   footer links, the Messenger/email/Instagram lines, the legal links, the

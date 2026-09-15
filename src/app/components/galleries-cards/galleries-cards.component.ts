@@ -5,19 +5,13 @@ import { Title } from '@angular/platform-browser';
 
 import { FaqComponent } from './../shared/faq/faq.component';
 import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
+import { CategoryNavComponent } from './../shared/category-nav/category-nav.component';
+import { GalleryWallComponent, WallItem } from './../shared/gallery-wall/gallery-wall.component';
 
-import { DimensionService } from './../../services/dimension.service';
 import { StructuredDataService } from './../../services/structured-data.service';
-import { COVER_FILENAME, PHONE_SLOT, coverImage, fetchManifest } from './../../config';
-import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
+import { fetchManifest } from './../../config';
+import { GalleryListing, manifestGalleries, snapshotGalleries } from './../../services/gallery-list';
 import { SERVICE_BY_SLUG, SERVICE_TITLES, ServiceCopy } from './../../content/services';
-
-// A card needs the name and the cover, never the gallery's photographs — those exist in
-// the snapshot for the gallery pages to prerender with, and the runtime list built from
-// the manifest below has no use for them.
-interface Gallery extends Omit<GallerySnapshotItem, 'photos'> {
-  isImgLoaded: boolean;
-}
 
 // Maps BG URL slug -> internal type key + R2 prefix used by the gallery component.
 // Add a new entry here when introducing a new service category and the rest of the
@@ -35,13 +29,14 @@ export const SLUG_TO_TYPE: Record<string, string> = {
   'Personal': 'Personal',
 };
 
-const TYPE_LABEL_BG: Record<string, { heading: string; cardTag: string }> = {
-  'Weddings': { heading: 'Сватбени', cardTag: 'СВАТБИ' },
-  'Graduates': { heading: 'Абитуриентски', cardTag: 'АБИТУРИЕНТИ' },
-  'Personal': { heading: 'Лични', cardTag: 'ПЕРСОНАЛНИ' },
-  'Baptisms': { heading: 'Кръщенета', cardTag: 'КРЪЩЕНЕТА' },
-  'Birthdays': { heading: 'Рождени дни', cardTag: 'РОЖДЕНИ ДНИ' },
-  'Family': { heading: 'Семейни', cardTag: 'СЕМЕЙНИ' },
+// Fallback <title> wording for the legacy English slugs, which have no SERVICE_TITLES entry.
+const TYPE_LABEL_BG: Record<string, { heading: string }> = {
+  'Weddings': { heading: 'Сватбени' },
+  'Graduates': { heading: 'Абитуриентски' },
+  'Personal': { heading: 'Лични' },
+  'Baptisms': { heading: 'Кръщенета' },
+  'Birthdays': { heading: 'Рождени дни' },
+  'Family': { heading: 'Семейни' },
 };
 
 // Alt-text prefix per type, used for SEO-friendly image alt attributes.
@@ -63,29 +58,26 @@ const TYPE_ALT_PREFIX: Record<string, string> = {
     RouterLink,
     FaqComponent,
     CtaBandComponent,
+    CategoryNavComponent,
+    GalleryWallComponent,
   ],
 })
 
 export class GalleriesCardsComponent implements OnInit {
 
   constructor(
-    public dimensionsService: DimensionService,
     private title: Title,
     private structuredData: StructuredDataService,
     @Inject(PLATFORM_ID) private platformId: object) { }
 
   @Input() galleryType: string = 'svatbi';
 
-  // Resolved internal type key (Weddings/Graduates/Personal/etc.) used in template @if's
+  // Resolved internal type key (Weddings/Graduates/Personal/etc.)
   public type: string = 'Weddings';
-  public cardTag: string = 'СВАТБИ';
   public pageHeading: string = '';
   public pageSubheading: string = '';
-  public currentGalleries: Gallery[] = [];
-  public altPrefix: string = '';
-
-  // Two cards across on desktop and tablet inside a 1400px shell, one on mobile.
-  public readonly cardSizes = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 650px, 47vw`;
+  public wall: WallItem[] = [];
+  private altPrefix: string = '';
 
   // Service prose for this category. Four of the seven categories have no
   // published galleries, and until this existed those URLs rendered a heading over
@@ -94,7 +86,6 @@ export class GalleriesCardsComponent implements OnInit {
 
   public async ngOnInit(): Promise<void> {
     this.type = SLUG_TO_TYPE[this.galleryType] || this.galleryType;
-    this.cardTag = TYPE_LABEL_BG[this.type]?.cardTag || '';
     this.altPrefix = TYPE_ALT_PREFIX[this.type] || '';
     this.service = SERVICE_BY_SLUG[this.galleryType];
     this.setHeadings();
@@ -102,46 +93,29 @@ export class GalleriesCardsComponent implements OnInit {
     this.setStructuredData();
 
     // Render the build-time snapshot first — synchronously, on server and client alike — so
-    // the prerendered HTML carries a crawlable <a> per gallery instead of an empty grid.
-    this.currentGalleries = (GALLERY_SNAPSHOT[this.type] ?? []).map((gallery) => ({
-      ...gallery,
-      isImgLoaded: false,
-    }));
+    // the prerendered HTML carries a crawlable <a> per gallery instead of an empty wall.
+    this.wall = this.tiles(snapshotGalleries(this.type));
 
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
     // Then refresh from the live manifest, so galleries published since the last deploy
-    // still show up without a code change.
-    await this.loadGalleries();
+    // still show up without a code change. A failed fetch keeps the snapshot on screen.
+    const manifest = await fetchManifest();
+    if (manifest) {
+      this.wall = this.tiles(manifestGalleries(manifest, this.type));
+    }
   }
 
-  // Build the card list from every manifest prefix under "<type>/".
-  // Card title = the folder name after "<type>/"; cover = cover.webp if present,
-  // otherwise the first image (manifest lists are already naturally sorted).
-  private async loadGalleries(): Promise<void> {
-    const manifest = await fetchManifest();
-    if (!manifest) {
-      return; // CORS/network failure — keep the snapshot on screen rather than crash
-    }
-
-    const typePrefix = `${this.type}/`;
-    this.currentGalleries = Object.keys(manifest.galleries)
-      .filter((prefix) => prefix.startsWith(typePrefix))
-      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
-      .map((prefix) => {
-        const files = manifest.galleries[prefix];
-        const cover = files.includes(COVER_FILENAME) ? COVER_FILENAME : files[0];
-        const image = cover ? coverImage(manifest, prefix, cover) : null;
-        return {
-          name: prefix.slice(typePrefix.length),
-          imageSrc: image?.src ?? '',
-          imageSrcset: image?.srcset ?? '',
-          isImgLoaded: false,
-        };
-      })
-      .filter((gallery) => gallery.imageSrc); // skip empty galleries (no cover available)
+  private tiles(galleries: GalleryListing[]): WallItem[] {
+    return galleries.map((gallery) => ({
+      name: gallery.name,
+      imageSrc: gallery.imageSrc,
+      imageSrcset: gallery.imageSrcset,
+      link: ['/galeriya', this.galleryType, gallery.name],
+      alt: `${this.altPrefix}${gallery.name} - фотограф София и Видин`,
+    }));
   }
 
   private setHeadings(): void {
@@ -159,15 +133,6 @@ export class GalleriesCardsComponent implements OnInit {
       this.pageHeading = h.h1;
       this.pageSubheading = h.sub;
     }
-  }
-
-  // Slug used when building links to the single-gallery page
-  public get gallerySlug(): string {
-    return this.galleryType;
-  }
-
-  public onImageLoad(gallery: Gallery): void {
-    gallery.isImgLoaded = true;
   }
 
   private setTitle(): void {

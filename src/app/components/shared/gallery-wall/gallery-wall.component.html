@@ -1,0 +1,26 @@
+<div class="wall">
+    @for (item of items; track item.link.join('/')) {
+        <a class="tile" [routerLink]="item.link">
+            <span class="tile-frame">
+                <img [src]="item.imageSrc"
+                     [attr.srcset]="item.imageSrcset || null"
+                     [attr.sizes]="item.imageSrcset ? sizes : null"
+                     [attr.loading]="loadingFor($index)"
+                     decoding="async"
+                     width="800"
+                     height="1000"
+                     [class.loaded]="isLoaded(item)"
+                     (load)="onLoad(item)"
+                     [alt]="item.alt">
+            </span>
+
+            <!-- h2: the tiles follow the page's h1 directly, and a page that jumps
+                 h1 → h3 reads as a broken outline to a screen reader. -->
+            <h2 class="tile-name">{{ item.name }}</h2>
+
+            @if (item.category) {
+                <span class="tile-category">{{ item.category }}</span>
+            }
+        </a>
+    }
+</div>

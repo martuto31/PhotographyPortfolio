@@ -1,66 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
+import { CategoryNavComponent } from './../shared/category-nav/category-nav.component';
+import { GalleryWallComponent, WallItem } from './../shared/gallery-wall/gallery-wall.component';
 
-import { SERVICES } from './../../content/services';
-import { GALLERY_SNAPSHOT } from './../../generated/galleries';
+import { SERVICES, ServiceCopy } from './../../content/services';
+import { fetchManifest } from './../../config';
+import { GalleryListing, interleave, manifestGalleries, snapshotGalleries } from './../../services/gallery-list';
 import { StructuredDataService } from './../../services/structured-data.service';
 
-interface CategoryRow {
-  slug: string;
-  label: string;
-  teaser: string;
-  /** Published galleries in this category, from the build-time snapshot. */
-  count: number;
-}
-
-// The /galerii index.
+// The /galerii index: one wall of every published gallery, the categories
+// dealt together, with the row of category pages above it.
 //
 // "Галерия" in the nav used to be href="/" plus a JS scroll handler: no crawlable
 // destination, no URL to send anyone, and clicking it from a gallery page threw the
 // visitor back to the home page. This is the page it should always have pointed at.
-//
-// Laid out as an editorial index rather than a card grid — four of the seven
-// categories have no cover photograph yet, and a grid with holes in it looks worse
-// than a list that never promised images.
+// It was a list of six category names for a while - three of them with no galleries
+// behind them - and a list of six words never looked like a photographer's site.
 @Component({
   selector: 'app-galleries-index',
   templateUrl: './galleries-index.component.html',
   styleUrls: ['./galleries-index.component.css'],
   standalone: true,
   imports: [
-    RouterLink,
     CtaBandComponent,
+    CategoryNavComponent,
+    GalleryWallComponent,
   ],
 })
 
 export class GalleriesIndexComponent implements OnInit {
 
-  constructor(private structuredData: StructuredDataService) { }
+  constructor(
+    private structuredData: StructuredDataService,
+    @Inject(PLATFORM_ID) private platformId: object) { }
 
-  public readonly categories: CategoryRow[] = SERVICES.map((service) => ({
-    slug: service.slug,
-    label: service.label,
-    teaser: service.teaser,
-    count: GALLERY_SNAPSHOT[service.type]?.length ?? 0,
-  }));
+  public wall: WallItem[] = [];
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     this.structuredData.set([
       this.structuredData.breadcrumbs([
         { name: 'Начало', url: 'https://phbyviki.com/' },
         { name: 'Галерия', url: 'https://phbyviki.com/galerii' },
       ]),
     ]);
-  }
 
-  public countLabel(count: number): string {
-    if (count === 0) {
-      return 'За услугата';
+    // The build-time snapshot first, on server and client alike, so the
+    // prerendered HTML carries a crawlable <a> and a real <img> per gallery.
+    this.wall = this.deal((service) => snapshotGalleries(service.type));
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
     }
 
-    return count === 1 ? '1 галерия' : `${count} галерии`;
+    // Then the live manifest, so galleries published since the last deploy
+    // show up without a code change. A failed fetch keeps the snapshot.
+    const manifest = await fetchManifest();
+    if (manifest) {
+      this.wall = this.deal((service) => manifestGalleries(manifest, service.type));
+    }
+  }
+
+  private deal(listFor: (service: ServiceCopy) => GalleryListing[]): WallItem[] {
+    return interleave(SERVICES.map((service) => listFor(service).map((gallery) => ({
+      name: gallery.name,
+      imageSrc: gallery.imageSrc,
+      imageSrcset: gallery.imageSrcset,
+      link: ['/galeriya', service.slug, gallery.name],
+      alt: `${gallery.name} - ${service.label.toLowerCase()}, фотограф София и Видин`,
+      category: service.label,
+    }))));
   }
 
 }

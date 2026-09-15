@@ -1,10 +1,10 @@
 .page-heading {
     max-width: 720px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 
 :host-context(.mobile) .page-heading {
-    margin-bottom: 44px;
+    margin-bottom: 28px;
 }
 
 .page-heading h1 {
@@ -23,130 +23,11 @@
     font-size: 15px;
 }
 
-/* ---- Index rows ---------------------------------------------------------
-   A ruled list, set the way a book's table of contents is: the name carries the
-   weight, the description sits under it, the count aligns right. */
-.index {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--rule);
+app-category-nav {
+    display: block;
+    margin-bottom: 44px;
 }
 
-.row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    padding: 32px 8px 32px 0;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-    transition: padding-left 340ms cubic-bezier(0.2, 0.6, 0.2, 1);
-}
-
-/* An amber rule grows in from the left on hover and pushes the row with it. */
-.row::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 1px;
-    background-color: var(--brass);
-    transition: width 340ms cubic-bezier(0.2, 0.6, 0.2, 1);
-}
-
-.row:hover {
-    padding-left: 46px;
-}
-
-.row:hover::before {
-    width: 30px;
-}
-
-:host-context(.mobile) .row {
-    gap: 20px;
-    padding: 24px 0;
-}
-
-/* The push-on-hover reads as a glitch on touch, where there is no hover to
-   telegraph it. */
-:host-context(.mobile) .row:hover,
-:host-context(.tablet) .row:hover {
-    padding-left: 0;
-}
-
-:host-context(.mobile) .row:hover::before,
-:host-context(.tablet) .row:hover::before {
-    width: 0;
-}
-
-.row-main {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-width: 0;
-}
-
-.row-name {
-    font-family: var(--font-serif);
-    font-size: clamp(24px, 3.2vw, 31px);
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--font-high-emphasis);
-    transition: color 220ms ease;
-}
-
-.row:hover .row-name {
-    color: var(--brass);
-}
-
-.row-teaser {
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--font-medium-emphasis);
-    max-width: 54ch;
-}
-
-:host-context(.mobile) .row-teaser {
-    font-size: 14px;
-}
-
-.row-meta {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    flex: none;
-}
-
-.row-count {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--font-low-emphasis);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-
-:host-context(.mobile) .row-count {
-    display: none;
-}
-
-.row-arrow {
-    width: 26px;
-    height: 26px;
-    fill: none;
-    stroke: var(--font-high-emphasis);
-    stroke-width: 1.25;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    flex: none;
-    transition: transform 340ms cubic-bezier(0.2, 0.6, 0.2, 1), stroke 220ms ease;
-}
-
-.row:hover .row-arrow {
-    transform: translateX(8px);
-    stroke: var(--brass);
+:host-context(.mobile) app-category-nav {
+    margin-bottom: 28px;
 }

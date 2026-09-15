@@ -1,0 +1,14 @@
+<nav class="categories" aria-label="Категории">
+    <a routerLink="/galerii" [class.active]="!active" [attr.aria-current]="!active ? 'page' : null">
+        Всички <span class="count">{{ total }}</span>
+    </a>
+
+    @for (category of categories; track category.slug) {
+        <a [routerLink]="[ '/galerii', category.slug ]" [class.active]="active === category.slug" [attr.aria-current]="active === category.slug ? 'page' : null">
+            {{ category.label }}
+            @if (category.count) {
+                <span class="count">{{ category.count }}</span>
+            }
+        </a>
+    }
+</nav>

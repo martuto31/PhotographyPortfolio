@@ -138,6 +138,8 @@ purpose — see its note.
   > for about me i dont like A1, A2 nor A3 designs as well and maybe we should do somehting about the photo what do yo suggest
   > and split your works to tasks or whatever you need
 - [x] T-32 · Refresh the preview channel for Viki after T-26..T-30 · auto · done 2026-09-15
+- [x] T-33 · One wall for /galerii and the category pages (G/K rounds one and two rejected) · auto · shipped to the preview as the proposal 2026-09-15 - awaiting Martin
+  > I dont like them i dont know they dont look visually apealing and its not normal flow like i dont want it to be basic but i dont want them overdone i want something that is with nice ui ux
 
 ---
 
@@ -201,6 +203,18 @@ purpose — see its note.
 - `sh scripts/qa.sh` green, `npm run ux` 0 FAIL (form labels, tap targets)
 **Evidence** — gate, ux, screenshots
 **Autonomy** — auto
+
+### T-33 · One wall for /galerii and the category pages
+**Why** — twelve boards for the two list pages were rejected across two rounds; the pages themselves were the problem (an index of six words, three with nothing behind them). Martin: "not basic, not overdone, nice UI/UX". Assumption: a real page on the preview judges better than a thirteenth board, and one `git revert` undoes it.
+**Scope** — `shared/gallery-wall`, `shared/category-nav`, `services/gallery-list.ts`, `galleries-index.*`, `galleries-cards.*`
+**Done when**
+- WHEN `/galerii` is prerendered, THE page SHALL carry an `<a>` per published gallery (31) with a real `<img>` and an `<h2>` name, categories dealt in turns
+- WHEN `/galerii/<slug>` is prerendered, THE wall SHALL hold that category alone, the row SHALL mark it current, and the service copy, FAQ and CTA SHALL follow; an empty category shows the empty-state text and no wall
+- THE category row SHALL be real links to `/galerii` and the six category pages, counts only where galleries exist
+- Three columns at 1440, two at 768 and 390, no horizontal overflow; the static HTML visible without script
+- `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
+**Evidence** — gate, ux, screenshots at 1440/768/390
+**Autonomy** — auto (revertable proposal)
 
 ### T-31 · Canvas round 2
 **Why** — Martin rejected G1/G2, K1–K3, A1–A3 and wants more choices, plus a proposal for the About portrait; K3 for contacts "and maybe some other choices".

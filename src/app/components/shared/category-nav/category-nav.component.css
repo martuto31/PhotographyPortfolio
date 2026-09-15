@@ -1,0 +1,76 @@
+.categories {
+    display: flex;
+    gap: 32px;
+    padding: 6px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    /* On narrow screens the row scrolls sideways rather than wrapping into a
+       ragged block; the scrollbar stays hidden, the fade at the right edge says
+       there is more. */
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+:host-context(.tablet) .categories {
+    gap: 26px;
+}
+
+:host-context(.mobile) .categories {
+    gap: 22px;
+    padding: 2px 0;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+}
+
+.categories a {
+    position: relative;
+    flex: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    /* 12px of caps inside a 44px thumb target. */
+    padding: 15px 0;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--font-medium-emphasis);
+    transition: color 200ms ease;
+}
+
+/* The underline grows from the left, the site's one repeated motion. */
+.categories a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 0;
+    height: 1px;
+    background-color: var(--brass);
+    transition: width 260ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.categories a:hover,
+.categories a.active {
+    color: var(--font-high-emphasis);
+}
+
+.categories a:hover::after,
+.categories a.active::after {
+    width: 100%;
+}
+
+.count {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--font-low-emphasis);
+    font-variant-numeric: tabular-nums;
+}
