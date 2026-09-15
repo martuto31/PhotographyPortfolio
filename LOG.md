@@ -28,7 +28,7 @@ New options for the pages you sent back, each with the dark/light chip:
 Say the numbers and they become tasks.
 
 ### T-24 · The preview for Viki
-**https://phbyvikiprod--preview-yb28hwie.web.app** — expires 2026-10-13.
+**https://phbyvikiprod--preview-yb28hwie.web.app** — expires 2026-10-15.
 A Firebase *preview channel* on the prod site: its own URL, nothing on
 phbyviki.com changed (the `live` release is still 2026-08-03). Galleries are
 complete on it - the bucket's CORS refuses that origin, so T-22's fallback
