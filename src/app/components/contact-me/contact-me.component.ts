@@ -35,6 +35,10 @@ export class ContactMeComponent {
   // component's standalone header would repeat both.
   @Input() embedded = false;
 
+  // /kontakti centres its own h1 straight above the form, so the embedded
+  // "Изпратете запитване" heading would say the same thing twice.
+  @Input() showHeading = true;
+
   public formGroup!: FormGroup<FormControls>;
 
   // Build a prefilled Gmail compose window from the form and open it in a new tab.

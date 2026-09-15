@@ -1,10 +1,14 @@
 .page-heading {
-    max-width: 720px;
-    margin-bottom: 72px;
+    max-width: 640px;
+    margin: 0 auto 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 :host-context(.mobile) .page-heading {
-    margin-bottom: 44px;
+    margin-bottom: 40px;
 }
 
 .page-heading h1 {
@@ -28,37 +32,51 @@
     font-size: 15px;
 }
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 96px;
-    align-items: start;
-    padding-bottom: 40px;
+/* ---- The form -----------------------------------------------------------------
+   The shared form component, at reading width in the middle of the page. */
+.form-column {
+    max-width: 560px;
+    margin: 0 auto;
 }
 
-:host-context(.tablet) .contact-grid,
-:host-context(.mobile) .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 64px;
-}
-
-/* ---- Contact methods ----------------------------------------------------- */
-.methods {
+/* ---- The other ways ----------------------------------------------------------
+   One ruled line under the form: label over value, four cells. On phones the
+   cells stack and centre. */
+.ways {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px 56px;
+    margin: 72px auto 40px;
+    padding-top: 40px;
     border-top: 1px solid var(--rule);
+    max-width: 960px;
 }
 
-.method {
+:host-context(.tablet) .ways {
+    gap: 28px 40px;
+    margin-top: 56px;
+}
+
+:host-context(.mobile) .ways {
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-top: 48px;
+    padding-top: 32px;
+}
+
+.way {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 6px;
-    padding: 26px 0;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
+    /* Enough height for a thumb, without changing the type. */
+    padding: 4px 0;
 }
 
-.method-label {
+.way-label {
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: 600;
@@ -67,87 +85,19 @@
     color: var(--brass);
 }
 
-.method-value {
+.way-value {
     font-family: var(--font-serif);
-    font-size: clamp(22px, 2.6vw, 28px);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
+    font-size: 22px;
+    line-height: 1.1;
     color: var(--font-high-emphasis);
-    font-variant-numeric: tabular-nums;
     transition: color 220ms ease;
-    /* The email is long and must not push the column wider than its track. */
     overflow-wrap: anywhere;
 }
 
-/* Everything after the phone number steps down a level, so the page has one
-   obvious primary action rather than four competing ones. */
-.method-value-sm {
-    font-size: clamp(18px, 1.8vw, 22px);
-    font-style: italic;
-    font-weight: 400;
-}
-
-a.method:hover .method-value {
+a.way:hover .way-value {
     color: var(--brass);
 }
 
-.method-note {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--font-medium-emphasis);
-    max-width: 42ch;
-    margin-top: 2px;
-}
-
-.method-static {
+.way-static {
     cursor: default;
-}
-
-.socials {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 26px 0;
-}
-
-.social-links {
-    display: flex;
-    gap: 28px;
-}
-
-.social-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--font-high-emphasis);
-    transition: color 200ms ease;
-}
-
-.social-links a:hover {
-    color: var(--brass);
-}
-
-.social-links img {
-    width: 18px;
-    height: 18px;
-}
-
-/* ---- Form ---------------------------------------------------------------
-   The shared form component centres itself for the home page; on this page it
-   sits in a column and should be left-aligned with the heading above it. */
-.form-column {
-    background-color: var(--paper-warm);
-    padding: 56px 48px;
-}
-
-:host-context(.mobile) .form-column {
-    padding: 36px 20px;
-}
-
-:host-context(.tablet) .form-column {
-    padding: 44px 32px;
 }
