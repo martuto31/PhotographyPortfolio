@@ -50,6 +50,8 @@ const evalExpr = opt('--eval', '');
 // --scroll <px>: fold capture from that offset, after scrolling down to it in
 // steps so lazy images on the way have been asked for.
 const scrollTo = Number(opt('--scroll', '0'));
+// --height <px>: viewport height for every width (default: a common pairing).
+const heightOpt = Number(opt('--height', '0'));
 const routes = argv.length ? argv : DEFAULT_ROUTES;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -117,7 +119,7 @@ try {
   await cdp.send('Runtime.enable');
 
   for (const width of widths) {
-    const height = width < 700 ? 844 : width >= 2560 ? Math.round(width * 9 / 16) : 900;
+    const height = heightOpt || (width < 700 ? 844 : width >= 2560 ? Math.round(width * 9 / 16) : width >= 1900 ? 1080 : width <= 1280 ? 800 : 900);
     await cdp.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: width < 700 });
     for (const route of routes) {
       await cdp.send('Page.navigate', { url: `http://localhost:${PORT}${route}` });

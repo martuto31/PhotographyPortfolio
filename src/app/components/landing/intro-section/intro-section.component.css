@@ -1,10 +1,11 @@
-/* ---- The photograph, whole ----------------------------------------------------
-   Canvas page 3 (2026-09-15): a full-viewport hero and an uncropped photograph
-   only both hold if the photo keeps its own shape and the screen shows what is
-   left over. So the frame is the viewport height, 1.5 x that wide (3:2), never
-   wider than the screen or the 2400px file. Laptop 1440x900: 1350 wide with
-   45px of paper each side. 27": 200px each side. 4K: the file is the ceiling,
-   720px each side and paper under it - a 3600px export would fill it. */
+/* ---- The photograph, full width ----------------------------------------------
+   Martin (2026-09-15): the photo must run the full width of the screen. It
+   keeps its own 3:2 at the full width and is capped at one viewport height;
+   so on a 3:2-or-narrower screen (phones, tablets, the canvas rule's laptop)
+   nothing is cut, and on a wider one only the leftover height goes - 7% on a
+   1440x900 laptop, 16% on 16:9, from the sky and the grass, never the couple
+   (object-position keeps the frame on them). The old 16:7 strip cut 45%.
+   Above 2400px wide the file is upscaled; a 3600px export would fix 4K. */
 .hero {
     position: relative;
     width: 100vw;
@@ -14,9 +15,7 @@
 
 .hero-frame {
     position: relative;
-    width: min(100vw, 150vh, 2400px);
-    max-width: 100%;
-    margin-inline: auto;
+    width: 100%;
     background-color: var(--paper-warm);
 }
 
@@ -24,6 +23,11 @@
     display: block;
     width: 100%;
     height: auto;
+    /* svh, not vh: on mobile Safari 100vh is the expanded viewport. Irrelevant
+       on phones, where the photo is far shorter than the screen anyway. */
+    max-height: 100svh;
+    object-fit: cover;
+    object-position: center 42%;
 }
 
 /* Two scrims on the photograph, nothing on the page: a short one at the top so
@@ -44,10 +48,10 @@
 }
 
 /* ---- Where the words go -------------------------------------------------------
-   H3: today's composition, uncropped. On desktop the copy sits over the lower
-   left of the photograph, inside the frame, so it always has the ramp under it
-   however wide the screen. On phones the photograph is 260px tall - too short
-   to carry three lines and two buttons - so the copy follows it on the paper. */
+   H3: today's composition. On desktop the copy sits over the lower left of the
+   photograph with the ramp under it. On phones the photograph is 260px tall -
+   too short to carry three lines and two buttons - so the copy follows it on
+   the paper. */
 .hero-overlay {
     box-sizing: border-box;
     padding: 28px 18px 0;
@@ -59,13 +63,9 @@
 
 :host-context(.desktop) .hero-overlay {
     position: absolute;
-    left: 50%;
+    left: 0;
+    right: 0;
     bottom: 0;
-    /* Pinned to the frame, not the section: the frame is centred and may be
-       narrower than the viewport. */
-    width: min(100vw, 150vh, 2400px);
-    max-width: 100%;
-    transform: translateX(-50%);
     padding: 0 56px 56px;
     color: var(--font-white);
     /* The bone button over the photograph - an ink block would sink into it. */

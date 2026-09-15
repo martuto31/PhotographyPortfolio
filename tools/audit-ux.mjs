@@ -33,7 +33,9 @@ const OUT_FILE = join(OUT_DIR, 'ux-audit.json');
 const PORT = 4900 + Math.floor(Math.random() * 300);
 const DEBUG_PORT = 9700 + Math.floor(Math.random() * 300);
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const WIDTHS = [1440, 390];
+// --widths 320,768,1920 audits other viewports; the default pair is the gate.
+const widthsArg = process.argv.indexOf('--widths');
+const WIDTHS = widthsArg === -1 ? [1440, 390] : process.argv.splice(widthsArg, 2)[1].split(',').map(Number);
 
 const DEFAULT_ROUTES = [
   '/',

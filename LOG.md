@@ -76,6 +76,22 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-15
+- **T-27b · Hero at the full width of the screen** — commit "Run the hero
+  photograph the full width of the screen" — you said the photo was not 100%
+  wide (the canvas rule left paper either side on screens wider than 3:2).
+  Now: full width always, its own 3:2, capped at one viewport height with
+  `object-fit: cover` centred on the couple. What that cuts: nothing on
+  phones, tablets or any screen at 3:2 or narrower; 7% on a 1440×900 laptop,
+  16% on 16:9 (1920×1080, 2560×1440) - sky and grass, never the couple; the
+  old strip cut 45%. Checked at 320 / 390 / 768 / 1024 / 1280 / 1440 / 1920 /
+  2560. If you would rather never cut, the alternative is full width with the
+  photo running under the fold on 16:9 - say so. Above 2400px the file is
+  upscaled; a 3600px export from Viki would fix 4K. Responsiveness: the audit
+  ran at 320 / 768 / 1024 / 1920 on all eight routes - no overflow, no
+  contrast failures (one transient: a tablet-width page is prerendered as
+  desktop and re-lays after hydration - a brief flash inherent to the
+  breakpoint service, not new). `tools/audit-ux.mjs` takes `--widths`,
+  `tools/shots.mjs` takes `--height`.
 - **T-32 · Preview channel refreshed** — https://phbyvikiprod--preview-yb28hwie.web.app
   now shows the paper theme, the H3 hero, the new sections, W3 galleries and
   K3 contacts. Live untouched.
