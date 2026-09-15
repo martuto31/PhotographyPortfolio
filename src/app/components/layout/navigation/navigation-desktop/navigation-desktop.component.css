@@ -33,6 +33,8 @@
     cursor: pointer;
     color: var(--font-high-emphasis);
     transition: color 320ms ease;
+    /* 32px of lockup inside a 44px target - the desktop bar also serves tablets. */
+    padding: 6px 0;
 }
 
 .brand-name {

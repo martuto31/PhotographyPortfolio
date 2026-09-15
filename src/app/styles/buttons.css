@@ -6,7 +6,9 @@
     text-transform: uppercase;
     border-radius: 0;
     cursor: pointer;
-    padding: 12px 22px;
+    /* 13px, not 12: with the 12px label that makes the block 44px tall, the
+       thumb target Apple asks for (the audit's warning on every phone page). */
+    padding: 13px 22px;
     border: 0;
     transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
     display: inline-block;

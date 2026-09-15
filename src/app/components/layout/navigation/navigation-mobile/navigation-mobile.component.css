@@ -33,6 +33,8 @@
     cursor: pointer;
     color: var(--font-high-emphasis);
     transition: color 320ms ease;
+    /* 32px of lockup inside a 44px thumb target. */
+    padding: 6px 0;
 }
 
 .brand-name {
@@ -202,6 +204,12 @@
     display: flex;
     gap: 22px;
     margin-top: 16px;
+}
+
+.links a {
+    display: inline-flex;
+    padding: 11px;
+    margin: -11px;
 }
 
 .links img {

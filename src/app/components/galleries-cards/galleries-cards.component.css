@@ -25,7 +25,9 @@
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--brass);
-    margin-bottom: 20px;
+    /* 12px of caps inside a 44px target; the margin keeps the h1 where it was. */
+    padding: 15px 0;
+    margin-bottom: 5px;
     transition: color 200ms ease;
 }
 

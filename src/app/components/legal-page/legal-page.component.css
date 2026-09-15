@@ -96,6 +96,24 @@
     color: var(--font-high-emphasis);
 }
 
+:host-context(.mobile) .toc a,
+:host-context(.tablet) .toc a {
+    padding: 12px 0;
+}
+
+/* Links inside running text and definition rows: inline, so the line sets the
+   height - WCAG exempts them, but a little padding still helps a thumb. Spelled
+   out rather than :is(): Angular's scoper splits :is() on its commas inside a
+   :host-context() rule, and the unbalanced paren swallows the rules after it. */
+:host-context(.mobile) .legal-body p a,
+:host-context(.mobile) .legal-body li a,
+:host-context(.mobile) .legal-body dd a,
+:host-context(.tablet) .legal-body p a,
+:host-context(.tablet) .legal-body li a,
+:host-context(.tablet) .legal-body dd a {
+    padding: 12px 0;
+}
+
 /* ---- Body ---------------------------------------------------------------- */
 .legal-body {
     max-width: 68ch;
@@ -282,4 +300,9 @@ dd {
 .legal-other a:hover,
 .legal-other a:focus-visible {
     color: var(--brass);
+}
+
+:host-context(.mobile) .legal-other a,
+:host-context(.tablet) .legal-other a {
+    padding: 13px 0;
 }

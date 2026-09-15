@@ -39,14 +39,7 @@ until the next `npm run sitemap` + redeploy. To refresh it after more commits:
 `.firebaserc`; on another machine run
 `npx firebase target:apply hosting app phbyvikiprod --project phbyvikiprod` first).
 
-### T-23 · Taste calls the audit only warns about - yours if you want them
-1. ~~Hero sentence 14px / 13.5px~~ - went to 16/15 with the H3 hero (T-27), as
-   drawn on the canvas.
-2. **Buttons are 43px tall on phones**, one under the 44px thumb guideline.
-3. **Footer "Пишете в Messenger / Instagram" links are 24px tall** on phones.
-4. **Mobile drawer links are 33px tall** - fine by WCAG, under Apple's 44.
-5. **Headings read well at the spec's sizes:** h1 39/27, h2 31/24, h3 19-20,
-   body 17px/1.7. I would not take the h1 up.
+### T-23 · Taste calls - done ("do them", 2026-09-15); see Shipped
 
 ### T-21 · The "missing" gallery photos - nothing to fix, but read this once
 You were looking at localhost (the `.verify` screenshots or a preview server). The
@@ -76,6 +69,16 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-15
+- **T-23b · Thumb targets** — commit "Give every phone tap target 44px" —
+  buttons 43→44 (one pixel of padding, all sizes); on phones and tablets the
+  footer links, the Messenger/email/Instagram lines, the legal links, the
+  wordmark, the breadcrumbs, the "Всички" links, the social icons and the
+  legal page's table of contents all get room for a thumb; the type itself
+  does not change. Audit warnings at 390: 196 → 5 (the five left are links
+  inside legal sentences, which WCAG exempts). One trap found: Angular's
+  style scoper splits `:is(p, li, dd)` inside a `:host-context()` rule on its
+  commas, and the unbalanced paren swallowed every rule after it - spelled
+  out instead.
 - **T-27b · Hero at the full width of the screen** — commit "Run the hero
   photograph the full width of the screen" — you said the photo was not 100%
   wide (the canvas rule left paper either side on screens wider than 3:2).

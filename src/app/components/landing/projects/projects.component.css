@@ -35,6 +35,12 @@
     margin-bottom: 6px;
 }
 
+:host-context(.mobile) .all-galleries,
+:host-context(.tablet) .all-galleries {
+    padding: 18px 0 8px;
+    margin-bottom: 0;
+}
+
 /* ---- The three cards --------------------------------------------------------
    One card pattern for the whole site: cover at 4:5, tag, italic name. The
    shadow and the hover lift come from .glow in global.css. */

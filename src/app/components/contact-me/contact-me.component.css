@@ -116,6 +116,8 @@
     align-self: center;
     margin-top: 12px;
     min-width: 240px;
+    /* A <button> ignores the line box the <a> buttons get; pin the height. */
+    min-height: 44px;
 }
 
 .embedded .btn-primary {

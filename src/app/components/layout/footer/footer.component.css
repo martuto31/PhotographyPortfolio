@@ -113,6 +113,40 @@
     color: var(--brass);
 }
 
+/* Thumb targets: on handhelds every footer link is at least 44px tall. The
+   type does not change; the space around it does. */
+:host-context(.mobile) .footer-nav a,
+:host-context(.tablet) .footer-nav a {
+    padding: 11px 0;
+}
+
+:host-context(.mobile) .footer-primary,
+:host-context(.tablet) .footer-primary {
+    padding: 8px 0;
+    margin-bottom: 4px;
+}
+
+:host-context(.mobile) .footer-email,
+:host-context(.tablet) .footer-email {
+    padding: 10px 0;
+}
+
+:host-context(.mobile) .footer-alt,
+:host-context(.tablet) .footer-alt {
+    padding: 16px 0 7px;
+    margin-top: 2px;
+}
+
+:host-context(.mobile) .footer-legal a,
+:host-context(.tablet) .footer-legal a {
+    padding: 13px 0;
+}
+
+:host-context(.mobile) .footer-brand,
+:host-context(.tablet) .footer-brand {
+    padding: 3px 0;
+}
+
 /* Contact column */
 .footer-primary {
     font-family: var(--font-sans);
@@ -172,10 +206,10 @@
 }
 
 .footer-social a {
-    /* The icon is 22px; the link around it has to give a thumb 24px or more. */
+    /* The icon is 22px; the link around it makes a 44px thumb target. */
     display: inline-flex;
-    padding: 5px;
-    margin: -5px;
+    padding: 11px;
+    margin: -11px;
     color: var(--font-high-emphasis);
     transition: opacity 200ms ease;
 }

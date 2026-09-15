@@ -60,6 +60,7 @@
     font-variant-numeric: tabular-nums;
     color: var(--font-high-emphasis);
     transition: color 200ms ease;
+    padding: 9px 0;
 }
 
 .about-alt:hover {

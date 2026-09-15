@@ -48,6 +48,8 @@
     letter-spacing: -0.01em;
     color: var(--font-white);
     transition: color 220ms ease;
+    /* The line box is the type's own height; the padding makes it a 44px target. */
+    padding: 10px 0;
 }
 
 .cta-primary:hover {

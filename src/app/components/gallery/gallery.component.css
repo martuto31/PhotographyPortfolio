@@ -310,6 +310,16 @@
     flex: none;
 }
 
+:host-context(.mobile) .siblings-all,
+:host-context(.tablet) .siblings-all {
+    padding: 13px 0;
+}
+
+:host-context(.mobile) .gallery-heading .breadcrumb a,
+:host-context(.tablet) .gallery-heading .breadcrumb a {
+    padding: 13px 0;
+}
+
 .siblings-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
