@@ -147,7 +147,7 @@ purpose — see its note.
 - [x] T-36 · Hero cycles through Viki's three photographs, 5 → 4 → 1 · auto · done 2026-09-16
 - [x] T-37 · Buttons: not rectangles · auto · done 2026-09-16 (pills)
 - [x] T-38 · Typography pass - leads unified; Bulgarian letterforms = needs-you (LOG) · auto · done 2026-09-16
-- [ ] T-39 · CTA pass - the closing band, the contact CTAs, the hero buttons · auto
+- [x] T-39 · CTA pass - closing band leads with the channel that works on the device · auto · done 2026-09-16
 - [ ] T-40 · Bug sweep - click-throughs, console, audit-ux at three widths · auto
 - [ ] T-41 · SEO check after the redesign - titles, meta, og:image (still the old landing.webp), structured data, sitemap · auto
   > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
@@ -226,6 +226,17 @@ purpose — see its note.
 - `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
 **Evidence** — gate, ux, screenshots at 1440/768/390
 **Autonomy** — auto (revertable proposal)
+
+### T-39 · CTA pass
+**Why** — Martin: "cta". Reviewed every ask on the site: hero (gallery + Messenger), nav "Пишете ми" (→ /kontakti on desktop, deliberately: an m.me link on a desktop lands on a Facebook login wall as often as an inbox), the phone contact bar, the contacts page, the closing band. The one inconsistency: the closing band's biggest action was the m.me link on every device, including desktop, where the nav had already decided against it. Assumption: on desktop the band leads with the contact page and offers Messenger as a button; on phones and tablets Messenger stays first (it opens the app). No new copy - the labels already existed.
+**Scope** — `shared/cta-band/cta-band.component.{ts,html}`
+**Done when**
+- WHEN the band renders on desktop (≥961px), THE `.cta-primary` SHALL link to `/kontakti` with the label "Изпрати запитване", followed by Messenger and Instagram buttons
+- WHEN it renders on a phone or tablet, THE `.cta-primary` SHALL be the Messenger link "Пишете в Messenger", followed by "Изпрати запитване" (/kontakti) and Instagram
+- WHEN a page with the band is prerendered, THE static HTML SHALL carry the desktop form (a crawlable `/kontakti` link)
+- `sh scripts/qa.sh` green; `npm run ux` 0 FAIL
+**Evidence** — gate, ux; `npm run shots -- --eval` reading the band's links at 1440/768/390; screenshot of the band at 1440
+**Autonomy** — auto
 
 ### T-38 · Typography pass
 **Why** — Martin: "small details like fonts". The scale is DESIGN-SPEC's and the families stay (Cormorant + the system sans); what had drifted was the lead under each page heading - five pages, four private recipes, About's serif lead two sizes below the service pages'. One more finding is a decision, not a fix: on iPhone/Mac the system sans draws Bulgarian letterforms (в→b, д→g, т→m) while Cormorant does not, so headings and body disagree on the same screen; see LOG → Needs you.

@@ -9,17 +9,36 @@
         </div>
 
         <div class="cta-actions">
-            <a class="cta-primary" [href]="contact.messengerHref" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M12 2C6.3 2 2 6.2 2 11.8c0 3.1 1.4 5.8 3.7 7.6V23l3.4-1.9c.9.25 1.9.4 2.9.4 5.7 0 10-4.2 10-9.7S17.7 2 12 2Zm1 13.1-2.6-2.7-5 2.7L11 9.2l2.6 2.7 4.9-2.7-6.5 6.9Z"/>
-                </svg>
-                Пишете в Messenger
-            </a>
+            <!-- The first action is the channel that works where the visitor is.
+                 On a phone or tablet the Messenger link opens the app; on a desktop
+                 an m.me link lands on a Facebook login wall as often as an inbox
+                 (the nav makes the same call), so there the contact page - which
+                 offers every channel - leads, and Messenger follows as a button. -->
+            @if (dimensions.isDesktop) {
+                <a class="cta-primary" routerLink="/kontakti">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/>
+                    </svg>
+                    Изпрати запитване
+                </a>
 
-            <div class="cta-links">
-                <a class="btn btn-light" routerLink="/kontakti">Изпрати запитване</a>
-                <a class="btn btn-ghost-light" [href]="contact.instagramDmHref" target="_blank" rel="noopener">Instagram</a>
-            </div>
+                <div class="cta-links">
+                    <a class="btn btn-light" [href]="contact.messengerHref" target="_blank" rel="noopener">Messenger</a>
+                    <a class="btn btn-ghost-light" [href]="contact.instagramDmHref" target="_blank" rel="noopener">Instagram</a>
+                </div>
+            } @else {
+                <a class="cta-primary" [href]="contact.messengerHref" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M12 2C6.3 2 2 6.2 2 11.8c0 3.1 1.4 5.8 3.7 7.6V23l3.4-1.9c.9.25 1.9.4 2.9.4 5.7 0 10-4.2 10-9.7S17.7 2 12 2Zm1 13.1-2.6-2.7-5 2.7L11 9.2l2.6 2.7 4.9-2.7-6.5 6.9Z"/>
+                    </svg>
+                    Пишете в Messenger
+                </a>
+
+                <div class="cta-links">
+                    <a class="btn btn-light" routerLink="/kontakti">Изпрати запитване</a>
+                    <a class="btn btn-ghost-light" [href]="contact.instagramDmHref" target="_blank" rel="noopener">Instagram</a>
+                </div>
+            }
 
             <span class="cta-note">{{ contact.areas }}</span>
         </div>

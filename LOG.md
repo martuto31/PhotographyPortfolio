@@ -70,6 +70,14 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-16
+- **T-39 · The closing band asks with the channel that works** — commit
+  "Lead the closing band with the channel that works on the device". On a
+  phone or tablet the big action stays "Пишете в Messenger" (it opens the
+  app). On a desktop it is now "Изпрати запитване" → the contact page, with
+  Messenger and Instagram as the two buttons under it - the nav already
+  made that call because an m.me link on a desktop lands on a Facebook
+  login wall as often as an inbox. Everything else (hero, nav, phone bar,
+  contacts page) reviewed and left as is.
 - **T-38 · Type: the lead under every heading is one thing now** — commit
   "Give every page the same lead". Two leads exist - the serif italic
   statement (service pages, About) and the sans introduction (galleries,

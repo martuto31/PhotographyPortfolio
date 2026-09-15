@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { CONTACT } from './../../../content/contact';
+import { DimensionService } from './../../../services/dimension.service';
 
 // Closing call to action, on ink.
 //
@@ -20,6 +21,8 @@ import { CONTACT } from './../../../content/contact';
 })
 
 export class CtaBandComponent {
+
+  constructor(public dimensions: DimensionService) { }
 
   @Input() heading = 'Свободна ли е вашата дата?';
 
