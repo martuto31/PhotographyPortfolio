@@ -9,17 +9,17 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-35 · The five hero candidates - I need the files
-The photos you pasted into the chat are not on disk here. Drop the five
-originals (full-size JPGs are best) into `.verify/hero-candidates/` in the
-repo, or tell me a folder, and say "hero try". I then run each through the
-home page at 16:9, 16:10, tablet and phone (`node tools/hero-try.mjs <dir>`)
-and put every one on its own preview URL, so you and Viki can open the real
-page with each photo on your own phones and pick a number.
-
-### T-33 · The wall on the preview - yes or what is wrong
-https://phbyvikiprod--preview-yb28hwie.web.app/galerii and /galerii/svatbi.
-G1-G6 and K1-K6 are off the table; this replaces both pages. See Shipped.
+### T-35 · Hero photo - pick a number (with Viki)
+Six candidates from the Drive folder „пробни корици“, each on its own preview
+(expire 2026-09-29); the real home page, open them on your phones too:
+1. Симона и Коста, first dance — https://phbyvikiprod--hero-1-eh6947jn.web.app
+2. DSC00331, at the arch with the officiant — https://phbyvikiprod--hero-2-0hzf1gjf.web.app
+3. DSC00456, colour smoke, from behind — https://phbyvikiprod--hero-3-ul1pvvdm.web.app
+4. DSC00464, colour smoke, the kiss — https://phbyvikiprod--hero-4-5bp5buds.web.app
+5. DSC09285, the lift in the fog — https://phbyvikiprod--hero-5-3x0nm2y3.web.app
+6. DSC09763, fountains — https://phbyvikiprod--hero-6-x0rhg6oi.web.app
+Contact sheet at four screens: `.verify/hero-try/contact-sheet.png`.
+Then I set the crop, the alt text and a 3600px export from the original.
 
 ### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.

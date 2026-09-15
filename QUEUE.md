@@ -142,7 +142,7 @@ purpose — see its note.
   > I dont like them i dont know they dont look visually apealing and its not normal flow like i dont want it to be basic but i dont want them overdone i want something that is with nice ui ux
 - [x] T-34 · Gallery → sibling → back → other gallery keeps showing the first one; category row too · auto · done 2026-09-15
   > she likes the website and galleries like that but said there were bugs can you fix it like opening a gallery from the suggestion, going back opening other doesnt open it etc
-- [ ] T-35 · Home page with each of Viki's five candidate photos, for her and Martin to pick · needs-you · blocked: the five files (pasted into chat, not on disk)
+- [ ] T-35 · Home page with each candidate hero photo, for Viki and Martin to pick · needs-you · six previews up 2026-09-15, waiting on the number
 
 ---
 
