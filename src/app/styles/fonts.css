@@ -1,9 +1,18 @@
+/* Source Sans 3 — the reading face, Latin + Cyrillic in one 40 KB variable
+   file (200–900). Chosen for its Bulgarian letterforms: the page is lang="bg",
+   so в, д, т, п, и... take the Bulgarian shapes on every device, the way the
+   Cormorant headings already do. The system fonts only did that on Apple
+   devices (Segoe UI and Roboto have no Bulgarian forms), so a phone in Sofia
+   and a laptop in Vidin showed two different alphabets. Subset from the OFL
+   original (OFL-source-sans-3.txt); size-adjust matches its x-height to the
+   system font's so the type scale in the stylesheets stays as it was. */
 @font-face {
-    font-family: 'Overpass';
-    src: url('/assets/fonts/Overpass.ttf') format('truetype');
-    font-weight: 400 700;
+    font-family: 'Source Sans 3';
+    src: url('/assets/fonts/source-sans-3.woff2') format('woff2');
+    font-weight: 200 900;
     font-style: normal;
     font-display: swap;
+    size-adjust: 106%;
 }
 
 /* Cormorant — Latin subset (brand wordmark, Latin nav/footer text) */

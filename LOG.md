@@ -61,6 +61,17 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-16
+- **T-42 · Bulgarian letterforms on every device** — commit "Set the body in
+  a face with Bulgarian letterforms". What was true: the Cormorant headings
+  already draw the Bulgarian в, д, т (the page is lang="bg" and the font
+  has the forms); the body did so only on iPhone/Mac, because Windows and
+  Android system fonts have no Bulgarian forms - so the two alphabets
+  depended on the device. Now the reading face is Source Sans 3 (Adobe,
+  open licence; Inter, Noto Sans, Fira, Onest checked and lacking the
+  forms), one 40 KB file for Latin + Cyrillic + every weight, preloaded,
+  sized to the old system font so nothing else moved. Same on the 404 page.
+  **If Viki prefers another of the three that qualify (Manrope,
+  Commissioner, Overpass) it is one line to swap** - say the name.
 - **T-41 · SEO check - one fault, fixed** — commit "Share the hero photograph
   when a page is sent". All 43 pages: unique titles ≤ 60 and descriptions
   ≤ 160, one canonical, one h1, valid JSON-LD, sitemap 43/43, every page

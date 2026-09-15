@@ -149,7 +149,8 @@ purpose — see its note.
 - [x] T-38 · Typography pass - leads unified; Bulgarian letterforms = needs-you (LOG) · auto · done 2026-09-16
 - [x] T-39 · CTA pass - closing band leads with the channel that works on the device · auto · done 2026-09-16
 - [x] T-40 · Bug sweep - 43 routes × 3 widths + click-throughs: nothing to fix · auto · done 2026-09-16
-- [ ] T-42 · Bulgarian Cyrillic letterforms everywhere - body and headings, every device · auto · ! (Martin, 2026-09-16: "cyrylil should be bulgarian not russian so check it out")
+- [x] T-42 · Bulgarian Cyrillic letterforms everywhere - Source Sans 3 as the reading face · auto · done 2026-09-16
+  > cyrylil should be bulgarian not russian so check it out
 - [x] T-41 · SEO check after the redesign - all clean; share image was the fault · auto · done 2026-09-16
   > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
 

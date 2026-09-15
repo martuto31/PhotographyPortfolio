@@ -73,10 +73,11 @@
 
     /* ---- Type ---------------------------------------------------------------
        Cormorant for headings, in normal case - half of why the old dark theme
-       read cold was its tracked uppercase. The UI face is the system stack, as
-       the spec names it; Overpass is no longer loaded for text. */
+       read cold was its tracked uppercase. The reading face is Source Sans 3
+       (fonts.css) for its Bulgarian letterforms; the system stack is the
+       fallback while it loads. */
     --font-serif: 'Cormorant', Georgia, 'Times New Roman', serif;
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
     /* ---- Layout -------------------------------------------------------------
        The fixed header overlays content, so its height has to be a token: the

@@ -14,6 +14,17 @@
     <!-- Standalone page: Firebase Hosting serves this with a real HTTP 404 for paths that
          match no rewrite, so it cannot rely on the hashed Angular stylesheet. -->
     <style>
+        /* The reading face, as in the app (styles/fonts.css): Bulgarian letterforms
+           on every device. This page loads no app stylesheet, so it is declared here. */
+        @font-face {
+            font-family: 'Source Sans 3';
+            src: url('/assets/fonts/source-sans-3.woff2') format('woff2');
+            font-weight: 200 900;
+            font-style: normal;
+            font-display: swap;
+            size-adjust: 106%;
+        }
+
         /* Mirrors src/app/styles/variables.css. Duplicated because this page
            cannot load the hashed Angular stylesheet — keep the two in step. */
         :root {
@@ -39,7 +50,7 @@
             text-align: center;
             background-color: var(--paper);
             color: var(--font-high-emphasis);
-            font-family: 'Overpass', system-ui, -apple-system, sans-serif;
+            font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
         }
 
         .eyebrow {

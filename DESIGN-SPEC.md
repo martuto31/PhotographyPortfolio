@@ -73,8 +73,18 @@ Hero uses the same recipe on an overlay inset from the edges:
 
 ```css
 --serif: 'Cormorant Real', Georgia, 'Times New Roman', serif;
---ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+--ui: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 ```
+
+**Bulgarian letterforms** (Martin, 2026-09-16: "cyrillic should be bulgarian not
+russian"). The page is `lang="bg"`; a font with a `locl` BGR feature then draws
+в, д, т, п, и… in their Bulgarian shapes. Cormorant has them. The system fonts
+only do on Apple devices - Segoe UI and Roboto have no Bulgarian forms - so the
+reading face is Source Sans 3 (OFL, subset to Latin + Cyrillic, one 40 KB
+variable file, `size-adjust: 106%` to match the system font's x-height so the
+sizes below hold). Any replacement sans must carry `locl` BGR; Inter, Noto Sans,
+Fira Sans and Onest do not (checked 2026-09-16); Manrope, Commissioner and
+Overpass do.
 
 - **h1** — Cormorant 400, `clamp(27px, 4.4vw, 39px)`, line-height 1.05, normal case
 - **h2** — Cormorant 400, `clamp(24px, 3.2vw, 31px)`, line-height 1.14
