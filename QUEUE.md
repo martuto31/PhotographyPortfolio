@@ -145,7 +145,7 @@ purpose — see its note.
 - [x] T-35 · Home page with each candidate hero photo, for Viki and Martin to pick · needs-you · answered 2026-09-16: 5, 4, 1 in that order, cycling
   > she wants 3 and wants them to shuffle because she cant choose which she likes more - and wants a priority or like this image to be first - hero-5 … this second: hero-4 … this to be third: hero-1
 - [x] T-36 · Hero cycles through Viki's three photographs, 5 → 4 → 1 · auto · done 2026-09-16
-- [ ] T-37 · Buttons: not rectangles · auto · Martin: "i dont want rectangle buttons"
+- [x] T-37 · Buttons: not rectangles · auto · done 2026-09-16 (pills)
 - [ ] T-38 · Typography pass - sizes, rhythm, consistency across pages · auto (families stay; a family change is needs-you)
 - [ ] T-39 · CTA pass - the closing band, the contact CTAs, the hero buttons · auto
 - [ ] T-40 · Bug sweep - click-throughs, console, audit-ux at three widths · auto
@@ -226,6 +226,17 @@ purpose — see its note.
 - `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
 **Evidence** — gate, ux, screenshots at 1440/768/390
 **Autonomy** — auto (revertable proposal)
+
+### T-37 · Buttons: not rectangles
+**Why** — Martin: "i dont want rectangle buttons". Assumption: a full pill (999px) on every `.btn` and the nav's "Пишете ми", the same ink/bone fills; the fixed phone contact bar stays a bar (two halves of a bar are not buttons), the form's underline fields stay, the round modal controls already are.
+**Scope** — `styles/buttons.css`, `navigation-desktop.component.css`, `src/404.html`
+**Done when**
+- WHEN any page renders, THE computed `border-radius` of every `.btn` and of the nav `.write` SHALL be ≥ 22px (a full pill at 44px tall) at 1440, 768 and 390
+- THE `.btn` SHALL stay ≥ 44px tall and its label on one line at 390 (hero, closing band, contact form, 404, About)
+- THE phone contact bar, form fields and modal controls SHALL be unchanged
+- `sh scripts/qa.sh` green; `npm run ux` 0 FAIL
+**Evidence** — gate; `npm run shots -- --eval` reading border-radius/height per `.btn`; screenshots of the hero and the closing band at 1440/390
+**Autonomy** — auto (one revert)
 
 ### T-36 · Hero cycles through Viki's three photographs
 **Why** — Viki could not choose; she wants three, in order: the lift in fog (5) first, the colour-smoke kiss (4), the first dance (1). Assumption: "shuffle" means a slow cross-dissolve in her order, not random; the first is what every visitor and every crawler sees.

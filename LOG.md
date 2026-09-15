@@ -61,6 +61,11 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-16
+- **T-37 · Buttons are pills** — commit "Round every button into a pill".
+  Every `.btn`, the nav's "Пишете ми" and the static 404's links: full round,
+  same ink/bone fills, still 44px tall, one line on a phone. The phone
+  contact bar stays a bar, the form keeps its underline fields, the round
+  photo controls were already round. Preview refreshed.
 - **T-36 · The hero is Viki's three photographs** — commit "Cycle the hero
   through Viki's three photographs". The lift in the fog first, the colour
   smoke kiss, the first dance; a slow dissolve every 6.5s, in her order.
