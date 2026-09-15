@@ -27,7 +27,35 @@
        on phones, where the photo is far shorter than the screen anyway. */
     max-height: 100svh;
     object-fit: cover;
+    /* Each photograph sets its own object-position inline. */
     object-position: center 42%;
+}
+
+/* ---- Three photographs, one at a time ---------------------------------------
+   Viki's three, in her order. The first stays in flow and sizes the frame; the
+   others are added by script once it has loaded and lie over it, all faded
+   with the same long cross-dissolve. Without script, or with reduced motion,
+   the first photograph is simply the hero. */
+.hero-photo-next {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    max-height: none;
+}
+
+.cycling .hero-photo {
+    opacity: 0;
+    transition: opacity 1600ms ease-in-out;
+}
+
+.cycling .hero-photo.showing {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cycling .hero-photo {
+        transition: none;
+    }
 }
 
 /* Two scrims on the photograph, nothing on the page: a short one at the top so

@@ -8,8 +8,8 @@
 // dist, and the home page is captured with it at four screens - a 16:9 desktop, a
 // 16:10 laptop, a tablet and a phone. One PNG per candidate x screen and one
 // contact sheet (a row per candidate) land in .verify/hero-try/. Headless Chrome
-// on a throwaway profile; nothing on screen; the dist's hero-arch.webp is left as
-// built. `npm run build` first.
+// on a throwaway profile; nothing on screen; the dist's own hero files are left
+// as built. `npm run build` first.
 import { spawn } from 'node:child_process';
 import { mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -150,7 +150,7 @@ try {
         // Swap the photograph in place and wait for it to load (capped: a decode
         // that never settles must not hang the run).
         await cdp.send('Runtime.evaluate', {
-          expression: `new Promise((done) => { const img = document.querySelector('.hero-photo'); img.onload = () => done('load'); img.onerror = () => done('error'); setTimeout(() => done('timeout'), 6000); img.src = ${JSON.stringify(t.src)}; })`,
+          expression: `new Promise((done) => { document.querySelectorAll('.hero-photo-next').forEach((n) => n.remove()); document.querySelector('.hero-frame')?.classList.remove('cycling'); const img = document.querySelector('.hero-photo'); img.onload = () => done('load'); img.onerror = () => done('error'); setTimeout(() => done('timeout'), 6000); img.removeAttribute('srcset'); img.src = ${JSON.stringify(t.src)}; })`,
           awaitPromise: true,
         });
         await sleep(500);

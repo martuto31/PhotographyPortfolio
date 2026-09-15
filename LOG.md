@@ -9,18 +9,6 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-35 · Hero photo - pick a number (with Viki)
-Six candidates from the Drive folder „пробни корици“, each on its own preview
-(expire 2026-09-29); the real home page, open them on your phones too:
-1. Симона и Коста, first dance — https://phbyvikiprod--hero-1-eh6947jn.web.app
-2. DSC00331, at the arch with the officiant — https://phbyvikiprod--hero-2-0hzf1gjf.web.app
-3. DSC00456, colour smoke, from behind — https://phbyvikiprod--hero-3-ul1pvvdm.web.app
-4. DSC00464, colour smoke, the kiss — https://phbyvikiprod--hero-4-5bp5buds.web.app
-5. DSC09285, the lift in the fog — https://phbyvikiprod--hero-5-3x0nm2y3.web.app
-6. DSC09763, fountains — https://phbyvikiprod--hero-6-x0rhg6oi.web.app
-Contact sheet at four screens: `.verify/hero-try/contact-sheet.png`.
-Then I set the crop, the alt text and a 3600px export from the original.
-
 ### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
 - **About:** the coral is keyed out of the existing portrait (a real re-cut,
@@ -71,6 +59,17 @@ the next tasks come from your answers under Needs you.
 ---
 
 ## Shipped
+
+### 2026-09-16
+- **T-36 · The hero is Viki's three photographs** — commit "Cycle the hero
+  through Viki's three photographs". The lift in the fog first, the colour
+  smoke kiss, the first dance; a slow dissolve every 6.5s, in her order.
+  Only the first is in the static page (the one Google and every visitor
+  see first); the others arrive after it has loaded. Phones now get a
+  1200px file instead of the 2400 (a quarter of the bytes). Nothing moves
+  for someone who asked for reduced motion or while the tab is hidden; the
+  frame never changes height. Preview refreshed.
+  Assumption: "shuffle" = her order, not random - say if she wanted random.
 
 ### 2026-09-15
 - **T-34 · Gallery kept the previous couple after a sibling click** — commit

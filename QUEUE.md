@@ -142,7 +142,15 @@ purpose — see its note.
   > I dont like them i dont know they dont look visually apealing and its not normal flow like i dont want it to be basic but i dont want them overdone i want something that is with nice ui ux
 - [x] T-34 · Gallery → sibling → back → other gallery keeps showing the first one; category row too · auto · done 2026-09-15
   > she likes the website and galleries like that but said there were bugs can you fix it like opening a gallery from the suggestion, going back opening other doesnt open it etc
-- [ ] T-35 · Home page with each candidate hero photo, for Viki and Martin to pick · needs-you · six previews up 2026-09-15, waiting on the number
+- [x] T-35 · Home page with each candidate hero photo, for Viki and Martin to pick · needs-you · answered 2026-09-16: 5, 4, 1 in that order, cycling
+  > she wants 3 and wants them to shuffle because she cant choose which she likes more - and wants a priority or like this image to be first - hero-5 … this second: hero-4 … this to be third: hero-1
+- [x] T-36 · Hero cycles through Viki's three photographs, 5 → 4 → 1 · auto · done 2026-09-16
+- [ ] T-37 · Buttons: not rectangles · auto · Martin: "i dont want rectangle buttons"
+- [ ] T-38 · Typography pass - sizes, rhythm, consistency across pages · auto (families stay; a family change is needs-you)
+- [ ] T-39 · CTA pass - the closing band, the contact CTAs, the hero buttons · auto
+- [ ] T-40 · Bug sweep - click-throughs, console, audit-ux at three widths · auto
+- [ ] T-41 · SEO check after the redesign - titles, meta, og:image (still the old landing.webp), structured data, sitemap · auto
+  > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
 
 ---
 
@@ -218,6 +226,18 @@ purpose — see its note.
 - `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
 **Evidence** — gate, ux, screenshots at 1440/768/390
 **Autonomy** — auto (revertable proposal)
+
+### T-36 · Hero cycles through Viki's three photographs
+**Why** — Viki could not choose; she wants three, in order: the lift in fog (5) first, the colour-smoke kiss (4), the first dance (1). Assumption: "shuffle" means a slow cross-dissolve in her order, not random; the first is what every visitor and every crawler sees.
+**Scope** — `intro-section.component.{ts,html,css}`, `assets/img/hero/hero-{lift,smoke,dance}-{1200,1800,2400}.webp` (hero-arch removed), `tools/hero-try.mjs`
+**Done when**
+- WHEN `/` is prerendered, THE HTML SHALL carry exactly one hero `<img>` - hero-lift with a 1200/1800/2400 srcset, `sizes="100vw"`, `fetchpriority="high"` - and a `<link rel="preload">` for it with matching imagesrcset/imagesizes
+- WHEN the page runs in a browser, THE other two SHALL be added after the first has loaded and shown, and the hero SHALL move lift → smoke → dance → lift, one every 6.5s, with a 1.6s fade, at every width
+- IF the tab is hidden or `prefers-reduced-motion` is set, THEN nothing SHALL move (reduced motion: the first photograph only)
+- THE frame's height SHALL not change when the photographs change (no layout shift)
+- `sh scripts/qa.sh` green; no reference to hero-arch remains
+**Evidence** — gate; `npm run shots -- --full 0 --settle 6000/12500/19000 --eval …` shows lift/smoke/dance in turn at 1440 (a second navigation in one headless tab reports hidden - tool artefact)
+**Autonomy** — auto
 
 ### T-34 · Gallery page keeps the previous gallery after a sibling click
 **Why** — Viki: opening a gallery from the suggestions, going back and opening another "doesn't open it". Reproduced headlessly: the URL and tab title change, the page keeps the first couple. The router reuses the component when only the parameters change and both list pages did their work in `ngOnInit` only; the category row (T-33) has the same fault from one category to the next.

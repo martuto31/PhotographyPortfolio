@@ -3,14 +3,39 @@
          one viewport height - see the stylesheet for what that cuts and where.
          The copy sits over the lower-left on a gradient where the photograph is
          tall enough to carry it, and under it on phones and tablets. -->
-    <div class="hero-frame">
-        <img class="hero-photo"
-             src="assets/img/hero/hero-arch.webp"
+    <div class="hero-frame" [class.cycling]="cycling">
+        <!-- The first photograph is the page's LCP element and the only one in
+             the prerendered HTML. It stays in flow and sets the frame's height;
+             the others are added by script and sit over it. -->
+        <img #first #photo
+             class="hero-photo"
+             [class.showing]="current === 0"
+             [src]="src(photos[0])"
+             [srcset]="srcset(photos[0])"
+             [sizes]="sizes"
+             [style.object-position]="photos[0].position"
              width="2400"
              height="1600"
              fetchpriority="high"
              decoding="async"
-             alt="Младоженци се целуват под цветна арка - сватбена фотография от Виктория Борисова">
+             (load)="onFirstLoad()"
+             [alt]="photos[0].alt">
+
+        @if (cycling) {
+            @for (photo of photos.slice(1); track photo.name; let i = $index) {
+                <img #photo
+                     class="hero-photo hero-photo-next"
+                     [class.showing]="current === i + 1"
+                     [src]="src(photo)"
+                     [srcset]="srcset(photo)"
+                     [sizes]="sizes"
+                     [style.object-position]="photo.position"
+                     width="2400"
+                     height="1600"
+                     decoding="async"
+                     [alt]="photo.alt">
+            }
+        }
 
         <div class="hero-scrim" aria-hidden="true"></div>
 
