@@ -146,7 +146,7 @@ purpose — see its note.
   > she wants 3 and wants them to shuffle because she cant choose which she likes more - and wants a priority or like this image to be first - hero-5 … this second: hero-4 … this to be third: hero-1
 - [x] T-36 · Hero cycles through Viki's three photographs, 5 → 4 → 1 · auto · done 2026-09-16
 - [x] T-37 · Buttons: not rectangles · auto · done 2026-09-16 (pills)
-- [ ] T-38 · Typography pass - sizes, rhythm, consistency across pages · auto (families stay; a family change is needs-you)
+- [x] T-38 · Typography pass - leads unified; Bulgarian letterforms = needs-you (LOG) · auto · done 2026-09-16
 - [ ] T-39 · CTA pass - the closing band, the contact CTAs, the hero buttons · auto
 - [ ] T-40 · Bug sweep - click-throughs, console, audit-ux at three widths · auto
 - [ ] T-41 · SEO check after the redesign - titles, meta, og:image (still the old landing.webp), structured data, sitemap · auto
@@ -226,6 +226,17 @@ purpose — see its note.
 - `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
 **Evidence** — gate, ux, screenshots at 1440/768/390
 **Autonomy** — auto (revertable proposal)
+
+### T-38 · Typography pass
+**Why** — Martin: "small details like fonts". The scale is DESIGN-SPEC's and the families stay (Cormorant + the system sans); what had drifted was the lead under each page heading - five pages, four private recipes, About's serif lead two sizes below the service pages'. One more finding is a decision, not a fix: on iPhone/Mac the system sans draws Bulgarian letterforms (в→b, д→g, т→m) while Cormorant does not, so headings and body disagree on the same screen; see LOG → Needs you.
+**Scope** — `styles/headings.css` (`.lead-serif`, `.lead-sans`), `about-me.*`, `galleries-cards.*`, `galleries-index.*`, `contact-page.*`, `legal-page.*`
+**Done when**
+- WHEN `/galerii/svatbi` and `/about-me` render, THE lead SHALL be Cormorant italic at the same computed size (23px at 1440, 19px at 390), ≤ 46ch wide
+- WHEN `/galerii`, `/kontakti` and `/poveritelnost` render, THE lead SHALL be the sans at 17px/1.7 (15px on a phone), ≤ 62ch, the contacts one still centred
+- No other computed type change on those pages (h1, body, eyebrow sizes as before)
+- `sh scripts/qa.sh` green
+**Evidence** — gate; `npm run shots -- --eval` reading font-family/size/width of the lead per page
+**Autonomy** — auto
 
 ### T-37 · Buttons: not rectangles
 **Why** — Martin: "i dont want rectangle buttons". Assumption: a full pill (999px) on every `.btn` and the nav's "Пишете ми", the same ink/bone fills; the fixed phone contact bar stays a bar (two halves of a bar are not buttons), the form's underline fields stay, the round modal controls already are.

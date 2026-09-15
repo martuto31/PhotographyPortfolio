@@ -32,13 +32,9 @@
     font-weight: 400;
 }
 
+/* The lead is .lead-serif (headings.css); only its spacing is set here. */
 .left .lead {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(16px, 1.4vw, 18px);
-    line-height: 1.55;
-    color: var(--font-high-emphasis);
-    margin: 0 0 12px;
+    margin-bottom: 14px;
 }
 
 .left .text {

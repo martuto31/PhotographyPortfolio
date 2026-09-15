@@ -9,6 +9,15 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
+### T-38 · Bulgarian letterforms - A or B? (with Viki)
+`.verify/bg-forms.png` (sent in chat). On iPhone and Mac the body text draws
+the Bulgarian forms of в, д, т (like b, g, m) because the page says
+`lang="bg"` and Apple's font has them; Windows and Android show the standard
+forms, and the Cormorant headings never have the Bulgarian ones - so on her
+own phone the heading and the paragraph disagree. **A** keep (Bulgarian
+tradition, only Apple shows it) · **B** standard forms everywhere (one look
+on every device, matches the headings). My pick: B. One CSS line either way.
+
 ### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
 - **About:** the coral is keyed out of the existing portrait (a real re-cut,
@@ -61,6 +70,12 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-16
+- **T-38 · Type: the lead under every heading is one thing now** — commit
+  "Give every page the same lead". Two leads exist - the serif italic
+  statement (service pages, About) and the sans introduction (galleries,
+  contacts, legal) - and each page had its own recipe; About's was two sizes
+  smaller than the service pages'. One rule each in headings.css; h1, body,
+  eyebrow untouched. Families and the scale stay as in DESIGN-SPEC.
 - **T-37 · Buttons are pills** — commit "Round every button into a pill".
   Every `.btn`, the nav's "Пишете ми" and the static 404's links: full round,
   same ink/bone fills, still 44px tall, one line on a phone. The phone

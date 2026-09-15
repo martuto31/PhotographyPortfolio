@@ -111,3 +111,34 @@ h3 em,
 .measure {
     max-width: 66ch;
 }
+
+/* ---- The lead under a page heading ------------------------------------------
+   Two kinds, and each page uses one. The serif lead is the one sentence that
+   has to land (a service page, About): the display italic, a size up from the
+   body, a short measure so it stays a statement and not a paragraph. The sans
+   lead is an introduction in the reading face. Both were set per page before
+   and had drifted - About's serif lead was two sizes smaller than the service
+   pages' - so they live here now. */
+.lead-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(19px, 1.8vw, 23px);
+    line-height: 1.45;
+    color: var(--font-high-emphasis);
+    max-width: 46ch;
+    margin: 0;
+}
+
+.lead-sans {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--font-medium-emphasis);
+    max-width: 62ch;
+    margin: 0;
+}
+
+.mobile .lead-sans {
+    font-size: 15px;
+}

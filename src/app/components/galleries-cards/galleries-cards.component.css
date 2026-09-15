@@ -48,25 +48,9 @@
     color: var(--font-high-emphasis);
 }
 
-.page-heading p {
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--font-medium-emphasis);
-    margin: 0;
-    max-width: 60ch;
-}
-
-/* The service lead is the one sentence that has to land, so it is set in the
-   display serif rather than the UI sans. */
-.page-heading .lead {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(18px, 1.8vw, 22px);
-    line-height: 1.45;
-    color: var(--font-high-emphasis);
-    max-width: 42ch;
-}
+/* The service lead is .lead-serif and the legacy route's subheading is
+   .lead-sans (both in headings.css): the one sentence that has to land, in
+   the display serif rather than the UI sans. */
 
 app-category-nav {
     display: block;

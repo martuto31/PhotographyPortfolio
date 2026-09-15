@@ -6,9 +6,9 @@
             <h1>{{ pageHeading }}</h1>
 
             @if (service) {
-                <p class="lead">{{ service.lead }}</p>
+                <p class="lead lead-serif">{{ service.lead }}</p>
             } @else if (pageSubheading) {
-                <p>{{ pageSubheading }}</p>
+                <p class="lead-sans">{{ pageSubheading }}</p>
             }
         </header>
     }

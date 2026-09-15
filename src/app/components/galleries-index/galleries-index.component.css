@@ -11,17 +11,7 @@
     margin: 0 0 20px;
 }
 
-.page-heading p {
-    font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--font-medium-emphasis);
-    margin: 0;
-}
-
-:host-context(.mobile) .page-heading p {
-    font-size: 15px;
-}
+/* The lead is .lead-sans (headings.css). */
 
 app-category-nav {
     display: block;
