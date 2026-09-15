@@ -61,6 +61,17 @@ the next tasks come from your answers under Needs you.
 ## Shipped
 
 ### 2026-09-16
+- **T-41 · SEO check - one fault, fixed** — commit "Share the hero photograph
+  when a page is sent". All 43 pages: unique titles ≤ 60 and descriptions
+  ≤ 160, one canonical, one h1, valid JSON-LD, sitemap 43/43, every page
+  linked. The fault: the share image (what Messenger, Viber and Facebook
+  show when someone sends a link) was a 892×1501 portrait WebP - blank or
+  badly cropped in most previews. Now a 1200×630 JPEG of the hero, on every
+  non-gallery page; category pages keep their cover, galleries their own.
+  One oddity noted, not changed: the "Юбилей Сергей" URL carries the
+  macOS-style decomposed "й" from its folder name - consistent everywhere
+  (sitemap, links, canonical), so it works; renaming the folder would
+  change the URL.
 - **T-39 · The closing band asks with the channel that works** — commit
   "Lead the closing band with the channel that works on the device". On a
   phone or tablet the big action stays "Пишете в Messenger" (it opens the

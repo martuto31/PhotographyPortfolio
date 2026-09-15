@@ -150,7 +150,7 @@ purpose — see its note.
 - [x] T-39 · CTA pass - closing band leads with the channel that works on the device · auto · done 2026-09-16
 - [x] T-40 · Bug sweep - 43 routes × 3 widths + click-throughs: nothing to fix · auto · done 2026-09-16
 - [ ] T-42 · Bulgarian Cyrillic letterforms everywhere - body and headings, every device · auto · ! (Martin, 2026-09-16: "cyrylil should be bulgarian not russian so check it out")
-- [ ] T-41 · SEO check after the redesign - titles, meta, og:image (still the old landing.webp), structured data, sitemap · auto
+- [x] T-41 · SEO check after the redesign - all clean; share image was the fault · auto · done 2026-09-16
   > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
 
 ---
@@ -227,6 +227,31 @@ purpose — see its note.
 - `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
 **Evidence** — gate, ux, screenshots at 1440/768/390
 **Autonomy** — auto (revertable proposal)
+
+### T-41 · SEO check after the redesign
+**Why** — Martin: "seo". Audited all 43 prerendered pages: titles unique and ≤ 60, descriptions unique and ≤ 160, one canonical/h1/og:title/og:image each, JSON-LD parses, robots and sitemap (43/43) fine, internal links to every page (T-33). The one fault: the site-wide share image was `landing.webp` - a 892×1501 portrait WebP, which Messenger/Viber previews show blank or badly cropped. Assumption: a 1200×630 JPEG of the hero photograph (Viki's first choice) is the right default; gallery pages keep their own cover.
+**Scope** — `assets/img/og-home.jpg`, `assets/seo.json`, `src/index.html` (og/twitter/JSON-LD image lines only), `services/seo.service.ts`
+**Done when**
+- WHEN `/` is prerendered, THE `og:image` and `twitter:image` SHALL be `https://phbyviki.com/assets/img/og-home.jpg` with `og:image:width` 1200, `og:image:height` 630, `og:image:type` image/jpeg and a non-empty `og:image:alt`; exactly one of each
+- WHEN a non-gallery page (`/kontakti`, `/about-me`, `/poveritelnost`) is prerendered, THE `og:image` SHALL be og-home.jpg; a category page keeps its card cover and a gallery page its own cover
+- THE LocalBusiness JSON-LD `image` SHALL be og-home.jpg; the Person `image` SHALL stay landing.webp (it is her portrait)
+- THE file SHALL be a 1200×630 JPEG ≤ 150 KB
+- `sh scripts/qa.sh` green
+**Evidence** — gate; grep of the prerendered head on four routes; `sharp` metadata of the JPEG
+**Autonomy** — auto
+
+### T-42 · Bulgarian Cyrillic letterforms everywhere
+**Why** — Martin: "cyrylil should be bulgarian not russian so check it out". Found: Cormorant already draws the Bulgarian forms (it carries `locl` BGR and the page is `lang="bg"`); the reading sans did so only on Apple devices - Segoe UI and Roboto have no Bulgarian forms, so Windows and Android showed the Russian shapes. Fix: a reading face with the forms. Checked Inter, Noto Sans, Fira Sans, Onest (none), Manrope, Commissioner, Overpass, Source Sans 3 (yes). Assumption: Source Sans 3 - the quietest of the four next to Cormorant, Adobe's Cyrillic, OFL; one 40 KB variable file, size-adjusted so the type scale stays.
+**Scope** — `assets/fonts/source-sans-3.woff2` (+ OFL), `styles/fonts.css`, `styles/variables.css`, `src/index.html` (preload), `src/404.html`, `DESIGN-SPEC.md`; `Overpass.ttf` removed
+**Done when**
+- WHEN any page renders, THE computed font-family of body text, buttons and eyebrows SHALL resolve to "Source Sans 3" and `document.fonts.check('16px "Source Sans 3"')` SHALL be true
+- WHEN the word "това" renders in the body at lang=bg, THE glyphs for в and т SHALL be the Bulgarian forms (the GSUB `locl` BGR substitution applies - verify by comparing pixel width/shape against `font-feature-settings: "locl" 0`, or by `font-language-override`)
+- THE woff2 SHALL carry a `wght` axis 200–900 and a `locl` feature under cyrl/BGR; ≤ 60 KB
+- THE prerendered `index.html` SHALL preload the woff2 with `crossorigin`; no reference to Overpass remains in src
+- Computed sizes of h1, body, eyebrow, buttons unchanged from T-38's numbers (size-adjust, not the scale)
+- `sh scripts/qa.sh` green; `npm run ux` 0 FAIL
+**Evidence** — gate, ux; fontTools check of the woff2; `npm run shots -- --eval` on font-family/fonts.check; screenshot of About
+**Autonomy** — auto (Martin's instruction; the face itself is one line to swap)
 
 ### T-39 · CTA pass
 **Why** — Martin: "cta". Reviewed every ask on the site: hero (gallery + Messenger), nav "Пишете ми" (→ /kontakti on desktop, deliberately: an m.me link on a desktop lands on a Facebook login wall as often as an inbox), the phone contact bar, the contacts page, the closing band. The one inconsistency: the closing band's biggest action was the m.me link on every device, including desktop, where the nav had already decided against it. Assumption: on desktop the band leads with the contact page and offers Messenger as a button; on phones and tablets Messenger stays first (it opens the app). No new copy - the labels already existed.

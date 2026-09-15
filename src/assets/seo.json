@@ -2,7 +2,7 @@
     "landing": {
         "description": "Сватбен и събитиен фотограф в София и Видин. Сватби, абитуриентски балове, кръщенета и лични фотосесии. Пишете ми за свободна дата и цена.",
         "keywords": "сватбен фотограф София, сватбен фотограф Видин, фотограф София, фотограф Видин, фотограф за абитуриентски бал, фотограф за кръщене, фотограф за рожден ден, лична фотосесия София, Виктория Борисова, phbyviki",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galerii": {
         "description": "Всички категории - сватби, абитуриенти, кръщенета, семейни и лични фотосесии от Виктория Борисова в София, Видин и цяла България.",
@@ -12,17 +12,17 @@
     "kontakti": {
         "description": "Свържете се с Виктория Борисова - фотограф в София и Видин. Messenger, Instagram или имейл. Отговарям до 24 часа с наличност и цена.",
         "keywords": "контакти фотограф София, фотограф Видин контакти, запазване на дата фотограф, сватбен фотограф контакти, Виктория Борисова, phbyviki",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "poveritelnost": {
         "description": "Как Виктория Борисова обработва лични данни: този сайт не използва бисквитки и не проследява посетителите. Вашите права по GDPR и как да ги упражните.",
         "keywords": "политика за поверителност, лични данни, GDPR, бисквитки, phbyviki, Виктория Борисова",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "usloviya": {
         "description": "Общи условия за ползване на phbyviki.com - авторско право върху фотографиите, какво може да прави клиентът със своите снимки и как се запазва дата.",
         "keywords": "общи условия, авторско право фотография, ползване на снимки, ЗАПСП, phbyviki, Виктория Борисова",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galerii/svatbi": {
         "description": "Сватбен фотограф в София и Видин. Документални кадри от подготовката до последния танц. Разгледайте галериите и запазете вашата дата.",
@@ -37,17 +37,17 @@
     "galerii/krushteneta": {
         "description": "Фотограф за кръщене в София и Видин. Дискретно заснемане на тайнството в храма и на празненството след него. Пишете ми за свободна дата.",
         "keywords": "фотограф за кръщене София, фотограф за кръщене Видин, фотограф за кръщавка, фотосесия кръщене, снимки от кръщене, Виктория Борисова кръщенета, детски фотограф",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galerii/rojdeni-dni": {
         "description": "Фотограф за рожден ден в София и Видин - детски партита, юбилеи и семейни празненства. Заснемане, без да прекъсвам празника.",
         "keywords": "фотограф за рожден ден София, фотограф за рожден ден Видин, фотограф за детски рожден ден, фотограф за юбилей, рожден ден фотосесия, семеен фотограф",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galerii/semeyni": {
         "description": "Семеен фотограф в София и Видин. Семейни и детски фотосесии на открито или у дома, с време децата да свикнат. Запазете своя час.",
         "keywords": "семеен фотограф София, семеен фотограф Видин, семейна фотосесия, детска фотосесия София, детски фотограф Видин, фотосесия за бременни, фотосесия майка и дете",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galerii/lichni": {
         "description": "Лични фотосесии в София и Видин - портрети, годежи, юбилеи и идеи, които не се вписват никъде другаде. Разкажете ми вашата идея.",
@@ -57,26 +57,26 @@
     "gallery": {
         "description": "Галерия с фотосесии от Виктория Борисова - сватби, абитуриенти, кръщенета и лични фотосесии в София и Видин.",
         "keywords": "фотосесия София, фотосесия Видин, професионален фотограф, галерия снимки, Виктория Борисова галерия, специални моменти",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galeriya": {
         "description": "Галерия с фотосесии от Виктория Борисова - сватби, абитуриенти, кръщенета и лични фотосесии в София и Видин.",
         "keywords": "фотосесия София, фотосесия Видин, професионален фотограф, галерия снимки, Виктория Борисова галерия, специални моменти",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "galleries": {
         "description": "Галерия с фотосесии от Виктория Борисова - сватби, абитуриенти, кръщенета и лични фотосесии в София и Видин.",
         "keywords": "фотосесия София, фотосесия Видин, професионален фотограф, галерия снимки, Виктория Борисова",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "about-me": {
         "description": "Виктория Борисова - сватбен и събитиен фотограф с над 4 години опит в София и Видин. Документален и спокоен подход. Пишете ми по всяко време.",
         "keywords": "Виктория Борисова фотограф, фотограф София, фотограф Видин, сватбен фотограф, събитийна фотография, портретна фотография, professional photographer Bulgaria, phbyviki",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     },
     "not-found": {
         "description": "Страницата не е намерена. Върнете се към phbyviki.com - фотограф София и Видин.",
         "keywords": "phbyviki, Виктория Борисова, фотограф София, фотограф Видин",
-        "ogImage": "https://phbyviki.com/assets/img/landing.webp"
+        "ogImage": "https://phbyviki.com/assets/img/og-home.jpg"
     }
 }

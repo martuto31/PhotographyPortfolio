@@ -18,7 +18,7 @@ interface SEOData {
 }
 
 const SITE_URL = 'https://phbyviki.com';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/img/landing.webp`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/img/og-home.jpg`;
 const DEFAULT_TITLE = 'Фотосесия | Галерия | Виктория Борисова';
 
 // Per-category wording for single-gallery pages. Each gallery is its own indexable page,
