@@ -9,15 +9,6 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### T-38 · Bulgarian letterforms - A or B? (with Viki)
-`.verify/bg-forms.png` (sent in chat). On iPhone and Mac the body text draws
-the Bulgarian forms of в, д, т (like b, g, m) because the page says
-`lang="bg"` and Apple's font has them; Windows and Android show the standard
-forms, and the Cormorant headings never have the Bulgarian ones - so on her
-own phone the heading and the paragraph disagree. **A** keep (Bulgarian
-tradition, only Apple shows it) · **B** standard forms everywhere (one look
-on every device, matches the headings). My pick: B. One CSS line either way.
-
 ### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
 - **About:** the coral is keyed out of the existing portrait (a real re-cut,

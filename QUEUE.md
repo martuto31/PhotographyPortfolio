@@ -148,7 +148,8 @@ purpose — see its note.
 - [x] T-37 · Buttons: not rectangles · auto · done 2026-09-16 (pills)
 - [x] T-38 · Typography pass - leads unified; Bulgarian letterforms = needs-you (LOG) · auto · done 2026-09-16
 - [x] T-39 · CTA pass - closing band leads with the channel that works on the device · auto · done 2026-09-16
-- [ ] T-40 · Bug sweep - click-throughs, console, audit-ux at three widths · auto
+- [x] T-40 · Bug sweep - 43 routes × 3 widths + click-throughs: nothing to fix · auto · done 2026-09-16
+- [ ] T-42 · Bulgarian Cyrillic letterforms everywhere - body and headings, every device · auto · ! (Martin, 2026-09-16: "cyrylil should be bulgarian not russian so check it out")
 - [ ] T-41 · SEO check after the redesign - titles, meta, og:image (still the old landing.webp), structured data, sitemap · auto
   > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
 
