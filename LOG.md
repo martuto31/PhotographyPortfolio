@@ -9,6 +9,19 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
+### What is left, in one place (2026-09-16)
+1. **Look at the preview** - https://phbyvikiprod--preview-yb28hwie.web.app - hero
+   (three photos cycling), pill buttons, the new body font. Say what is wrong.
+2. **Font** (Viki): the body is Source Sans 3 for the Bulgarian letterforms. If
+   she prefers Manrope, Commissioner or Overpass instead, say the name - one line.
+3. **About page** (Viki): pick A4 / A5 / A6 from the canvas page 7, or send a new
+   photo of her at work (4:5, daylight) - see T-31 below.
+4. **Spreadsheet** with venue + date per gallery (T-21/T-20) - copy for the
+   gallery pages.
+5. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
+6. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
+   once you and Viki say yes (52 commits ahead of master, nothing live yet).
+
 ### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
 - **About:** the coral is keyed out of the existing portrait (a real re-cut,
