@@ -37,7 +37,6 @@ export const CONTACT = {
   instagram: 'https://www.instagram.com/_phbyviki',
   facebook: 'https://www.facebook.com/people/phbyviki/100076542123196/',
 
-  responseTime: 'до 24 часа',
   areas: 'София · Видин',
 } as const;
 
@@ -45,9 +44,9 @@ export const CONTACT = {
 // about-me copy. "100+" is the count of events shot that Martin gave on
 // 2026-09-16 (it was 150+ from 2026-09-11) — the site shows 31 galleries
 // because most clients never publish theirs, so this one figure is theirs to
-// stand behind, not derivable from the site.
+// stand behind, not derivable from the site. The "24ч" reply-time tile and every
+// "отговарям до 24 часа" on the site went on 2026-09-17 (Martin: "звучи банално").
 export const CREDENTIALS = [
-  { value: '4+', label: 'години зад обектива' },
+  { value: '4+', label: 'години опит' },
   { value: '100+', label: 'заснети събития' },
-  { value: '24ч', label: 'отговор на запитване' },
 ] as const;

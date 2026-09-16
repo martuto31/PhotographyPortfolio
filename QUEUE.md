@@ -159,10 +159,29 @@ purpose — see its note.
   > fonts - what do you reccomend, okay lets go withy a if you reccomnd,
 - [x] T-45 · Venue/date without the spreadsheet - what can be done instead · needs-you · answered 2026-09-16 (LOG: no EXIF in R2; a 31-line Messenger message replaces the spreadsheet)
 - [x] T-31 · About page - stays as it is for now (Martin, 2026-09-16: "about page can we keep for now")
+- [x] T-46 · Copy pass two - literary Bulgarian, no "24 часа", hero line explained, cities tile without label, FAQ 5 · auto · done 2026-09-17, texts listed in LOG
+  > 1 - какво значи без позиране и анпрежение. нека поработим над това и да бъде ан български книжовен език. софия и видин но не ми хареса софия и видин какво може да имзислим или да си го оставим, махни 'където снимам най-често. Нека махнем отговарям до 24 часа звучи банално. 5-  ако събитието е другата ми пишете за да се уточним или нещо такова. . Нека всички текстове да са професионални.
+- [ ] T-47 · Per-gallery texts written from the photographs (Viki cannot recall dates or write them) · needs-you · proposal in LOG, waiting for a yes
+  > Също какво правим с текстовете за всчка галерия които чакаме от нея но тя каза че не помни дати и не може да измисли текстове
 
 ---
 
 # Ready
+
+### T-46 · Copy pass two - literary Bulgarian, no "24 часа"
+**Why** — Martin, 2026-09-17: the hero line "без позиране и напрежение" was unclear - make it standard literary Bulgarian; drop "където снимам най-често"; "отговарям до 24 часа" sounds banal - remove it; FAQ 5 should say "if the event is elsewhere, write to me so we can settle the details"; all texts professional. Assumptions: every "24 часа" promise goes, including the strip tile (three tiles now: 4+ · 100+ · София & Видин, the last without a label); the hero line is rebuilt from Viki's own About vocabulary ("документален и спокоен подход", "без да се натрапвам"); colloquial phrasing in the texts I wrote earlier is edited to literary register; Viki's own paragraphs are untouched.
+**Scope** — `content/{contact,home,services}.ts`, `intro-section`, `credentials` (html+css), `process`, `landing`, `cta-band.ts`, `gallery`, `about-me`, `galleries-index`, `contact-page`, `contact-me`, `legal-page` templates, `assets/seo.json`
+**Done when**
+- WHEN `/` is prerendered, THE page SHALL contain "Документален и спокоен подход - вие преживявате деня си, а аз запечатвам важните моменти, без да се натрапвам." and SHALL NOT contain "Без позиране"
+- THE page SHALL NOT contain "24 часа", "24ч" or "където снимам най-често"; THE strip SHALL have exactly three `.cred` cells, the third "София & Видин" with no label
+- THE page SHALL contain "пишете ми, за да уточним детайлите и разходите за път." and "Ясен процес в четири стъпки"
+- WHEN any of the 43 routes is prerendered, THE page SHALL NOT contain "24 часа" or "24ч" (grep over dist/**/index.html)
+- WHEN `/kontakti` is prerendered, THE lead SHALL be "Изпратете ми датата, мястото и повода. Ще ви отговоря дали датата е свободна и ще ви изпратя конкретна оферта."
+- WHEN `/galerii/svatbi` is prerendered, THE page SHALL contain "все пак ми пишете - понякога има свободни уикенди" and SHALL NOT contain "случва се да имам свободен уикенд"
+- The strip lays out as three cells at 1440 and two + one full-width at 390, no overflow
+- `sh scripts/qa.sh` green
+**Evidence** — gate; grep over the 43 pages; screenshot of the strip at 1440 and 390
+**Autonomy** — auto (Martin's instruction; texts listed in LOG for his check)
 
 ### T-43 · Copy pass - the cities once per page, no "цяла България", 100+ events, fix the texts
 **Why** — Martin: "да пише навсякъде фотограф видин и софия звучи странно и после имаме фотограф цялата страна, махаме фотограф цялата страна. Смени на 100+ заснети събития и оправи текстовете … помисли все едно че си специалист на тази тема и маркетингов специалист". Assumptions: (1) the cities stay where they do the work - the home H1, the `<title>`/description of every page, the schema, one natural sentence in the body - and leave the category H1s, the gallery sub-line, the credentials label, the /galerii lead and every alt text; (2) "цяла България" goes everywhere it is a claim, and travel survives only as the honest answer to the travel question ("Ако сватбата ви е другаде - просто ми пишете"); (3) two things found on the way are fixed too: the home CTA told people to *call* (there is no number on the site), and "фирмени" events were still offered in two places after Viki removed the corporate category. Every changed sentence is listed in LOG for Martin to check; nothing here is live.
