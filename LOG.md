@@ -206,6 +206,13 @@ font page, T-45 answered); the next tasks come from your answers under Needs you
 ## Shipped
 
 ### 2026-09-16
+- **T-44 · Font comparison page** — `tools/fonts-compare.html`, hosted at
+  https://phbyvikiprod--fonts-cqv7luse.web.app/shriftove (expires 2026-10-16):
+  A Source Sans 3 (current) · B Manrope · C Commissioner · D Overpass, same
+  Cormorant heading, same copy, names hidden until "Покажи имената".
+- **T-45 · Venue/date without the spreadsheet** — answered under Needs you:
+  the R2 files carry no EXIF, so a Messenger message with the 31 gallery
+  names is the replacement; the same message asks for client reviews.
 - **T-43 · Copy pass** — commit "Say the cities once and drop the whole-country
   claim". Every changed sentence is under Needs you → T-43. Verified by a
   fresh agent against the 43 prerendered pages: new strings present, old
