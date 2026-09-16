@@ -13,7 +13,7 @@ more work into `QUEUE.md` → Intake.
 1. **Check the texts** (T-43 below) - every changed sentence is listed; say
    which to change back. They are on the preview:
    https://phbyvikiprod--preview-yb28hwie.web.app
-2. **Font** - pick a letter on the comparison page (T-44 below) and say it.
+2. ~~Font~~ - decided 2026-09-16: A, Source Sans 3 stays (my recommendation, Martin's yes).
 3. **Venue/date per gallery** - no spreadsheet needed; forward the message under
    T-45 to Viki, she answers in Messenger. Same message asks for 3-5 client reviews.
 4. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
@@ -89,7 +89,7 @@ strongest differentiator in the market, but is it true for every service?
 (b) A "Цени от … лв" line - the pricing gap is the biggest conversion leak on the
 site and only you two can fill it.
 
-### T-44 · Fonts - pick a letter
+### T-44 · Fonts - decided: A (Source Sans 3), nothing to change
 **https://phbyvikiprod--fonts-cqv7luse.web.app/shriftove** (expires 2026-10-16).
 Four cards A-D: same heading (Cormorant, unchanged), same paragraph, same
 buttons, same letters - only the text face differs. Names hidden by default so

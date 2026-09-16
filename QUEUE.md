@@ -155,7 +155,8 @@ purpose — see its note.
   > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
 - [x] T-43 · Copy pass - "София и Видин" once per page, no "цяла България", 100+ events, fix the texts · auto · done 2026-09-16, texts listed in LOG for Martin to check
   > i dont know about the fonts i need to check them like difference, about page can we keep for now. 4 - we cant right now and what could we do about that. Can we check all texts and copys like she offers Видин И софия, но да пише навсякъде фотофраф видин и софия звучи странно и после имаме фотограф цялата страна, махаме фотограф цялата страна. Смени на 100+ заснети събития и оправи текстовете, за сватбите и галериите които чакаш от нея какво друго може да измислим и давай ми текстове за проверка ако трябва или помисли все едно че си специалист на тази тема и маркетингов специалист
-- [x] T-44 · Font comparison page for Martin and Viki - the four faces side by side, hosted · auto · done 2026-09-16
+- [x] T-44 · Font comparison page for Martin and Viki - the four faces side by side, hosted · auto · done 2026-09-16 · decided 2026-09-16: A (Source Sans 3) stays
+  > fonts - what do you reccomend, okay lets go withy a if you reccomnd,
 - [x] T-45 · Venue/date without the spreadsheet - what can be done instead · needs-you · answered 2026-09-16 (LOG: no EXIF in R2; a 31-line Messenger message replaces the spreadsheet)
 - [x] T-31 · About page - stays as it is for now (Martin, 2026-09-16: "about page can we keep for now")
 
