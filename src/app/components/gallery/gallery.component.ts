@@ -418,7 +418,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   // screen readers, instead of 154 identical strings on one page.
   public altFor(index: number): string {
     const subject = this.displayName ? `${this.displayName} - ` : '';
-    return `${subject}${this.pageHeading || 'Фотосесия'}, кадър ${index + 1} - Виктория Борисова, фотограф София и Видин`;
+    return `${subject}${this.pageHeading || 'Фотосесия'}, кадър ${index + 1} - Виктория Борисова`;
   }
 
   private setHeadings(): void {

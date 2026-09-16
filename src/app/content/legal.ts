@@ -69,7 +69,7 @@ export const PRIVACY: LegalDoc = {
       blocks: [
         {
           kind: 'p',
-          text: `Администратор на личните данни е <strong>${CONTACT.legalName}</strong> - фотограф, работещ в София, Видин и цяла България.`,
+          text: `Администратор на личните данни е <strong>${CONTACT.legalName}</strong> - фотограф, работещ в София и Видин.`,
         },
         {
           kind: 'defs',

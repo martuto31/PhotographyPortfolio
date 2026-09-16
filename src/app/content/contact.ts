@@ -38,15 +38,16 @@ export const CONTACT = {
   facebook: 'https://www.facebook.com/people/phbyviki/100076542123196/',
 
   responseTime: 'до 24 часа',
-  areas: 'София · Видин · цяла България',
+  areas: 'София · Видин',
 } as const;
 
 // Above-the-fold credibility line. "4+" is the "над четири години" in her own
-// about-me copy. "150+" is Viki's own count of events shot (2026-09-11) — the
-// site shows 31 galleries because most clients never publish theirs, so this one
-// figure is hers to stand behind, not derivable from the site.
+// about-me copy. "100+" is the count of events shot that Martin gave on
+// 2026-09-16 (it was 150+ from 2026-09-11) — the site shows 31 galleries
+// because most clients never publish theirs, so this one figure is theirs to
+// stand behind, not derivable from the site.
 export const CREDENTIALS = [
   { value: '4+', label: 'години зад обектива' },
-  { value: '150+', label: 'заснети събития' },
+  { value: '100+', label: 'заснети събития' },
   { value: '24ч', label: 'отговор на запитване' },
 ] as const;

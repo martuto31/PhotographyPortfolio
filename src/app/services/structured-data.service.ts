@@ -94,7 +94,6 @@ export class StructuredDataService {
       'areaServed': [
         { '@type': 'City', 'name': 'София' },
         { '@type': 'City', 'name': 'Видин' },
-        { '@type': 'Country', 'name': 'България' },
       ],
       'availableChannel': {
         '@type': 'ServiceChannel',

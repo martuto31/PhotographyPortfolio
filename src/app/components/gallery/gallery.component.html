@@ -8,7 +8,7 @@
 
         <h1>{{ displayName }}</h1>
 
-        <p>{{ pageHeading }} - София и Видин</p>
+        <p>{{ pageHeading }}</p>
     </header>
 }
 
@@ -67,7 +67,7 @@
                         <img [src]="sibling.imageSrc"
                              [attr.srcset]="sibling.imageSrcset || null"
                              [attr.sizes]="sibling.imageSrcset ? siblingSizes : null"
-                             [alt]="sibling.name + ' - ' + pageHeading + ', фотограф София и Видин'"
+                             [alt]="sibling.name + ' - ' + pageHeading + ', Виктория Борисова'"
                              loading="lazy"
                              decoding="async">
                     </div>
@@ -105,7 +105,7 @@
             </svg>
         </button>
 
-        <img id="modal" [src]="modalImage" alt="Снимка от фотосесия - Виктория Борисова, фотограф София и Видин">
+        <img id="modal" [src]="modalImage" alt="Снимка от фотосесия - Виктория Борисова">
 
         <button type="button" class="modal-btn slide-btn btn-right" (click)="nextImage()" aria-label="Следваща снимка">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">

@@ -153,10 +153,32 @@ purpose — see its note.
   > cyrylil should be bulgarian not russian so check it out
 - [x] T-41 · SEO check after the redesign - all clean; share image was the fault · auto · done 2026-09-16
   > If its okay enter the loop and make it visually appealing then work on the small details like fonts, buttons like i dont want rectangle buttons, cta, bugs, seo.
+- [x] T-43 · Copy pass - "София и Видин" once per page, no "цяла България", 100+ events, fix the texts · auto · done 2026-09-16, texts listed in LOG for Martin to check
+  > i dont know about the fonts i need to check them like difference, about page can we keep for now. 4 - we cant right now and what could we do about that. Can we check all texts and copys like she offers Видин И софия, но да пише навсякъде фотофраф видин и софия звучи странно и после имаме фотограф цялата страна, махаме фотограф цялата страна. Смени на 100+ заснети събития и оправи текстовете, за сватбите и галериите които чакаш от нея какво друго може да измислим и давай ми текстове за проверка ако трябва или помисли все едно че си специалист на тази тема и маркетингов специалист
+- [ ] T-44 · Font comparison page for Martin and Viki - the four faces side by side, hosted · auto
+- [ ] T-45 · Venue/date without the spreadsheet - what can be done instead · needs-you (answered in LOG)
+- [x] T-31 · About page - stays as it is for now (Martin, 2026-09-16: "about page can we keep for now")
 
 ---
 
 # Ready
+
+### T-43 · Copy pass - the cities once per page, no "цяла България", 100+ events, fix the texts
+**Why** — Martin: "да пише навсякъде фотограф видин и софия звучи странно и после имаме фотограф цялата страна, махаме фотограф цялата страна. Смени на 100+ заснети събития и оправи текстовете … помисли все едно че си специалист на тази тема и маркетингов специалист". Assumptions: (1) the cities stay where they do the work - the home H1, the `<title>`/description of every page, the schema, one natural sentence in the body - and leave the category H1s, the gallery sub-line, the credentials label, the /galerii lead and every alt text; (2) "цяла България" goes everywhere it is a claim, and travel survives only as the honest answer to the travel question ("Ако сватбата ви е другаде - просто ми пишете"); (3) two things found on the way are fixed too: the home CTA told people to *call* (there is no number on the site), and "фирмени" events were still offered in two places after Viki removed the corporate category. Every changed sentence is listed in LOG for Martin to check; nothing here is live.
+**Scope** — `content/{contact,home,services,legal}.ts`, `intro-section.component.html`, `credentials.component.html`, `landing.component.html`, `galleries-index.component.html`, `galleries-cards.component.{ts,html}`, `gallery.component.{ts,html}`, `contact-page.component.html`, `assets/seo.json`, `src/index.html` + `structured-data.service.ts` (areaServed), the per-photo alt texts
+**Done when**
+- WHEN `/` is prerendered, THE page SHALL contain "100+" next to "заснети събития" and SHALL NOT contain "150+"
+- THE page SHALL contain "Сватби, абитуриентски балове, кръщенета и семейни празници. Без позиране" and SHALL NOT contain "в цялата страна"
+- THE page SHALL NOT contain "обадете се" nor "цяла България"; the H1 SHALL still read "в София и Видин"
+- WHEN `/galerii/svatbi` is prerendered, THE h1 SHALL be "Сватбен фотограф" (no city), THE page SHALL contain "Работя основно в София и Видин. Ако сватбата ви е другаде" and SHALL NOT contain "пътувам в цяла България" nor "снимам в цяла България"
+- WHEN `/galerii/rojdeni-dni` is prerendered, THE page SHALL contain "семейни събирания - в София и Видин." and SHALL NOT contain "фирмени" nor "и страната"
+- WHEN `/galerii` is prerendered, THE page SHALL NOT contain "цяла България" nor "фирмени"
+- WHEN a gallery page (`/galeriya/svatbi/<name>`) is prerendered, THE sub-line under the h1 SHALL be the type noun alone (no " - София и Видин") and no `alt` SHALL end in "фотограф София и Видин"
+- WHEN `/kontakti` is prerendered, THE page SHALL contain "черно на бяло." and SHALL NOT contain "обещания" nor "цяла България"
+- No prerendered page SHALL contain "цяла България" or "цялата страна" (grep over `dist/**/index.html`); every `<title>` unchanged
+- `sh scripts/qa.sh` green
+**Evidence** — gate; grep over the 43 prerendered pages for the present/absent strings above
+**Autonomy** — auto (Martin: write it as the specialist and hand him the texts to check)
 
 ### T-26 · Хартия и месинг - the light tokens on every page
 **Why** — Martin picked direction B from the canvas ("lets go with the white - хартия и месинг flow of the app and colors"). Viki's own words for theme 01 were "изчистеното, семплото"; wedding photographs read better on paper than on black; and the black was the thing Martin was unsure about. Assumption: the CTA band at the foot of every page stays dark, as drawn on board B ("keeps a premium note") - the one place the glow survives.

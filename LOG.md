@@ -9,18 +9,150 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### What is left, in one place (2026-09-16)
-1. **Look at the preview** - https://phbyvikiprod--preview-yb28hwie.web.app - hero
-   (three photos cycling), pill buttons, the new body font. Say what is wrong.
-2. **Font** (Viki): the body is Source Sans 3 for the Bulgarian letterforms. If
-   she prefers Manrope, Commissioner or Overpass instead, say the name - one line.
-3. **About page** (Viki): pick A4 / A5 / A6 from the canvas page 7, or send a new
-   photo of her at work (4:5, daylight) - see T-31 below.
-4. **Spreadsheet** with venue + date per gallery (T-21/T-20) - copy for the
-   gallery pages.
-5. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
-6. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
-   once you and Viki say yes (52 commits ahead of master, nothing live yet).
+### What is left, in one place (2026-09-16, evening)
+1. **Check the texts** (T-43 below) - every changed sentence is listed; say
+   which to change back. They are on the preview:
+   https://phbyvikiprod--preview-yb28hwie.web.app
+2. **Font** - pick a letter on the comparison page (T-44 below) and say it.
+3. **Venue/date per gallery** - no spreadsheet needed; forward the message under
+   T-45 to Viki, she answers in Messenger. Same message asks for 3-5 client reviews.
+4. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
+5. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
+   once you and Viki say yes (nothing live yet).
+About page: stays as it is for now (your call, 2026-09-16).
+
+### T-43 · Texts to check (changed 2026-09-16, on the preview)
+Rule applied: the cities stay where they do the work - the home H1, every
+page `<title>` and description, the schema, one natural sentence per service -
+and go from everywhere else. "Цяла България" is gone as a claim; travel stays
+only as the honest answer to the travel question. Old → new:
+
+**Начало**
+- Под заглавието: „Заснемам вашите събития в цялата страна. Без позиране…“ →
+  „**Сватби, абитуриентски балове, кръщенета и семейни празници.** Без позиране и
+  напрежение - вие преживявате деня си, а аз го запечатвам.“
+- Лентата с числата: „150+ заснети събития“ → „**100+** заснети събития“;
+  „София & Видин / и цяла България“ → „София & Видин / **където снимам най-често**“
+- Стъпка 1: „Отговарям до 24 часа с наличност и цена - без формуляри и без
+  чакане.“ → „**До 24 часа ще знаете дали съм свободна и колко ще струва.**“
+  (редът над стъпките вече казва „няма формуляри, няма чакане“)
+- Въпрос „В кои градове снимате?“: „Основно в София и Видин, но пътувам в цяла
+  България. Ако събитието ви е извън тези райони, просто ми пишете…“ →
+  „Основно в София и Видин. **Ако събитието ви е другаде**, просто ми пишете -
+  почти винаги се получава, а транспортът се уточнява предварително.“
+- Тъмната лента долу: махнато „Ако предпочитате да се чуем, обадете се по всяко
+  време.“ - **в сайта няма телефон**, а изречението кани на обаждане.
+- Бележката под бутоните и футърът: „София · Видин · цяла България“ → „София · Видин“
+
+**Галерия (/galerii)**
+- „…и семейни събития - заснети в София, Видин и цяла България. Всяка галерия…“ →
+  „…и семейни събития. Всяка галерия е един ден, както е бил.“
+- Лентата долу: „годежи, юбилеи, фирмени празненства и доста неща…“ →
+  „годежи, юбилеи, **изненади** и доста неща…“ (Вики махна фирмените)
+
+**Категориите (/galerii/svatbi и другите пет)**
+- Заглавията: „Сватбен фотограф - София и Видин“ → „**Сватбен фотограф**“; същото
+  за „Фотограф за абитуриентски бал“, „Фотограф за кръщене“, „Фотограф за рожден
+  ден“, „Семеен фотограф“, „Други събития“. Градовете остават в `<title>`-а,
+  описанието за Google и схемата на всяка от тях.
+- Сватби, последен абзац: „Работя основно в София и Видин, но пътувам в цяла
+  България. Ако сватбата ви е другаде…“ → „Работя основно в София и Видин. Ако
+  сватбата ви е другаде - просто ми пишете и ще намерим решение.“
+- Сватби, въпрос „Пътувате ли извън София и Видин?“: „Да, снимам в цяла
+  България. Транспортът и нощувката…“ → „**Да.** Транспортът и нощувката се
+  уточняват предварително и влизат в общата сума.“
+- Рождени дни, последен абзац: „…семейни събирания и фирмени тържества - в
+  София, Видин и страната.“ → „…**и семейни събирания - в София и Видин.**“
+
+**Отделна галерия (/galeriya/svatbi/…)**
+- Редът под имената: „Сватбена фотосесия - София и Видин“ → „Сватбена фотосесия“
+  (и съответно за другите видове)
+
+**Контакти**
+- „…с наличност и конкретна цена, написани черно на бяло, а не обещания, които
+  после се променят.“ → „…с наличност и конкретна цена, **черно на бяло**.“
+- „Къде снимам: София & Видин · цяла България“ → „София & Видин“
+
+**Невидими, за пълнота:** alt-текстовете на всяка снимка вече завършват на
+„Виктория Борисова“ вместо „фотограф София и Видин“ (същият текст на 500 снимки
+е спам сигнал, не SEO); правната страница „работещ в София, Видин и цяла
+България“ → „в София и Видин“; описанието на /galerii за Google - същото;
+схемата вече не изброява „България“ като обслужвана област.
+
+**Not changed, on purpose:** Viki's own texts (About, the wedding day, prom,
+christening, "други събития") apart from the two "цяла България" clauses above;
+the home H1 „…в София и Видин“ - the one place the cities belong.
+
+**Ideas I did not build (need a yes):** (a) "Без лимит на снимките" as the fourth
+tile in the strip instead of the cities - the birthdays FAQ already promises it,
+strongest differentiator in the market, but is it true for every service?
+(b) A "Цени от … лв" line - the pricing gap is the biggest conversion leak on the
+site and only you two can fill it.
+
+### T-44 · Fonts - pick a letter
+**https://phbyvikiprod--fonts-cqv7luse.web.app/shriftove** (expires 2026-10-16).
+Four cards A-D: same heading (Cormorant, unchanged), same paragraph, same
+buttons, same letters - only the text face differs. Names hidden by default so
+you choose by eye; "Покажи имената" reveals them. A is what the site has now.
+Say the letter; the swap is one line.
+
+### T-45 · Venue and date without the spreadsheet
+Checked the photographs in R2: no EXIF, so nothing is derivable - the date and
+place exist only in Viki's head. She needs no spreadsheet: forward this to her
+in Messenger and she answers inline, a voice note is fine too (31 lines, ten
+minutes). Until it comes, the gallery pages say only the category (T-43), never
+a guessed town.
+
+```
+Вики, за всяка галерия - град и месец/година, така: „Видин, юни 2024“.
+
+Сватби:
+- Александрина и Борис -
+- Анжела и Александър -
+- Бети и Светли -
+- Вики и Петьо -
+- Виктория и Мартин -
+- Елина и Денис -
+- Лора и Асен -
+- Лори и Любо -
+- Люба и Калоян -
+- Нанси и Чавдар -
+- Натали и Валентин -
+- Руми и Цецко -
+- Krysteena & Martin -
+
+Абитуриенти:
+- Ванеса -
+- Вивиан -
+- Ева -
+- Елинор -
+- Ирена -
+- Катрин и Калин -
+- Мери -
+- Мони -
+- Никол -
+- Никол и Димитър -
+- Петя -
+- Семеен бал Ванеса -
+- Семеен бал Мадлен -
+- Семеен бал Мони -
+
+Други събития:
+- Детски рожден ден Дари -
+- Криси -
+- Миши -
+- Юбилей Сергей -
+
+И още едно: 3-5 съобщения от клиенти след снимките (копирани от Messenger,
+с тяхното „да“ за публикуване). Секцията „Отзиви“ на началната страница е
+празна и чака точно тях - за сватбен фотограф това тежи повече от всеки текст.
+```
+
+What the answers unlock, in order of value: the reviews (the empty section on
+the home page, the strongest proof there is); town + season under each gallery's
+name („Сватба във Видин · юни 2024“), which also gives every gallery page a
+sentence Google has not seen on the other thirty; a `context` line on each
+review that links to its gallery.
 
 ### T-31 · Round two on the canvas - About (page 7), with Viki
 https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
@@ -66,14 +198,20 @@ which `npm run publish` already does.
 
 ## Working on
 
-**The auto queue is empty.** T-26…T-32 from your 2026-09-15 picks are shipped;
-the next tasks come from your answers under Needs you.
+**The auto queue is empty.** Your 2026-09-16 message is done (T-43 texts, T-44
+font page, T-45 answered); the next tasks come from your answers under Needs you.
 
 ---
 
 ## Shipped
 
 ### 2026-09-16
+- **T-43 · Copy pass** — commit "Say the cities once and drop the whole-country
+  claim". Every changed sentence is under Needs you → T-43. Verified by a
+  fresh agent against the 43 prerendered pages: new strings present, old
+  ones absent, titles untouched; gate green. Also fixed on the way: the home
+  CTA invited a phone call (no number on the site) and "фирмени" events were
+  still offered twice after Viki removed the category.
 - **T-42 · Bulgarian letterforms on every device** — commit "Set the body in
   a face with Bulgarian letterforms". What was true: the Cormorant headings
   already draw the Bulgarian в, д, т (the page is lang="bg" and the font

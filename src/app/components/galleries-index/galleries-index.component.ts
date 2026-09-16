@@ -68,7 +68,7 @@ export class GalleriesIndexComponent implements OnInit {
       imageSrc: gallery.imageSrc,
       imageSrcset: gallery.imageSrcset,
       link: ['/galeriya', service.slug, gallery.name],
-      alt: `${gallery.name} - ${service.label.toLowerCase()}, фотограф София и Видин`,
+      alt: `${gallery.name} - ${service.label.toLowerCase()}, Виктория Борисова`,
       category: service.label,
     }))));
   }
