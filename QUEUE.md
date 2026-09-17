@@ -162,6 +162,8 @@ purpose — see its note.
 - [x] T-46 · Copy pass two - literary Bulgarian, no "24 часа", hero line explained, cities tile without label, FAQ 5 · auto · done 2026-09-17, texts listed in LOG
   > 1 - какво значи без позиране и анпрежение. нека поработим над това и да бъде ан български книжовен език. софия и видин но не ми хареса софия и видин какво може да имзислим или да си го оставим, махни 'където снимам най-често. Нека махнем отговарям до 24 часа звучи банално. 5-  ако събитието е другата ми пишете за да се уточним или нещо такова. . Нека всички текстове да са професионални.
 - [ ] T-47 · Per-gallery texts written from the photographs (Viki cannot recall dates or write them) · needs-you · proposal in LOG, waiting for a yes
+- [x] T-48 · Email-ready list of every non-Viki text for her to approve or redact · auto · done 2026-09-17 (`.verify/tekstove-za-viki-2026-09-17.txt`)
+  > okay can i send them to email to her so she agrees or redacts them can you help with that and what else is left, testemonials for now wont do and for seo is everything ready and whats left from buildig the website
   > Също какво правим с текстовете за всчка галерия които чакаме от нея но тя каза че не помни дати и не може да измисли текстове
 
 ---

@@ -14,8 +14,9 @@ more work into `QUEUE.md` → Intake.
    https://phbyvikiprod--preview-yb28hwie.web.app
 2. **Per-gallery texts** (T-47 below) - say yes and I write them from the photographs;
    Viki only reads and corrects.
-3. **Forward the T-45 message** to Viki - without the dates now: town per gallery
-   if she remembers (skip the rest), and 3-5 client messages for the reviews.
+3. **Email to Viki** - `.verify/tekstove-za-viki-2026-09-17.txt` (also sent to
+   you in chat): every non-Viki text, numbered by page; she answers by number.
+   Reviews: parked (Martin, 2026-09-17: "testimonials for now wont do").
 4. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
 5. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
    once you and Viki say yes (nothing live yet).
