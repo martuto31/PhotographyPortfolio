@@ -9,18 +9,27 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### What is left, in one place (2026-09-17)
-1. **Check the texts** (T-46 below - numbered, answer by number). On the preview:
-   https://phbyvikiprod--preview-yb28hwie.web.app
-2. **Per-gallery texts** (T-47 below) - say yes and I write them from the photographs;
-   Viki only reads and corrects.
-3. **Email to Viki** - `.verify/tekstove-za-viki-2026-09-17.txt` (also sent to
-   you in chat): every non-Viki text, numbered by page; she answers by number.
-   Reviews: parked (Martin, 2026-09-17: "testimonials for now wont do").
-4. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
-5. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
-   once you and Viki say yes (nothing live yet).
-Settled: font A (Source Sans 3) stays; About page stays for now.
+### What is left, in one place (2026-09-19)
+1. **Two things to confirm from Viki's answers** (T-49 below): the three FAQ
+   entries she left out are removed - right? And "духането на свещичките" is
+   as she wrote it - or a slip for "духването"? One word each.
+2. **Per-gallery texts** (T-47 below) - say yes and I write them from the
+   photographs; Viki only reads and corrects.
+3. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
+4. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
+   once you and Viki say yes (nothing live yet). Everything else is built.
+Settled: font A (Source Sans 3); About stays; reviews parked.
+
+### T-49 · Viki's answers - applied, two things to confirm
+Her list came back with nine sentences changed and everything else as sent;
+all nine are in (preview refreshed). Two readings I made, say if wrong:
+- **Three FAQ entries were missing from her copy** - prom "Какво да облечем за
+  фотосесията?", family "Детето ни не стои мирно. Проблем ли е?" and "Кое е
+  най-подходящото време на деня?". I read a dropped bullet in an otherwise
+  complete list as "remove" and took them out (the prom page has two FAQs now,
+  the family page one). One line brings any of them back.
+- **"духането на свещичките"** (birthdays, paragraph 2) is her wording; the
+  sent text had "духването". Both are Bulgarian; hers stays unless you say.
 
 ### T-46 · Texts to check (2026-09-17) - answer by number
 Register: standard literary Bulgarian, professional; every "24 часа" promise
@@ -269,12 +278,20 @@ which `npm run publish` already does.
 
 ## Working on
 
-**The auto queue is empty.** T-46 is done; T-47 (gallery texts from the
+**The auto queue is empty.** T-49 is done; T-47 (gallery texts from the
 photographs) waits for your yes under Needs you.
 
 ---
 
 ## Shipped
+
+### 2026-09-19
+- **T-49 · Viki's answers applied** — commit "Put in Viki's wording from her
+  review of the texts". Nine sentences changed (hero line, process lead, step
+  3, two FAQ answers, footer tagline, /galerii lead and band, family
+  paragraph, "духането"), three FAQ entries she left out removed. Verified by
+  a fresh agent on all 43 pages, 11/11; gate green. Two readings to confirm
+  under Needs you.
 
 ### 2026-09-17
 - **T-46 · Copy pass two** — commit "Put the texts in literary Bulgarian and
