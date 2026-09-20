@@ -9,6 +9,10 @@
         <h1>{{ displayName }}</h1>
 
         <p>{{ pageHeading }}</p>
+
+        @if (galleryText) {
+            <p class="about">{{ galleryText }}</p>
+        }
     </header>
 }
 

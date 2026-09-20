@@ -9,6 +9,7 @@ import { StructuredDataService } from './../../services/structured-data.service'
 
 import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, fetchManifest, galleryImages } from './../../config';
 import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
+import { galleryText } from './../../content/gallery-texts';
 
 type SiblingGallery = GallerySnapshotItem;
 
@@ -120,6 +121,9 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   public categorySlug = '';
   public displayName = '';
 
+  // The gallery's own paragraph (content/gallery-texts.ts), or empty when it has none.
+  public galleryText = '';
+
   // Other galleries in the same category. A gallery page used to carry three
   // internal links and nothing to do at the bottom — a visitor who scrolled 154
   // photographs arrived at a dead end. Read from the build-time snapshot so the
@@ -191,6 +195,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
     this.categoryLink = '';
     this.categorySlug = '';
     this.displayName = '';
+    this.galleryText = '';
   }
 
   ngOnDestroy(): void {
@@ -439,6 +444,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
     this.categoryLabel = heading.category;
     this.categorySlug = slug;
     this.categoryLink = `/galerii/${slug}`;
+    this.galleryText = galleryText(`${SLUG_TO_PREFIX[slug]}/${this.displayName}`);
   }
 
   private setSiblings(): void {
@@ -566,7 +572,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
       ]),
       this.structuredData.imageGallery({
         name: `${this.displayName} - ${this.pageHeading}`,
-        description: `${this.pageHeading} „${this.displayName}“ от Виктория Борисова - фотограф в София и Видин.`,
+        description: this.galleryText || `${this.pageHeading} „${this.displayName}“ от Виктория Борисова - фотограф в София и Видин.`,
         url,
         // Prerender runs before the manifest fetch, so `images` is empty on the
         // server. The sitemap already carries per-gallery <image:image> entries;

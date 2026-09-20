@@ -275,6 +275,15 @@
     margin: 0;
 }
 
+/* The gallery's own paragraph - same voice and measure as the service copy on
+   /galerii, centred under the noun. */
+.gallery-heading .about {
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 62ch;
+    margin: 18px auto 0;
+}
+
 /* ---- Sibling galleries --------------------------------------------------
    Sits between the photographs and the closing CTA. Before it, the only way on
    from a gallery was the browser's back button. */

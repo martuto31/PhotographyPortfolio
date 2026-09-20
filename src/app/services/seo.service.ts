@@ -5,6 +5,7 @@ import { DOCUMENT } from '@angular/common';
 
 import seoDataJson from '../../assets/seo.json';
 import { GALLERY_SNAPSHOT } from '../generated/galleries';
+import { galleryText } from '../content/gallery-texts';
 
 interface SEODataItem {
   title?: string;
@@ -33,6 +34,24 @@ const GALLERY_TYPE_COPY: Record<string, { type: string; noun: string; keywords: 
   'rojdeni-dni': { type: 'Birthdays', noun: 'Фотосесия за рожден ден', keywords: 'фотограф за рожден ден София, детски рожден ден, фотограф за юбилей' },
   'semeyni': { type: 'Family', noun: 'Семейна фотосесия', keywords: 'семеен фотограф София, семейна фотосесия, детска фотосесия' },
 };
+
+// A gallery's paragraph, cut to whole sentences that fit a search snippet. Google
+// shows ~155 characters; ending on a full stop beats ending mid-word. A text whose
+// first sentence alone is over the limit is kept whole - truncated is still better
+// than the generic line.
+const SNIPPET_LENGTH = 160;
+
+function snippet(text: string): string {
+  const sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g) ?? [text];
+  let out = '';
+  for (const sentence of sentences) {
+    if (out && (out + sentence).trim().length > SNIPPET_LENGTH) {
+      break;
+    }
+    out += sentence;
+  }
+  return out.trim();
+}
 
 @Injectable({
   providedIn: 'root'
@@ -185,7 +204,12 @@ export class SEOService {
       item: {
         // Kept near 150 characters. The previous wording ran past 165 on every
         // gallery, so Google truncated all ~31 of them mid-sentence.
-        description: `${copy.noun} „${name}“ - Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и ми пишете за вашата дата.`,
+        //
+        // A gallery with its own paragraph (content/gallery-texts.ts) uses that instead,
+        // so the 31 gallery pages stop sharing one description.
+        description: galleryText(`${copy.type}/${name}`)
+          ? snippet(galleryText(`${copy.type}/${name}`))
+          : `${copy.noun} „${name}“ - Виктория Борисова, фотограф в София и Видин. Разгледайте кадрите и ми пишете за вашата дата.`,
         keywords: `${name}, ${copy.keywords}, Виктория Борисова, phbyviki`,
         // A shared gallery link previews that gallery's own cover, not the homepage
         // image. The cover is the photograph chosen to represent it, and it is in the
