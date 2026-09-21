@@ -275,14 +275,6 @@
     margin: 0;
 }
 
-/* The gallery's one line (what the shoot was + photo count), same style as the
-   noun above it. */
-.gallery-heading .about {
-    max-width: 62ch;
-    margin: 6px auto 0;
-    line-height: 1.6;
-}
-
 /* ---- Sibling galleries --------------------------------------------------
    Sits between the photographs and the closing CTA. Before it, the only way on
    from a gallery was the browser's back button. */

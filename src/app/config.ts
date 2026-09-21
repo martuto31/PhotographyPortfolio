@@ -73,6 +73,24 @@ async function fetchManifestFrom(url: string): Promise<GalleryManifest | null> {
   }
 }
 
+// A route segment as the visitor typed or pasted it. The router decodes once; a link
+// that went through a chat app or a share sheet often arrives encoded twice
+// ("Лора%2520и%2520Асен" → "Лора%20и%20Асен"), and then nothing matches the manifest.
+// Decode until the value stops changing. Malformed sequences are left as they are.
+export function decodeRouteSegment(raw: string): string {
+  let value = raw;
+  for (let i = 0; i < 3 && value.includes('%'); i++) {
+    try {
+      const next = decodeURIComponent(value);
+      if (next === value) break;
+      value = next;
+    } catch {
+      break;
+    }
+  }
+  return value;
+}
+
 // Build a public image URL from a manifest gallery prefix + filename, encoding
 // each path segment (handles spaces / & / Cyrillic in gallery folder names).
 export function imageUrl(prefix: string, file: string): string {

@@ -4,6 +4,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 
 import seoDataJson from '../../assets/seo.json';
+import { decodeRouteSegment } from '../config';
 import { GALLERY_SNAPSHOT } from '../generated/galleries';
 import { galleryDescription, galleryLine } from '../content/gallery-texts';
 
@@ -158,10 +159,8 @@ export class SEOService {
       return null;
     }
 
-    let decoded: string;
-    try {
-      decoded = decodeURIComponent(routerUrl.slice(PREFIX.length));
-    } catch {
+    const decoded = decodeRouteSegment(routerUrl.slice(PREFIX.length));
+    if (decoded.includes('%')) {
       return null; // malformed percent-encoding — fall through to the normal lookup
     }
 

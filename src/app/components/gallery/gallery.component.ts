@@ -7,9 +7,9 @@ import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
 import { DimensionService } from './../../services/dimension.service';
 import { StructuredDataService } from './../../services/structured-data.service';
 
-import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, fetchManifest, galleryImages } from './../../config';
+import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, decodeRouteSegment, fetchManifest, galleryImages } from './../../config';
 import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
-import { galleryDescription, galleryLine, photoCountLabel } from './../../content/gallery-texts';
+import { galleryDescription, galleryLine } from './../../content/gallery-texts';
 
 type SiblingGallery = GallerySnapshotItem;
 
@@ -70,7 +70,8 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
 
   // The "<slug>/<gallery>" path used to look the gallery up, from either route shape.
   private get slugPath(): string {
-    return this.galleryType ? `${this.galleryType}/${this.galleryName}` : this.galleryName;
+    const name = decodeRouteSegment(this.galleryName);
+    return this.galleryType ? `${this.galleryType}/${name}` : name;
   }
 
   public images: ResponsiveImage[] = [];
@@ -121,15 +122,11 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   public categorySlug = '';
   public displayName = '';
 
-  // The gallery's own line (content/gallery-texts.ts), or empty when it has none, and
-  // the photo count shown after it: from the snapshot first, the manifest once loaded.
-  public galleryLine = '';
-  public photoCount = 0;
-
-  // "Изнесен ритуал, портрети в парк · 153 снимки" - the count only once known.
-  public get caption(): string {
-    return this.photoCount ? `${this.galleryLine} · ${photoCountLabel(this.photoCount)}` : this.galleryLine;
-  }
+  // The gallery's own line (content/gallery-texts.ts) and photo count - snapshot first,
+  // the manifest once loaded. Not shown on the page (Martin, 2026-09-21): they feed
+  // the JSON-LD description only; SEOService builds the meta description the same way.
+  private galleryLine = '';
+  private photoCount = 0;
 
   // Other galleries in the same category. A gallery page used to carry three
   // internal links and nothing to do at the bottom — a visitor who scrolled 154
