@@ -4,7 +4,7 @@
             <span class="tile-frame">
                 <img [src]="item.imageSrc"
                      [attr.srcset]="item.imageSrcset || null"
-                     [attr.sizes]="item.imageSrcset ? sizes : null"
+                     [attr.sizes]="item.imageSrcset ? sizesFor(item) : null"
                      [attr.loading]="loadingFor($index)"
                      decoding="async"
                      width="800"

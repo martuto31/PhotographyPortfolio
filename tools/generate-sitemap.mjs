@@ -293,6 +293,8 @@ async function main() {
       const cover = gallery.files.includes(COVER_FILENAME) ? COVER_FILENAME : gallery.files[0];
       const coverUrl = `https://images.phbyviki.com/${encodePath(gallery.prefix)}/${encodeURIComponent(cover)}`;
       const srcset = buildSrcset(manifest, gallery.prefix, cover);
+      const coverDims = manifest.dims?.[gallery.prefix];
+      const coverSize = coverDims ? coverDims.sizes[coverDims.files.indexOf(cover)] ?? [0, 0] : [0, 0];
       const photoCount = gallery.files.filter((file) => file !== COVER_FILENAME).length;
       const photos = buildPhotos(manifest, gallery, SNAPSHOT_PHOTOS)
         .map((photo) => `        { src: ${JSON.stringify(photo.src)}, srcset: ${JSON.stringify(photo.srcset)}, width: ${photo.width}, height: ${photo.height} },`)
@@ -302,6 +304,8 @@ async function main() {
         `      name: ${JSON.stringify(gallery.name)},`,
         `      imageSrc: ${JSON.stringify(coverUrl)},`,
         `      imageSrcset: ${JSON.stringify(srcset)},`,
+        `      imageWidth: ${coverSize[0]},`,
+        `      imageHeight: ${coverSize[1]},`,
         `      photoCount: ${photoCount},`,
         `      photos: [`,
         photos,
@@ -334,6 +338,9 @@ async function main() {
     '  imageSrc: string;',
     '  // Empty until the cover has responsive derivatives in R2 (npm run publish -- --thumbs).',
     '  imageSrcset: string;',
+    '  // The cover\'s full-size pixels (0 when not measured), for crop-aware sizes.',
+    '  imageWidth: number;',
+    '  imageHeight: number;',
     '  // Photographs in the gallery, cover excluded - shown under the heading and in the',
     '  // meta description before the manifest has loaded.',
     '  photoCount: number;',

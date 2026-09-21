@@ -6,12 +6,15 @@ export interface GalleryListing {
   name: string;
   imageSrc: string;
   imageSrcset: string;
+  // The cover's full-size pixels (0 when not measured), for crop-aware `sizes`.
+  imageWidth: number;
+  imageHeight: number;
 }
 
 // The build-time snapshot's list for a type - what the prerendered HTML carries,
 // so a crawler sees a real <a> and a real <img> per gallery.
 export function snapshotGalleries(type: string): GalleryListing[] {
-  return (GALLERY_SNAPSHOT[type] ?? []).map(({ name, imageSrc, imageSrcset }) => ({ name, imageSrc, imageSrcset }));
+  return (GALLERY_SNAPSHOT[type] ?? []).map(({ name, imageSrc, imageSrcset, imageWidth, imageHeight }) => ({ name, imageSrc, imageSrcset, imageWidth, imageHeight }));
 }
 
 // The live manifest's list for a type, so galleries published since the last
@@ -27,7 +30,13 @@ export function manifestGalleries(manifest: GalleryManifest, type: string): Gall
       const files = manifest.galleries[prefix];
       const cover = files.includes(COVER_FILENAME) ? COVER_FILENAME : files[0];
       const image = cover ? coverImage(manifest, prefix, cover) : null;
-      return { name: prefix.slice(typePrefix.length), imageSrc: image?.src ?? '', imageSrcset: image?.srcset ?? '' };
+      return {
+        name: prefix.slice(typePrefix.length),
+        imageSrc: image?.src ?? '',
+        imageSrcset: image?.srcset ?? '',
+        imageWidth: image?.width ?? 0,
+        imageHeight: image?.height ?? 0,
+      };
     })
     .filter((gallery) => gallery.imageSrc);
 }

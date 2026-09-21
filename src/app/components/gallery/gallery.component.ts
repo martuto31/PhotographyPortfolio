@@ -7,7 +7,7 @@ import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
 import { DimensionService } from './../../services/dimension.service';
 import { StructuredDataService } from './../../services/structured-data.service';
 
-import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, decodeRouteSegment, fetchManifest, galleryImages } from './../../config';
+import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, coverSizes, decodeRouteSegment, fetchManifest, galleryImages } from './../../config';
 import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
 import { galleryDescription, galleryLine } from './../../content/gallery-texts';
 
@@ -97,7 +97,12 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   public readonly pairSizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 94vw, 512px`;
 
   // The sibling strip stays three-up from tablet width and goes full-bleed on mobile.
-  public readonly siblingSizes = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 425px, 31vw`;
+  private static readonly SIBLING_SLOTS = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 425px, 31vw`;
+
+  // The card is 4:3; a wider cover is cropped by height and needs more pixels across.
+  public siblingSizes(sibling: SiblingGallery): string {
+    return coverSizes(GalleryComponent.SIBLING_SLOTS, 4, 3, sibling.imageWidth, sibling.imageHeight);
+  }
 
   public areImagesLoaded = false;
   // Counts images that have finished (loaded or errored). The skeleton mask

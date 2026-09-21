@@ -132,6 +132,8 @@ export class GalleriesCardsComponent implements OnInit, OnChanges {
       name: gallery.name,
       imageSrc: gallery.imageSrc,
       imageSrcset: gallery.imageSrcset,
+      imageWidth: gallery.imageWidth,
+      imageHeight: gallery.imageHeight,
       link: ['/galeriya', this.galleryType, gallery.name],
       alt: `${this.altPrefix}${gallery.name} - Виктория Борисова`,
     }));

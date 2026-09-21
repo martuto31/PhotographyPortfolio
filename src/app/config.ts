@@ -180,3 +180,47 @@ export function coverImage(
 ): ResponsiveImage {
   return galleryImages(manifest, prefix, [file])[0];
 }
+
+// A cover is shown cropped to a fixed box (the wall's 4:5, the sibling cards' 4:3)
+// with object-fit: cover. A photograph wider than the box is scaled to the box's
+// *height*, so the pixels it needs across are more than the box's width - a 3:2
+// landscape in a 4:5 tile needs 1.875x. `sizes` only knows the box width, so the
+// browser picked a 512px file for a 790px job and the wall looked soft on any
+// 1x monitor. Scale every slot by that factor; a photograph narrower than the box
+// is cropped by width and needs nothing extra.
+export function coverSizes(slots: string, boxWidth: number, boxHeight: number, imageWidth: number, imageHeight: number): string {
+  if (!imageWidth || !imageHeight) {
+    return slots;
+  }
+  const factor = (imageWidth / imageHeight) / (boxWidth / boxHeight);
+  if (factor <= 1.01) {
+    return slots;
+  }
+  const f = factor.toFixed(3);
+  return splitSlots(slots)
+    .map((slot) => {
+      // "(max-width: 480px) min(94vw, 341px)" -> condition + value; the last slot has no condition.
+      const condition = slot.startsWith('(') ? slot.slice(0, slot.indexOf(')') + 1) : '';
+      const value = slot.slice(condition.length).trim();
+      return `${condition ? condition + ' ' : ''}calc(${value} * ${f})`;
+    })
+    .join(', ');
+}
+
+// Split a `sizes` list on the commas between slots, not the ones inside min()/calc().
+function splitSlots(sizes: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < sizes.length; i++) {
+    const ch = sizes[i];
+    if (ch === '(') depth++;
+    else if (ch === ')') depth--;
+    else if (ch === ',' && depth === 0) {
+      out.push(sizes.slice(start, i).trim());
+      start = i + 1;
+    }
+  }
+  out.push(sizes.slice(start).trim());
+  return out.filter(Boolean);
+}

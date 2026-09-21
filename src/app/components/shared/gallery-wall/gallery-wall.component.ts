@@ -2,7 +2,7 @@ import { AfterViewChecked, AfterViewInit, Component, ElementRef, Inject, Input, 
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-import { PHONE_SLOT } from './../../../config';
+import { PHONE_SLOT, coverSizes } from './../../../config';
 
 // One tile on the wall.
 export interface WallItem {
@@ -11,6 +11,9 @@ export interface WallItem {
   imageSrcset: string;
   link: string[];
   alt: string;
+  // The cover's full-size pixels, so `sizes` can allow for the 4:5 crop.
+  imageWidth?: number;
+  imageHeight?: number;
   /** Shown under the name on the mixed wall; left empty on a category page. */
   category?: string;
 }
@@ -41,8 +44,13 @@ export class GalleryWallComponent implements AfterViewInit, AfterViewChecked, On
 
   @Input() items: WallItem[] = [];
 
-  // Three across on desktop, two on tablets and phones.
-  public readonly sizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 47vw, (min-width: 1440px) 421px, 30vw`;
+  // Three across on desktop, two on tablets and phones - the tile's width. A
+  // landscape cover cropped into the 4:5 tile needs more than that (coverSizes).
+  private static readonly SLOTS = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 47vw, (min-width: 1440px) 421px, 30vw`;
+
+  public sizesFor(item: WallItem): string {
+    return coverSizes(GalleryWallComponent.SLOTS, 4, 5, item.imageWidth ?? 0, item.imageHeight ?? 0);
+  }
 
   // The first row is on screen at every width and must not wait for the lazy
   // loader; four covers the widest row with one to spare.

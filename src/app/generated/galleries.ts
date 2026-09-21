@@ -19,6 +19,9 @@ export interface GallerySnapshotItem {
   imageSrc: string;
   // Empty until the cover has responsive derivatives in R2 (npm run publish -- --thumbs).
   imageSrcset: string;
+  // The cover's full-size pixels (0 when not measured), for crop-aware sizes.
+  imageWidth: number;
+  imageHeight: number;
   // Photographs in the gallery, cover excluded - shown under the heading and in the
   // meta description before the manifest has loaded.
   photoCount: number;
@@ -32,6 +35,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Ема",
       imageSrc: "https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/dsc09148.webp",
       imageSrcset: "https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/w512/dsc09148.webp 512w, https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/w1024/dsc09148.webp 1024w, https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/w1600/dsc09148.webp 1600w, https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/dsc09148.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 56,
       photos: [
         { src: "https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/dsc09148.webp", srcset: "https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/w512/dsc09148.webp 512w, https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/w1024/dsc09148.webp 1024w, https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/w1600/dsc09148.webp 1600w, https://images.phbyviki.com/Birthdays/%D0%95%D0%BC%D0%B0/dsc09148.webp 2048w", width: 2048, height: 1365 },
@@ -50,6 +55,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Ванеса",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 23,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/dsc07322.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w512/dsc07322.webp 512w, https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1024/dsc07322.webp 1024w, https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1600/dsc07322.webp 1600w, https://images.phbyviki.com/Graduates/%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/dsc07322.webp 2048w", width: 2048, height: 1365 },
@@ -66,6 +73,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Вивиан",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 21,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/dsc04403.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/w512/dsc04403.webp 512w, https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/w1024/dsc04403.webp 1024w, https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/w1600/dsc04403.webp 1600w, https://images.phbyviki.com/Graduates/%D0%92%D0%B8%D0%B2%D0%B8%D0%B0%D0%BD/dsc04403.webp 2048w", width: 2048, height: 1365 },
@@ -82,6 +91,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Ева",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/cover.webp 1366w",
+      imageWidth: 1366,
+      imageHeight: 2048,
       photoCount: 6,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/dsc07411.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/w512/dsc07411.webp 512w, https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/w1024/dsc07411.webp 1024w, https://images.phbyviki.com/Graduates/%D0%95%D0%B2%D0%B0/dsc07411.webp 1366w", width: 1366, height: 2048 },
@@ -96,6 +107,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Елинор",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 16,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/dsc00235.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/w512/dsc00235.webp 512w, https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/w1024/dsc00235.webp 1024w, https://images.phbyviki.com/Graduates/%D0%95%D0%BB%D0%B8%D0%BD%D0%BE%D1%80/dsc00235.webp 1365w", width: 1365, height: 2048 },
@@ -112,6 +125,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Ирена",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/cover.webp 1378w",
+      imageWidth: 1378,
+      imageHeight: 2048,
       photoCount: 4,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/dsc1283.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/w512/dsc1283.webp 512w, https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/w1024/dsc1283.webp 1024w, https://images.phbyviki.com/Graduates/%D0%98%D1%80%D0%B5%D0%BD%D0%B0/dsc1283.webp 1385w", width: 1385, height: 2048 },
@@ -124,6 +139,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Катрин и Калин",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 6,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/dsc0881.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/w512/dsc0881.webp 512w, https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/w1024/dsc0881.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/w1600/dsc0881.webp 1600w, https://images.phbyviki.com/Graduates/%D0%9A%D0%B0%D1%82%D1%80%D0%B8%D0%BD%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD/dsc0881.webp 2048w", width: 2048, height: 1365 },
@@ -138,6 +155,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Мери",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/cover.webp 1366w",
+      imageWidth: 1366,
+      imageHeight: 2048,
       photoCount: 10,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/dsc0227.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/w512/dsc0227.webp 512w, https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/w1024/dsc0227.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9C%D0%B5%D1%80%D0%B8/dsc0227.webp 1432w", width: 1432, height: 2048 },
@@ -154,6 +173,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Мони",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 18,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/dsc00183.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/w512/dsc00183.webp 512w, https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/w1024/dsc00183.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9C%D0%BE%D0%BD%D0%B8/dsc00183.webp 1365w", width: 1365, height: 2048 },
@@ -170,6 +191,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Никол",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/cover.webp 1366w",
+      imageWidth: 1366,
+      imageHeight: 2048,
       photoCount: 4,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/dsc07860.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/w512/dsc07860.webp 512w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/w1024/dsc07860.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB/dsc07860.webp 1366w", width: 1366, height: 2048 },
@@ -182,6 +205,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Никол и Димитър",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/cover.webp 1366w",
+      imageWidth: 1366,
+      imageHeight: 2048,
       photoCount: 5,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/dsc0979.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/w512/dsc0979.webp 512w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/w1024/dsc0979.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%20%D0%B8%20%D0%94%D0%B8%D0%BC%D0%B8%D1%82%D1%8A%D1%80/dsc0979.webp 1422w", width: 1422, height: 2048 },
@@ -195,6 +220,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Петя",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 5,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/dsc07342.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/w512/dsc07342.webp 512w, https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/w1024/dsc07342.webp 1024w, https://images.phbyviki.com/Graduates/%D0%9F%D0%B5%D1%82%D1%8F/dsc07342.webp 1366w", width: 1366, height: 2048 },
@@ -208,6 +235,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Семеен бал Ванеса",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 8,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/dsc0008.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w512/dsc0008.webp 512w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1024/dsc0008.webp 1024w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/w1600/dsc0008.webp 1600w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%92%D0%B0%D0%BD%D0%B5%D1%81%D0%B0/dsc0008.webp 2048w", width: 2048, height: 1365 },
@@ -224,6 +253,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Семеен бал Мадлен",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 14,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/dsc01427.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/w512/dsc01427.webp 512w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/w1024/dsc01427.webp 1024w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/w1600/dsc01427.webp 1600w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%B0%D0%B4%D0%BB%D0%B5%D0%BD/dsc01427.webp 2048w", width: 2048, height: 1365 },
@@ -240,6 +271,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Семеен бал Мони",
       imageSrc: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/w1600/cover.webp 1600w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 25,
       photos: [
         { src: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/dsc09312.webp", srcset: "https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/w512/dsc09312.webp 512w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/w1024/dsc09312.webp 1024w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/w1600/dsc09312.webp 1600w, https://images.phbyviki.com/Graduates/%D0%A1%D0%B5%D0%BC%D0%B5%D0%B5%D0%BD%20%D0%B1%D0%B0%D0%BB%20%D0%9C%D0%BE%D0%BD%D0%B8/dsc09312.webp 2048w", width: 2048, height: 1365 },
@@ -258,6 +291,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Детайли",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/dsc00066.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/w512/dsc00066.webp 512w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/w1024/dsc00066.webp 1024w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/w1600/dsc00066.webp 1600w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/dsc00066.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1261,
       photoCount: 40,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/dsc00066.webp", srcset: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/w512/dsc00066.webp 512w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/w1024/dsc00066.webp 1024w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/w1600/dsc00066.webp 1600w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D0%B0%D0%B8%CC%86%D0%BB%D0%B8/dsc00066.webp 2048w", width: 2048, height: 1261 },
@@ -274,6 +309,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Детски рожден ден Дари",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/w1600/cover.webp 1600w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 19,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/dsc0419.webp", srcset: "https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/w512/dsc0419.webp 512w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/w1024/dsc0419.webp 1024w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/w1600/dsc0419.webp 1600w, https://images.phbyviki.com/Personal/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%20%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%20%D0%B4%D0%B5%D0%BD%20%D0%94%D0%B0%D1%80%D0%B8/dsc0419.webp 2048w", width: 2048, height: 1365 },
@@ -290,6 +327,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Криси",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/w1600/cover.webp 1600w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 4,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/dsc02228.webp", srcset: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/w512/dsc02228.webp 512w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/w1024/dsc02228.webp 1024w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8/dsc02228.webp 1366w", width: 1366, height: 2048 },
@@ -302,6 +341,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Криси и Лиза",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/dsc06926.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/w512/dsc06926.webp 512w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/w1024/dsc06926.webp 1024w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/dsc06926.webp 1365w",
+      imageWidth: 1365,
+      imageHeight: 2048,
       photoCount: 37,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/dsc06926.webp", srcset: "https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/w512/dsc06926.webp 512w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/w1024/dsc06926.webp 1024w, https://images.phbyviki.com/Personal/%D0%9A%D1%80%D0%B8%D1%81%D0%B8%20%D0%B8%20%D0%9B%D0%B8%D0%B7%D0%B0/dsc06926.webp 1365w", width: 1365, height: 2048 },
@@ -318,6 +359,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Мери",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/dsc06436.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/w512/dsc06436.webp 512w, https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/w1024/dsc06436.webp 1024w, https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/dsc06436.webp 1365w",
+      imageWidth: 1365,
+      imageHeight: 2048,
       photoCount: 47,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/dsc06436.webp", srcset: "https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/w512/dsc06436.webp 512w, https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/w1024/dsc06436.webp 1024w, https://images.phbyviki.com/Personal/%D0%9C%D0%B5%D1%80%D0%B8/dsc06436.webp 1365w", width: 1365, height: 2048 },
@@ -334,6 +377,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Миши",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/w1600/cover.webp 1600w, https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 3,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/dsc02268.webp", srcset: "https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/w512/dsc02268.webp 512w, https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/w1024/dsc02268.webp 1024w, https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/dsc02268.webp 1366w", width: 1366, height: 2048 },
@@ -345,6 +390,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Юбилей Сергей",
       imageSrc: "https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/w512/cover.webp 512w, https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/w1024/cover.webp 1024w, https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/w1600/cover.webp 1600w, https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 20,
       photos: [
         { src: "https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07618.webp", srcset: "https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/w512/dsc07618.webp 512w, https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/w1024/dsc07618.webp 1024w, https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/w1600/dsc07618.webp 1600w, https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07618.webp 2048w", width: 2048, height: 1365 },
@@ -363,6 +410,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Александрина и Борис",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 48,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/dsc00066.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/w512/dsc00066.webp 512w, https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/w1024/dsc00066.webp 1024w, https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/w1600/dsc00066.webp 1600w, https://images.phbyviki.com/Weddings/%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%91%D0%BE%D1%80%D0%B8%D1%81/dsc00066.webp 2048w", width: 2048, height: 1261 },
@@ -379,6 +428,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Анжела и Александър",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 20,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/dsc01843.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/w512/dsc01843.webp 512w, https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/w1024/dsc01843.webp 1024w, https://images.phbyviki.com/Weddings/%D0%90%D0%BD%D0%B6%D0%B5%D0%BB%D0%B0%20%D0%B8%20%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%8A%D1%80/dsc01843.webp 1365w", width: 1365, height: 2048 },
@@ -395,6 +446,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Бети и Светли",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 33,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03194.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/w512/dsc03194.webp 512w, https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/w1024/dsc03194.webp 1024w, https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/w1600/dsc03194.webp 1600w, https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03194.webp 2048w", width: 2048, height: 1365 },
@@ -411,6 +464,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Вики и Петьо",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1340,
       photoCount: 16,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/dsc-5914.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/w512/dsc-5914.webp 512w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/w1024/dsc-5914.webp 1024w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/w1600/dsc-5914.webp 1600w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE/dsc-5914.webp 2048w", width: 2048, height: 1365 },
@@ -427,6 +482,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Виктория и Мартин",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 13,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/dsc05124.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/w512/dsc05124.webp 512w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/w1024/dsc05124.webp 1024w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/w1600/dsc05124.webp 1600w, https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/dsc05124.webp 2048w", width: 2048, height: 1365 },
@@ -443,6 +500,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Дея и Виктор",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/dsc04419.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/w512/dsc04419.webp 512w, https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/w1024/dsc04419.webp 1024w, https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/w1600/dsc04419.webp 1600w, https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/dsc04419.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 132,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/dsc04419.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/w512/dsc04419.webp 512w, https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/w1024/dsc04419.webp 1024w, https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/w1600/dsc04419.webp 1600w, https://images.phbyviki.com/Weddings/%D0%94%D0%B5%D1%8F%20%D0%B8%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80/dsc04419.webp 2048w", width: 2048, height: 1365 },
@@ -459,6 +518,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Елина и Денис",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 11,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02581.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/w512/dsc02581.webp 512w, https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/w1024/dsc02581.webp 1024w, https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/w1600/dsc02581.webp 1600w, https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02581.webp 2048w", width: 2048, height: 1365 },
@@ -475,6 +536,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Лора и Асен",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 153,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/458964167-961224656019938-7812062304782235402-n.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/w512/458964167-961224656019938-7812062304782235402-n.webp 512w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/w1024/458964167-961224656019938-7812062304782235402-n.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/w1600/458964167-961224656019938-7812062304782235402-n.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B0%20%D0%B8%20%D0%90%D1%81%D0%B5%D0%BD/458964167-961224656019938-7812062304782235402-n.webp 2048w", width: 2048, height: 1365 },
@@ -491,6 +554,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Лори и Любо",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 52,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/dsc00014.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/w512/dsc00014.webp 512w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/w1024/dsc00014.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/w1600/dsc00014.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9B%D0%BE%D1%80%D0%B8%20%D0%B8%20%D0%9B%D1%8E%D0%B1%D0%BE/dsc00014.webp 2048w", width: 2048, height: 1365 },
@@ -507,6 +572,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Люба и Калоян",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 74,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00615.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/w512/dsc00615.webp 512w, https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/w1024/dsc00615.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/w1600/dsc00615.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00615.webp 2048w", width: 2048, height: 1365 },
@@ -523,6 +590,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Мира и Валентин",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc00044.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w512/dsc00044.webp 512w, https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w1024/dsc00044.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc00044.webp 1365w",
+      imageWidth: 1365,
+      imageHeight: 2048,
       photoCount: 68,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc00044.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w512/dsc00044.webp 512w, https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w1024/dsc00044.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9C%D0%B8%D1%80%D0%B0%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc00044.webp 1365w", width: 1365, height: 2048 },
@@ -539,6 +608,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Нанси и Чавдар",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 65,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/dsc00267.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/w512/dsc00267.webp 512w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/w1024/dsc00267.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/w1600/dsc00267.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/dsc00267.webp 2048w", width: 2048, height: 1365 },
@@ -555,6 +626,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Натали и Валентин",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 46,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc03942.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w512/dsc03942.webp 512w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/w1024/dsc03942.webp 1024w, https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc03942.webp 1366w", width: 1366, height: 2048 },
@@ -571,6 +644,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Руми и Цецко",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 87,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/dsc00118.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/w512/dsc00118.webp 512w, https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/w1024/dsc00118.webp 1024w, https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/w1600/dsc00118.webp 1600w, https://images.phbyviki.com/Weddings/%D0%A0%D1%83%D0%BC%D0%B8%20%D0%B8%20%D0%A6%D0%B5%D1%86%D0%BA%D0%BE/dsc00118.webp 2048w", width: 2048, height: 1365 },
@@ -587,6 +662,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Симона и Коста",
       imageSrc: "https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/dsc00702.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/w512/dsc00702.webp 512w, https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/w1024/dsc00702.webp 1024w, https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/w1600/dsc00702.webp 1600w, https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/dsc00702.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 157,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/dsc00702.webp", srcset: "https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/w512/dsc00702.webp 512w, https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/w1024/dsc00702.webp 1024w, https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/w1600/dsc00702.webp 1600w, https://images.phbyviki.com/Weddings/%D0%A1%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%20%D0%B8%20%D0%9A%D0%BE%D1%81%D1%82%D0%B0/dsc00702.webp 2048w", width: 2048, height: 1365 },
@@ -603,6 +680,8 @@ export const GALLERY_SNAPSHOT: Record<string, GallerySnapshotItem[]> = {
       name: "Krysteena & Martin",
       imageSrc: "https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/cover.webp",
       imageSrcset: "https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/w512/cover.webp 512w, https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/w1024/cover.webp 1024w, https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/w1600/cover.webp 1600w, https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/cover.webp 2048w",
+      imageWidth: 2048,
+      imageHeight: 1365,
       photoCount: 55,
       photos: [
         { src: "https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/dsc00012.webp", srcset: "https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/w512/dsc00012.webp 512w, https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/w1024/dsc00012.webp 1024w, https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/w1600/dsc00012.webp 1600w, https://images.phbyviki.com/Weddings/Krysteena%20%26%20Martin/dsc00012.webp 2048w", width: 2048, height: 1365 },
