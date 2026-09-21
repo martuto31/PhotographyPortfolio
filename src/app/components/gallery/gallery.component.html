@@ -55,19 +55,19 @@
 @if (siblings.length) {
     <section class="siblings">
         <header class="siblings-heading">
-            <h2>Още от {{ categoryLabel.toLowerCase() }}</h2>
+            <h2>{{ siblingsHeading }}</h2>
 
-            <a class="link-underline siblings-all" [routerLink]="categoryLink">Всички</a>
+            <a class="link-underline siblings-all" [routerLink]="siblingsAllLink">Всички</a>
         </header>
 
         <div class="siblings-grid">
             @for (sibling of siblings; track sibling.name) {
-                <a class="sibling" [routerLink]="[ '/galeriya', categorySlug, sibling.name ]">
+                <a class="sibling" [routerLink]="[ '/galeriya', sibling.slug, sibling.name ]">
                     <div class="sibling-image">
                         <img [src]="sibling.imageSrc"
                              [attr.srcset]="sibling.imageSrcset || null"
                              [attr.sizes]="sibling.imageSrcset ? siblingSizes : null"
-                             [alt]="sibling.name + ' - ' + pageHeading + ', Виктория Борисова'"
+                             [alt]="sibling.name + ' - ' + sibling.noun + ', Виктория Борисова'"
                              loading="lazy"
                              decoding="async">
                     </div>

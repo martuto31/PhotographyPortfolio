@@ -10,6 +10,7 @@
 /galerii/krushteneta
 /galerii/rojdeni-dni
 /galerii/semeyni
+/galeriya/rojdeni-dni/Ема
 /galeriya/abiturienti/Ванеса
 /galeriya/abiturienti/Вивиан
 /galeriya/abiturienti/Ева
@@ -24,8 +25,11 @@
 /galeriya/abiturienti/Семеен бал Ванеса
 /galeriya/abiturienti/Семеен бал Мадлен
 /galeriya/abiturienti/Семеен бал Мони
+/galeriya/lichni/Детайли
 /galeriya/lichni/Детски рожден ден Дари
 /galeriya/lichni/Криси
+/galeriya/lichni/Криси и Лиза
+/galeriya/lichni/Мери
 /galeriya/lichni/Миши
 /galeriya/lichni/Юбилей Сергей
 /galeriya/svatbi/Александрина и Борис
@@ -33,11 +37,14 @@
 /galeriya/svatbi/Бети и Светли
 /galeriya/svatbi/Вики и Петьо
 /galeriya/svatbi/Виктория и Мартин
+/galeriya/svatbi/Дея и Виктор
 /galeriya/svatbi/Елина и Денис
 /galeriya/svatbi/Лора и Асен
 /galeriya/svatbi/Лори и Любо
 /galeriya/svatbi/Люба и Калоян
+/galeriya/svatbi/Мира и Валентин
 /galeriya/svatbi/Нанси и Чавдар
 /galeriya/svatbi/Натали и Валентин
 /galeriya/svatbi/Руми и Цецко
+/galeriya/svatbi/Симона и Коста
 /galeriya/svatbi/Krysteena & Martin

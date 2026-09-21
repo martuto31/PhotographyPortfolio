@@ -228,7 +228,10 @@ for (const route of routes) {
   // -- gallery pages from here on
 
   const imgs = tags(html, 'img');
-  const photos = imgs.filter((i) => (i.attrs.src ?? '').startsWith(IMAGE_HOST) && !/\/cover\.webp$/i.test(i.attrs.src));
+  // The gallery's own photographs carry class="image"; the sibling cards' covers do
+  // not, and a gallery without a cover.webp shows its first photograph there, so
+  // filtering by filename alone counted that card as a photograph without dimensions.
+  const photos = imgs.filter((i) => (i.attrs.src ?? '').startsWith(IMAGE_HOST) && /(^|\s)image(\s|$)/.test(i.attrs.class ?? ''));
 
   if (imgs.length > 0) pass(route, 'images');
   else fail(route, 'images', 'zero <img> tags');

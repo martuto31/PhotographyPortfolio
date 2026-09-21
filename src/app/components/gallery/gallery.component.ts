@@ -11,7 +11,8 @@ import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, decodeRouteSegment, fetchM
 import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
 import { galleryDescription, galleryLine } from './../../content/gallery-texts';
 
-type SiblingGallery = GallerySnapshotItem;
+// A card in the "more galleries" strip: a snapshot item plus the category slug its link needs.
+type SiblingGallery = GallerySnapshotItem & { slug: string; noun: string };
 
 type Orientation = 'portrait' | 'landscape';
 
@@ -133,6 +134,8 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   // photographs arrived at a dead end. Read from the build-time snapshot so the
   // strip is in the prerendered HTML rather than waiting on the manifest fetch.
   public siblings: SiblingGallery[] = [];
+  public siblingsHeading = '';
+  public siblingsAllLink = '';
 
   private static readonly MAX_SIBLINGS = 3;
 
@@ -461,9 +464,26 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
 
-    this.siblings = (GALLERY_SNAPSHOT[type] ?? [])
+    const own = (GALLERY_SNAPSHOT[type] ?? [])
       .filter((gallery) => gallery.name !== this.displayName)
+      .map((gallery) => ({ ...gallery, slug: this.categorySlug, noun: this.pageHeading }));
+
+    // The only gallery in its category (the first birthday, say) would otherwise end
+    // in a dead end again: fill the strip from the other categories, newest first,
+    // and let the heading and the "all" link say so.
+    if (own.length) {
+      this.siblings = own.slice(0, GalleryComponent.MAX_SIBLINGS);
+      this.siblingsHeading = `Още от ${this.categoryLabel.toLowerCase()}`;
+      this.siblingsAllLink = this.categoryLink;
+      return;
+    }
+
+    this.siblings = Object.entries(SLUG_TO_PREFIX)
+      .filter(([slug]) => slug !== this.categorySlug)
+      .flatMap(([slug, prefix]) => (GALLERY_SNAPSHOT[prefix] ?? []).map((gallery) => ({ ...gallery, slug, noun: TYPE_HEADING[slug].noun })))
       .slice(0, GalleryComponent.MAX_SIBLINGS);
+    this.siblingsHeading = 'Още галерии';
+    this.siblingsAllLink = '/galerii';
   }
 
   // The photographs compiled into the build-time snapshot, used as the initial value of
