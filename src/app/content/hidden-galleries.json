@@ -1,10 +1,14 @@
 {
-  "_comment": "Manifest prefixes kept out of the site - not deleted from R2, so putting one back is removing its line here and running npm run sitemap. Viki, 2026-09-22.",
-  "hidden": [
-    "Weddings/Бети и Светли",
-    "Weddings/Елина и Денис",
-    "Weddings/Натали и Валентин",
-    "Weddings/Люба и Калоян",
-    "Personal/Юбилей Сергей"
-  ]
+  "_comment": "Galleries kept off the site. Nothing is deleted from R2; to put one back, remove its line and run npm run sitemap. 'everywhere' hides on the preview channel and the live site alike. 'liveSiteOnly' hides only on the deployed phbyviki.com (npm run deploy sets SITE_TARGET=live); the preview channel still shows them so the whole site can be reviewed. galleries: Viki's five, 2026-09-22. types: every wedding until the couples' consent is in (Martin, 2026-09-22).",
+  "everywhere": [],
+  "liveSiteOnly": {
+    "types": ["Weddings"],
+    "galleries": [
+      "Weddings/Бети и Светли",
+      "Weddings/Елина и Денис",
+      "Weddings/Натали и Валентин",
+      "Weddings/Люба и Калоян",
+      "Personal/Юбилей Сергей"
+    ]
+  }
 }

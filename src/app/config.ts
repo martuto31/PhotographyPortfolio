@@ -1,4 +1,4 @@
-import hiddenGalleries from './content/hidden-galleries.json';
+import { HIDDEN_GALLERIES, HIDDEN_TYPES } from './generated/site-target';
 
 // Public base URL of the R2 bucket (custom domain recommended, e.g. https://images.phbyviki.com).
 // During testing you can temporarily use the bucket's https://<id>.r2.dev URL.
@@ -64,15 +64,18 @@ export async function fetchManifest(): Promise<GalleryManifest | null> {
   return manifest && withoutHiddenGalleries(manifest);
 }
 
-// Galleries taken off the site (content/hidden-galleries.json) stay in the bucket and
+// Galleries kept off the site (content/hidden-galleries.json) stay in the bucket and
 // in the live manifest; drop them here so no card, page or sibling list shows them.
-// The build-time snapshot and sitemap apply the same list (tools/generate-sitemap.mjs).
-const HIDDEN_GALLERIES = new Set(hiddenGalleries.hidden.map((prefix) => prefix.normalize('NFC')));
+// The lists come from generated/site-target.ts: what tools/generate-sitemap.mjs left
+// out of the sitemap and snapshot for this build's target (preview or live site).
+const HIDDEN = new Set(HIDDEN_GALLERIES.map((prefix) => prefix.normalize('NFC')));
+
+function isHidden(prefix: string): boolean {
+  return HIDDEN.has(prefix.normalize('NFC')) || HIDDEN_TYPES.includes(prefix.slice(0, prefix.indexOf('/')));
+}
 
 function withoutHiddenGalleries(manifest: GalleryManifest): GalleryManifest {
-  const galleries = Object.fromEntries(
-    Object.entries(manifest.galleries).filter(([prefix]) => !HIDDEN_GALLERIES.has(prefix.normalize('NFC'))),
-  );
+  const galleries = Object.fromEntries(Object.entries(manifest.galleries).filter(([prefix]) => !isHidden(prefix)));
   return { ...manifest, galleries };
 }
 
