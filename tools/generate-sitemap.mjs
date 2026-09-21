@@ -16,7 +16,7 @@
 //
 // Reads the public manifest — no credentials needed.
 
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -149,6 +149,19 @@ async function main() {
     throw new Error(`Could not fetch manifest: HTTP ${response.status}`);
   }
   const manifest = await response.json();
+
+  // Galleries Viki has taken off the site stay in the bucket but leave the manifest
+  // here, so neither the sitemap, the snapshot nor the same-origin copy carry them.
+  // config.ts applies the same list to the live manifest at runtime.
+  const hidden = JSON.parse(await readFile(join(REPO_ROOT, 'src', 'app', 'content', 'hidden-galleries.json'), 'utf8')).hidden
+    .map((prefix) => prefix.normalize('NFC'));
+  for (const prefix of Object.keys(manifest.galleries)) {
+    if (hidden.includes(prefix.normalize('NFC'))) {
+      delete manifest.galleries[prefix];
+      delete manifest.dims?.[prefix];
+      console.log(`  - hidden: ${prefix}`);
+    }
+  }
 
   // Same-origin copy of the manifest, served from /assets/. The bucket's CORS policy
   // allows https://phbyviki.com only, so on any other origin - localhost, a Firebase

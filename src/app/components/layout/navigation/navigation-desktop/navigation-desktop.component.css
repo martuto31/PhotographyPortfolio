@@ -157,12 +157,18 @@
     flex: none;
 }
 
-/* .write is also an .actions > a, whose colour rules above would otherwise win. */
+/* .write is also an .actions > a, whose colour, padding-bottom (4px, for the
+   underline) and letter-spacing rules above would otherwise win - the text then sat
+   low in the pill and the tracking left a gap on the right. Even padding, and the
+   right side gives back the last letter's tracking so the word reads centred. */
 .actions > a.write,
 :host-context(.transparent) .actions > a.write {
     color: var(--btn-fg);
     background-color: var(--btn-bg);
     text-shadow: none;
+    padding: 9px calc(18px - 0.1em) 9px 18px;
+    letter-spacing: 0.1em;
+    line-height: 1;
 }
 
 .actions > a.write::after {

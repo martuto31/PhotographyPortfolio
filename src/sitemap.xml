@@ -68,32 +68,6 @@
     </url>
 
     <url>
-        <loc>https://phbyviki.com/galeriya/svatbi/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03194.webp</image:loc>
-            <image:title>Бети и Светли - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03195.webp</image:loc>
-            <image:title>Бети и Светли - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03212.webp</image:loc>
-            <image:title>Бети и Светли - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03213.webp</image:loc>
-            <image:title>Бети и Светли - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%91%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%B8/dsc03214.webp</image:loc>
-            <image:title>Бети и Светли - фотограф София и Видин</image:title>
-        </image:image>
-    </url>
-
-    <url>
         <loc>https://phbyviki.com/galeriya/svatbi/%D0%92%D0%B8%D0%BA%D0%B8%20%D0%B8%20%D0%9F%D0%B5%D1%82%D1%8C%D0%BE</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
@@ -142,32 +116,6 @@
         <image:image>
             <image:loc>https://images.phbyviki.com/Weddings/%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D1%8F%20%D0%B8%20%D0%9C%D0%B0%D1%80%D1%82%D0%B8%D0%BD/dsc05152.webp</image:loc>
             <image:title>Виктория и Мартин - фотограф София и Видин</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://phbyviki.com/galeriya/svatbi/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02581.webp</image:loc>
-            <image:title>Елина и Денис - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02582.webp</image:loc>
-            <image:title>Елина и Денис - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02583.webp</image:loc>
-            <image:title>Елина и Денис - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02584.webp</image:loc>
-            <image:title>Елина и Денис - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%95%D0%BB%D0%B8%D0%BD%D0%B0%20%D0%B8%20%D0%94%D0%B5%D0%BD%D0%B8%D1%81/dsc02585.webp</image:loc>
-            <image:title>Елина и Денис - фотограф София и Видин</image:title>
         </image:image>
     </url>
 
@@ -224,32 +172,6 @@
     </url>
 
     <url>
-        <loc>https://phbyviki.com/galeriya/svatbi/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00615.webp</image:loc>
-            <image:title>Люба и Калоян - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00752.webp</image:loc>
-            <image:title>Люба и Калоян - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00753.webp</image:loc>
-            <image:title>Люба и Калоян - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00756.webp</image:loc>
-            <image:title>Люба и Калоян - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9B%D1%8E%D0%B1%D0%B0%20%D0%B8%20%D0%9A%D0%B0%D0%BB%D0%BE%D1%8F%D0%BD/dsc00907.webp</image:loc>
-            <image:title>Люба и Калоян - фотограф София и Видин</image:title>
-        </image:image>
-    </url>
-
-    <url>
         <loc>https://phbyviki.com/galeriya/svatbi/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
@@ -272,32 +194,6 @@
         <image:image>
             <image:loc>https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D0%BD%D1%81%D0%B8%20%D0%B8%20%D0%A7%D0%B0%D0%B2%D0%B4%D0%B0%D1%80/dsc00288.webp</image:loc>
             <image:title>Нанси и Чавдар - фотограф София и Видин</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://phbyviki.com/galeriya/svatbi/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc03942.webp</image:loc>
-            <image:title>Натали и Валентин - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc03943.webp</image:loc>
-            <image:title>Натали и Валентин - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc03956.webp</image:loc>
-            <image:title>Натали и Валентин - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc04004.webp</image:loc>
-            <image:title>Натали и Валентин - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Weddings/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D0%B8%20%D0%B8%20%D0%92%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B8%D0%BD/dsc04008.webp</image:loc>
-            <image:title>Натали и Валентин - фотограф София и Видин</image:title>
         </image:image>
     </url>
 
@@ -784,32 +680,6 @@
         <image:image>
             <image:loc>https://images.phbyviki.com/Personal/%D0%9C%D0%B8%D1%88%D0%B8/dsc02286.webp</image:loc>
             <image:title>Миши - фотограф София и Видин</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://phbyviki.com/galeriya/lichni/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07618.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07624.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07644.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07778.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07829.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
         </image:image>
     </url>
 

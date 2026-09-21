@@ -1,0 +1,10 @@
+{
+  "_comment": "Manifest prefixes kept out of the site - not deleted from R2, so putting one back is removing its line here and running npm run sitemap. Viki, 2026-09-22.",
+  "hidden": [
+    "Weddings/Бети и Светли",
+    "Weddings/Елина и Денис",
+    "Weddings/Натали и Валентин",
+    "Weddings/Люба и Калоян",
+    "Personal/Юбилей Сергей"
+  ]
+}

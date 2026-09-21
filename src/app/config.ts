@@ -1,3 +1,5 @@
+import hiddenGalleries from './content/hidden-galleries.json';
+
 // Public base URL of the R2 bucket (custom domain recommended, e.g. https://images.phbyviki.com).
 // During testing you can temporarily use the bucket's https://<id>.r2.dev URL.
 // No credentials live here — the bucket is public; images are plain URLs.
@@ -58,7 +60,20 @@ export interface ResponsiveImage {
 // same-origin copy, and only if that fails too return null so callers can degrade
 // gracefully (snapshot cards/gallery) instead of crashing.
 export async function fetchManifest(): Promise<GalleryManifest | null> {
-  return (await fetchManifestFrom(MANIFEST_URL)) ?? (await fetchManifestFrom(MANIFEST_FALLBACK_URL));
+  const manifest = (await fetchManifestFrom(MANIFEST_URL)) ?? (await fetchManifestFrom(MANIFEST_FALLBACK_URL));
+  return manifest && withoutHiddenGalleries(manifest);
+}
+
+// Galleries taken off the site (content/hidden-galleries.json) stay in the bucket and
+// in the live manifest; drop them here so no card, page or sibling list shows them.
+// The build-time snapshot and sitemap apply the same list (tools/generate-sitemap.mjs).
+const HIDDEN_GALLERIES = new Set(hiddenGalleries.hidden.map((prefix) => prefix.normalize('NFC')));
+
+function withoutHiddenGalleries(manifest: GalleryManifest): GalleryManifest {
+  const galleries = Object.fromEntries(
+    Object.entries(manifest.galleries).filter(([prefix]) => !HIDDEN_GALLERIES.has(prefix.normalize('NFC'))),
+  );
+  return { ...manifest, galleries };
 }
 
 async function fetchManifestFrom(url: string): Promise<GalleryManifest | null> {
