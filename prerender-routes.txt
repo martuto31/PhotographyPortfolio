@@ -25,7 +25,7 @@
 /galeriya/abiturienti/Семеен бал Ванеса
 /galeriya/abiturienti/Семеен бал Мадлен
 /galeriya/abiturienti/Семеен бал Мони
-/galeriya/lichni/Детайли
+/galeriya/lichni/Детайли
 /galeriya/lichni/Детски рожден ден Дари
 /galeriya/lichni/Криси
 /galeriya/lichni/Криси и Лиза

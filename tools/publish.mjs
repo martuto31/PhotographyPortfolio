@@ -10,6 +10,7 @@
 //                                  # regenerates the sitemap and prerender inputs
 //      npm run publish -- --dir ./some-other-folder
 //      npm run publish -- --thumbs          # backfill derivatives for photos already in R2
+//      npm run publish -- --thumbs --force  # rewrite every derivative (after a quality change)
 //      npm run publish -- --manifest-only   # just rebuild manifest from what's already in R2
 //
 // Every mode ends by running tools/generate-sitemap.mjs, because the sitemap,
@@ -56,6 +57,7 @@ import {
   S3Client,
   PutObjectCommand,
   ListObjectsV2Command,
+  DeleteObjectsCommand,
 } from '@aws-sdk/client-s3';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -73,8 +75,12 @@ const {
 const R2_ENDPOINT =
   process.env.R2_ENDPOINT || `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
 
-const MAX_EDGE = Number(process.env.MAX_EDGE || 2048); // longest side, px
-const WEBP_QUALITY = Number(process.env.WEBP_QUALITY || 82);
+// 2026-09-22: 2048/q82 read soft on a 2K monitor - the lightbox upscaled, and every
+// derivative was a re-encode of that already-lossy file. 2560 covers a 2K screen
+// at 1x and a 1440px laptop at 2x; q88 keeps skin and sky clean. Storage stays
+// well inside the free 10 GB.
+const MAX_EDGE = Number(process.env.MAX_EDGE || 2560); // longest side, px
+const WEBP_QUALITY = Number(process.env.WEBP_QUALITY || 88);
 const MANIFEST_KEY = 'manifest.json';
 
 // The bucket is public, so reads go over the CDN rather than the S3 API: it is the
@@ -82,19 +88,35 @@ const MANIFEST_KEY = 'manifest.json';
 // to listing and writing. Mirrors IMAGE_BASE_URL in src/app/config.ts.
 const PUBLIC_BASE_URL = (process.env.PUBLIC_BASE_URL || 'https://images.phbyviki.com').replace(/\/+$/, '');
 
-// Widths served to the grid and the cards, smallest first. Sized against the real
-// layout: the photo grid is 3 columns inside a 1400px shell (~435 CSS px a column,
-// so 512 covers 1x and 1024 covers 2x), and the gallery cards are 2 columns
-// (~645 CSS px, so 1600 covers 2x). Changing this list means re-running --thumbs.
-const THUMB_WIDTHS = (process.env.THUMB_WIDTHS || '512,1024,1600')
+// Widths served besides the full-size file, smallest first. Two, by Martin's call
+// (2026-09-22): 1024 for phones (a 341 CSS px slot at 3x), 1600 for the wall tiles
+// and the grid on desktop (a landscape cover in a 4:5 tile needs ~790px at 1x, 1580
+// at 2x). Anything bigger gets the full file. Changing this list means re-running
+// --thumbs --force and --prune.
+const THUMB_WIDTHS = (process.env.THUMB_WIDTHS || '1024,1600')
   .split(',')
   .map((w) => Number(w.trim()))
   .filter((w) => w > 0)
   .sort((a, b) => a - b);
 
-// Slightly under WEBP_QUALITY: a derivative is a downscale of an already-lossy
-// webp, and downscaling hides most of what the second encode costs.
-const THUMB_QUALITY = Number(process.env.THUMB_QUALITY || 80);
+// Derivatives are cut from the original when we have it (upload) and from the
+// full-size webp only when we don't (--thumbs), so they no longer pay for a second
+// lossy encode; q86 is the visible floor for hair and straw at 100%.
+const THUMB_QUALITY = Number(process.env.THUMB_QUALITY || 86);
+
+// A light unsharp mask after every downscale. Lanczos alone leaves a downscaled
+// photograph faintly soft at 100%; this brings the edge back without haloes
+// (sigma 0.6 px, flat areas untouched, edges x0.3).
+const SHARPEN = { sigma: 0.6, m1: 0.6, m2: 0.3 };
+
+// --thumbs --force: rewrite derivatives that already exist (after a quality change).
+// --force-before <ISO date>: only those written before that moment, so copies cut
+// from camera originals by a newer pipeline run are left alone.
+// --prune: delete derivative folders for widths no longer in THUMB_WIDTHS.
+const forceThumbs = process.argv.includes('--force');
+const forceBeforeArg = process.argv[process.argv.indexOf('--force-before') + 1];
+const FORCE_BEFORE = process.argv.includes('--force-before') ? new Date(forceBeforeArg) : null;
+const pruneWidths = process.argv.includes('--prune');
 
 // Matches the folder a derivative lives in, e.g. "w1024".
 const DERIVATIVE_DIR = /^w(\d+)$/;
@@ -133,12 +155,33 @@ const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff']);
 // Folded into the manifest at the end, on top of whatever the previous manifest knew.
 const measured = new Map();
 
+// Delete derivative folders whose width is no longer served (after THUMB_WIDTHS
+// shrinks). Full-size photos and covers are never touched: only "<gallery>/wNNN/".
+async function pruneDerivatives() {
+  const objects = await listAllObjects();
+  const doomed = objects
+    .map((o) => o.Key)
+    .filter((key) => {
+      const width = derivativeWidth(key);
+      return width !== null && !THUMB_WIDTHS.includes(width);
+    });
+  console.log(`• --prune: ${doomed.length} derivative(s) at widths other than ${THUMB_WIDTHS.join('/')}px.`);
+  for (let i = 0; i < doomed.length; i += 1000) {
+    const batch = doomed.slice(i, i + 1000);
+    await s3.send(new DeleteObjectsCommand({ Bucket: R2_BUCKET, Delete: { Objects: batch.map((Key) => ({ Key })), Quiet: true } }));
+    console.log(`  … deleted ${Math.min(i + 1000, doomed.length)}/${doomed.length}`);
+  }
+}
+
 // ---- main -------------------------------------------------------------------
 async function main() {
+  if (pruneWidths) {
+    await pruneDerivatives();
+  }
   if (thumbsOnly) {
     await backfillDerivatives();
-  } else if (manifestOnly) {
-    console.log('• Skipping upload (--manifest-only)');
+  } else if (manifestOnly || pruneWidths) {
+    console.log('• Skipping upload');
   } else {
     if (!existsSync(SOURCE_DIR)) {
       fail(`Source folder not found: ${SOURCE_DIR}\nCreate it and add  <Type>/<Gallery>/*.jpg  then re-run.`);
@@ -210,16 +253,20 @@ async function uploadFolder(root) {
 
 // Encode one source image to webp + its derivatives, and PUT them all to R2.
 async function uploadImage(source, key) {
-  const full = await sharp(source)
-    .rotate() // honour EXIF orientation
+  // Decode the camera file once, orientation applied, and cut every size from it -
+  // the full-size webp is one output among them, not the input for the others.
+  const oriented = await sharp(source).rotate().toBuffer();
+
+  const full = await sharp(oriented)
     .resize(MAX_EDGE, MAX_EDGE, { fit: 'inside', withoutEnlargement: true })
+    .sharpen(SHARPEN)
     .webp({ quality: WEBP_QUALITY })
     .toBuffer({ resolveWithObject: true });
 
   await putImage(key, full.data);
   console.log(`  ↑ ${key}  (${(full.data.length / 1024).toFixed(0)} KB)`);
 
-  await writeDerivatives(full.data, key, full.info.width, new Set());
+  await writeDerivatives(oriented, key, full.info.width, new Set());
 
   measured.set(key, [full.info.width, full.info.height]);
 }
@@ -239,6 +286,7 @@ async function writeDerivatives(full, key, fullWidth, existing) {
 
     const buffer = await sharp(full)
       .resize({ width, withoutEnlargement: true })
+      .sharpen(SHARPEN)
       .webp({ quality: THUMB_QUALITY })
       .toBuffer();
 
@@ -252,7 +300,14 @@ async function writeDerivatives(full, key, fullWidth, existing) {
 async function backfillDerivatives() {
   const objects = await listAllObjects();
 
-  const existing = new Set(objects.map((o) => o.Key));
+  // A derivative counts as present unless --force says to redo it - all of them,
+  // or with --force-before only the ones written before that moment.
+  const stale = (o) => forceThumbs && (!FORCE_BEFORE || new Date(o.LastModified) < FORCE_BEFORE);
+  const existing = new Set(objects.filter((o) => !(isDerivativeKey(o.Key) && stale(o))).map((o) => o.Key));
+  if (forceThumbs) {
+    const redo = objects.filter((o) => isDerivativeKey(o.Key) && stale(o)).length;
+    console.log(`• --force: ${redo} existing derivative(s) will be rewritten${FORCE_BEFORE ? ` (written before ${FORCE_BEFORE.toISOString()})` : ''}.`);
+  }
   const originals = objects
     .map((o) => o.Key)
     .filter((key) => key !== MANIFEST_KEY && !isDerivativeKey(key) && key.includes('/'))
@@ -477,6 +532,12 @@ function derivativeKey(key, width) {
 function isDerivativeKey(key) {
   const parent = dirOf(key);
   return DERIVATIVE_DIR.test(fileOf(parent));
+}
+
+// The width a derivative key is stored at ("…/w1024/x.webp" -> 1024), or null.
+function derivativeWidth(key) {
+  const match = DERIVATIVE_DIR.exec(fileOf(dirOf(key)));
+  return match ? Number(match[1]) : null;
 }
 
 // Runs `worker` over `tasks` CONCURRENCY at a time. Failures are collected rather
