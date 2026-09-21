@@ -944,32 +944,6 @@
     </url>
 
     <url>
-        <loc>https://phbyviki.com/galeriya/lichni/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07618.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07624.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07644.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07778.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://images.phbyviki.com/Personal/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B8%CC%86%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B8%CC%86/dsc07829.webp</image:loc>
-            <image:title>Юбилей Сергей - фотограф София и Видин</image:title>
-        </image:image>
-    </url>
-
-    <url>
         <loc>https://phbyviki.com/galerii/krushteneta</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
