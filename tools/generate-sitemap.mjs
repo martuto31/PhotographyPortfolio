@@ -261,6 +261,7 @@ async function main() {
       const cover = gallery.files.includes(COVER_FILENAME) ? COVER_FILENAME : gallery.files[0];
       const coverUrl = `https://images.phbyviki.com/${encodePath(gallery.prefix)}/${encodeURIComponent(cover)}`;
       const srcset = buildSrcset(manifest, gallery.prefix, cover);
+      const photoCount = gallery.files.filter((file) => file !== COVER_FILENAME).length;
       const photos = buildPhotos(manifest, gallery, SNAPSHOT_PHOTOS)
         .map((photo) => `        { src: ${JSON.stringify(photo.src)}, srcset: ${JSON.stringify(photo.srcset)}, width: ${photo.width}, height: ${photo.height} },`)
         .join('\n');
@@ -269,6 +270,7 @@ async function main() {
         `      name: ${JSON.stringify(gallery.name)},`,
         `      imageSrc: ${JSON.stringify(coverUrl)},`,
         `      imageSrcset: ${JSON.stringify(srcset)},`,
+        `      photoCount: ${photoCount},`,
         `      photos: [`,
         photos,
         `      ],`,
@@ -300,6 +302,9 @@ async function main() {
     '  imageSrc: string;',
     '  // Empty until the cover has responsive derivatives in R2 (npm run publish -- --thumbs).',
     '  imageSrcset: string;',
+    '  // Photographs in the gallery, cover excluded - shown under the heading and in the',
+    '  // meta description before the manifest has loaded.',
+    '  photoCount: number;',
     `  // First ${SNAPSHOT_PHOTOS} photographs, so a prerendered gallery page has real <img> tags.`,
     '  photos: SnapshotPhoto[];',
     '}',

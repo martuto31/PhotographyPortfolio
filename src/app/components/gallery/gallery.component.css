@@ -275,13 +275,12 @@
     margin: 0;
 }
 
-/* The gallery's own paragraph - same voice and measure as the service copy on
-   /galerii, centred under the noun. */
+/* The gallery's one line (what the shoot was + photo count), same style as the
+   noun above it. */
 .gallery-heading .about {
-    font-size: 15px;
-    line-height: 1.75;
     max-width: 62ch;
-    margin: 18px auto 0;
+    margin: 6px auto 0;
+    line-height: 1.6;
 }
 
 /* ---- Sibling galleries --------------------------------------------------

@@ -9,7 +9,7 @@ import { StructuredDataService } from './../../services/structured-data.service'
 
 import { COVER_FILENAME, PHONE_SLOT, ResponsiveImage, fetchManifest, galleryImages } from './../../config';
 import { GALLERY_SNAPSHOT, GallerySnapshotItem } from './../../generated/galleries';
-import { galleryText } from './../../content/gallery-texts';
+import { galleryDescription, galleryLine, photoCountLabel } from './../../content/gallery-texts';
 
 type SiblingGallery = GallerySnapshotItem;
 
@@ -121,8 +121,15 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   public categorySlug = '';
   public displayName = '';
 
-  // The gallery's own paragraph (content/gallery-texts.ts), or empty when it has none.
-  public galleryText = '';
+  // The gallery's own line (content/gallery-texts.ts), or empty when it has none, and
+  // the photo count shown after it: from the snapshot first, the manifest once loaded.
+  public galleryLine = '';
+  public photoCount = 0;
+
+  // "Изнесен ритуал, портрети в парк · 153 снимки" - the count only once known.
+  public get caption(): string {
+    return this.photoCount ? `${this.galleryLine} · ${photoCountLabel(this.photoCount)}` : this.galleryLine;
+  }
 
   // Other galleries in the same category. A gallery page used to carry three
   // internal links and nothing to do at the bottom — a visitor who scrolled 154
@@ -195,7 +202,8 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
     this.categoryLink = '';
     this.categorySlug = '';
     this.displayName = '';
-    this.galleryText = '';
+    this.galleryLine = '';
+    this.photoCount = 0;
   }
 
   ngOnDestroy(): void {
@@ -386,6 +394,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
     // none — a failed fetch should degrade to the prerendered page, not below it.
     if (loaded.length) {
       this.images = loaded;
+      this.photoCount = loaded.length;
       this.rememberOrientations();
       this.layoutRows();
     }
@@ -444,7 +453,9 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
     this.categoryLabel = heading.category;
     this.categorySlug = slug;
     this.categoryLink = `/galerii/${slug}`;
-    this.galleryText = galleryText(`${SLUG_TO_PREFIX[slug]}/${this.displayName}`);
+    this.galleryLine = galleryLine(`${SLUG_TO_PREFIX[slug]}/${this.displayName}`);
+    this.photoCount = (GALLERY_SNAPSHOT[SLUG_TO_PREFIX[slug]] ?? [])
+      .find((item) => item.name.normalize('NFC') === this.displayName.normalize('NFC'))?.photoCount ?? 0;
   }
 
   private setSiblings(): void {
@@ -572,7 +583,9 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
       ]),
       this.structuredData.imageGallery({
         name: `${this.displayName} - ${this.pageHeading}`,
-        description: this.galleryText || `${this.pageHeading} „${this.displayName}“ от Виктория Борисова - фотограф в София и Видин.`,
+        description: this.galleryLine
+          ? galleryDescription(this.displayName, this.galleryLine, this.photoCount)
+          : `${this.pageHeading} „${this.displayName}“ от Виктория Борисова - фотограф в София и Видин.`,
         url,
         // Prerender runs before the manifest fetch, so `images` is empty on the
         // server. The sitemap already carries per-gallery <image:image> entries;
