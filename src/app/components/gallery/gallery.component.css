@@ -40,6 +40,103 @@
     padding-bottom: 2px;
 }
 
+/* ---- The mosaic (T-53) ---------------------------------------------------------
+   The masonry the site had before W3, back as the second layout: CSS columns
+   across the whole 1400px shell, each photograph at its own ratio, reading down
+   one column and then the next. Two columns on a tablet and on a phone - one
+   column on a phone would just be the feed again. */
+.container.mosaic {
+    display: block;
+    max-width: none;
+    column-count: 3;
+    column-gap: 16px;
+}
+
+:host-context(.tablet) .container.mosaic {
+    column-count: 2;
+    column-gap: 12px;
+}
+
+:host-context(.mobile) .container.mosaic {
+    column-count: 2;
+    column-gap: 10px;
+}
+
+.tile {
+    break-inside: avoid;
+    /* Room for the glow below each print; the column itself must not clip it. */
+    margin-bottom: 16px;
+    padding-bottom: 2px;
+}
+
+:host-context(.tablet) .tile {
+    margin-bottom: 12px;
+}
+
+:host-context(.mobile) .tile {
+    margin-bottom: 10px;
+}
+
+/* ---- The toggle ----------------------------------------------------------------
+   A pill with the two layouts, the chosen one in ink like the primary button.
+   Same face as .btn: 12px tracked sans, so it sits with the rest of the chrome.
+   The right padding gives back the trailing letter-spacing so the label reads
+   centred (the header pill needed the same). */
+.view-toggle {
+    display: inline-flex;
+    margin-top: 26px;
+    padding: 3px;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+.view-toggle button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    height: 38px;
+    padding: 0 calc(18px - 0.12em) 0 16px;
+    margin: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    word-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--font-medium-emphasis);
+    cursor: pointer;
+    transition: background-color 200ms ease, color 200ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.view-toggle button:hover {
+    color: var(--font-high-emphasis);
+}
+
+.view-toggle button[aria-pressed="true"] {
+    color: var(--btn-fg);
+    background-color: var(--btn-bg);
+    cursor: default;
+}
+
+.view-toggle button:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+}
+
+.view-toggle svg {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+}
+
 /* The thumbnail is a real <button> for keyboard/screen-reader access; strip the
    native chrome so it looks identical to the bare image it replaced. */
 .image-btn {
@@ -61,7 +158,7 @@
 
 /* Each photograph is a print pinned to the paper - the glow recipe from
    global.css, on the image itself so the shadow follows its edge. */
-.photo img {
+.image-btn img {
     width: 100%;
     height: auto;
     display: block;
@@ -73,7 +170,7 @@
 /* A photograph whose shape is not known yet holds a 3:2 box: the column keeps
    its length while the files arrive and the lazy loader only fetches what is
    near the viewport. Once it loads it takes its own ratio. */
-.photo img:not(.settled) {
+.image-btn img:not(.settled) {
     aspect-ratio: 3 / 2;
 }
 
@@ -218,6 +315,23 @@
     flex: none;
     background-color: var(--paper-warm);
     animation: pulse 1.5s infinite;
+}
+
+/* The mask over the mosaic is a screenful of small prints, three or two across. */
+.container.mosaic .loading-mask {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+}
+
+:host-context(.tablet) .container.mosaic .loading-mask {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+:host-context(.mobile) .container.mosaic .loading-mask {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
 }
 
 @keyframes pulse {

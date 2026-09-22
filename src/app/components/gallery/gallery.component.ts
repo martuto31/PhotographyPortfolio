@@ -16,6 +16,23 @@ type SiblingGallery = GallerySnapshotItem & { slug: string; noun: string };
 
 type Orientation = 'portrait' | 'landscape';
 
+// T-53: the visitor picks how the photographs are laid out. 'feed' is the one big
+// column (W3); 'mosaic' is the older three-column masonry, back by request as a
+// way to take in a whole gallery at once. The feed is what the prerendered page
+// carries; the choice is remembered per browser.
+export type GalleryView = 'feed' | 'mosaic';
+
+const DEFAULT_VIEW: GalleryView = 'feed';
+const VIEW_STORAGE_KEY = 'phbyviki.gallery-view';
+
+// The button labels. Not „Поток / Мрежа“ (Martin, 2026-09-22). Bulgarian UIs are
+// split - Nikon says „миниатюри / цял кадър“, Google „табличен изглед / списък“ -
+// so these are the plain words a client would use, not camera or file-manager jargon.
+export const VIEW_LABELS: Record<GalleryView, string> = {
+  feed: 'По една',
+  mosaic: 'Мозайка',
+};
+
 // One line of the gallery: a landscape photograph on its own, two portraits side
 // by side, or a lone portrait (centred, narrower - see the stylesheet).
 interface GalleryRow {
@@ -77,6 +94,9 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
 
   public images: ResponsiveImage[] = [];
 
+  public view: GalleryView = DEFAULT_VIEW;
+  public readonly viewLabels = VIEW_LABELS;
+
   // The photographs grouped into rows for the template. Rebuilt whenever the list
   // changes or a photograph's orientation becomes known.
   public rows: GalleryRow[] = [];
@@ -95,6 +115,12 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
 
   // Two portraits share the column.
   public readonly pairSizes = `(max-width: 480px) ${PHONE_SLOT}, (max-width: 960px) 94vw, 512px`;
+
+  // The mosaic: three columns in the 1400px shell (40px sides, 16px gutters), two
+  // under 960px (24px sides, 12px gutters) and two on a phone (18px sides, 10px
+  // gutters). Every slot lands on the 1024 copy - at 1x on a 2K screen, at 2x on a
+  // laptop, at 3x on a phone - so the tiles are never the soft size.
+  public readonly mosaicSizes = '(max-width: 480px) calc(50vw - 23px), (max-width: 960px) calc(50vw - 30px), (min-width: 1440px) 429px, calc(33.33vw - 37px)';
 
   // The sibling strip stays three-up from tablet width and goes full-bleed on mobile.
   private static readonly SIBLING_SLOTS = `(max-width: 480px) ${PHONE_SLOT}, (min-width: 1440px) 425px, 31vw`;
@@ -148,9 +174,10 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   // that one and not the preloads belonging to the document itself.
   private static readonly PRELOAD_MARKER = 'data-hero-preload';
 
-  // Tiles rendered eagerly. Two fills the first screen of the single column;
-  // everything below stays lazy, which is the whole point on a 154-photograph gallery.
-  public static readonly EAGER_IMAGES = 2;
+  // Tiles rendered eagerly. Two fills the first screen of the single column, six the
+  // first screen of the mosaic; everything below stays lazy, which is the whole point
+  // on a 154-photograph gallery.
+  private static readonly EAGER_IMAGES: Record<GalleryView, number> = { feed: 2, mosaic: 6 };
 
   // Counts the loads started, so a manifest that arrives for a gallery the
   // visitor has already left (two sibling clicks in a row) is dropped.
@@ -158,6 +185,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     void this.load();
+    this.restoreView();
   }
 
   // The router keeps this component when only the URL parameters change - a
@@ -368,6 +396,43 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
     new Image().src = this.images[previous].src;
   }
 
+  public setView(view: GalleryView): void {
+    if (view === this.view) {
+      return;
+    }
+    this.view = view;
+    try {
+      localStorage.setItem(VIEW_STORAGE_KEY, view);
+    } catch {
+      // Private mode or storage blocked: the choice holds for this page only.
+    }
+  }
+
+  // The remembered layout, applied after the first paint. The prerendered HTML is the
+  // feed and hydration has to match it node for node; switching a tick later swaps
+  // the branch the ordinary way. A visitor who chose the mosaic sees the feed for one
+  // frame while the photographs are still arriving.
+  private restoreView(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(VIEW_STORAGE_KEY);
+    } catch {
+      return;
+    }
+    if (stored === 'feed' || stored === 'mosaic') {
+      const view = stored;
+      setTimeout(() => { this.view = view; });
+    }
+  }
+
+  // Skeletons in the loading mask: a screenful of either layout.
+  public get skeletons(): unknown[] {
+    return [].constructor(this.view === 'mosaic' ? 9 : 4);
+  }
+
   private lockBodyScroll(): void {
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = 'hidden';
@@ -424,7 +489,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
   // The first row loads eagerly — it is what the visitor is looking at, and the LCP
   // candidate must never be lazy. Everything after it waits until it is scrolled to.
   public loadingFor(index: number): 'eager' | 'lazy' {
-    return index < GalleryComponent.EAGER_IMAGES ? 'eager' : 'lazy';
+    return index < GalleryComponent.EAGER_IMAGES[this.view] ? 'eager' : 'lazy';
   }
 
   // Only the single LCP candidate is promoted; marking a whole row "high" would put
@@ -579,7 +644,7 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
       // assumes 100vw and preloads a wider derivative than the grid will ask for,
       // which downloads a second copy of the same photograph.
       link.setAttribute('imagesrcset', hero.srcset);
-      link.setAttribute('imagesizes', this.gridSizes);
+      link.setAttribute('imagesizes', this.view === 'mosaic' ? this.mosaicSizes : this.gridSizes);
     }
     this.dom.head.appendChild(link);
   }
