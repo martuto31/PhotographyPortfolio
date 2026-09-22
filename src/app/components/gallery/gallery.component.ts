@@ -676,9 +676,8 @@ export class GalleryComponent implements OnInit, OnChanges, OnDestroy {
           ? galleryDescription(this.displayName, this.galleryLine, this.photoCount)
           : `${this.pageHeading} „${this.displayName}“ от Виктория Борисова - фотограф в София и Видин.`,
         url,
-        // Prerender runs before the manifest fetch, so `images` is empty on the
-        // server. The sitemap already carries per-gallery <image:image> entries;
-        // this list is a bonus when it happens to be populated.
+        // On the server this is the build-time seed (setSeedImages runs first), so
+        // the prerendered page carries the first eight photographs with their credit.
         images: this.images.slice(0, 8).map((image) => image.src),
       }),
     ]);

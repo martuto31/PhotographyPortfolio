@@ -107,9 +107,11 @@
           ],
           "areaServed": [
             { "@type": "City", "name": "София" },
-            { "@type": "City", "name": "Видин" }
+            { "@type": "City", "name": "Видин" },
+            { "@type": "Country", "name": "България" }
           ],
           "knowsLanguage": ["bg", "en"],
+          "knowsAbout": ["Сватбена фотография", "Документална фотография", "Абитуриентски балове", "Кръщенета", "Семейни фотосесии", "Детски рождени дни", "Портретна фотография"],
           "sameAs": [
             "https://www.instagram.com/_phbyviki",
             "https://www.facebook.com/people/phbyviki/100076542123196/"
@@ -122,18 +124,20 @@
             "worksFor": { "@id": "https://phbyviki.com/#business" },
             "image": "https://images.phbyviki.com/site/landing.webp",
             "url": "https://phbyviki.com/about-me",
+            "knowsLanguage": ["bg", "en"],
+            "knowsAbout": ["Сватбена фотография", "Документална фотография", "Портретна фотография"],
             "sameAs": [
               "https://www.instagram.com/_phbyviki",
               "https://www.facebook.com/people/phbyviki/100076542123196/"
             ]
           },
           "makesOffer": [
-            { "@type": "Offer", "name": "Сватбена фотография", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/svatbi" },
-            { "@type": "Offer", "name": "Абитуриентски фотосесии и бал", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/abiturienti" },
-            { "@type": "Offer", "name": "Фотограф за кръщене", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/krushteneta" },
-            { "@type": "Offer", "name": "Фотограф за рожден ден", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/rojdeni-dni" },
-            { "@type": "Offer", "name": "Семейни и детски фотосесии", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/semeyni" },
-            { "@type": "Offer", "name": "Лична / портретна фотосесия", "areaServed": ["София", "Видин"], "url": "https://phbyviki.com/galerii/lichni" }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Сватбена фотография", "url": "https://phbyviki.com/galerii/svatbi" }, "areaServed": ["София", "Видин"] },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Абитуриентски фотосесии и бал", "url": "https://phbyviki.com/galerii/abiturienti" }, "areaServed": ["София", "Видин"] },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Фотограф за кръщене", "url": "https://phbyviki.com/galerii/krushteneta" }, "areaServed": ["София", "Видин"] },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Фотограф за рожден ден", "url": "https://phbyviki.com/galerii/rojdeni-dni" }, "areaServed": ["София", "Видин"] },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Семейни и детски фотосесии", "url": "https://phbyviki.com/galerii/semeyni" }, "areaServed": ["София", "Видин"] },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Лична / портретна фотосесия", "url": "https://phbyviki.com/galerii/lichni" }, "areaServed": ["София", "Видин"] }
           ]
         }
         </script>

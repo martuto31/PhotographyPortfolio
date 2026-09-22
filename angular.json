@@ -27,6 +27,7 @@
             },
             "assets": [
               "src/robots.txt",
+              "src/llms.txt",
               "src/sitemap.xml",
               "src/404.html",
               "src/favicon.ico",

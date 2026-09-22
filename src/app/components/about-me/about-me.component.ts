@@ -32,6 +32,7 @@ export class AboutMeComponent implements OnInit {
         { name: 'Начало', url: 'https://phbyviki.com/' },
         { name: 'За мен', url: 'https://phbyviki.com/about-me' },
       ]),
+      this.structuredData.profilePage('https://phbyviki.com/about-me'),
     ]);
   }
 

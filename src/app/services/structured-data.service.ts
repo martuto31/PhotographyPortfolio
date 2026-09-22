@@ -94,6 +94,8 @@ export class StructuredDataService {
       'areaServed': [
         { '@type': 'City', 'name': 'София' },
         { '@type': 'City', 'name': 'Видин' },
+        // "Пътувате ли извън София и Видин? - Да." (the wedding FAQ).
+        { '@type': 'Country', 'name': 'България' },
       ],
       'availableChannel': {
         '@type': 'ServiceChannel',
@@ -112,7 +114,32 @@ export class StructuredDataService {
       'url': params.url,
       'author': { '@id': 'https://phbyviki.com/#viktoria' },
       'copyrightHolder': { '@id': 'https://phbyviki.com/#business' },
-      'image': params.images,
+      // Each photograph carries its own credit, so a picture lifted out of the page by
+      // an image index or an answer engine still says whose it is. license and
+      // acquireLicensePage are the pair Google Images reads for its licence details.
+      'image': params.images.map((src) => ({
+        '@type': 'ImageObject',
+        'contentUrl': src,
+        'creator': { '@id': 'https://phbyviki.com/#viktoria' },
+        'creditText': 'Виктория Борисова / phbyviki',
+        'copyrightNotice': '© Виктория Борисова',
+        'license': 'https://phbyviki.com/usloviya',
+        'acquireLicensePage': 'https://phbyviki.com/kontakti',
+      })),
+    };
+  }
+
+  // The About page is the page about the person behind the business. ProfilePage with
+  // the founder as mainEntity ties the page to the same @id the LocalBusiness graph in
+  // index.html names, so every mention resolves to one person.
+  public profilePage(url: string): object {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      'url': url,
+      'inLanguage': 'bg-BG',
+      'mainEntity': { '@id': 'https://phbyviki.com/#viktoria' },
+      'about': { '@id': 'https://phbyviki.com/#business' },
     };
   }
 
