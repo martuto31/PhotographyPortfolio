@@ -10,6 +10,7 @@ import { TestimonialsComponent } from './../shared/testimonials/testimonials.com
 
 import { HOME_FAQ } from './../../content/home';
 import { TESTIMONIALS } from './../../content/testimonials';
+import { SITE_IMAGE_BASE_URL } from './../../config';
 import { StructuredDataService } from './../../services/structured-data.service';
 
 @Component({
@@ -29,6 +30,9 @@ import { StructuredDataService } from './../../services/structured-data.service'
 })
 
 export class LandingComponent implements OnInit {
+
+  // Where the site's own photographs live (R2, not Firebase) - see config.ts.
+  public readonly siteImages = SITE_IMAGE_BASE_URL;
 
   constructor(private structuredData: StructuredDataService) { }
 

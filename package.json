@@ -15,6 +15,7 @@
     "shots": "node tools/shots.mjs",
     "hero:try": "node tools/hero-try.mjs",
     "publish": "node tools/publish.mjs",
+    "publish:site": "node tools/publish-site-images.mjs",
     "sitemap": "node tools/generate-sitemap.mjs",
     "icons": "node tools/generate-icons.mjs",
     "logo": "node tools/generate-logo.mjs",

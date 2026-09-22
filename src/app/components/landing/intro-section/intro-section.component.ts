@@ -3,10 +3,11 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { CONTACT } from './../../../content/contact';
+import { SITE_IMAGE_BASE_URL } from './../../../config';
 import { ScrollService } from './../../../services/scroll.service';
 
 export interface HeroPhoto {
-  /** File stem under assets/img/hero, exported at each of HERO_WIDTHS. */
+  /** File stem under site/hero in the bucket (source: src/assets/img/hero), exported at each of HERO_WIDTHS. */
   name: string;
   alt: string;
   /** What the crop keeps on a screen wider than 3:2 - see the stylesheet. */
@@ -128,11 +129,11 @@ export class IntroSectionComponent implements OnInit, AfterViewInit, OnDestroy {
   private static readonly PRELOAD_MARKER = 'data-hero-image-preload';
 
   public src(photo: HeroPhoto): string {
-    return `/assets/img/hero/${photo.name}-${HERO_WIDTHS[HERO_WIDTHS.length - 1]}.webp`;
+    return `${SITE_IMAGE_BASE_URL}/hero/${photo.name}-${HERO_WIDTHS[HERO_WIDTHS.length - 1]}.webp`;
   }
 
   public srcset(photo: HeroPhoto): string {
-    return HERO_WIDTHS.map((w) => `/assets/img/hero/${photo.name}-${w}.webp ${w}w`).join(', ');
+    return HERO_WIDTHS.map((w) => `${SITE_IMAGE_BASE_URL}/hero/${photo.name}-${w}.webp ${w}w`).join(', ');
   }
 
   // The first photograph is up: give it a moment, then bring in the others and

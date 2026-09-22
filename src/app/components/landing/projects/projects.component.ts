@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { SITE_IMAGE_BASE_URL } from './../../../config';
 import { DimensionService } from './../../../services/dimension.service';
 
 interface Project {
@@ -30,19 +31,19 @@ export class ProjectsComponent {
       name: 'Сватбени фотосесии',
       tag: 'Сватби',
       btnLink: 'galerii/svatbi',
-      imageSrc: 'assets/img/card-covers/weddings.webp',
+      imageSrc: `${SITE_IMAGE_BASE_URL}/card-covers/weddings.webp`,
     },
     {
       name: 'Абитуриентски фотосесии',
       tag: 'Абитуриенти',
       btnLink: 'galerii/abiturienti',
-      imageSrc: 'assets/img/card-covers/graduates.webp',
+      imageSrc: `${SITE_IMAGE_BASE_URL}/card-covers/graduates.webp`,
     },
     {
       name: 'Други събития',
       tag: 'Други',
       btnLink: 'galerii/lichni',
-      imageSrc: 'assets/img/card-covers/personal.webp',
+      imageSrc: `${SITE_IMAGE_BASE_URL}/card-covers/personal.webp`,
     },
   ];
 

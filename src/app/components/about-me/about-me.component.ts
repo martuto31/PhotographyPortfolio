@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CtaBandComponent } from './../shared/cta-band/cta-band.component';
 
 import { CONTACT } from './../../content/contact';
+import { SITE_IMAGE_BASE_URL } from './../../config';
 import { StructuredDataService } from './../../services/structured-data.service';
 
 @Component({
@@ -18,6 +19,8 @@ import { StructuredDataService } from './../../services/structured-data.service'
 })
 
 export class AboutMeComponent implements OnInit {
+
+  public readonly siteImages = SITE_IMAGE_BASE_URL;
 
   constructor(private structuredData: StructuredDataService) { }
 

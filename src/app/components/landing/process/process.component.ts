@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { SITE_IMAGE_BASE_URL } from './../../../config';
 import { PROCESS } from './../../../content/home';
 
 // "How it works", in four steps.
@@ -15,6 +16,8 @@ import { PROCESS } from './../../../content/home';
 })
 
 export class ProcessComponent {
+
+  public readonly siteImages = SITE_IMAGE_BASE_URL;
 
   public readonly steps = PROCESS;
 

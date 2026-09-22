@@ -7,6 +7,12 @@ export const IMAGE_BASE_URL = 'https://images.phbyviki.com';
 
 export const MANIFEST_URL = `${IMAGE_BASE_URL}/manifest.json`;
 
+// The site's own photographs (hero, quote, process, category cards, the About
+// portrait) also live in the bucket, under site/ - tools/publish-site-images.mjs
+// puts them there. Served from Cloudflare instead of Firebase Hosting, whose Spark
+// plan pauses the site after 360 MB a day; these were 2.6 MB of every first visit.
+export const SITE_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/site`;
+
 // Build-time copy of the same manifest, written by tools/generate-sitemap.mjs and served
 // from this site's own origin. The bucket's CORS policy allows https://phbyviki.com only,
 // so on localhost or a Firebase preview channel the live fetch is refused; without this

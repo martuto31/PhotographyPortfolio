@@ -52,6 +52,8 @@
         <link rel="manifest" href="/site.webmanifest">
 
         <link rel="preconnect" href="https://images.phbyviki.com" crossorigin>
+        <!-- Twice on purpose: <img> requests use the non-CORS connection pool, the manifest fetch the CORS one. -->
+        <link rel="preconnect" href="https://images.phbyviki.com">
 
         <!-- The hero is the largest contentful paint on the home page and is set as a
              CSS background, so the browser cannot discover it until the stylesheet has
@@ -118,7 +120,7 @@
             "name": "Виктория Борисова",
             "jobTitle": "Професионален фотограф",
             "worksFor": { "@id": "https://phbyviki.com/#business" },
-            "image": "https://phbyviki.com/assets/img/landing.webp",
+            "image": "https://images.phbyviki.com/site/landing.webp",
             "url": "https://phbyviki.com/about-me",
             "sameAs": [
               "https://www.instagram.com/_phbyviki",

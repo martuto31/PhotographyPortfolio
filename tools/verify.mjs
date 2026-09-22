@@ -34,7 +34,7 @@ const SOURCE_DIR = join(REPO_ROOT, 'src', 'app');
 
 const IMAGE_HOST = 'https://images.phbyviki.com/';
 // Keep in sync with HERO_IMAGE in intro-section.component.ts.
-const HERO_IMAGE = '/assets/img/hero/';
+const HERO_IMAGE = 'https://images.phbyviki.com/site/hero/';
 // A route that fell through to the not-found component still prerenders "successfully";
 // its title is how we tell.
 const NOT_FOUND_TITLE = 'Страницата не е намерена';
