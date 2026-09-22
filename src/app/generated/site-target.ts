@@ -4,4 +4,4 @@
 // What the runtime drops from the live manifest, mirroring what the sitemap and
 // snapshot left out at build time. See content/hidden-galleries.json.
 export const HIDDEN_TYPES: string[] = [];
-export const HIDDEN_GALLERIES: string[] = ["Personal/Юбилей Сергей"];
+export const HIDDEN_GALLERIES: string[] = ["Personal/Юбилей Сергей","Weddings/Бети и Светли","Weddings/Елина и Денис","Weddings/Натали и Валентин","Weddings/Люба и Калоян"];

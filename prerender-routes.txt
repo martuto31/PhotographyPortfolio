@@ -33,17 +33,13 @@
 /galeriya/lichni/Миши
 /galeriya/svatbi/Александрина и Борис
 /galeriya/svatbi/Анжела и Александър
-/galeriya/svatbi/Бети и Светли
 /galeriya/svatbi/Вики и Петьо
 /galeriya/svatbi/Виктория и Мартин
 /galeriya/svatbi/Дея и Виктор
-/galeriya/svatbi/Елина и Денис
 /galeriya/svatbi/Лора и Асен
 /galeriya/svatbi/Лори и Любо
-/galeriya/svatbi/Люба и Калоян
 /galeriya/svatbi/Мира и Валентин
 /galeriya/svatbi/Нанси и Чавдар
-/galeriya/svatbi/Натали и Валентин
 /galeriya/svatbi/Руми и Цецко
 /galeriya/svatbi/Симона и Коста
 /galeriya/svatbi/Krysteena & Martin
