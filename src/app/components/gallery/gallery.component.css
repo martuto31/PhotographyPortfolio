@@ -78,10 +78,8 @@
 }
 
 /* ---- The toggle ----------------------------------------------------------------
-   A pill with the two layouts, the chosen one in ink like the primary button.
-   Same face as .btn: 12px tracked sans, so it sits with the rest of the chrome.
-   The right padding gives back the trailing letter-spacing so the label reads
-   centred (the header pill needed the same). */
+   A pill with the two layouts as icons, the chosen one in ink like the primary
+   button. 44px targets inside a 3px frame. */
 .view-toggle {
     display: inline-flex;
     margin-top: 26px;
@@ -93,20 +91,14 @@
 .view-toggle button {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    justify-content: center;
+    width: 50px;
     height: 38px;
-    padding: 0 calc(18px - 0.12em) 0 16px;
+    padding: 0;
     margin: 0;
     border: 0;
     border-radius: 999px;
     background: transparent;
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    word-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1;
     color: var(--font-medium-emphasis);
     cursor: pointer;
     transition: background-color 200ms ease, color 200ms ease;
@@ -129,9 +121,9 @@
 }
 
 .view-toggle svg {
-    width: 15px;
-    height: 15px;
-    flex: none;
+    width: 18px;
+    height: 18px;
+    display: block;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.6;

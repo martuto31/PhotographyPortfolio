@@ -11,23 +11,24 @@
         <p>{{ pageHeading }}</p>
 
         <!-- T-53: the two layouts. One big column (the default) or the three-column
-             mosaic; the choice is remembered in this browser. -->
+             mosaic; the choice is remembered in this browser. Icons only - the grid /
+             rows pair every store and file manager uses - with the name in the tooltip
+             and for screen readers (Martin, 2026-09-22: no words to learn). -->
         @if (images.length > 1) {
             <div class="view-toggle" role="group" aria-label="Подредба на снимките">
-                <button type="button" (click)="setView('feed')" [attr.aria-pressed]="view === 'feed'">
+                <button type="button" (click)="setView('feed')" [attr.aria-pressed]="view === 'feed'" [attr.aria-label]="viewLabels.feed" [title]="viewLabels.feed">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <rect x="3.5" y="5.5" width="17" height="13" rx="1" />
+                        <rect x="3.5" y="3.5" width="17" height="7" rx="1" />
+                        <rect x="3.5" y="13.5" width="17" height="7" rx="1" />
                     </svg>
-                    <span>{{ viewLabels.feed }}</span>
                 </button>
-                <button type="button" (click)="setView('mosaic')" [attr.aria-pressed]="view === 'mosaic'">
+                <button type="button" (click)="setView('mosaic')" [attr.aria-pressed]="view === 'mosaic'" [attr.aria-label]="viewLabels.mosaic" [title]="viewLabels.mosaic">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <rect x="3.5" y="3.5" width="7" height="7" rx="1" />
                         <rect x="13.5" y="3.5" width="7" height="7" rx="1" />
                         <rect x="3.5" y="13.5" width="7" height="7" rx="1" />
                         <rect x="13.5" y="13.5" width="7" height="7" rx="1" />
                     </svg>
-                    <span>{{ viewLabels.mosaic }}</span>
                 </button>
             </div>
         }

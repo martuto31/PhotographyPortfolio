@@ -25,12 +25,14 @@ export type GalleryView = 'feed' | 'mosaic';
 const DEFAULT_VIEW: GalleryView = 'feed';
 const VIEW_STORAGE_KEY = 'phbyviki.gallery-view';
 
-// The button labels. Not „Поток / Мрежа“ (Martin, 2026-09-22). Bulgarian UIs are
-// split - Nikon says „миниатюри / цял кадър“, Google „табличен изглед / списък“ -
-// so these are the plain words a client would use, not camera or file-manager jargon.
+// The buttons are icons only (Martin, 2026-09-22: the grid / rows pair is what every
+// store and file manager shows, so there is nothing to learn; every word we tried -
+// Поток/Мрежа, По една/Мозайка - was the unfamiliar part). These names go in the
+// tooltip and the accessible label. Bulgarian UIs disagree on them anyway: Nikon says
+// „миниатюри / цял кадър“, Google „табличен изглед / списък“.
 export const VIEW_LABELS: Record<GalleryView, string> = {
-  feed: 'По една',
-  mosaic: 'Мозайка',
+  feed: 'По една снимка на ред',
+  mosaic: 'Мрежа от снимки',
 };
 
 // One line of the gallery: a landscape photograph on its own, two portraits side
