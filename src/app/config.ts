@@ -188,15 +188,18 @@ export function coverImage(
 // browser picked a 512px file for a 790px job and the wall looked soft on any
 // 1x monitor. Scale every slot by that factor; a photograph narrower than the box
 // is cropped by width and needs nothing extra.
+//
+// On top of the crop, covers ask for one tier more than they strictly need
+// (COVER_OVERSAMPLE): the browser takes the first copy at or above the requested
+// width, so +30% pushes a 790px need past the 1024 copy to the 1600 one, and a
+// 2x need past 1600 to the full file - the covers are the shop window and Martin
+// wants them a step sharper than the maths (2026-09-22). Costs roughly double the
+// bytes per cover; the wall is lazy-loaded, so only tiles on screen pay it.
+export const COVER_OVERSAMPLE = 1.3;
+
 export function coverSizes(slots: string, boxWidth: number, boxHeight: number, imageWidth: number, imageHeight: number): string {
-  if (!imageWidth || !imageHeight) {
-    return slots;
-  }
-  const factor = (imageWidth / imageHeight) / (boxWidth / boxHeight);
-  if (factor <= 1.01) {
-    return slots;
-  }
-  const f = factor.toFixed(3);
+  const crop = imageWidth && imageHeight ? Math.max(1, (imageWidth / imageHeight) / (boxWidth / boxHeight)) : 1;
+  const f = (crop * COVER_OVERSAMPLE).toFixed(3);
   return splitSlots(slots)
     .map((slot) => {
       // "(max-width: 480px) min(94vw, 341px)" -> condition + value; the last slot has no condition.
