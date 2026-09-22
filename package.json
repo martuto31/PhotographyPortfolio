@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "SITE_TARGET=live npm run sitemap && ng build && firebase deploy --only hosting && npm run sitemap",
+    "deploy": "SITE_TARGET=live npm run sitemap && ng build && firebase deploy --only hosting && { node tools/cloudflare.mjs purge || echo \"edge cache not purged (no CF token) - pages refresh within 5 minutes\"; } && npm run sitemap",
     "preview:deploy": "npm run sitemap && ng build && firebase hosting:channel:deploy preview --project phbyvikiprod --only app --expires 30d",
     "preview": "npx http-server dist/photography-portfolio/browser -p 4200 -c-1",
     "verify": "node tools/verify.mjs",
@@ -17,7 +17,8 @@
     "sitemap": "node tools/generate-sitemap.mjs",
     "icons": "node tools/generate-icons.mjs",
     "logo": "node tools/generate-logo.mjs",
-    "brand": "npm run icons && npm run logo"
+    "brand": "npm run icons && npm run logo",
+    "cf": "node tools/cloudflare.mjs"
   },
   "private": true,
   "dependencies": {
