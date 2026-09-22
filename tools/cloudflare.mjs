@@ -4,7 +4,7 @@
 //   node tools/cloudflare.mjs status          what is configured right now
 //   node tools/cloudflare.mjs apply           cache rules, rate limit, WAF, AI bots, alert
 //   node tools/cloudflare.mjs proxy on|off    the site itself through the proxy (or back out)
-//   node tools/cloudflare.mjs kill on|off     the kill switch: block every request
+//   node tools/cloudflare.mjs kill on|off     block every request (adds/removes the rule)
 //   node tools/cloudflare.mjs purge           empty the edge cache (run after a deploy)
 //
 // The goal is predictable cost: R2 is only read on a cache miss, so anything that
@@ -57,23 +57,29 @@ const getPhase = async (phase) => {
 
 const uaMatch = (bots) => bots.map((b) => `lower(http.user_agent) contains "${b.toLowerCase()}"`).join(' or ');
 
-const KILL_DESCRIPTION = 'KILL SWITCH - block every request (node tools/cloudflare.mjs kill on)';
+const KILL_DESCRIPTION = 'KILL SWITCH - every request blocked';
 
+// The kill switch is NOT kept in the rule list as a dormant rule: one accidental click
+// on its toggle in the dashboard takes the whole site down, which is exactly what
+// happened on 2026-09-22. `kill on` adds the rule, `kill off` removes it again.
 function firewallRules(killEnabled) {
-  return [
+  const rules = [
     {
       description: 'AI training crawlers blocked (answer engines deliberately allowed - T-54)',
       expression: `(${uaMatch(TRAINING_BOTS)})`,
       action: 'block',
       enabled: true,
     },
-    {
+  ];
+  if (killEnabled) {
+    rules.unshift({
       description: KILL_DESCRIPTION,
       expression: `(http.host eq "${SITE_HOST}" or http.host eq "${IMAGE_HOST}" or http.host eq "www.${SITE_HOST}")`,
       action: 'block',
-      enabled: killEnabled,
-    },
-  ];
+      enabled: true,
+    });
+  }
+  return rules;
 }
 
 async function applyCacheRules() {
@@ -153,7 +159,7 @@ if (command === 'status') {
 } else if (command === 'apply') {
   console.log('cache rules      ', (await applyCacheRules()).rules.length, 'rules');
   console.log('rate limit       ', (await applyRateLimit()).rules.length, 'rule');
-  console.log('firewall         ', (await putPhase('http_request_firewall_custom', firewallRules(false))).rules.length, 'rules (kill switch off)');
+  console.log('firewall         ', (await putPhase('http_request_firewall_custom', firewallRules(false))).rules.length, 'rule (no kill switch rule; `kill on` adds it)');
   // Training crawlers blocked as a category; answer-engine traffic left alone, which
   // is the whole point of being found by them.
   const bots = await api(`${Z}/bot_management`, { method: 'PUT', body: { ai_bots_protection: 'disabled', crawler_protection: 'disabled', fight_mode: false } })
@@ -169,7 +175,7 @@ if (command === 'status') {
 } else if (command === 'kill') {
   const on = process.argv[3] === 'on';
   await putPhase('http_request_firewall_custom', firewallRules(on));
-  console.log(on ? 'KILL SWITCH ON - every request is blocked' : 'kill switch off - traffic flowing');
+  console.log(on ? 'KILL SWITCH ON - every request is blocked; `kill off` removes the rule' : 'kill switch removed - traffic flowing');
 } else if (command === 'purge') {
   await api(`${Z}/purge_cache`, { method: 'POST', body: { purge_everything: true } });
   console.log('edge cache emptied');
