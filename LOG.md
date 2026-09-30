@@ -9,179 +9,31 @@ more work into `QUEUE.md` → Intake.
 
 ## Needs you
 
-### What is left, in one place (2026-09-19)
-1. **Two things to confirm from Viki's answers** (T-49 below): the three FAQ
-   entries she left out are removed - right? And "духането на свещичките" is
-   as she wrote it - or a slip for "духването"? One word each.
-2. **Per-gallery texts** (T-47 below) - say yes and I write them from the
-   photographs; Viki only reads and corrects.
-3. **Cloudflare R2 token** - unblocks the thumbs backfill (faster galleries).
-4. **Deploy** - your hand: `npm run deploy` from `redesign/conversion-pass`
-   once you and Viki say yes (nothing live yet). Everything else is built.
-Settled: font A (Source Sans 3); About stays; reviews parked.
+Tidied 2026-10-01 (T-55): only what is still open. Everything settled is under
+Shipped or in `git log`. Live = 8b69e6b (master = prod = the branch).
 
-### T-49 · Viki's answers - applied, two things to confirm
-Her list came back with nine sentences changed and everything else as sent;
-all nine are in (preview refreshed). Two readings I made, say if wrong:
-- **Three FAQ entries were missing from her copy** - prom "Какво да облечем за
-  фотосесията?", family "Детето ни не стои мирно. Проблем ли е?" and "Кое е
-  най-подходящото време на деня?". I read a dropped bullet in an otherwise
-  complete list as "remove" and took them out (the prom page has two FAQs now,
-  the family page one). One line brings any of them back.
-- **"духането на свещичките"** (birthdays, paragraph 2) is her wording; the
-  sent text had "духването". Both are Bulgarian; hers stays unless you say.
+1. **T-54 · GEO, the build half** - yes or no to the three items still waiting
+   in TASKS.md: a five-line „Накратко" block per service page, ~12 more FAQ
+   answers (I draft, Viki confirms), and a Bulgarian test-prompt set you run
+   monthly. robots.txt, llms.txt and the schema are already live.
+2. **Cloudflare token** - you deleted the one pasted in chat, so `npm run cf`
+   fails and `npm run deploy` skips its edge purge. A new token in `tools/.env`
+   when you want those back. If no purge has run since the photos were re-cut
+   (370da8c), do Caching → Purge Everything once by hand - I cannot tell from here.
+3. **For Viki, one Messenger message** (T-45): town and month per gallery, plus
+   3-5 client messages for the empty „Отзиви“ section. The list below predates
+   the seven galleries from T-52 and Viki's five hidden ones (T-50) - bring it
+   up to date before sending.
+4. **Consent from the couples** → drop `Weddings` from `liveSiteOnly` in
+   `src/app/content/hidden-galleries.json` and deploy.
+5. **Standing, on Viki:** Google Business Profile, prices for `/tseni`; optional:
+   camera originals of the 31 older galleries, and a new About portrait.
+6. **Search Console:** Indexing → Pages, the indexed count (4 of 33 on 2026-09-22).
+7. **`WORKER.md` is untracked** - commit it yourself or tell me to. Its "R2 CORS
+   blocks localhost" trap is out of date since T-22.
+8. **The preview channel expires 2026-10-15** - `npm run preview:deploy` renews it.
 
-### T-46 · Texts to check (2026-09-17) - answer by number
-Register: standard literary Bulgarian, professional; every "24 часа" promise
-gone; Viki's own paragraphs untouched. Old → new:
-
-**Начало**
-1. Под заглавието: „…Без позиране и напрежение - вие преживявате деня си, а аз го
-   запечатвам.“ → „Сватби, абитуриентски балове, кръщенета и семейни празници.
-   **Документален и спокоен подход - вие преживявате деня си, а аз запечатвам
-   важните моменти, без да се натрапвам.**“ (нейните думи от „За мен“)
-2. Лентата с числата: три полета - „4+ години опит“ · „100+ заснети събития“ ·
-   „София & Видин“ (без надпис). Махнати: „24ч отговор на запитване“ и
-   „където снимам най-често“. „години зад обектива“ → „години опит“.
-3. Над стъпките: „Няма формуляри, няма чакане с дни и няма изненади накрая. Ето
-   какво следва, ако решите да ми пишете.“ → „**Ясен процес в четири стъпки - без
-   формуляри и без изненади.**“
-4. Стъпка 1: „…До 24 часа ще знаете дали съм свободна и колко ще струва.“ →
-   „**Изпратете ми датата, мястото и повода. Ще потвърдя дали датата е свободна и
-   ще ви предложа конкретна оферта.**“
-5. Стъпка 2: „Чуваме се на живо или онлайн. Минаваме през програмата на деня,
-   локациите и хората, които държите да са в кадър.“ → „Срещаме се на живо или
-   онлайн и преминаваме през програмата на деня, локациите и хората, които искате
-   да бъдат в кадър.“
-6. Стъпка 3: „…вие празнувате, аз работя. Няма да ви местя от място на място и няма
-   да ви карам да повтаряте…“ → „…вие празнувате, а аз работя. Няма да ви местя от
-   място на място, нито да ви карам да повтаряте моменти заради снимката.“
-7. Стъпка 4: „…идва първата селекция, а след нея - цялата обработена галерия,
-   която сваляте в оригинален размер.“ → „…получавате първа селекция, а след нея -
-   цялата обработена галерия за изтегляне в пълен размер.“
-8. Въпрос „В кои градове снимате?“: → „Основно в София и Видин. **Ако събитието ви
-   е другаде, пишете ми, за да уточним детайлите и разходите за път.**“
-9. Въпрос „Колко струва…?“: „Цената зависи от това колко часа продължава
-   събитието, къде е и какво включва. Пишете ми с датата и мястото и ще получите
-   конкретна оферта до 24 часа.“ → „Цената зависи от продължителността на
-   събитието, мястото и това, което включва. Изпратете ми датата и мястото и ще
-   получите конкретна оферта.“
-10. Въпрос „Колко предварително…?“: „…обикновено е достатъчно да се чуем няколко
-    седмици предварително.“ → „…между 6 и 12 месеца предварително. За фотосесии,
-    рождени дни и кръщенета обикновено са достатъчни няколко седмици.“
-11. Въпрос „Как се запазва дата?“: „След като се разберем за услугата и цената…
-    До този момент не е ангажираща за никого от двама ни.“ → „След като уточним
-    услугата и цената, датата се резервира с капаро. До този момент няма
-    ангажимент за никоя от страните.“
-12. Въпрос „Кога получавам снимките…?“: „Малка селекция с най-хубавите кадри… Снимките
-    се свалят онлайн…“ → „Малка селекция от най-добрите кадри… Снимките се изтеглят
-    онлайн в пълен размер, без водни знаци.“
-13. Въпрос „Мога ли да поискам…?“: „Да, и това е напълно нормално. Нищо не се
-    публикува… без ваше съгласие.“ → „Да. Нищо не се публикува в сайта или в
-    социалните мрежи без вашето изрично съгласие.“
-14. Тъмната лента долу (и на всяка категория): „Пишете ми датата и мястото на
-    събитието - отговарям до 24 часа с наличност и цена.“ → „**Изпратете ми датата
-    и мястото на събитието. Ще ви отговоря дали датата е свободна и ще ви изпратя
-    конкретна оферта.**“
-
-**Галерия (/galerii)**
-15. Лентата долу: „…изненади и доста неща, които не се вписват в нито една
-    категория. Разкажете ми какво празнувате.“ → „…изненади и **много поводи**, които
-    не се вписват в нито една категория. **Разкажете ми за вашия.**“
-
-**Категориите**
-16. Сватби, „Среща преди сватбата“: „…говорим за програмата на деня, локациите и
-    хората, които държите да бъдат в кадър.“ → „…обсъждаме програмата на деня,
-    локациите и хората, които искате да бъдат в кадър.“
-17. Сватби, въпрос за датата: „Ако датата ви е близо, пак ми пишете: случва се да
-    имам свободен уикенд.“ → „Ако датата ви е скоро, все пак ми пишете - понякога
-    има свободни уикенди.“
-18. Сватби, „Кога получаваме снимките?“: „…селекция с най-хубавите кадри… в срок,
-    който сме уговорили при запазването на датата.“ → „…селекция от най-добрите
-    кадри… в срока, уговорен при запазването на датата.“
-19. Абитуриенти, ред под заглавието: „Дванадесет години свършват за една вечер.
-    Заслужават повече от няколко снимки с телефон.“ → „Дванадесет години училище
-    завършват с една вечер - тя заслужава повече от няколко снимки с телефон.“
-20. Абитуриенти, „Какво да облечем?“: „…Ако не е, работим с каквото ви харесва -
-    важното е да се чувствате добре в него.“ → „…Ако не е - нещо, в което се
-    чувствате добре.“
-21. Кръщенета, „Колко време оставате?“: „Обичайно покривам… Ако искате да остана до
-    края на вечерта, се разбираме предварително.“ → „Обикновено заснемам
-    подготовката, тайнството и началото на празненството. Ако желаете да остана до
-    края на вечерта, уточняваме го предварително.“
-22. Семейни, абзац: „Ако мисълта за фотосесия ви кара да се притеснявате как да
-    застанете или какво да правите с ръцете - спокойно, повечето хора се чувстват
-    така. Аз идвам с идеи, вие идвате със себе си. … за деца, бебета, бременни и
-    по-големи семейства…“ → „Ако мисълта за фотосесия ви притеснява - как да
-    застанете, какво да правите с ръцете - знайте, че повечето хора се чувстват
-    така. Аз идвам с идеите, вие - просто със себе си. Семейни фотосесии на открито
-    или у дома: за деца, бебета, бъдещи майки и големи семейства в София и Видин.“
-23. Семейни, „Детето ни не стои мирно“: „Точно обратното. … сесията е построена
-    така, че да няма нужда да ги караме да позират.“ → „Напротив. … сесията е
-    замислена така, че да не се налага да позират.“
-24. Семейни, „Какво да облечем?“: „Изберете цветове, които си пасват едни на други…
-    достатъчно е цветовете да си пасват.“ → „Изберете цветове, които се съчетават,
-    без едри надписи и шарки. Не е нужно да сте в еднакви дрехи - достатъчно е
-    тоновете да си подхождат.“
-25. Рождени дни, юбилеи: „Ако искате, поемам и тази роля, за да не се налага на вас
-    да мислите за това…“ → „Ако желаете, поемам и тази роля, за да не мислите за
-    това в деня на празника.“
-26. Рождени дни, „Правите ли снимки и на гостите?“: „Да, това е половината от
-    празника. Много семейства после раздават галерията…“ → „Да - гостите са
-    половината от празника. Много семейства след това споделят галерията с всички
-    присъствали.“
-27. Други събития, ред под заглавието: „…или просто идея, която ви върти в главата
-    от месеци.“ → „Годежи, юбилеи, портрети или просто идея, за която мислите от
-    месеци.“
-
-**Отделна галерия**
-28. Лентата долу: „Ако планирате подобен ден, пишете ми датата и мястото -
-    отговарям до 24 часа с наличност и цена.“ → „Ако планирате подобен ден,
-    изпратете ми датата и мястото. Ще ви отговоря дали датата е свободна и ще ви
-    изпратя конкретна оферта.“
-
-**За мен**
-29. Лентата долу: „Кажете ми датата и мястото и ще ви отговоря до 24 часа дали съм
-    свободна и колко ще струва.“ → „Изпратете ми датата и мястото и ще ви отговоря
-    дали съм свободна и при какви условия.“
-
-**Контакти**
-30. Под заглавието: „…Отговарям до 24 часа - с наличност и конкретна цена, черно на
-    бяло.“ → „Изпратете ми датата, мястото и повода. Ще ви отговоря дали датата е
-    свободна и ще ви изпратя конкретна оферта.“
-31. Формата: „Пишете ми за дата, идея или въпрос - отговарям до 24 часа.“ → „Пишете
-    ми за дата, идея или въпрос.“; правните страници: „попитайте ме - отговарям до
-    24 часа“ → „попитайте ме.“; описанието на /kontakti за Google - същото.
-
-**Not touched:** Viki's own paragraphs (сватби, абитуриенти, кръщенета, други
-събития, За мен); the wedding travel FAQ from her T-09 text.
-
-### T-47 · Per-gallery texts - proposal (needs a yes)
-Viki cannot recall dates and cannot write 31 texts; reading 31 short texts and
-correcting three is a different job, ten minutes. So: I write each gallery's
-two-three sentences **from the photographs themselves** - what the visitor is
-about to see (church or civil ceremony, the season if it shows, the first dance,
-the sparklers, a park session, the family at the arch), the couple's names, no
-date and no venue name unless it is legible in a frame. Nothing invented:
-everything in the text is in the pictures. Viki reads them once, corrects what
-she recognises as wrong (venue names she remembers can go in then), and the
-gallery pages stop being 31 copies of the same sentence - the one thing Google
-still holds against them. Cost: an afternoon of looking at photographs; one
-commit; strings asserted per gallery page. Say yes and I start with the weddings.
-
-### T-44 · Fonts - decided: A (Source Sans 3), nothing to change
-**https://phbyvikiprod--fonts-cqv7luse.web.app/shriftove** (expires 2026-10-16).
-Four cards A-D: same heading (Cormorant, unchanged), same paragraph, same
-buttons, same letters - only the text face differs. Names hidden by default so
-you choose by eye; "Покажи имената" reveals them. A is what the site has now.
-Say the letter; the swap is one line.
-
-### T-45 · Venue and date without the spreadsheet
-Checked the photographs in R2: no EXIF, so nothing is derivable - the date and
-place exist only in Viki's head. She needs no spreadsheet: forward this to her
-in Messenger and she answers inline, a voice note is fine too (31 lines, ten
-minutes). Until it comes, the gallery pages say only the category (T-43), never
-a guessed town.
+The T-45 message:
 
 ```
 Вики, за всяка галерия - град и месец/година, така: „Видин, юни 2024“.
@@ -228,62 +80,84 @@ a guessed town.
 празна и чака точно тях - за сватбен фотограф това тежи повече от всеки текст.
 ```
 
-What the answers unlock, in order of value: the reviews (the empty section on
-the home page, the strongest proof there is); town + season under each gallery's
-name („Сватба във Видин · юни 2024“), which also gives every gallery page a
-sentence Google has not seen on the other thirty; a `context` line on each
-review that links to its gallery.
-
-### T-31 · Round two on the canvas - About (page 7), with Viki
-https://claude.ai/code/artifact/dfcba592-2a61-43f1-bd1c-0a5053c52f50 → page 7.
-- **About:** the coral is keyed out of the existing portrait (a real re-cut,
-  `.verify/design-canvas/portrait-keyed.png`; a faint sunlit rim on the hair
-  remains). A4 писмо · A5 портретът на хартия · A6 интервю (draft questions,
-  yours to change). My pick: A4 - needs the portrait least and opens with her
-  work. Better still: one new photo from Viki, her at work, 4:5, daylight.
-- Contacts: K3 stays (Martin, 2026-09-15). The G and K rows on page 7 are
-  superseded by T-33.
-
-### T-24 · The preview for Viki
-**https://phbyvikiprod--preview-yb28hwie.web.app** — expires 2026-10-15.
-A Firebase *preview channel* on the prod site: its own URL, nothing on
-phbyviki.com changed (the `live` release is still 2026-08-03). Galleries are
-complete on it - the bucket's CORS refuses that origin, so T-22's fallback
-copy is doing the work; photos published after 2026-09-12 will not show there
-until the next `npm run sitemap` + redeploy. To refresh it after more commits:
-`npm run build && npx firebase hosting:channel:deploy preview --project phbyvikiprod --only app --expires 30d`
-(the `app` target mapping for that project lives in the gitignored
-`.firebaserc`; on another machine run
-`npx firebase target:apply hosting app phbyvikiprod --project phbyvikiprod` first).
-
-### T-23 · Taste calls - done ("do them", 2026-09-15); see Shipped
-
-### T-21 · The "missing" gallery photos - nothing to fix, but read this once
-You were looking at localhost (the `.verify` screenshots or a preview server). The
-bucket's CORS policy allows `https://phbyviki.com` only, so off that origin the
-manifest fetch is refused and a gallery shows the 8 seeded photographs and stops -
-Лора и Асен has 153. Production was never affected; the built HTML carries the
-seeds; every image URL answers 200. T-22 (shipped below) makes the site fall back
-to its own copy of the manifest, so localhost and the preview link for Viki now
-show whole galleries. New photos still need `npm run sitemap` after a publish,
-which `npm run publish` already does.
-
-### Still open from T-20
-- **The About portrait** - see T-31 above: keyed off the coral now; a new photo
-  from Viki is still the better fix.
-- `WORKER.md` is untracked - commit it yourself or tell me to. Its "R2 CORS blocks
-  localhost" trap is out of date after T-22: galleries fill locally now.
-
 ---
 
 ## Working on
 
-**The auto queue is empty.** T-49 is done; T-47 (gallery texts from the
-photographs) waits for your yes under Needs you.
+**The auto queue is empty.** T-54's remaining items wait for a yes (1 above).
 
 ---
 
 ## Shipped
+
+### 2026-10-01
+- **T-55 · Queue tidied** - thirteen shipped specs out of `QUEUE.md` → Ready,
+  the "Was:" snapshots and closed tasks out of Needs you, T-47 marked done, the
+  Blocked table brought up to date, the missing Shipped lines below added. No code.
+
+### 2026-09-23
+- **T-54 · GEO, first half** (8b69e6b, live) - `llms.txt` from existing copy;
+  schema: ImageObject credit on gallery photos, About as ProfilePage,
+  `knowsAbout`, Bulgaria in `areaServed`. No prices or reviews.
+
+### 2026-09-22 (afternoon)
+- **robots.txt matches the WAF** (b033de9) - answer engines allowed, training
+  crawlers refused.
+- **Cloudflare as code** (f5cc05f, 1ec669f) - proxied, cache key without the
+  query string, image rate limit, training-bot WAF rule; `npm run cf kill on/off`
+  creates and deletes the block rule (after the 15:40 incident).
+- **T-53 · Gallery view toggle** (e22cc8c, de0bbed, live) - feed / mosaic,
+  icons only, feed default. Also f963cd4: one-off tools removed.
+
+### 2026-09-22
+- **Site images to R2** (see `git log`) - hero, quote, process, category cards,
+  About portrait now at images.phbyviki.com/site/ (`npm run publish:site`); a first
+  visit takes ~350 KB from Firebase instead of ~2 MB. Spark confirmed by Martin
+  (pauses at 360 MB/day, cannot bill). Audit page updated (v2).
+- **Overbilling / scraping audit** - artifact EMRrKwnvZhC9XBwUF1D8NM. Findings:
+  only R2 reads on edge misses are movable by strangers ($0.36/M past 10M);
+  cache-busting via query strings and random 404 paths were open; Firebase plan
+  unknown (Spark stops at 360 MB/day, Blaze bills). Code side: robots.txt now
+  disallows AI-training crawlers (deployed). Everything else needs Martin's
+  Cloudflare login - checklist in the artifact.
+- **Image quality** (370da8c, deployed) - Martin: covers soft on a 2K monitor,
+  twice. Cause: derivatives re-encoded from the compressed 2048 webp at q80, no
+  sharpening. Now 2560/q88 full + 1024/1600 copies at q86 cut from the original
+  with a light unsharp mask; the 31 older galleries re-cut from their 2048 files
+  (no originals on hand); 512 copies pruned. Bucket ~0.9 GB. Two copies by
+  Martin's decision. Comparison page: https://claude.ai/artifact/BQEaxRJWm1Nqg7ECNrqEoJ
+- **Sharp covers** (1599111, deployed) - `sizes` on the wall tiles and sibling
+  cards now allows for the object-fit crop (landscape cover in a 4:5 tile needs
+  1.875x the width); a 1x 2K monitor was getting w512 for a 790px job. Cover
+  pixel size added to the snapshot/listing; `coverSizes()` in config.ts.
+- **DEPLOYED** - `npm run deploy` (SITE_TARGET=live): 33 routes, 21 galleries,
+  weddings hidden; both hosting targets (app + the old-domain redirect). Live
+  smoke test clean.
+- **Thumbs backfill** (5d8c296) - `npm run publish -- --thumbs`, 915 older photos;
+  srcset + width/height live on every gallery page. verify 50/38 PASS, 0 skipped.
+- **T-52 · Seven new galleries** (f990874) - 537 photos to R2 with derivatives
+  and dims; lone-gallery strip; verify counts own photographs only; to-upload
+  folders + README. verify 50/38 PASS; preview refreshed.
+- **T-51 · Weddings hidden on live only** (e726af6) - two-scope
+  `hidden-galleries.json`, `SITE_TARGET=live` in `npm run deploy`,
+  `generated/site-target.ts` for the runtime, `npm run preview:deploy`. verify
+  43/31 and 29/17 PASS. Centering audit clean.
+- **T-50 · Viki's second review** (e039344) - nine copy points verbatim; five
+  galleries hidden via `hidden-galleries.json` (runtime + build); header pill
+  centred. verify 38/26 PASS; six `check-text` runs; preview refreshed.
+
+### 2026-09-21
+- **Gallery page fixes from Martin's phone** (see `git log -1`) - the line is hidden
+  (meta + JSON-LD only); links encoded twice (chat apps) decode until stable, so
+  „Лора%20и%20Асен“ with no photos cannot happen again; `section-space` before the
+  CTA band, as on the other pages.
+- **T-47 · Gallery lines** (188b193 → e06c213) - first as 31 paragraphs from
+  contact sheets of the R2 photos; Martin: cringe. Now one factual line + photo
+  count under the noun, and a distinct meta/JSON-LD description per gallery.
+  `content/gallery-texts.ts`; snapshot gains `photoCount`; Unicode-normalised
+  lookup (Mac folder names carry decomposed „й“). verify 43/31 PASS; `check-text`
+  on four galleries; preview refreshed.
+- **„духването“** (e3f06b8) - put back on the birthdays page, Martin's call.
 
 ### 2026-09-19
 - **T-49 · Viki's answers applied** — commit "Put in Viki's wording from her

@@ -34,6 +34,10 @@ tells it this is the client's own wording and not to improve it.
 
 ## Triaged
 
+- [x] T-55 · Tidy the queue: Ready and LOG Needs you reconciled with what shipped · auto · done 2026-10-01
+- [ ] T-54 · GEO · needs-you · robots.txt (b033de9), llms.txt + schema (8b69e6b) shipped; answer blocks, FAQ expansion and test prompts wait for a yes (TASKS.md)
+- [x] T-53 · Gallery view toggle — LIVE 2026-09-22 (icons-only feed/mosaic pill, de0bbed)
+
 One line per item drained from Intake. Full specs get written under **Ready** —
 `needs-you` ones soon, `auto` ones when their turn comes.
 
@@ -161,7 +165,7 @@ purpose — see its note.
 - [x] T-31 · About page - stays as it is for now (Martin, 2026-09-16: "about page can we keep for now")
 - [x] T-46 · Copy pass two - literary Bulgarian, no "24 часа", hero line explained, cities tile without label, FAQ 5 · auto · done 2026-09-17, texts listed in LOG
   > 1 - какво значи без позиране и анпрежение. нека поработим над това и да бъде ан български книжовен език. софия и видин но не ми хареса софия и видин какво може да имзислим или да си го оставим, махни 'където снимам най-често. Нека махнем отговарям до 24 часа звучи банално. 5-  ако събитието е другата ми пишете за да се уточним или нещо такова. . Нека всички текстове да са професионални.
-- [ ] T-47 · Per-gallery texts written from the photographs (Viki cannot recall dates or write them) · needs-you · proposal in LOG, waiting for a yes
+- [x] T-47 · Per-gallery texts written from the photographs (Viki cannot recall dates or write them) · done 2026-09-21: one factual line per gallery, meta only (e06c213, 441cece)
 - [x] T-48 · Email-ready list of every non-Viki text for her to approve or redact · auto · done 2026-09-17 (`.verify/tekstove-za-viki-2026-09-17.txt`)
   > okay can i send them to email to her so she agrees or redacts them can you help with that and what else is left, testemonials for now wont do and for seo is everything ready and whats left from buildig the website
 - [x] T-49 · Apply Viki's answers to the T-48 list - 9 edits, 3 FAQ entries she left out · auto · done 2026-09-19 (two readings flagged in LOG)
@@ -248,218 +252,10 @@ purpose — see its note.
 
 # Ready
 
-### T-49 · Apply Viki's answers to the T-48 list
-**Why** — Viki returned the T-48 list (via Martin, 2026-09-19) with her wording. Diffed against what was sent: nine sentences changed, everything else returned unchanged, and three FAQ entries are missing from her copy - the prom "Какво да облечем за фотосесията?" and the family "Детето ни не стои мирно" and "Кое е най-подходящото време на деня?". Assumption: a bullet she dropped from an otherwise complete list is a bullet she does not want; they are removed (one revert brings them back) and flagged in LOG. Her text lands verbatim, including "духането на свещичките" (flagged once as a possible slip for "духването").
-**Scope** — `intro-section.component.html`, `process.component.html`, `content/home.ts`, `footer.component.html`, `galleries-index.component.html`, `content/services.ts`
-**Done when**
-- WHEN `/` is prerendered, THE page SHALL contain "Заснемам вашите събития в документален стил - вие преживявате деня си, а аз запечатвам важните моменти и вашите емоции." and SHALL NOT contain "без да се натрапвам"
-- THE page SHALL contain "Ясен процес в четири стъпки и без формуляри." and SHALL NOT contain "без формуляри и без изненади"
-- THE page SHALL contain "вие празнувате, а аз просто снимам." and SHALL NOT contain "Няма да ви местя"
-- THE page SHALL contain "Снимките се изтеглят онлайн в пълен размер." and SHALL NOT contain "без водни знаци"
-- THE page SHALL contain "Да. Нищо не се публикува без вашето изрично съгласие." and SHALL NOT contain "в сайта или в социалните мрежи"
-- THE footer tagline SHALL be exactly "Сватбен и събитиен фотограф" on every prerendered page; no page SHALL contain "естествени кадри и емоционални моменти"
-- WHEN `/galerii` is prerendered, THE page SHALL contain "Всяка галерия е моят поглед през обектива." and "Снимала съм много и най-различни събития, затова разкажете ми за вашия и ще намерим решение." and SHALL NOT contain "както е бил" nor "не се вписват в нито една категория"
-- WHEN `/galerii/semeyni` is prerendered, THE page SHALL contain "Аз идвам с идеите, вие бъдете себе си." and SHALL NOT contain "просто със себе си", "Детето ни не стои мирно" nor "най-подходящото време на деня"; THE FAQ SHALL have exactly one entry ("Какво да облечем?")
-- WHEN `/galerii/abiturienti` is prerendered, THE page SHALL NOT contain "Какво да облечем за фотосесията?"; THE FAQ SHALL have exactly two entries
-- WHEN `/galerii/rojdeni-dni` is prerendered, THE page SHALL contain "духането на свещичките" and SHALL NOT contain "духването"
-- `sh scripts/qa.sh` green
-**Evidence** — gate; grep over the prerendered pages for every pair above
-**Autonomy** — auto (her exact text)
+Specs leave this section when their task ships; `LOG.md` → Shipped and `git log`
+keep the record.
 
-### T-46 · Copy pass two - literary Bulgarian, no "24 часа"
-**Why** — Martin, 2026-09-17: the hero line "без позиране и напрежение" was unclear - make it standard literary Bulgarian; drop "където снимам най-често"; "отговарям до 24 часа" sounds banal - remove it; FAQ 5 should say "if the event is elsewhere, write to me so we can settle the details"; all texts professional. Assumptions: every "24 часа" promise goes, including the strip tile (three tiles now: 4+ · 100+ · София & Видин, the last without a label); the hero line is rebuilt from Viki's own About vocabulary ("документален и спокоен подход", "без да се натрапвам"); colloquial phrasing in the texts I wrote earlier is edited to literary register; Viki's own paragraphs are untouched.
-**Scope** — `content/{contact,home,services}.ts`, `intro-section`, `credentials` (html+css), `process`, `landing`, `cta-band.ts`, `gallery`, `about-me`, `galleries-index`, `contact-page`, `contact-me`, `legal-page` templates, `assets/seo.json`
-**Done when**
-- WHEN `/` is prerendered, THE page SHALL contain "Документален и спокоен подход - вие преживявате деня си, а аз запечатвам важните моменти, без да се натрапвам." and SHALL NOT contain "Без позиране"
-- THE page SHALL NOT contain "24 часа", "24ч" or "където снимам най-често"; THE strip SHALL have exactly three `.cred` cells, the third "София & Видин" with no label
-- THE page SHALL contain "пишете ми, за да уточним детайлите и разходите за път." and "Ясен процес в четири стъпки"
-- WHEN any of the 43 routes is prerendered, THE page SHALL NOT contain "24 часа" or "24ч" (grep over dist/**/index.html)
-- WHEN `/kontakti` is prerendered, THE lead SHALL be "Изпратете ми датата, мястото и повода. Ще ви отговоря дали датата е свободна и ще ви изпратя конкретна оферта."
-- WHEN `/galerii/svatbi` is prerendered, THE page SHALL contain "все пак ми пишете - понякога има свободни уикенди" and SHALL NOT contain "случва се да имам свободен уикенд"
-- The strip lays out as three cells at 1440 and two + one full-width at 390, no overflow
-- `sh scripts/qa.sh` green
-**Evidence** — gate; grep over the 43 pages; screenshot of the strip at 1440 and 390
-**Autonomy** — auto (Martin's instruction; texts listed in LOG for his check)
-
-### T-43 · Copy pass - the cities once per page, no "цяла България", 100+ events, fix the texts
-**Why** — Martin: "да пише навсякъде фотограф видин и софия звучи странно и после имаме фотограф цялата страна, махаме фотограф цялата страна. Смени на 100+ заснети събития и оправи текстовете … помисли все едно че си специалист на тази тема и маркетингов специалист". Assumptions: (1) the cities stay where they do the work - the home H1, the `<title>`/description of every page, the schema, one natural sentence in the body - and leave the category H1s, the gallery sub-line, the credentials label, the /galerii lead and every alt text; (2) "цяла България" goes everywhere it is a claim, and travel survives only as the honest answer to the travel question ("Ако сватбата ви е другаде - просто ми пишете"); (3) two things found on the way are fixed too: the home CTA told people to *call* (there is no number on the site), and "фирмени" events were still offered in two places after Viki removed the corporate category. Every changed sentence is listed in LOG for Martin to check; nothing here is live.
-**Scope** — `content/{contact,home,services,legal}.ts`, `intro-section.component.html`, `credentials.component.html`, `landing.component.html`, `galleries-index.component.html`, `galleries-cards.component.{ts,html}`, `gallery.component.{ts,html}`, `contact-page.component.html`, `assets/seo.json`, `src/index.html` + `structured-data.service.ts` (areaServed), the per-photo alt texts
-**Done when**
-- WHEN `/` is prerendered, THE page SHALL contain "100+" next to "заснети събития" and SHALL NOT contain "150+"
-- THE page SHALL contain "Сватби, абитуриентски балове, кръщенета и семейни празници. Без позиране" and SHALL NOT contain "в цялата страна"
-- THE page SHALL NOT contain "обадете се" nor "цяла България"; the H1 SHALL still read "в София и Видин"
-- WHEN `/galerii/svatbi` is prerendered, THE h1 SHALL be "Сватбен фотограф" (no city), THE page SHALL contain "Работя основно в София и Видин. Ако сватбата ви е другаде" and SHALL NOT contain "пътувам в цяла България" nor "снимам в цяла България"
-- WHEN `/galerii/rojdeni-dni` is prerendered, THE page SHALL contain "семейни събирания - в София и Видин." and SHALL NOT contain "фирмени" nor "и страната"
-- WHEN `/galerii` is prerendered, THE page SHALL NOT contain "цяла България" nor "фирмени"
-- WHEN a gallery page (`/galeriya/svatbi/<name>`) is prerendered, THE sub-line under the h1 SHALL be the type noun alone (no " - София и Видин") and no `alt` SHALL end in "фотограф София и Видин"
-- WHEN `/kontakti` is prerendered, THE page SHALL contain "черно на бяло." and SHALL NOT contain "обещания" nor "цяла България"
-- No prerendered page SHALL contain "цяла България" or "цялата страна" (grep over `dist/**/index.html`); every `<title>` unchanged
-- `sh scripts/qa.sh` green
-**Evidence** — gate; grep over the 43 prerendered pages for the present/absent strings above
-**Autonomy** — auto (Martin: write it as the specialist and hand him the texts to check)
-
-### T-26 · Хартия и месинг - the light tokens on every page
-**Why** — Martin picked direction B from the canvas ("lets go with the white - хартия и месинг flow of the app and colors"). Viki's own words for theme 01 were "изчистеното, семплото"; wedding photographs read better on paper than on black; and the black was the thing Martin was unsure about. Assumption: the CTA band at the foot of every page stays dark, as drawn on board B ("keeps a premium note") - the one place the glow survives.
-**Scope** — `src/app/styles/*.css`, every component stylesheet that hard-codes a stage colour (nav bars, skeletons, mobile bar, icons), `src/index.html` theme-color
-**Done when**
-- WHEN any route is prerendered, THE `<body>` ground SHALL be `#FAF7F2` and running text `#5C5449` on `#1A1714` headings (tokens in `variables.css`)
-- THE primary button SHALL be ink on paper (`#1A1714` / `#FAF7F2`) outside the dark band and bone (`#F1ECE3` / `#100E0C`) inside `.on-ink`
-- WHEN `npm run ux` runs, THE contrast check SHALL report 0 FAIL on all eight routes at 1440 and 390
-- No rgba(13,12,11,…) or `#1C1916`-style stage colour is left outside `.on-ink` and the photo modal
-- `sh scripts/qa.sh` green
-**Evidence** — gate output, `npm run ux` table, screenshots in `.verify/`
-**Autonomy** — auto (decided in chat)
-
-### T-27 · Home hero H3
-**Why** — Viki did not like the cropped hero; Martin wants it "to take the whole page like it was initially but not cut" and, asked which copy placement, picked H3: today's composition, uncropped - copy bottom-left over a gradient. Assumption: on phones and tablets the photo is too short to carry the copy (390px wide → 260px tall), so there the headline and buttons sit under it, as drawn on the page-3 phone frame.
-**Scope** — `intro-section.component.*`, `variables.css` (`--hero-image` goes), `navigation.component.ts` unchanged
-**Done when**
-- WHEN the home page renders on desktop, THE hero photograph SHALL be an `<img>` at `width: min(100vw, 150vh, 2400px); height: auto` centred, never `object-fit: cover`
-- WHEN the viewport is 1440×900, THE photograph SHALL be 1350×900 with the h1, sentence and buttons over its lower-left on a gradient
-- WHEN the viewport is 390 wide, THE photograph SHALL span the width whole and the h1 SHALL sit under it on paper
-- THE home page SHALL still preload the hero exactly once (`hero-preload` gate check)
-- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL
-**Evidence** — gate, ux, screenshots at 390 / 1024 / 1440 / 2560 / 3840 in `.verify/`
-**Autonomy** — auto
-
-### T-28 · Home sections P1 · S3 · Q3
-**Why** — Martin's picks per row: nav N1, credentials C1, FAQ F1, CTA T1 and footer Ft1 are what is shipped; P1 (three cards, the same object as /galerii), S3 (steps beside a photograph) and Q3 (the quote photograph whole, the words beside it on a band) are new.
-**Scope** — `projects.component.*`, `process.component.*`, `landing.component.*`
-**Done when**
-- WHEN `/` is prerendered, THE portfolio section SHALL contain three `<a>` cards to `/galerii/svatbi`, `/galerii/abiturienti`, `/galerii/lichni` with the 4:5 cover, the tag and the italic name, plus the "Всички категории" link
-- THE page SHALL NOT contain the three teaser paragraphs ("Заснемане на сватби - подготовка на булка", "Заснемам индивидуални и групови", "Обичам да улавям емоцията")
-- THE process section SHALL render the four steps as a ruled list beside `detail-hands.webp` on desktop, stacked on phones
-- THE quote section SHALL show `feature-love.webp` whole (no `object-fit: cover`, no scrim) with "Истории, които остават." beside it on the `--paper-warm` band
-- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL
-**Evidence** — string assertions, gate, ux, screenshots
-**Autonomy** — auto
-
-### T-29 · Gallery page W3
-**Why** — "W3 is perfect lets try it". One column, each photograph big and whole; two portraits share a row. The manifest carries no dimensions yet (thumbs backfill is blocked on the R2 token), so orientation is read from the image itself as it loads and the pairing happens on the client; once widths land in the manifest the same pairing can move to prerender time.
-**Scope** — `gallery.component.*`
-**Done when**
-- WHEN a gallery renders on desktop, THE photographs SHALL sit in one column of at most 1040px, each at its own ratio, `height: auto`
-- WHEN two consecutive photographs are portrait, THEY SHALL share one row at half width each; a lone portrait SHALL be centred at 60% width
-- WHEN the viewport is under 960px, THE photographs SHALL all be one column at full width
-- THE prerendered HTML SHALL still carry the eight seeded `<img>` tags, the first eager and preloaded (`lcp-photo` gate check), and the sibling strip
-- The modal still opens, arrows and Escape work, focus returns to the trigger
-- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL
-**Evidence** — gate, ux, screenshots at 390 / 768 / 1440 on Лора и Асен
-**Autonomy** — auto
-
-### T-30 · Contacts K3
-**Why** — "for contacts lets leave it K3": the form is the page, the ways to write sit under it in one quiet line.
-**Scope** — `contact-page.component.*`, `contact-me.component.css`
-**Done when**
-- WHEN `/kontakti` is prerendered, THE h1 and lead SHALL be centred, THE form SHALL follow at ≤560px wide, and Messenger / Instagram / email / where-I-shoot SHALL follow the form as one row of links (stacked on phones)
-- THE form labels, inputs and the submit SHALL be unchanged in markup (ids, formControlNames)
-- `sh scripts/qa.sh` green, `npm run ux` 0 FAIL (form labels, tap targets)
-**Evidence** — gate, ux, screenshots
-**Autonomy** — auto
-
-### T-33 · One wall for /galerii and the category pages
-**Why** — twelve boards for the two list pages were rejected across two rounds; the pages themselves were the problem (an index of six words, three with nothing behind them). Martin: "not basic, not overdone, nice UI/UX". Assumption: a real page on the preview judges better than a thirteenth board, and one `git revert` undoes it.
-**Scope** — `shared/gallery-wall`, `shared/category-nav`, `services/gallery-list.ts`, `galleries-index.*`, `galleries-cards.*`
-**Done when**
-- WHEN `/galerii` is prerendered, THE page SHALL carry an `<a>` per published gallery (31) with a real `<img>` and an `<h2>` name, categories dealt in turns
-- WHEN `/galerii/<slug>` is prerendered, THE wall SHALL hold that category alone, the row SHALL mark it current, and the service copy, FAQ and CTA SHALL follow; an empty category shows the empty-state text and no wall
-- THE category row SHALL be real links to `/galerii` and the six category pages, counts only where galleries exist
-- Three columns at 1440, two at 768 and 390, no horizontal overflow; the static HTML visible without script
-- `node tools/verify.mjs` PASS, `npm run ux` 0 FAIL
-**Evidence** — gate, ux, screenshots at 1440/768/390
-**Autonomy** — auto (revertable proposal)
-
-### T-41 · SEO check after the redesign
-**Why** — Martin: "seo". Audited all 43 prerendered pages: titles unique and ≤ 60, descriptions unique and ≤ 160, one canonical/h1/og:title/og:image each, JSON-LD parses, robots and sitemap (43/43) fine, internal links to every page (T-33). The one fault: the site-wide share image was `landing.webp` - a 892×1501 portrait WebP, which Messenger/Viber previews show blank or badly cropped. Assumption: a 1200×630 JPEG of the hero photograph (Viki's first choice) is the right default; gallery pages keep their own cover.
-**Scope** — `assets/img/og-home.jpg`, `assets/seo.json`, `src/index.html` (og/twitter/JSON-LD image lines only), `services/seo.service.ts`
-**Done when**
-- WHEN `/` is prerendered, THE `og:image` and `twitter:image` SHALL be `https://phbyviki.com/assets/img/og-home.jpg` with `og:image:width` 1200, `og:image:height` 630, `og:image:type` image/jpeg and a non-empty `og:image:alt`; exactly one of each
-- WHEN a non-gallery page (`/kontakti`, `/about-me`, `/poveritelnost`) is prerendered, THE `og:image` SHALL be og-home.jpg; a category page keeps its card cover and a gallery page its own cover
-- THE LocalBusiness JSON-LD `image` SHALL be og-home.jpg; the Person `image` SHALL stay landing.webp (it is her portrait)
-- THE file SHALL be a 1200×630 JPEG ≤ 150 KB
-- `sh scripts/qa.sh` green
-**Evidence** — gate; grep of the prerendered head on four routes; `sharp` metadata of the JPEG
-**Autonomy** — auto
-
-### T-42 · Bulgarian Cyrillic letterforms everywhere
-**Why** — Martin: "cyrylil should be bulgarian not russian so check it out". Found: Cormorant already draws the Bulgarian forms (it carries `locl` BGR and the page is `lang="bg"`); the reading sans did so only on Apple devices - Segoe UI and Roboto have no Bulgarian forms, so Windows and Android showed the Russian shapes. Fix: a reading face with the forms. Checked Inter, Noto Sans, Fira Sans, Onest (none), Manrope, Commissioner, Overpass, Source Sans 3 (yes). Assumption: Source Sans 3 - the quietest of the four next to Cormorant, Adobe's Cyrillic, OFL; one 40 KB variable file, size-adjusted so the type scale stays.
-**Scope** — `assets/fonts/source-sans-3.woff2` (+ OFL), `styles/fonts.css`, `styles/variables.css`, `src/index.html` (preload), `src/404.html`, `DESIGN-SPEC.md`; `Overpass.ttf` removed
-**Done when**
-- WHEN any page renders, THE computed font-family of body text, buttons and eyebrows SHALL resolve to "Source Sans 3" and `document.fonts.check('16px "Source Sans 3"')` SHALL be true
-- WHEN the word "това" renders in the body at lang=bg, THE glyphs for в and т SHALL be the Bulgarian forms (the GSUB `locl` BGR substitution applies - verify by comparing pixel width/shape against `font-feature-settings: "locl" 0`, or by `font-language-override`)
-- THE woff2 SHALL carry a `wght` axis 200–900 and a `locl` feature under cyrl/BGR; ≤ 60 KB
-- THE prerendered `index.html` SHALL preload the woff2 with `crossorigin`; no reference to Overpass remains in src
-- Computed sizes of h1, body, eyebrow, buttons unchanged from T-38's numbers (size-adjust, not the scale)
-- `sh scripts/qa.sh` green; `npm run ux` 0 FAIL
-**Evidence** — gate, ux; fontTools check of the woff2; `npm run shots -- --eval` on font-family/fonts.check; screenshot of About
-**Autonomy** — auto (Martin's instruction; the face itself is one line to swap)
-
-### T-39 · CTA pass
-**Why** — Martin: "cta". Reviewed every ask on the site: hero (gallery + Messenger), nav "Пишете ми" (→ /kontakti on desktop, deliberately: an m.me link on a desktop lands on a Facebook login wall as often as an inbox), the phone contact bar, the contacts page, the closing band. The one inconsistency: the closing band's biggest action was the m.me link on every device, including desktop, where the nav had already decided against it. Assumption: on desktop the band leads with the contact page and offers Messenger as a button; on phones and tablets Messenger stays first (it opens the app). No new copy - the labels already existed.
-**Scope** — `shared/cta-band/cta-band.component.{ts,html}`
-**Done when**
-- WHEN the band renders on desktop (≥961px), THE `.cta-primary` SHALL link to `/kontakti` with the label "Изпрати запитване", followed by Messenger and Instagram buttons
-- WHEN it renders on a phone or tablet, THE `.cta-primary` SHALL be the Messenger link "Пишете в Messenger", followed by "Изпрати запитване" (/kontakti) and Instagram
-- WHEN a page with the band is prerendered, THE static HTML SHALL carry the desktop form (a crawlable `/kontakti` link)
-- `sh scripts/qa.sh` green; `npm run ux` 0 FAIL
-**Evidence** — gate, ux; `npm run shots -- --eval` reading the band's links at 1440/768/390; screenshot of the band at 1440
-**Autonomy** — auto
-
-### T-38 · Typography pass
-**Why** — Martin: "small details like fonts". The scale is DESIGN-SPEC's and the families stay (Cormorant + the system sans); what had drifted was the lead under each page heading - five pages, four private recipes, About's serif lead two sizes below the service pages'. One more finding is a decision, not a fix: on iPhone/Mac the system sans draws Bulgarian letterforms (в→b, д→g, т→m) while Cormorant does not, so headings and body disagree on the same screen; see LOG → Needs you.
-**Scope** — `styles/headings.css` (`.lead-serif`, `.lead-sans`), `about-me.*`, `galleries-cards.*`, `galleries-index.*`, `contact-page.*`, `legal-page.*`
-**Done when**
-- WHEN `/galerii/svatbi` and `/about-me` render, THE lead SHALL be Cormorant italic at the same computed size (23px at 1440, 19px at 390), ≤ 46ch wide
-- WHEN `/galerii`, `/kontakti` and `/poveritelnost` render, THE lead SHALL be the sans at 17px/1.7 (15px on a phone), ≤ 62ch, the contacts one still centred
-- No other computed type change on those pages (h1, body, eyebrow sizes as before)
-- `sh scripts/qa.sh` green
-**Evidence** — gate; `npm run shots -- --eval` reading font-family/size/width of the lead per page
-**Autonomy** — auto
-
-### T-37 · Buttons: not rectangles
-**Why** — Martin: "i dont want rectangle buttons". Assumption: a full pill (999px) on every `.btn` and the nav's "Пишете ми", the same ink/bone fills; the fixed phone contact bar stays a bar (two halves of a bar are not buttons), the form's underline fields stay, the round modal controls already are.
-**Scope** — `styles/buttons.css`, `navigation-desktop.component.css`, `src/404.html`
-**Done when**
-- WHEN any page renders, THE computed `border-radius` of every `.btn` and of the nav `.write` SHALL be ≥ 22px (a full pill at 44px tall) at 1440, 768 and 390
-- THE `.btn` SHALL stay ≥ 44px tall and its label on one line at 390 (hero, closing band, contact form, 404, About)
-- THE phone contact bar, form fields and modal controls SHALL be unchanged
-- `sh scripts/qa.sh` green; `npm run ux` 0 FAIL
-**Evidence** — gate; `npm run shots -- --eval` reading border-radius/height per `.btn`; screenshots of the hero and the closing band at 1440/390
-**Autonomy** — auto (one revert)
-
-### T-36 · Hero cycles through Viki's three photographs
-**Why** — Viki could not choose; she wants three, in order: the lift in fog (5) first, the colour-smoke kiss (4), the first dance (1). Assumption: "shuffle" means a slow cross-dissolve in her order, not random; the first is what every visitor and every crawler sees.
-**Scope** — `intro-section.component.{ts,html,css}`, `assets/img/hero/hero-{lift,smoke,dance}-{1200,1800,2400}.webp` (hero-arch removed), `tools/hero-try.mjs`
-**Done when**
-- WHEN `/` is prerendered, THE HTML SHALL carry exactly one hero `<img>` - hero-lift with a 1200/1800/2400 srcset, `sizes="100vw"`, `fetchpriority="high"` - and a `<link rel="preload">` for it with matching imagesrcset/imagesizes
-- WHEN the page runs in a browser, THE other two SHALL be added after the first has loaded and shown, and the hero SHALL move lift → smoke → dance → lift, one every 6.5s, with a 1.6s fade, at every width
-- IF the tab is hidden or `prefers-reduced-motion` is set, THEN nothing SHALL move (reduced motion: the first photograph only)
-- THE frame's height SHALL not change when the photographs change (no layout shift)
-- `sh scripts/qa.sh` green; no reference to hero-arch remains
-**Evidence** — gate; `npm run shots -- --full 0 --settle 6000/12500/19000 --eval …` shows lift/smoke/dance in turn at 1440 (a second navigation in one headless tab reports hidden - tool artefact)
-**Autonomy** — auto
-
-### T-34 · Gallery page keeps the previous gallery after a sibling click
-**Why** — Viki: opening a gallery from the suggestions, going back and opening another "doesn't open it". Reproduced headlessly: the URL and tab title change, the page keeps the first couple. The router reuses the component when only the parameters change and both list pages did their work in `ngOnInit` only; the category row (T-33) has the same fault from one category to the next.
-**Scope** — `gallery.component.ts`, `galleries-cards.component.ts`, `category-nav.component.ts`
-**Done when**
-- WHEN a visitor on `/galeriya/svatbi/<A>` clicks a sibling `<B>`, THE h1, the photographs and the sibling strip SHALL be B's
-- WHEN they press Back, THE page SHALL be A's again; a further sibling click SHALL show that gallery
-- WHEN a visitor on `/galerii/svatbi` clicks "Абитуриенти" in the row, THE h1, title and wall SHALL be the graduates' and the row SHALL mark it current
-- IF two navigations overlap, THEN the later one SHALL win (no stale manifest result lands)
-- `sh scripts/qa.sh` green; prerendered HTML unchanged in substance
-**Evidence** — gate; scratchpad `flow.mjs` click-through: steps 2, 4, 6 report the new gallery's h1 and first photo
-**Autonomy** — auto
-
-### T-31 · Canvas round 2
-**Why** — Martin rejected G1/G2, K1–K3, A1–A3 and wants more choices, plus a proposal for the About portrait; K3 for contacts "and maybe some other choices".
-**Scope** — `.verify/design-canvas/` (build4.py, new boards, canvas page 7), the artifact
-**Done when**
-- THE canvas SHALL gain a page with new numbered options: /galerii G4–G6, /galerii/svatbi K4–K6, About A4–A6, Contacts K4–K5, each with the dark/light chip
-- THE About row SHALL include the portrait with the coral keyed out (a real re-cut of `about-me.png`, not a mock) so the option can be judged
-- Sticky notes SHALL say what each option costs and which needs data or a new photo from Viki
-**Evidence** — artifact URL, `--check` ok
-**Autonomy** — auto (proposals only; nothing ships until Martin picks)
+_Empty._
 
 ---
 
@@ -476,10 +272,9 @@ Not startable. Listed so they are not rediscovered every week.
 | Task | Blocked on | Who |
 |---|---|---|
 | Pricing page `/tseni` | package prices | Viki |
-| Venue / town / date on gallery cards | gallery spreadsheet | Viki |
-| Gallery page texts, 80–150 words each | gallery spreadsheet | Viki |
-| Responsive `srcset` and real image dimensions | R2 token 403s | Martin |
+| Town and month on gallery pages | her reply to the T-45 message (LOG) | Viki |
 | Testimonials | real quotes | Viki |
+| Weddings back on the live site | the couples' consent | Viki |
 
-The moment the spreadsheet lands, the two gallery tasks become roughly 60 small
-ones and this queue earns its keep.
+Done and off this list: `srcset` and real image dimensions (5d8c296), gallery
+texts (T-47, meta lines only by Martin's choice).
