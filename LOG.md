@@ -12,10 +12,13 @@ more work into `QUEUE.md` → Intake.
 Tidied 2026-10-01 (T-55): only what is still open. Everything settled is under
 Shipped or in `git log`. Live = 8b69e6b (master = prod = the branch).
 
-1. **T-54 · GEO, the build half** - yes or no to the three items still waiting
-   in TASKS.md: a five-line „Накратко" block per service page, ~12 more FAQ
-   answers (I draft, Viki confirms), and a Bulgarian test-prompt set you run
-   monthly. robots.txt, llms.txt and the schema are already live.
+1. **T-54 · GEO, one item left** - the „Накратко" blocks and the extra FAQ
+   answers are deferred, as you said on 2026-10-01. Still open: do you want a
+   list of ~15 Bulgarian questions („сватбен фотограф Видин" and the like) to
+   paste into ChatGPT, Perplexity and Gemini once a month, noting whether Viki
+   is named? About 15 minutes a month of your time; it is the only way to tell
+   whether the GEO work does anything. My recommendation: yes. Say yes and I
+   write it; say no and T-54 closes.
 2. **Cloudflare token** - you deleted the one pasted in chat, so `npm run cf`
    fails and `npm run deploy` skips its edge purge. A new token in `tools/.env`
    when you want those back. If no purge has run since the photos were re-cut
@@ -84,7 +87,7 @@ The T-45 message:
 
 ## Working on
 
-**The auto queue is empty.** T-54's remaining items wait for a yes (1 above).
+**The auto queue is empty.** T-54's test-prompt set waits for a yes (1 above).
 
 ---
 

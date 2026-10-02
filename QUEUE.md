@@ -35,7 +35,7 @@ tells it this is the client's own wording and not to improve it.
 ## Triaged
 
 - [x] T-55 · Tidy the queue: Ready and LOG Needs you reconciled with what shipped · auto · done 2026-10-01
-- [ ] T-54 · GEO · needs-you · robots.txt (b033de9), llms.txt + schema (8b69e6b) shipped; answer blocks, FAQ expansion and test prompts wait for a yes (TASKS.md)
+- [ ] T-54 · GEO · needs-you · robots.txt (b033de9), llms.txt + schema (8b69e6b) shipped; answer blocks, FAQ expansion and test prompts wait for a yes (TASKS.md) · Martin 2026-10-01: answer blocks + FAQ expansion: leave them for now · deferred 2026-10-02; only the monthly test-prompt set is still open (LOG → Needs you 1)
 - [x] T-53 · Gallery view toggle — LIVE 2026-09-22 (icons-only feed/mosaic pill, de0bbed)
 
 One line per item drained from Intake. Full specs get written under **Ready** —
