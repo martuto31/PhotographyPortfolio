@@ -23,65 +23,60 @@ Shipped or in `git log`. Live = 8b69e6b (master = prod = the branch).
    fails and `npm run deploy` skips its edge purge. A new token in `tools/.env`
    when you want those back. If no purge has run since the photos were re-cut
    (370da8c), do Caching → Purge Everything once by hand - I cannot tell from here.
-3. **For Viki, one Messenger message** (T-45): town and month per gallery, plus
-   3-5 client messages for the empty „Отзиви“ section. The list below predates
-   the seven galleries from T-52 and Viki's five hidden ones (T-50) - bring it
-   up to date before sending.
-4. **Consent from the couples** → drop `Weddings` from `liveSiteOnly` in
+3. **Consent from the couples** → drop `Weddings` from `liveSiteOnly` in
    `src/app/content/hidden-galleries.json` and deploy.
-5. **Standing, on Viki:** Google Business Profile, prices for `/tseni`; optional:
+4. **Standing, on Viki:** Google Business Profile, prices for `/tseni`; optional:
    camera originals of the 31 older galleries, and a new About portrait.
-6. **Search Console:** Indexing → Pages, the indexed count (4 of 33 on 2026-09-22).
-7. **`WORKER.md` is untracked** - commit it yourself or tell me to. Its "R2 CORS
+5. **Search Console:** Indexing → Pages, the indexed count (4 of 33 on 2026-09-22).
+6. **`WORKER.md` is untracked** - commit it yourself or tell me to. Its "R2 CORS
    blocks localhost" trap is out of date since T-22.
-8. **The preview channel expires 2026-10-15** - `npm run preview:deploy` renews it.
+7. **The preview channel expires 2026-10-15** - `npm run preview:deploy` renews it.
 
-The T-45 message:
+Town and month per gallery are no longer asked for anywhere (Martin, 2026-10-03:
+Viki doesn't know them). The old T-45 message is gone; the reviews ask that was
+inside it is now the message under Test by hand.
+
+---
+
+## Test by hand
+
+### Forward to Viki: the reviews message (T-56)
+
+Viki sends this to past clients on Messenger or Viber, one client at a time, and
+fills in the bracket. Each paragraph is one line so it pastes without odd breaks.
 
 ```
-Вики, за всяка галерия - град и месец/година, така: „Видин, юни 2024“.
+Здравейте! Пише ви Вики, фотографката от [сватбата ви / бала / кръщенето / фотосесията].
 
-Сватби:
-- Александрина и Борис -
-- Анжела и Александър -
-- Бети и Светли -
-- Вики и Петьо -
-- Виктория и Мартин -
-- Елина и Денис -
-- Лора и Асен -
-- Лори и Любо -
-- Люба и Калоян -
-- Нанси и Чавдар -
-- Натали и Валентин -
-- Руми и Цецко -
-- Krysteena & Martin -
+Подготвям раздел с отзиви в сайта си и много ще се радвам, ако отделите минута да ми напишете няколко думи. Не е нужно да е дълго - и едно изречение е напълно достатъчно.
 
-Абитуриенти:
-- Ванеса -
-- Вивиан -
-- Ева -
-- Елинор -
-- Ирена -
-- Катрин и Калин -
-- Мери -
-- Мони -
-- Никол -
-- Никол и Димитър -
-- Петя -
-- Семеен бал Ванеса -
-- Семеен бал Мадлен -
-- Семеен бал Мони -
+Ако ви помага, ето няколко въпроса:
+1. По какъв повод снимахме?
+2. Как се чувствахте по време на снимките?
+3. Какво мислите за готовите снимки?
+4. Бихте ли ме препоръчали на свои близки?
 
-Други събития:
-- Детски рожден ден Дари -
-- Криси -
-- Миши -
-- Юбилей Сергей -
+Можете да отговорите само на някои от тях, както ви е удобно.
 
-И още едно: 3-5 съобщения от клиенти след снимките (копирани от Messenger,
-с тяхното „да“ за публикуване). Секцията „Отзиви“ на началната страница е
-празна и чака точно тях - за сватбен фотограф това тежи повече от всеки текст.
+И един последен въпрос: съгласни ли сте да публикувам отговора ви в сайта си с малкото ви име?
+
+Благодаря ви от сърце!
 ```
+
+**How an answer becomes a review** on the „Отзиви" section (one entry in
+`src/app/content/testimonials.ts`; the section appears on the home page as soon
+as there is one):
+
+| Field | Comes from | Rule |
+|---|---|---|
+| `quote` | their answers to 2-4, in their order | their words; only typos fixed, nothing added or reworded |
+| `name` | the first name they agreed to | e.g. „Мария" or „Мария и Иван"; no "да" → not published |
+| `context` | answer 1 | the occasion only: „Сватба", „Абитуриентски бал", „Кръщене", „Рожден ден", „Семейна фотосесия" |
+| `gallery` | optional | only if their gallery is visible on the live site (weddings stay hidden until consent) |
+
+To get one on the site: paste the reply into `QUEUE.md` → Intake as
+`from Viki, <date>: отзив, <name> said yes: „<their words>"`. Quoted text ships
+on its own. Keep a screenshot of their "да".
 
 ---
 
@@ -92,6 +87,13 @@ The T-45 message:
 ---
 
 ## Shipped
+
+### 2026-10-03
+- **T-56 · Town/month dropped, reviews message written** - Viki doesn't know
+  town or month for any gallery, so that ask is gone from LOG, TASKS, the Blocked
+  table and HANDOFF's current snapshot; the old T-45 message is gone with it. The
+  reviews message (4 guided questions, one sentence is enough, first-name
+  permission) and the answer → review template are under Test by hand. Docs only.
 
 ### 2026-10-01
 - **T-55 · Queue tidied** - thirteen shipped specs out of `QUEUE.md` → Ready,
