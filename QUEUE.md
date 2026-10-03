@@ -29,6 +29,8 @@ Where a line came from helps too — `from Viki, 2026-09-11:` above a pasted blo
 tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
+! Town and month per gallery: Viki doesn't know them for any gallery (Martin, 2026-10-03). Drop that ask everywhere (LOG, TASKS) and don't plan around it.
+! Client reviews made easy (Martin, 2026-10-03): write a short Bulgarian message Viki can paste to past clients (Messenger/Viber), with 3–4 easy guided questions (e.g. what the occasion was, how the shoot felt, how the photos turned out, would you recommend her), saying that a one-line answer is fine and asking permission to show their first name. Also a small template for how each answer becomes a review on the „Отзиви“ section. Put it in LOG → Test by hand for Martin to forward.
 
 ---
 
