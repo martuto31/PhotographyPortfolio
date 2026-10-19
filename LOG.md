@@ -30,7 +30,8 @@ Shipped or in `git log`. Live = 8b69e6b (master = prod = the branch).
 5. **Search Console:** Indexing → Pages, the indexed count (4 of 33 on 2026-09-22).
 6. **`WORKER.md` is untracked** - commit it yourself or tell me to. Its "R2 CORS
    blocks localhost" trap is out of date since T-22.
-7. **The preview channel expires 2026-10-15** - `npm run preview:deploy` renews it.
+7. **The preview channel expired on 2026-10-15.** `npm run preview:deploy` renews it; say so and the session runs it.
+8. **This week (19 Oct):** Martin asks Viki for her prices, the Google Business Profile, the couples' consent and the reviews message.
 
 Town and month per gallery are no longer asked for anywhere (Martin, 2026-10-03:
 Viki doesn't know them). The old T-45 message is gone; the reviews ask that was
