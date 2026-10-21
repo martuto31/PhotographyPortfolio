@@ -25,6 +25,9 @@ If the loop dies — rate limit, closed lid, crash — nothing is lost. All stat
 
 ## The tick
 
+Before the first tick of a session, read `HANDOFF.md` and `docs/CONVENTIONS.md`: what the last session left, and
+how commits, decision records and code comments are written here.
+
 One pass, in this order. Then update `LOG.md` and sleep.
 
 ### 1. Drain Intake — triage cheap, spec late
@@ -111,7 +114,11 @@ question into `LOG.md` under **Needs you** and move to the next task.
 Martin should come back to finished work and a short decision list. Never to a
 session frozen on question one.
 
-### 5. Write `LOG.md`
+### 5. Write `LOG.md`, `HANDOFF.md` and the decisions
+
+In the same commit as the task: bring `HANDOFF.md` up to date (its state and what's left), write a decision record
+in `docs/decisions/` for any lasting choice and name it under `Decisions:`, and write the commit message as
+`docs/CONVENTIONS.md` §1 says. Give the verifier these three as extra lines beside the Done when lines.
 
 Three sections, newest first: **Shipped**, **Needs you**, **Working on**.
 That file is the only thing he reads. Keep it short enough to scan in a minute.

@@ -1,0 +1,21 @@
+#!/bin/sh
+# Checks the commit title: "[Type] What it is about" (docs/CONVENTIONS.md §1).
+# Git's own messages pass: merges, reverts, fixup!/squash!/amend!. Installed by scripts/install-hooks.sh.
+msg_file="$1"
+title=$(grep -v '^#' "$msg_file" | sed -n '1p')
+
+case "$title" in
+  "Merge "*|"Revert "*|"fixup! "*|"squash! "*|"amend! "*) exit 0 ;;
+esac
+
+if printf '%s\n' "$title" | grep -Eq '^\[(Feature|Fix|Improve|Refactor|Test|Docs|Chore|Security)\] .+'; then
+  exit 0
+fi
+
+cat >&2 <<'MSG'
+Commit title must look like:  [Feature] What it is about
+Types: Feature, Fix, Improve, Refactor, Test, Docs, Chore, Security.
+Then an empty line and the description: Why / What / Decisions / Tests.
+Rules: docs/CONVENTIONS.md §1.
+MSG
+exit 1
