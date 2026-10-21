@@ -27,6 +27,10 @@ Shipped or in `git log`. Live = 8b69e6b (master = prod = the branch).
    `src/app/content/hidden-galleries.json` and deploy.
 4. **Standing, on Viki:** Google Business Profile, prices for `/tseni`; optional:
    camera originals of the 31 older galleries, and a new About portrait.
+   **Answer (Martin, 22 Oct 2026):** the Google profile's base city is **София**: address hidden, service areas only
+   around Sofia (Google: within about 2 hours of the base), so Vidin stays on the site and in links, not in the profile.
+   Name proposed: „Виктория Борисова Фотография“ (already the site's `alternateName`); once Martin confirms, it becomes
+   the schema `name` in `src/index.html` too, so Google sees one name.
 5. **Search Console:** Indexing → Pages, the indexed count (4 of 33 on 2026-09-22).
 6. **`WORKER.md` is untracked** - commit it yourself or tell me to. Its "R2 CORS
    blocks localhost" trap is out of date since T-22.
