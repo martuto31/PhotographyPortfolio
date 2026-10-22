@@ -38,7 +38,7 @@ tells it this is the client's own wording and not to improve it.
   > ! Town and month per gallery: Viki doesn't know them for any gallery (Martin, 2026-10-03). Drop that ask everywhere (LOG, TASKS) and don't plan around it.
   > ! Client reviews made easy (Martin, 2026-10-03): write a short Bulgarian message Viki can paste to past clients (Messenger/Viber), with 3–4 easy guided questions (e.g. what the occasion was, how the shoot felt, how the photos turned out, would you recommend her), saying that a one-line answer is fine and asking permission to show their first name. Also a small template for how each answer becomes a review on the „Отзиви“ section. Put it in LOG → Test by hand for Martin to forward.
 - [x] T-55 · Tidy the queue: Ready and LOG Needs you reconciled with what shipped · auto · done 2026-10-01
-- [ ] T-54 · GEO · needs-you · robots.txt (b033de9), llms.txt + schema (8b69e6b) shipped; answer blocks, FAQ expansion and test prompts wait for a yes (TASKS.md) · Martin 2026-10-01: answer blocks + FAQ expansion: leave them for now · deferred 2026-10-02; only the monthly test-prompt set is still open (LOG → Needs you 1)
+- [x] T-54 · GEO · done 2026-10-22: the monthly check is `docs/ai-check.md` (Martin: yes, by hand) · robots.txt (b033de9), llms.txt + schema (8b69e6b) shipped; answer blocks, FAQ expansion and test prompts wait for a yes (TASKS.md) · Martin 2026-10-01: answer blocks + FAQ expansion: leave them for now · deferred 2026-10-02; only the monthly test-prompt set is still open (LOG → Needs you 1)
 - [x] T-53 · Gallery view toggle — LIVE 2026-09-22 (icons-only feed/mosaic pill, de0bbed)
 
 One line per item drained from Intake. Full specs get written under **Ready** —

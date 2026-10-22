@@ -19,6 +19,8 @@ Shipped or in `git log`. Live = 8b69e6b (master = prod = the branch).
    is named? About 15 minutes a month of your time; it is the only way to tell
    whether the GEO work does anything. My recommendation: yes. Say yes and I
    write it; say no and T-54 closes.
+   **Answer (Martin, 22 Oct 2026):** yes, by hand. Done: `docs/ai-check.md` (15 questions, Sofia first; Perplexity
+   all, ChatGPT and Gemini five; a results table). Monthly in `hq/ROUTINES.md`; the first run is the baseline.
 2. **Cloudflare token** - you deleted the one pasted in chat, so `npm run cf`
    fails and `npm run deploy` skips its edge purge. A new token in `tools/.env`
    when you want those back. If no purge has run since the photos were re-cut
