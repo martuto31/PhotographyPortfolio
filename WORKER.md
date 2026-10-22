@@ -258,6 +258,9 @@ Without these you would burn the whole window before his first check-in.
   agent on the diff besides the verifier. It hunts for bugs the Done when lines don't cover. Fix its real defects
   before READY; its optional notes go to `LOG.md`. Under `/work` the dispatcher starts it; in a direct session,
   start it yourself.
+- **Save your last gate run.** Run the gate once after your last edit and save it as `.verify/<task>-gate.txt`
+  (plus any browser run as `.verify/<task>-e2e.txt`). Name them on READY's `Saved runs:` line. The verifier reads
+  them instead of running them again, as long as nothing changed after them.
 
 ## The QA gate
 
