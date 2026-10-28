@@ -29,6 +29,7 @@ Where a line came from helps too — `from Viki, 2026-09-11:` above a pasted blo
 tells it this is the client's own wording and not to improve it.
 
 <!-- paste below this line -->
+from Martin's tool review, 2026-10-28: the photo viewer has arrows, keys and Escape but no swipe or pinch-zoom on a phone; add them (PhotoSwipe 5, MIT, or a small touch handler in gallery.component.ts), not sure Viki wants it, ask her with a phone recording
 
 ---
 
